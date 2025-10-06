@@ -1,0 +1,4532 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi EL SEMAR #13</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdoftsrAAAAABOhrPKzneF-HXGYUQQ5WLRYEbyM"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #ffffff;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .main-wrapper {
+            min-height: 100vh;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Left Hero Section */
+        .hero-section {
+            flex: 0 0 45%;
+            background: linear-gradient(135deg,#ff2e17 0%, #fe860e 50%, #ff2e17 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+            z-index: 1;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero-section {
+                flex: 1;
+                border-top-right-radius: 0;
+                border-bottom-left-radius: 40px;
+                border-bottom-right-radius: 40px;
+            }
+            
+            /* Hide hero section when form is active on mobile */
+            .main-wrapper.form-active .hero-section {
+                display: none;
+            }
+        }
+
+           
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .logo-container {
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .logo-circle {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            
+        }
+
+        .logo-circle svg {
+            width: 120px;
+            height: 120px;
+            
+        }
+
+        .hero-title {
+            color: white;
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-subtitle {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-tagline {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: fadeInUp 1s ease 0.6s both;
+            
+        }
+
+        .hero-tagline:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0px 0px 5px rgba(0,0,0,1);
+            transform: translateY(-10px);
+            
+        }
+
+        @media (max-width: 768px) {
+            .hero-tagline {
+                font-size: 1rem;
+                
+            }
+        }
+
+        .tagline-button {
+            border: 2px solid rgba(255, 255, 255, 0);
+            background-color: #00000000;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            
+        }
+
+        /* Right Form Section */
+        .form-section {
+            flex: 1;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .pages-wrapper {
+            position: relative;
+            width: 200%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .pages-wrapper.show-payment {
+            transform: translateX(-50%);
+        }
+
+        .page-slide {
+            width: 50%;
+            padding: 60px 50px;
+            overflow-y: visible;
+            min-height: 100vh;
+        }
+
+        /* Ticket Selection Boarding Pass Style */
+        .ticket-selection {
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .ticket-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .ticket-card {
+            background: white;
+            border: 2px solid #000;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-family: 'Courier New', monospace;
+        }
+
+        .ticket-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .ticket-card.selected {
+            border-color: #ff6b35;
+            border-width: 3px;
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .ticket-card::before {
+            content: '';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: 60px;
+            background: repeating-linear-gradient(
+                to bottom,
+                #000 0px,
+                #000 8px,
+                transparent 8px,
+                transparent 16px
+            );
+        }
+
+        .ticket-main-section {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+
+
+
+        }
+
+        .ticket-info {
+            flex: 1;
+        }
+
+        .ticket-route {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #000;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .ticket-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .ticket-detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ticket-detail-label {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ticket-detail-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #000;
+            letter-spacing: 1px;
+        }
+
+        .ticket-passenger-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ticket-passenger {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ticket-passenger-label {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ticket-passenger-value {
+            width: 120px;
+            height: 20px;
+            background: #000;
+            border-radius: 2px;
+        }
+
+        .ticket-departure {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ticket-departure-time {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #000;
+            letter-spacing: 2px;
+        }
+
+        .ticket-stub {
+            background: #f8f8f8;
+            padding: 20px 30px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ticket-stub-info {
+            display: flex;
+            gap: 30px;
+        }
+
+        .ticket-stub-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .ticket-stub-label {
+            font-size: 0.7rem;
+            color: #666;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .ticket-stub-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #000;
+            letter-spacing: 1px;
+        }
+
+        .ticket-stub-barcode {
+            width: 60px;
+            height: 40px;
+            background: repeating-linear-gradient(
+                90deg,
+                #000 0px,
+                #000 2px,
+                transparent 2px,
+                transparent 4px
+            );
+        }
+
+        /* EL-SEMAR Ticket Styling */
+        .ticket-card.elsemar .ticket-route {
+            color: #54b449;
+        }
+
+        .ticket-card.elsemar.selected .ticket-route {
+            color: #ff6b35;
+        }
+
+        /* TRYOUT Ticket Styling */
+        .ticket-card.tryout .ticket-route {
+            color: #efe419;
+        }
+
+        .ticket-card.tryout.selected .ticket-route {
+            color: #ff6b35;
+        }
+
+        /* LOMBA Ticket Styling */
+        .ticket-card.lomba .ticket-route {
+            color: #e74c3c;
+        }
+
+        .ticket-card.lomba.selected .ticket-route {
+            color: #ff6b35;
+        }
+
+        /* Step Indicator */
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            
+        }
+
+        .step {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 18px;
+            color: #666;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-connector {
+            width: 80px;
+            height: 3px;
+            background: #e9ecef;
+            transition: all 0.4s ease;
+        }
+
+        .step-connector.completed {
+            background: #28a745;
+        }
+
+        .step.active {
+            background: linear-gradient(135deg, #ff9a56, #ff6b35);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .step.completed {
+            background: #28a745;
+            color: white;
+        }
+
+        h3, h2 {
+            color: #ff6b35;
+            font-weight: 700;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 14px;
+            display: block;
+        }
+
+        .form-control, .form-select {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: #fff;
+            margin-bottom: 20px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.15);
+            outline: none;
+        }
+
+        .form-control.is-invalid, .form-select.is-invalid {
+            border-color: #dc3545;
+        }
+
+        .form-control.is-valid, .form-select.is-valid {
+            border-color: #28a745;
+        }
+
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 13px;
+            margin-top: -15px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .form-control.is-invalid ~ .invalid-feedback,
+        .form-select.is-invalid ~ .invalid-feedback {
+            display: block;
+        }
+
+        .tryout-upload-box.is-invalid {
+            border: 2px solid #dc3545;
+            background: #fff5f5;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+
+        .col-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding: 0 10px;
+        }
+
+        .col-12 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding: 0 10px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 35px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff9a56, #ff6b35);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+            width: 100%;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-success:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        /* Payment Section */
+        .payment-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .merchant-info {
+            background: linear-gradient(135deg, #ff9a56, #ff6b35);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .merchant-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .qris-box {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .price-badge {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff6b35;
+            margin: 20px 0;
+        }
+
+        #qrcode {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        #qrcode img {
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            padding: 15px;
+            background: white;
+        }
+
+        .instruction-box {
+            background: #fff5f0;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .instruction-box h6 {
+            color: #ff6b35;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .instruction-box ol {
+            padding-left: 20px;
+        }
+
+        .instruction-box li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        /* Compact Digital Ticket (summary) */
+        .digital-ticket {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            padding: 0;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 2px solid #f0f0f0;
+        }
+        
+        .ticket-header-section {
+            background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .ticket-header-left {
+            flex: 1;
+        }
+        
+        .ticket-number {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+        
+        .ticket-name {
+            font-weight: 800;
+            font-size: 1.4rem;
+            margin: 0;
+            color: white;
+        }
+        
+        .ticket-date-box {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 10px 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .ticket-date-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 2px;
+        }
+        
+        .ticket-date-value {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        
+        .ticket-price-section {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 2px dashed #e0e0e0;
+            text-align: center;
+        }
+        
+        .price-label {
+            font-size: 0.75rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .price-value {
+            font-weight: 800;
+            font-size: 2rem;
+            color: #ff6b35;
+            margin: 0;
+        }
+        
+        .price-value.free {
+            color: #28a745;
+        }
+        
+        .price-original {
+            font-size: 1rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-top: 5px;
+        }
+        
+        .ticket-info-section {
+            padding: 20px;
+        }
+        
+        .ticket-info-row {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .ticket-info-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .ticket-info-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        
+        .ticket-info-value {
+            font-size: 1rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .ticket-header-section {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .ticket-name {
+                font-size: 1.2rem;
+                color: white;
+            }
+            
+            .price-value {
+                font-size: 1.6rem;
+            }
+        }
+
+        
+
+        /* Fancy Upload Button (migrated from style.css) */
+        .upload-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            height: 48px;
+            padding: 0 20px;
+            border-radius: 10px;
+            color: #fff;
+            background: linear-gradient(135deg, #ff7b34 0%, #ff4e24 100%);
+            box-shadow: 0 10px 24px rgba(255, 94, 58, 0.35);
+            border: none;
+            cursor: pointer;
+            transition: transform .15s ease, box-shadow .15s ease;
+            overflow: hidden;
+        }
+
+        .upload-button:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(120px 60px at -10% 50%, rgba(255,255,255,.35), transparent 60%),
+                        radial-gradient(120px 60px at 110% 50%, rgba(255,255,255,.35), transparent 60%);
+            pointer-events: none;
+        }
+
+        .upload-button:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(255, 94, 58, 0.45); }
+        .upload-button:active { transform: translateY(0); box-shadow: 0 8px 18px rgba(255, 94, 58, 0.35); }
+
+        .upload-button .icon { width: 22px; height: 22px; display: inline-block; }
+        .upload-button .label { font-weight: 600; letter-spacing: .3px; }
+        .upload-button.success { background: linear-gradient(135deg, #2ecc71 0%, #1ea75a 100%); box-shadow: 0 10px 24px rgba(46, 204, 113, 0.35); }
+
+        /* Hide native file input, click via label. Move far offscreen to avoid page jumping on focus */
+        .upload-input { position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; padding: 0; margin: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+        /* Centering helpers for upload UI */
+        .upload-picker { 
+            display: flex; 
+            justify-content: center; 
+            margin-bottom: 15px;
+        }
+        .upload-actions { display: flex; justify-content: center; }
+        #selectedFileName { text-align: center; }
+
+        /* Grey state before file selected */
+        .upload-button.idle {
+            background: linear-gradient(135deg, #c8c8c8 0%, #a9a9a9 100%);
+            box-shadow: 0 10px 24px rgba(90, 90, 90, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .upload-actions { flex-direction: column; align-items: center; gap: 12px; }
+            .upload-actions .upload-button,
+            .upload-actions .btn.btn-secondary { width: 100%; max-width: 360px; }
+            .upload-picker { justify-content: center; }
+        }
+
+        /* Custom Select Dropdown Styles */
+        .custom-select-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .custom-select-input {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #2c3e50;
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            outline: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .custom-select-input:hover {
+            border-color: #ff7e5f;
+            box-shadow: 0 4px 12px rgba(255, 126, 95, 0.15);
+            background: #ffffff;
+        }
+
+        .custom-select-input:focus {
+            border-color: #ff7e5f;
+            box-shadow: 0 0 0 4px rgba(255, 126, 95, 0.1), 0 4px 12px rgba(255, 126, 95, 0.2);
+            background: #ffffff;
+        }
+
+        .custom-select-input:focus + .custom-select-arrow {
+            color: #ff7e5f;
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .custom-select-input.is-invalid {
+            border-color: #dc3545;
+        }
+
+        .custom-select-input.is-valid {
+            border-color: #28a745;
+        }
+
+        .custom-select-input option {
+            padding: 12px;
+            background: white;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .custom-select-input option:hover {
+            background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+            color: white;
+        }
+
+        .custom-select-input option:checked {
+            background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        .custom-select-arrow {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #6c757d;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-select-wrapper:hover .custom-select-arrow {
+            color: #ff7e5f;
+        }
+
+        @media (max-width: 768px) {
+            .custom-select-input {
+                padding: 10px 40px 10px 12px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Payment Method Selection Styles */
+        .payment-method-selection {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .payment-options {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .payment-option {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+            flex: 1;
+            max-width: 250px;
+        }
+
+        .payment-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .payment-option.selected {
+            border-color: #ff6b35;
+            border-width: 3px;
+            background: linear-gradient(135deg, #fff5f0, #ffffff);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.2);
+        }
+
+        .payment-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .payment-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .payment-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #ff6b35;
+        }
+
+        .payment-desc {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* Payment Method Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .payment-method-selection {
+                padding: 15px;
+            }
+
+            .payment-options {
+                gap: 10px;
+            }
+
+            .payment-option {
+                padding: 15px 10px;
+                min-width: 0;
+                max-width: none;
+                flex: 1 1 calc(50% - 5px);
+            }
+
+            .payment-icon {
+                font-size: 2rem;
+                margin-bottom: 8px;
+            }
+
+            .payment-title {
+                font-size: 1rem;
+                margin-bottom: 6px;
+            }
+
+            .payment-price {
+                font-size: 1.1rem;
+                margin-bottom: 5px;
+            }
+
+            .payment-desc {
+                font-size: 0.75rem;
+                line-height: 1.3;
+            }
+        }
+
+        /* Social Proof Section Styles */
+        .social-proof-section {
+            background: linear-gradient(135deg, #f8fff9, #ffffff);
+            border: 2px solid #28a745;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .social-proof-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .social-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .social-step {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .social-step:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h6 {
+            color: #28a745;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .step-content p {
+            color: #666;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .upload-section {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+
+        .upload-section h5 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Social Proof Upload Styles */
+        .social-proof-uploads {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .proof-upload-item {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .proof-upload-item:hover {
+            border-color: #28a745;
+            background: #f8fff9;
+        }
+
+        .proof-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .proof-icon {
+            font-size: 1.5rem;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+            display: none;
+            margin-bottom: 20px;
+        }
+
+        .file-name.show {
+            display: block;
+        }
+
+        .upload-instructions {
+            background: #e8f5e8;
+            border: 1px solid #28a745;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Tryout Upload Box - Same as Social Proof */
+        .tryout-upload-box {
+            background: #ffffff;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .tryout-upload-box:hover {
+            border-color: #ff6b35;
+            background: #fff5f0;
+        }
+
+        .tryout-upload-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #ff6b35;
+        }
+
+        .tryout-upload-icon {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .tryout-upload-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Form Top Section */
+        .form-top-section {
+            margin-bottom: 30px;
+        }
+
+        /* Form Header Styles */
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            gap: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+
+
+
+        .btn-back {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 8px 16px;
+            font-weight: 500;
+            font-size: 13px;
+            color: #6c757d;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            
+            
+        }
+
+        .btn-back:hover {
+            background: #ffffff;
+            border-color: #ff6b35;
+            color: #ff6b35;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.2);
+        }
+
+        .form-header-center h3 {
+            color: #ff6b35;
+            font-weight: 700;
+            margin: 0;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        /* Alert */
+        .alert {
+            border-radius: 12px;
+            border: none;
+            padding: 15px 20px;
+            font-weight: 500;
+            margin-top: 15px;
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: #155724;
+        }
+
+        .alert-warning {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            color: #856404;
+        }
+
+        .alert-danger {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            color: #721c24;
+        }
+
+        .alert-info {
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+            color: #0c5460;
+        }
+
+        /* Utility */
+        .d-none { 
+            display: none !important; 
+        }
+        
+        /* Animated conditional fields */
+        .conditional-field {
+            animation: fadeSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-origin: top;
+        }
+        
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                max-height: 500px;
+            }
+        }
+        
+        .d-flex { display: flex; }
+        .align-items-center { align-items: center; }
+        .gap-3 { gap: 1rem; }
+        .text-center { text-align: center; }
+        .text-danger { color: #ff6b35 !important; font-weight: 600; }
+        .text-muted { color: #6c757d; }
+        .mb-3 { margin-bottom: 1rem; }
+        .mt-4 { margin-top: 1.5rem; }
+
+        .form-text {
+            font-size: 13px;
+            color: #6c757d;
+            margin-top: -15px;
+            margin-bottom: 15px;
+        }
+
+        .spinner-border {
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 3px solid rgba(40, 167, 69, 0.2);
+            border-top-color: #28a745;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Success Overlay with Digital Ticket Invoice */
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+
+        .success-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .success-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 100%;
+            padding: 0;
+            animation: slideUpFade 0.5s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: auto;
+            max-height: calc(100vh - 80px);
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-header {
+            background: linear-gradient(135deg, #ff9a56, #ff6b35);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: successPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes successPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255,255,255,0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(255,255,255,0);
+            }
+        }
+
+        .success-icon svg {
+            width: 50px;
+            height: 50px;
+            fill: white;
+        }
+
+        .success-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .success-message {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .invoice-ticket {
+            padding: 30px;
+        }
+
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px dashed #e0e0e0;
+        }
+
+        .invoice-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .invoice-number {
+            font-size: 0.9rem;
+            color: #666;
+            font-family: 'Courier New', monospace;
+        }
+
+        .invoice-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .invoice-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 12px 0;
+            flex-wrap: wrap;
+            gap: 8px;
+            min-height: 40px;
+        }
+
+        .invoice-label {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            flex: 0 0 auto;
+            min-width: 140px;
+            max-width: 140px;
+        }
+
+        .invoice-value {
+            font-size: 0.95rem;
+            color: #333;
+            font-weight: 600;
+            text-align: right;
+            flex: 1 1 0;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            min-width: 0;
+        }
+
+        .invoice-value.large {
+            font-size: 1.8rem;
+            color: #28a745;
+            font-weight: 800;
+        }
+
+        .invoice-divider {
+            height: 1px;
+            background: #e0e0e0;
+            margin: 20px 0;
+        }
+
+        /* Tablet responsive */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .invoice-label {
+                min-width: 150px;
+                max-width: 150px;
+                font-size: 0.8rem;
+            }
+
+            .invoice-value {
+                font-size: 0.9rem;
+            }
+        }
+
+        .invoice-timestamp {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .timestamp-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .timestamp-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .timestamp-label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .timestamp-value {
+            font-size: 0.85rem;
+            color: #333;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+        }
+
+        .invoice-footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 2px dashed #e0e0e0;
+        }
+
+        .invoice-note {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .btn-close-invoice {
+            background: linear-gradient(135deg, #ff9a56, #ff6b35);
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-close-invoice:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .success-content {
+                margin: 12px;
+                max-height: calc(100vh - 24px);
+            }
+
+            .success-icon {
+                width: 64px;
+                height: 64px;
+            }
+
+            .success-icon svg {
+                width: 40px;
+                height: 40px;
+            }
+
+            .success-title {
+                font-size: 1.25rem;
+            }
+
+            .invoice-ticket {
+                padding: 16px;
+            }
+
+            .invoice-title {
+                font-size: 1.1rem;
+            }
+
+            .invoice-row {
+                padding: 10px 0;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+                min-height: auto;
+            }
+
+            .invoice-label {
+                min-width: auto;
+                max-width: 100%;
+                font-size: 0.75rem;
+            }
+
+            .invoice-value {
+                text-align: left;
+                font-size: 0.9rem;
+                width: 100%;
+            }
+
+            .invoice-value.large {
+                font-size: 1.4rem;
+                text-align: left;
+            }
+
+            .btn-close-invoice {
+                padding: 12px 24px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Desktop: ensure invoice is scrollable */
+        @media (min-width: 1025px) {
+            .success-overlay {
+                align-items: flex-start;
+                overflow-y: auto;
+                padding-top: 60px;
+            }
+
+            .success-content {
+                max-height: calc(100vh - 120px);
+                overflow-y: auto;
+            }
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 1024px) {
+            .main-wrapper {
+                flex-direction: column;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            .hero-section {
+                flex: 0 0 auto;
+                min-height: 35vh;
+                padding: 40px 30px;
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 40px;
+                border-bottom-left-radius: 40px;
+                z-index: 1;
+            }
+            
+            /* Hide hero section when form is active on tablet */
+            .main-wrapper.form-active .hero-section {
+                display: none;
+            }
+
+            .form-section {
+                flex: 1 1 auto;
+                overflow-y: auto;
+                min-height: 65vh;
+                z-index: 2;
+                background: white;
+                position: relative;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .logo-circle {
+                width: 140px;
+                height: 140px;
+                box-shadow: 0 0px 20px rgba(0, 0, 0, 1);
+            }
+
+            .logo-circle svg {
+                width: 90px;
+                height: 90px;
+                
+            }
+
+            .page-slide {
+                padding: 40px 30px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .col-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .hero-section {
+                min-height: 30vh;
+                padding: 30px 20px;
+                z-index: 1;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .form-section {
+                min-height: 70vh;
+                z-index: 2;
+                background: white;
+                position: relative;
+            }
+
+            .page-slide {
+                padding: 30px 20px;
+                overflow-y: visible;
+            }
+
+            .step {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .step-connector {
+                width: 50px;
+            }
+
+            /* Form Header Mobile */
+            .form-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .form-header-left,
+            .form-header-center,
+            .form-header-right {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .form-header-center h3 {
+                font-size: 1.5rem;
+            }
+
+            .btn-back {
+                order: -1;
+                margin-bottom: 10px;
+            }
+            
+        }
+
+                /* Loading Screen Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .loading-cart {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            animation: cartBounce 1.5s ease-in-out infinite;
+        }
+
+        .loading-cart svg {
+            width: 100%;
+            height: 100%;
+            fill: #ff6b35;
+        }
+
+        @keyframes cartBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .loading-subtext {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .loading-dots {
+            display: inline-block;
+        }
+
+        .loading-dots span {
+            animation: dotPulse 1.5s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        .loading-dots span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <!-- Left Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <div class="logo-container">
+                    <div class="logo-circle">
+                        <img src="logo.png" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                </div>
+                <h1 class="hero-title">PENDAFTARAN<br>EL-SEMAR</h1>
+                <p class="hero-subtitle">Satu langkah pasti untuk menjadi bagian dari kami</p>
+               <a href="index.html" class="hero-tagline"><button class="tagline-button">HOME</button></a>
+            </div>
+        </div>
+
+        <!-- Right Form Section -->
+        <div class="form-section">
+            <div class="pages-wrapper" id="pagesWrapper">
+                <!-- Page 1: Registration Form -->
+                <div class="page-slide">
+                    <!-- Ticket Selection -->
+                    <div class="ticket-selection" id="ticketSelection">
+                        <h3 style="text-align: center; margin-bottom: 40px; color: #333; font-size: 1.5rem;">Pilih Jenis Tiket</h3>
+                        <div class="ticket-cards">
+                            <!-- EL-SEMAR Ticket -->
+                            <div class="ticket-card elsemar" data-ticket="elsemar" onclick="selectTicket('elsemar')">
+                                <div class="ticket-main-section">
+                                    <div class="ticket-info">
+                                        <div class="ticket-route">EL-SEMAR #13</div>
+                                        <div class="ticket-details-grid">
+                                            <div class="ticket-detail-item">
+                                                <div class="ticket-detail-label">Event</div>
+                                                <div class="ticket-detail-value">SEMINAR DAN PAMERAN</div>
+                                            </div>
+                                            <div class="ticket-detail-item">
+                                                <div class="ticket-detail-label">Location</div>
+                                                <div class="ticket-detail-value">REKTORAT UNS</div>
+                                            </div>
+                                            <div class="ticket-detail-item">
+                                                <div class="ticket-detail-label">Price</div>
+                                                <div class="ticket-detail-value">15-30K</div>
+                                            </div>
+                                        </div>
+                                        <div class="ticket-passenger-section">
+                                            <div class="ticket-passenger">
+                                            </div>
+                                            <div class="ticket-departure">
+                                                <div class="ticket-departure-label" style="font-size: 0.75rem; color: #666; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">Date</div>
+                                                <div class="ticket-departure-time">3/12/2025</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TRYOUT Ticket -->
+                            <div class="ticket-card tryout" data-ticket="tryout" onclick="selectTicket('tryout')">
+                                <div class="ticket-main-section">
+                                    <div class="ticket-info">
+                                        <div class="ticket-route">TRYOUT TEST</div>
+                                        <div class="ticket-details-grid">
+                                            <div class="ticket-detail-item">
+                                                <div class="ticket-detail-label">Event</div>
+                                                <div class="ticket-detail-value">TRYOUT</div>
+                                            </div>
+                                            <div class="ticket-detail-item">
+                                                <div class="ticket-detail-label">Location</div>
+                                                <div class="ticket-detail-value">FT UNS</div>
+                                            </div>
+                                            <div class="ticket-detail-item">
+                                                <div class="ticket-detail-label">Price</div>
+                                                <div class="ticket-detail-value">25K</div>
+                                            </div>
+                                        </div>
+                                        <div class="ticket-passenger-section">
+                                            <div class="ticket-passenger">
+                                                
+                                            </div>
+                                            <div class="ticket-departure">
+                                                <div class="ticket-departure-label" style="font-size: 0.75rem; color: #666; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">Date</div>
+                                                <div class="ticket-departure-time">8/11/2025</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <!-- Lomba Ticket -->
+                            <div class="ticket-card lomba" data-ticket="lomba" onclick="selectTicket('lomba')">
+                                <div class="ticket-main-section">
+                                    <div class="ticket-info">
+                                        <div class="ticket-route">LOMBA</div>
+                                        <div class="ticket-details-grid">
+                                            <div class="ticket-detail-item">
+                                                <div class="ticket-detail-label">Event</div>
+                                                <div class="ticket-detail-value">LOMBA</div>
+                                            </div>
+                                            <div class="ticket-detail-item">
+                                                <div class="ticket-detail-label">Location</div>
+                                                <div class="ticket-detail-value">REKTORAT UNS</div>
+                                            </div>
+                                            <div class="ticket-detail-item">
+                                                <div class="ticket-detail-label">Price</div>
+                                                <div class="ticket-detail-value">250K</div>
+                                            </div>
+                                        </div>
+                                        <div class="ticket-passenger-section">
+                                            <div class="ticket-passenger">
+                                                
+                                            </div>
+                                            <div class="ticket-departure">
+                                                <div class="ticket-departure-label" style="font-size: 0.75rem; color: #666; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">Date</div>
+                                                <div class="ticket-departure-time">8/11/2025</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Container -->
+                    <div id="formContainer" style="display: none;">
+                        <div class="form-top-section">
+                            <button type="button" class="btn-back" onclick="backToTicketSelection()">
+                                Back
+                            </button>
+                            <div class="step-indicator">
+            
+                                <div class="step active" id="step1">1</div>
+                                <div class="step-connector" id="connector"></div>
+                                <div class="step" id="step2">2</div>
+                            </div>
+                            
+                            <div class="form-header">
+                                <div class="form-header-left">
+                                    <!-- Empty for balance -->
+                                </div>
+                                <div class="form-header-center">
+                                    <h3 id="formTitle">Pendaftaran EL SEMAR #13</h3>
+                                </div>
+                                <div class="form-header-right">
+                                    <!-- Empty for balance -->
+                                </div>
+                            </div>
+                        </div>
+
+                    <form id="registrationForm" novalidate>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="fullName" class="form-label">Nama<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Nama lengkap" required>
+                                <div class="invalid-feedback">Nama harus diisi minimal 2 karakter</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="institutionType" class="form-label">Asal institusi<span class="text-danger">*</span></label>
+                                <select id="institutionType" name="institutionType" class="form-select" required>
+                                    <option value="" selected>Pilih</option>
+                                    <option value="UNS">UNS</option>
+                                    <option value="SMA">SMA</option>
+                                    <option value="SMK">SMK</option>
+                                    <option value="Umum">Umum</option>
+                                </select>
+                                <div class="invalid-feedback">Pilih asal institusi</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="phone" class="form-label">No telepon<span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="0812xxxxxxx" required>
+                                <div class="invalid-feedback">Nomor telepon tidak valid (contoh: 081234567890)</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+                                <div class="invalid-feedback">Email tidak valid (contoh: nama@domain.com)</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="reason" class="form-label">Apa yang membuat kamu tertarik dengan EL Semar?<span class="text-danger">*</span></label>
+                                <select id="reason" name="reason" class="form-select" required>
+                                    <option value="" selected>Pilih salah satu</option>
+                                    <option value="Seminar">Seminar</option>
+                                    <option value="Lomba">Lomba</option>
+                                    <option value="Pameran">Pameran</option>
+                                </select>
+                                <div class="invalid-feedback">Pilih salah satu</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="referral" class="form-label">Tau dari mana<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="referral" name="referral" placeholder="Instagram/Teman/dll" required>
+                                <div class="invalid-feedback">Field ini wajib diisi</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="awareness" class="form-label">Seberapa tau kamu tentang EL SEMAR?<span class="text-danger">*</span></label>
+                                <select id="awareness" name="awareness" class="form-select" required>
+                                    <option value="" selected>Pilih</option>
+                                    <option value="Tidak tahu">Tidak tahu</option>
+                                    <option value="Sedikit tahu">Sedikit tahu</option>
+                                    <option value="Cukup tahu">Cukup tahu</option>
+                                    <option value="Sangat tahu">Sangat tahu</option>
+                                    <option value="Paham banget">Paham banget</option>
+                                </select>
+                                <div class="invalid-feedback">Pilih salah satu</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="ticketType" class="form-label">Jenis tiket yang dibeli<span class="text-danger">*</span></label>
+                                <select id="ticketType" name="ticketType" class="form-select" required>
+                                    <option value="" selected>Pilih salah satu</option>
+                                    <option value="Day 1">Day 1 - Rp 15.000</option>
+                                    <option value="Day 2">Day 2 - Rp 15.000</option>
+                                    <option value="Day 1+2">Day 1+2 - Rp 25.000</option>
+                                </select>
+                                <div class="invalid-feedback">Pilih jenis tiket</div>
+                            </div>
+                        </div>
+
+                        <!-- Conditional Fields: UNS -->
+                        <div id="unsFields" class="d-none">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="faculty" class="form-label">Fakultas<span class="text-danger">*</span></label>
+                                    <select id="faculty" name="faculty" class="form-select">
+                                        <option value="" selected>Pilih Fakultas</option>
+                                        <option>Fakultas Matematika dan Ipa</option>
+                                        <option>Fakultas Ilmu Budaya</option>
+                                        <option>Fakultas Keolahragaan</option>
+                                        <option>Fakultas Teknik</option>
+                                        <option>Fakultas Hukum</option>
+                                        <option>Fakultas Pertanian</option>
+                                        <option>Fakultas Keguruan dan Ilmu Pendidikan</option>
+                                        <option>Sekolah Vokasi</option>
+                                        <option>Fakultas Seni Rupa dan Desain</option>
+                                        <option>Fakultas Ekonomi dan Bisnis</option>
+                                        <option>Fakultas Sosial dan Politik</option>
+                                        <option>Fakultas Kedokteran</option>
+                                    </select>
+                                    <div class="invalid-feedback">Pilih fakultas</div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="studyProgram" class="form-label">Prodi<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="studyProgram" name="studyProgram" placeholder="Program Studi">
+                                    <div class="invalid-feedback">Isi program studi</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="nimGroup" class="col-6 d-none">
+                                    <label for="nim" class="form-label">NIM<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="nim" name="nim" placeholder="NIM">
+                                    <div class="invalid-feedback">Isi NIM</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Conditional Fields: SMA -->
+                        <div id="smaFields" class="d-none">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="smaName" class="form-label">Nama SMA<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="smaName" name="smaName" placeholder="Nama SMA">
+                                    <div class="invalid-feedback">Isi nama SMA</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Conditional Fields: SMK -->
+                        <div id="smkFields" class="d-none">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="smkName" class="form-label">Nama SMK<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="smkName" name="smkName" placeholder="Nama SMK">
+                                    <div class="invalid-feedback">Isi nama SMK</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary">Lanjut ke Pembayaran</button>
+                        </div>
+                        <div id="formAlert" class="alert d-none" role="alert"></div>
+                    </form>
+
+                    <!-- Tryout Form -->
+                    <form id="tryoutForm" novalidate style="display: none;">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="tryoutFullName" class="form-label">Nama Lengkap<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="tryoutFullName" name="tryoutFullName" placeholder="Nama lengkap" required>
+                                <div class="invalid-feedback">Nama harus diisi minimal 2 karakter</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="tryoutSchoolType" class="form-label">Asal Sekolah<span class="text-danger">*</span></label>
+                                <select id="tryoutSchoolType" name="tryoutSchoolType" class="form-select" required>
+                                    <option value="" selected>Pilih Jenis Sekolah</option>
+                                    <option value="SMA">SMA</option>
+                                    <option value="SMK">SMK</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                                <div class="invalid-feedback">Pilih jenis sekolah</div>
+                            </div>
+                        </div>
+
+                        <!-- Conditional School Name Fields -->
+                        <div id="tryoutSmaFields" class="d-none">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="tryoutSmaName" class="form-label">Nama SMA<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="tryoutSmaName" name="tryoutSmaName" placeholder="Nama SMA">
+                                    <div class="invalid-feedback">Isi nama SMA</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tryoutSmkFields" class="d-none">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="tryoutSmkName" class="form-label">Nama SMK<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="tryoutSmkName" name="tryoutSmkName" placeholder="Nama SMK">
+                                    <div class="invalid-feedback">Isi nama SMK</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="tryoutPhone" class="form-label">No. HP<span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="tryoutPhone" name="tryoutPhone" placeholder="08xxxxxxxxxx" required>
+                                <div class="invalid-feedback">No HP harus diisi dengan format yang benar</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="tryoutEmail" class="form-label">Email<span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="tryoutEmail" name="tryoutEmail" placeholder="email@example.com" required>
+                                <div class="invalid-feedback">Email harus diisi dengan format yang benar</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="tryout-upload-title">Upload Foto Follow Instagram<span class="text-danger">*</span></span>
+                                <div class="tryout-upload-box">
+                                    <div class="tryout-upload-header">
+                                        
+                                    </div>
+                                    <div class="upload-picker">
+                                        <input type="file" class="upload-input" id="tryoutPhoto" name="tryoutPhoto" accept="image/jpeg,image/jpg,image/png,image/gif" required>
+                                        <label for="tryoutPhoto" class="upload-button idle" id="chooseTryoutBtn">
+                                            <div class="icon">📤</div>
+                                            
+                                            <div class="desc">Screenshot bukti follow</div>
+                                        </label>
+                                    </div>
+                                    <div id="tryoutFileName" class="file-name"></div>
+                                    
+                                </div>
+                                <div class="form-text">Upload screenshot bukti follow Instagram @el_semar</div>
+                                <div class="invalid-feedback">Upload foto follow Instagram</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary">Lanjut ke Pembayaran</button>
+                        </div>
+                        <div id="tryoutFormAlert" class="alert d-none" role="alert"></div>
+                    </form>
+
+                    <!-- Lomba Form -->
+                    <form id="lombaForm" novalidate style="display: none;">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="lombaTeamName" class="form-label">Nama Tim<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="lombaTeamName" name="lombaTeamName" placeholder="Nama tim" required>
+                                <div class="invalid-feedback">Nama tim harus diisi</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="lombaLeaderName" class="form-label">Nama Ketua Tim<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="lombaLeaderName" name="lombaLeaderName" placeholder="Nama ketua tim" required>
+                                <div class="invalid-feedback">Nama ketua tim harus diisi</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="lombaLeaderPhone" class="form-label">Nomor Telepon Ketua Tim<span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="lombaLeaderPhone" name="lombaLeaderPhone" placeholder="08xxxxxxxxxx" required>
+                                <div class="invalid-feedback">Nomor telepon ketua tim harus diisi</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="lombaLeaderEmail" class="form-label">Email Ketua Tim<span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="lombaLeaderEmail" name="lombaLeaderEmail" placeholder="email@example.com" required>
+                                <div class="invalid-feedback">Email ketua tim harus diisi</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="lombaMember1Name" class="form-label">Nama Anggota 1<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="lombaMember1Name" name="lombaMember1Name" placeholder="Nama anggota 1" required>
+                                <div class="invalid-feedback">Nama anggota 1 harus diisi</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="lombaMember1Phone" class="form-label">Nomor Telepon Anggota 1<span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="lombaMember1Phone" name="lombaMember1Phone" placeholder="08xxxxxxxxxx" required>
+                                <div class="invalid-feedback">Nomor telepon anggota 1 harus diisi</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="lombaMember2Name" class="form-label">Nama Anggota 2</label>
+                                <input type="text" class="form-control" id="lombaMember2Name" name="lombaMember2Name" placeholder="Nama anggota 2 (opsional)">
+                                <div class="form-text">Opsional - boleh dikosongkan</div>
+                            </div>
+                            <div class="col-6">
+                                <label for="lombaMember2Phone" class="form-label">Nomor Telepon Anggota 2</label>
+                                <input type="tel" class="form-control" id="lombaMember2Phone" name="lombaMember2Phone" placeholder="08xxxxxxxxxx (opsional)">
+                                <div class="form-text">Opsional - boleh dikosongkan</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="lombaInstitutionType" class="form-label">Asal Institusi<span class="text-danger">*</span></label>
+                                <select id="lombaInstitutionType" name="lombaInstitutionType" class="form-select" required>
+                                    <option value="" selected>Pilih</option>
+                                    <option value="Universitas">Universitas</option>
+                                    <option value="SMA">SMA</option>
+                                    <option value="SMK">SMK</option>
+                                    <option value="Umum">Umum</option>
+                                </select>
+                                <div class="invalid-feedback">Pilih asal institusi</div>
+                            </div>
+                        </div>
+
+                        <!-- Conditional Fields: Universitas -->
+                        <div id="lombaUniversitasFields" class="d-none">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="lombaUniversityName" class="form-label">Nama Universitas<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="lombaUniversityName" name="lombaUniversityName" placeholder="Contoh: Universitas Sebelas Maret">
+                                    <div class="invalid-feedback">Isi nama universitas</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Conditional Fields: SMA -->
+                        <div id="lombaSmaFields" class="d-none">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="lombaSmaName" class="form-label">Nama SMA<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="lombaSmaName" name="lombaSmaName" placeholder="Nama SMA">
+                                    <div class="invalid-feedback">Isi nama SMA</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Conditional Fields: SMK -->
+                        <div id="lombaSmkFields" class="d-none">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="lombaSmkName" class="form-label">Nama SMK<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="lombaSmkName" name="lombaSmkName" placeholder="Nama SMK">
+                                    <div class="invalid-feedback">Isi nama SMK</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="tryout-upload-title">Upload Kartu Pelajar/KTM/KTP<span class="text-danger">*</span></span>
+                                <div class="tryout-upload-box">
+                                    <div class="tryout-upload-header">
+                                        
+                                    </div>
+                                    <div class="upload-picker">
+                                        <input type="file" class="upload-input" id="lombaIdCards" name="lombaIdCards" accept="application/pdf" required>
+                                        <label for="lombaIdCards" class="upload-button idle" id="chooseLombaIdBtn">
+                                            <div class="icon">📄</div>
+                                            
+                                            <div class="desc">Upload kartu identitas</div>
+                                        </label>
+                                    </div>
+                                    <div id="lombaIdFileName" class="file-name"></div>
+                                    
+                                </div>
+                                <div class="form-text">Format file: PDF (Ukuran maksimal 5MB). Nama file: KARTU ID_NAMA TIM </div>
+                                <div class="invalid-feedback">Upload kartu identitas dalam format PDF</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="tryout-upload-title">Upload Surat Komitmen<span class="text-danger">*</span></span>
+                                <div class="tryout-upload-box">
+                                    <div class="tryout-upload-header">
+                                        
+                                    </div>
+                                    <div class="upload-picker">
+                                        <input type="file" class="upload-input" id="lombaCommitmentLetter" name="lombaCommitmentLetter" accept="application/pdf" required>
+                                        <label for="lombaCommitmentLetter" class="upload-button idle" id="chooseLombaCommitmentBtn">
+                                            <div class="icon">📄</div>
+                                            
+                                            <div class="desc">Upload surat komitmen</div>
+                                        </label>
+                                    </div>
+                                    <div id="lombaCommitmentFileName" class="file-name"></div>
+                                    
+                                </div>
+                                <div class="form-text">Format file: PDF (Ukuran maksimal 5MB). Nama file: SURAT_NAMA TIM</div>
+                                <div class="invalid-feedback">Upload surat komitmen dalam format PDF</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary">Lanjut ke Pembayaran</button>
+                        </div>
+                        <div id="lombaFormAlert" class="alert d-none" role="alert"></div>
+                    </form>
+                    </div>
+                </div>
+
+                <!-- Page 2: Payment -->
+                <div class="page-slide">
+                    <button type="button" class="btn-back" onclick="goBackToForm()">
+                        Back
+                    </button>
+                    <div class="payment-header">
+                        <h2>Pembayaran</h2>
+                    </div>
+
+                    <!-- Compact digital ticket summary (replaces orange box) -->
+                    <div class="digital-ticket" id="payerSummary">
+                        <!-- Header: Ticket Number and Date -->
+                        <div class="ticket-header-section">
+                            <div class="ticket-header-left">
+                                <div class="ticket-number">TIKET</div>
+                                <h3 class="ticket-name" id="tTicket">EL SEMAR #13</h3>
+                            </div>
+                            <div class="ticket-date-box">
+                                <div class="ticket-date-label">Tanggal</div>
+                                <div class="ticket-date-value" id="ticketDate">Rabu, 3 Des 2025</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Price Section -->
+                        <div class="ticket-price-section">
+                            <div class="price-label">Harga Tiket</div>
+                            <div class="price-value" id="ticketPrice">Rp 75.000</div>
+                            <div class="price-original" id="ticketPriceOriginal" style="display: none;">Rp 75.000</div>
+                        </div>
+                        
+                        <!-- Info Section: Name, Phone, Email, Event Date -->
+                        <div class="ticket-info-section">
+                            <div class="ticket-info-row">
+                                <div class="ticket-info-label" id="summaryNameLabel">Nama Lengkap</div>
+                                <div class="ticket-info-value" id="summaryName">-</div>
+                            </div>
+                            <div class="ticket-info-row">
+                                <div class="ticket-info-label" id="summaryPhoneLabel">No. Telepon</div>
+                                <div class="ticket-info-value" id="summaryPhone">-</div>
+                            </div>
+                            <div class="ticket-info-row">
+                                <div class="ticket-info-label" id="summaryEmailLabel">Email</div>
+                                <div class="ticket-info-value" id="summaryEmail">-</div>
+                            </div>
+                            <div class="ticket-info-row">
+                                <div class="ticket-info-label">Tempat</div>
+                                <div class="ticket-info-value" id="eventLocation">REKTORAT UNS</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method Selection -->
+                    <div class="payment-method-selection">
+                        <h5 style="text-align: center; margin-bottom: 20px; color: #333;">Pilih Metode Pembayaran</h5>
+                        <div class="payment-options">
+                            <div class="payment-option" id="paidOption" onclick="selectPaymentMethod('paid')">
+                                <div class="payment-icon">💳</div>
+                                <div class="payment-title">Bayar Tunai</div>
+                                <div class="payment-price" id="paidPrice">Rp 75.000</div>
+                                <div class="payment-desc">Transfer via QRIS</div>
+                            </div>
+                            <div class="payment-option" id="freeOption" onclick="selectPaymentMethod('free')">
+                                <div class="payment-icon">🎉</div>
+                                <div class="payment-title">GRATIS</div>
+                                <div class="payment-price" style="color: #28a745;">Rp 0</div>
+                                <div class="payment-desc">Follow & Repost Instagram</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <!-- Paid Payment Section -->
+                    <div class="qris-box" id="paidPaymentSection" style="display: none;">
+                        <h5>Nominal Pembayaran</h5>
+                        <div class="price-badge" id="displayPrice">Rp 0</div>
+                        <p class="text-muted">Termasuk kode unik untuk verifikasi</p>
+                        
+                        <div id="qrcode"></div>
+                        
+                        <div class="instruction-box">
+                            <h6>Cara Pembayaran:</h6>
+                            <ol>
+                                <li>Buka aplikasi pembayaran QRIS (GoPay, OVO, DANA, dll)</li>
+                                <li>Scan QR Code di atas</li>
+                                <li>Pastikan nominal sesuai dengan yang tertera</li>
+                                <li>Selesaikan pembayaran</li>
+                                <li>Upload bukti pembayaran di bawah</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Free Payment Section -->
+                    <div class="social-proof-section" id="freePaymentSection" style="display: none;">
+                        <div class="social-proof-header">
+                            <h5 style="color: #28a745; text-align: center; margin-bottom: 20px;">🎉 Pembayaran Gratis!</h5>
+                            <p style="text-align: center; color: #666; margin-bottom: 25px;">
+                                Ikuti langkah-langkah di bawah ini untuk mendapatkan tiket EL SEMAR #13 secara GRATIS!
+                            </p>
+                        </div>
+                        
+                        <div class="social-steps">
+                            <div class="social-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h6>Follow Instagram @el_semar</h6>
+                                    <p>Screenshot bukti follow Instagram official EL SEMAR</p>
+                                </div>
+                            </div>
+                            <div class="social-step" id="freeRepostStep">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h6>Repost & Tag</h6>
+                                    <p>Repost postingan EL SEMAR #13 di story/feed dan tag @el_semar <strong>(Khusus Day 1+2)</strong></p>
+                                </div>
+                            </div>
+                            <div class="social-step">
+                                <div class="step-number" id="freeUploadStepNum">3</div>
+                                <div class="step-content">
+                                    <h6>Upload Bukti</h6>
+                                    <p id="freeUploadStepDesc">Upload screenshot bukti follow di bawah ini</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <!-- Upload Section for Paid Payment -->
+                    <div class="upload-section" id="paidUploadSection" style="display: none;">
+                        <h5>Upload Bukti Pembayaran</h5>
+                        <form id="uploadForm">
+                            <div class="mb-3 upload-picker">
+                                <input type="file" class="upload-input" id="paymentProof" name="paymentProof" accept="image/jpeg,image/jpg,image/png,image/gif,application/pdf" required>
+                                <label for="paymentProof" class="upload-button idle" id="chooseFileBtn" style="margin-left:12px;">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 16V8M12 8l-3 3M12 8l3 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <rect x="4" y="16" width="16" height="4" rx="2" fill="white" opacity=".25"/>
+                                    </svg>
+                                    <span class="label">Pilih Bukti Pembayaran</span>
+                                </label>
+                                
+                            </div>
+                            <div id="paymentFileName" class="file-name"></div>
+                            <div class="upload-actions align-items-center gap-3">
+                                <button type="submit" id="submitBtn" class="upload-button success">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 16V8M12 8l-3 3M12 8l3 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <rect x="4" y="16" width="16" height="4" rx="2" fill="white" opacity=".25"/>
+                                    </svg>
+                                    <span class="label">Kirim Bukti Pembayaran</span>
+                                </button>
+                                
+                                <div id="uploadSpinner" class="spinner-border d-none" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                            <div id="uploadAlert" class="alert d-none" role="alert"></div>
+                        </form>
+                    </div>
+
+                    <!-- Upload Section for Free Payment -->
+                    <div class="upload-section" id="freeUploadSection" style="display: none;">
+                        <h5 style="color: #28a745;" id="freeUploadTitle">📱 Upload Bukti Follow Instagram</h5>
+                        <div class="upload-instructions">
+                            <p style="color: #666; margin-bottom: 20px; text-align: center;" id="freeUploadInstruction">
+                                Upload screenshot bukti follow Instagram @el_semar
+                            </p>
+                        </div>
+                        
+                        <form id="freeUploadForm">
+                            <div class="social-proof-uploads">
+                                <!-- Follow Proof Upload -->
+                                <div class="proof-upload-item" id="followProofUpload">
+                                    <div class="proof-label">
+                                        <span class="proof-icon">👥</span>
+                                        <span>Bukti Follow Instagram</span>
+                                    </div>
+                                    <div class="upload-picker">
+                                        <input type="file" class="upload-input" id="followProof" name="followProof" accept="image/jpeg,image/jpg,image/png,image/gif">
+                                        <label for="followProof" class="upload-button idle" id="chooseFollowBtn">
+                                            <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 16V8M12 8l-3 3M12 8l3 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <rect x="4" y="16" width="16" height="4" rx="2" fill="white" opacity=".25"/>
+                                            </svg>
+                                            <span class="label">Pilih Screenshot Follow</span>
+                                        </label>
+                                    </div>
+                                    <div id="followFileName" class="file-name"></div>
+                                </div>
+
+                                <!-- Repost Proof Upload -->
+                                <div class="proof-upload-item" id="repostProofUpload">
+                                    <div class="proof-label">
+                                        <span class="proof-icon">📱</span>
+                                        <span>Bukti Repost & Tag</span>
+                                    </div>
+                                    <div class="upload-picker">
+                                        <input type="file" class="upload-input" id="repostProof" name="repostProof" accept="image/jpeg,image/jpg,image/png,image/gif">
+                                        <label for="repostProof" class="upload-button idle" id="chooseRepostBtn">
+                                            <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 16V8M12 8l-3 3M12 8l3 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <rect x="4" y="16" width="16" height="4" rx="2" fill="white" opacity=".25"/>
+                                            </svg>
+                                            <span class="label">Pilih Screenshot Repost</span>
+                                        </label>
+                                    </div>
+                                    <div id="repostFileName" class="file-name"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="upload-actions align-items-center gap-3">
+                                
+                                <button type="submit" id="freeSubmitBtn" class="upload-button success">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 16V8M12 8l-3 3M12 8l3 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <rect x="4" y="16" width="16" height="4" rx="2" fill="white" opacity=".25"/>
+                                    </svg>
+                                    <span class="label">Kirim Bukti Social Media</span>
+                                </button>
+                                <div id="freeUploadSpinner" class="spinner-border d-none" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                            <div id="freeUploadAlert" class="alert d-none" role="alert"></div>
+                         
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-cart">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 2L7.17 4H2V6H3.18L5.68 15.39C5.86 16.03 6.46 16.5 7.12 16.5H18.88C19.54 16.5 20.14 16.03 20.32 15.39L22.82 6H19.83L18 4L16 2H9ZM9 4H15.85L17.43 6H6.57L9 4ZM7 18C5.9 18 5 18.9 5 20C5 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM17 18C15.9 18 15 18.9 15 20C15 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z" fill="currentColor"/>
+                </svg>
+            </div>
+            <div class="loading-text">
+                Memproses pesanan<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>
+            </div>
+            <div class="loading-subtext">Mohon tunggu dalam hitungan detik</div>
+        </div>
+    </div>
+
+    <!-- Success Overlay with Invoice -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-content">
+            <div class="success-header">
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <h2 class="success-title">Pembayaran Berhasil!</h2>
+                <p class="success-message">Terima kasih atas pendaftaran Anda</p>
+            </div>
+
+            <div class="invoice-ticket">
+                <div class="invoice-header">
+                    <div class="invoice-title" id="invoiceTitle">INVOICE PEMBAYARAN</div>
+                    <div class="invoice-number" id="invoiceNumber">INV-ELSEMAR-00001</div>
+                </div>
+
+                <div class="invoice-details">
+                    <div class="invoice-row">
+                        <span class="invoice-label" id="invoiceNameLabel">Nama</span>
+                        <span class="invoice-value" id="invoiceName">-</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span class="invoice-label" id="invoiceEmailLabel">Email</span>
+                        <span class="invoice-value" id="invoiceEmail">-</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span class="invoice-label" id="invoicePhoneLabel">No. Telepon</span>
+                        <span class="invoice-value" id="invoicePhone">-</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span class="invoice-label">Jenis Tiket</span>
+                        <span class="invoice-value" id="invoiceTicketType">-</span>
+                    </div>
+                </div>
+
+                <div class="invoice-divider"></div>
+
+                <div class="invoice-row">
+                    <span class="invoice-label">Total Pembayaran</span>
+                    <span class="invoice-value large" id="invoiceTotal">Rp 0</span>
+                </div>
+
+                <div class="invoice-divider"></div>
+
+                <div class="invoice-timestamp">
+                    <div class="timestamp-row">
+                        <span class="timestamp-label">Tanggal</span>
+                        <span class="timestamp-value" id="invoiceDate">-</span>
+                    </div>
+                    <div class="timestamp-row">
+                        <span class="timestamp-label">Waktu</span>
+                        <span class="timestamp-value" id="invoiceTime">-</span>
+                    </div>
+                    <div class="timestamp-row">
+                        <span class="timestamp-label">No. Registrasi</span>
+                        <span class="timestamp-value" id="invoiceRegNumber">-</span>
+                    </div>
+                </div>
+
+                <div class="invoice-footer">
+                    <p class="invoice-note">
+                        Kami akan memverifikasi pembayaran Anda dalam 1x24 jam.<br>
+                        Informasi lebih lanjut akan dikirim melalui email.
+                    </p>
+                    <button class="btn-close-invoice" onclick="closeSuccessOverlay()">Selesai</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwD06GW__3kPcoPz9M8-98lgGqnV-SOt5d3GImNGPb3JMItX-WdAgvwRsATCtuLyK1T/exec';
+        const RECAPTCHA_SITE_KEY = '6LdoftsrAAAAABOhrPKzneF-HXGYUQQ5WLRYEbyM';
+        const QRIS_STATIC = '00020101021126610014COM.GO-JEK.WWW01189360091436642109790210G6642109790303UMI51440014ID.CO.QRIS.WWW0215ID10254198343830303UMI5204581253033605802ID5920El Semar #13, JEBRES6004SOLO61055712562070703A01630478F3';
+
+        // Global variables
+        let selectedTicketType = null;
+        let selectedPaymentMethod = null;
+        let registrationData = {};
+        let uniqueCode = 0;
+        let lastSubmitTime = 0;
+
+        // Ticket prices
+        const ticketPrices = {
+            'Day 1': 15000,
+            'Day 2': 15000,
+            'Day 1+2': 25000,
+            
+            
+            'tryout': 25000,
+            'lomba': 250000
+        };
+
+        // Ticket selection function
+        function selectTicket(ticketType) {
+            // Remove selected class from all cards
+            document.querySelectorAll('.ticket-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked card
+            document.querySelector(`[data-ticket="${ticketType}"]`).classList.add('selected');
+            
+            selectedTicketType = ticketType;
+            
+            // Show form container and hide ticket selection
+            document.getElementById('ticketSelection').style.display = 'none';
+            document.getElementById('formContainer').style.display = 'block';
+            
+            // Add form-active class to main-wrapper (for mobile styling)
+            document.querySelector('.main-wrapper').classList.add('form-active');
+            
+            // Update form title
+            const formTitle = document.getElementById('formTitle');
+            if (ticketType === 'elsemar') {
+                formTitle.textContent = 'Pendaftaran EL SEMAR #13';
+                document.getElementById('registrationForm').style.display = 'block';
+                document.getElementById('tryoutForm').style.display = 'none';
+                document.getElementById('lombaForm').style.display = 'none';
+            } else if (ticketType === 'tryout') {
+                formTitle.textContent = 'Pendaftaran TRYOUT';
+                document.getElementById('registrationForm').style.display = 'none';
+                document.getElementById('tryoutForm').style.display = 'block';
+                document.getElementById('lombaForm').style.display = 'none';
+            } else if (ticketType === 'lomba') {
+                formTitle.textContent = 'Pendaftaran LOMBA';
+                document.getElementById('registrationForm').style.display = 'none';
+                document.getElementById('lombaForm').style.display = 'block';
+                document.getElementById('tryoutForm').style.display = 'none';
+            }
+
+        }
+
+        // Back to ticket selection
+        function backToTicketSelection() {
+            document.getElementById('ticketSelection').style.display = 'block';
+            document.getElementById('formContainer').style.display = 'none';
+            
+            // Remove form-active class from main-wrapper
+            document.querySelector('.main-wrapper').classList.remove('form-active');
+            
+            selectedTicketType = null;
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tryout school type change handler
+            document.getElementById('tryoutSchoolType').addEventListener('change', function() {
+                const schoolType = this.value;
+                const smaFields = document.getElementById('tryoutSmaFields');
+                const smkFields = document.getElementById('tryoutSmkFields');
+                
+                // Remove animation class first to allow re-animation
+                if (smaFields) {
+                    smaFields.classList.remove('conditional-field');
+                    void smaFields.offsetWidth; // Trigger reflow
+                }
+                if (smkFields) {
+                    smkFields.classList.remove('conditional-field');
+                    void smkFields.offsetWidth;
+                }
+                
+                smaFields.classList.add('d-none');
+                smkFields.classList.add('d-none');
+                
+                if (schoolType === 'SMA') {
+                    smaFields.classList.remove('d-none');
+                    smaFields.classList.add('conditional-field');
+                } else if (schoolType === 'SMK') {
+                    smkFields.classList.remove('d-none');
+                    smkFields.classList.add('conditional-field');
+                }
+            });
+
+            // Lomba institution type change handler
+            document.getElementById('lombaInstitutionType').addEventListener('change', function() {
+                const institutionType = this.value;
+                const universitasFields = document.getElementById('lombaUniversitasFields');
+                const smaFields = document.getElementById('lombaSmaFields');
+                const smkFields = document.getElementById('lombaSmkFields');
+                
+                // Remove animation class first to allow re-animation
+                if (universitasFields) {
+                    universitasFields.classList.remove('conditional-field');
+                    void universitasFields.offsetWidth; // Trigger reflow
+                }
+                if (smaFields) {
+                    smaFields.classList.remove('conditional-field');
+                    void smaFields.offsetWidth;
+                }
+                if (smkFields) {
+                    smkFields.classList.remove('conditional-field');
+                    void smkFields.offsetWidth;
+                }
+                
+                universitasFields.classList.add('d-none');
+                smaFields.classList.add('d-none');
+                smkFields.classList.add('d-none');
+                
+                if (institutionType === 'Universitas') {
+                    universitasFields.classList.remove('d-none');
+                    universitasFields.classList.add('conditional-field');
+                } else if (institutionType === 'SMA') {
+                    smaFields.classList.remove('d-none');
+                    smaFields.classList.add('conditional-field');
+                } else if (institutionType === 'SMK') {
+                    smkFields.classList.remove('d-none');
+                    smkFields.classList.add('conditional-field');
+                }
+            });
+
+            // Tryout form submission
+            document.getElementById('tryoutForm').addEventListener('submit', handleTryoutSubmit);
+            
+            // Lomba form submission
+            document.getElementById('lombaForm').addEventListener('submit', handleLombaSubmit);
+        });
+
+        // Handle lomba form submission
+        async function handleLombaSubmit(e) {
+            e.preventDefault();
+            
+            if (!canSubmit()) {
+                showAlert('lombaFormAlert', 'warning', 'Tunggu 5 detik sebelum submit lagi.');
+                return;
+            }
+            
+            if (!validateLombaForm()) return;
+            
+            try {
+                lastSubmitTime = Date.now();
+                showAlert('lombaFormAlert', 'info', 'Memproses data...');
+                
+                let recaptchaToken = '';
+                if (typeof grecaptcha !== 'undefined') {
+                    try {
+                        recaptchaToken = await getRecaptchaToken('lomba');
+                    } catch (error) {
+                        showAlert('lombaFormAlert', 'warning', 'Verifikasi keamanan gagal. Refresh halaman dan coba lagi.');
+                        return;
+                    }
+                }
+                
+                let registrationNumber = 1;
+                
+                try {
+                    const countResponse = await fetch(APPS_SCRIPT_URL + '?action=getCount&type=lomba');
+                    if (countResponse.ok) {
+                        const countData = await countResponse.json();
+                        registrationNumber = (countData.count || 0) + 1;
+                    }
+                } catch (error) {
+                    console.warn('Using default registration number: 1');
+                }
+                
+                const formData = new FormData(e.target);
+                registrationData = {
+                    ticketType: 'lomba',
+                    registrationNumber: registrationNumber,
+                    recaptchaToken: recaptchaToken
+                };
+                
+                // Process form fields
+                for (const [key, value] of formData.entries()) {
+                    if (typeof value === 'string') {
+                        registrationData[key] = sanitizeInput(value);
+                    } else {
+                        registrationData[key] = value;
+                    }
+                }
+                
+                // Convert lomba files to base64
+                const lombaIdCardsInput = document.getElementById('lombaIdCards');
+                const lombaCommitmentInput = document.getElementById('lombaCommitmentLetter');
+                
+                let filesProcessed = 0;
+                const totalFiles = (lombaIdCardsInput.files.length > 0 ? 1 : 0) + (lombaCommitmentInput.files.length > 0 ? 1 : 0);
+                
+                function checkAllFilesProcessed() {
+                    filesProcessed++;
+                    if (filesProcessed >= totalFiles || totalFiles === 0) {
+                        const basePrice = ticketPrices['lomba'];
+                        uniqueCode = registrationNumber;
+                        const finalPrice = basePrice + uniqueCode;
+                        
+                        registrationData.finalPrice = finalPrice;
+                        registrationData.uniqueCode = uniqueCode;
+                        
+                        showPaymentPage(finalPrice);
+                    }
+                }
+                
+                // Process ID Cards file
+                if (lombaIdCardsInput.files.length > 0) {
+                    const file = lombaIdCardsInput.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onloadend = () => {
+                        const base64 = reader.result.split(',')[1];
+                        registrationData.lombaIdCardsBase64 = base64;
+                        registrationData.lombaIdCardsName = file.name;
+                        checkAllFilesProcessed();
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+                
+                // Process Commitment Letter file
+                if (lombaCommitmentInput.files.length > 0) {
+                    const file = lombaCommitmentInput.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onloadend = () => {
+                        const base64 = reader.result.split(',')[1];
+                        registrationData.lombaCommitmentBase64 = base64;
+                        registrationData.lombaCommitmentName = file.name;
+                        checkAllFilesProcessed();
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+                
+                // If no files, proceed immediately
+                if (totalFiles === 0) {
+                    checkAllFilesProcessed();
+                }
+                
+            } catch (error) {
+                showAlert('lombaFormAlert', 'danger', 'Gagal memproses. Error: ' + error.message);
+            }
+        }
+
+        // Handle tryout form submission
+        async function handleTryoutSubmit(e) {
+            e.preventDefault();
+            
+            if (!canSubmit()) {
+                showAlert('tryoutFormAlert', 'warning', 'Tunggu 5 detik sebelum submit lagi.');
+                return;
+            }
+            
+            if (!validateTryoutForm()) return;
+            
+            try {
+                lastSubmitTime = Date.now();
+                showAlert('tryoutFormAlert', 'info', 'Memproses data...');
+                
+                let recaptchaToken = '';
+                if (typeof grecaptcha !== 'undefined') {
+                    try {
+                        recaptchaToken = await getRecaptchaToken('tryout');
+                    } catch (error) {
+                        showAlert('tryoutFormAlert', 'warning', 'Verifikasi keamanan gagal. Refresh halaman dan coba lagi.');
+                        return;
+                    }
+                }
+                
+                let registrationNumber = 1;
+                
+                try {
+                    const countResponse = await fetch(APPS_SCRIPT_URL + '?action=getCount&type=tryout');
+                    if (countResponse.ok) {
+                        const countData = await countResponse.json();
+                        registrationNumber = (countData.count || 0) + 1;
+                    }
+                } catch (error) {
+                    console.warn('Using default registration number: 1');
+                }
+                
+                const formData = new FormData(e.target);
+                registrationData = {
+                    ticketType: 'tryout',
+                    registrationNumber: registrationNumber,
+                    recaptchaToken: recaptchaToken
+                };
+                
+                // Process form fields
+                for (const [key, value] of formData.entries()) {
+                    if (typeof value === 'string') {
+                        registrationData[key] = sanitizeInput(value);
+                    } else {
+                        registrationData[key] = value;
+                    }
+                }
+                
+                // Convert tryoutPhoto to base64
+                const tryoutPhotoInput = document.getElementById('tryoutPhoto');
+                if (tryoutPhotoInput.files.length > 0) {
+                    const file = tryoutPhotoInput.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onloadend = () => {
+                        const base64 = reader.result.split(',')[1];
+                        registrationData.tryoutPhotoBase64 = base64;
+                        registrationData.tryoutPhotoName = file.name;
+                        
+                        const basePrice = ticketPrices['tryout'];
+                        uniqueCode = registrationNumber;
+                        const finalPrice = basePrice + uniqueCode;
+                        
+                        registrationData.finalPrice = finalPrice;
+                        registrationData.uniqueCode = uniqueCode;
+                        
+                        showPaymentPage(finalPrice);
+                    };
+                    
+                    reader.readAsDataURL(file);
+                } else {
+                    // No file selected, proceed without photo
+                    const basePrice = ticketPrices['tryout'];
+                    uniqueCode = registrationNumber;
+                    const finalPrice = basePrice + uniqueCode;
+                    
+                    registrationData.finalPrice = finalPrice;
+                    registrationData.uniqueCode = uniqueCode;
+                    
+                    showPaymentPage(finalPrice);
+                }
+                
+            } catch (error) {
+                showAlert('tryoutFormAlert', 'danger', 'Gagal memproses. Error: ' + error.message);
+            }
+        }
+
+        // Update existing ticketPrices to match new structure
+        ticketPrices.elsemar = 75000;
+        ticketPrices.tryout = 25000;
+
+        // Switch upload button from grey to orange when a file is selected
+        (function setupUploadButtonState() {
+            // Payment proof upload
+            const paymentInput = document.getElementById('paymentProof');
+            const paymentBtn = document.getElementById('chooseFileBtn');
+            if (paymentInput && paymentBtn) {
+                const updatePayment = () => {
+                    const hasFile = paymentInput.files && paymentInput.files.length > 0;
+                    paymentBtn.classList.toggle('idle', !hasFile);
+                    // Update filename display
+                    const fileNameEl = document.getElementById('paymentFileName');
+                    if (fileNameEl) {
+                        if (hasFile) {
+                            fileNameEl.textContent = paymentInput.files[0].name;
+                            fileNameEl.classList.add('show');
+                        } else {
+                            fileNameEl.classList.remove('show');
+                        }
+                    }
+                };
+                paymentInput.addEventListener('change', updatePayment);
+                updatePayment();
+            }
+
+            // Follow proof upload
+            const followInput = document.getElementById('followProof');
+            const followBtn = document.getElementById('chooseFollowBtn');
+            if (followInput && followBtn) {
+                const updateFollow = () => {
+                    const hasFile = followInput.files && followInput.files.length > 0;
+                    followBtn.classList.toggle('idle', !hasFile);
+                    // Update filename display
+                    const fileNameEl = document.getElementById('followFileName');
+                    if (fileNameEl) {
+                        if (hasFile) {
+                            fileNameEl.textContent = followInput.files[0].name;
+                            fileNameEl.classList.add('show');
+                        } else {
+                            fileNameEl.classList.remove('show');
+                        }
+                    }
+                };
+                followInput.addEventListener('change', updateFollow);
+                updateFollow();
+            }
+
+            // Repost proof upload
+            const repostInput = document.getElementById('repostProof');
+            const repostBtn = document.getElementById('chooseRepostBtn');
+            if (repostInput && repostBtn) {
+                const updateRepost = () => {
+                    const hasFile = repostInput.files && repostInput.files.length > 0;
+                    repostBtn.classList.toggle('idle', !hasFile);
+                    // Update filename display
+                    const fileNameEl = document.getElementById('repostFileName');
+                    if (fileNameEl) {
+                        if (hasFile) {
+                            fileNameEl.textContent = repostInput.files[0].name;
+                            fileNameEl.classList.add('show');
+                        } else {
+                            fileNameEl.classList.remove('show');
+                        }
+                    }
+                };
+                repostInput.addEventListener('change', updateRepost);
+                updateRepost();
+            }
+
+            // Tryout photo upload
+            const tryoutInput = document.getElementById('tryoutPhoto');
+            const tryoutBtn = document.getElementById('chooseTryoutBtn');
+            if (tryoutInput && tryoutBtn) {
+                const updateTryout = () => {
+                    const hasFile = tryoutInput.files && tryoutInput.files.length > 0;
+                    tryoutBtn.classList.toggle('idle', !hasFile);
+                    // Update filename display
+                    const fileNameEl = document.getElementById('tryoutFileName');
+                    if (fileNameEl) {
+                        if (hasFile) {
+                            fileNameEl.textContent = tryoutInput.files[0].name;
+                            fileNameEl.classList.add('show');
+                        } else {
+                            fileNameEl.classList.remove('show');
+                        }
+                    }
+                };
+                tryoutInput.addEventListener('change', updateTryout);
+                updateTryout();
+            }
+
+            // Lomba ID cards upload
+            const lombaIdInput = document.getElementById('lombaIdCards');
+            const lombaIdBtn = document.getElementById('chooseLombaIdBtn');
+            if (lombaIdInput && lombaIdBtn) {
+                const updateLombaId = () => {
+                    const hasFile = lombaIdInput.files && lombaIdInput.files.length > 0;
+                    lombaIdBtn.classList.toggle('idle', !hasFile);
+                    // Update filename display
+                    const fileNameEl = document.getElementById('lombaIdFileName');
+                    if (fileNameEl) {
+                        if (hasFile) {
+                            fileNameEl.textContent = lombaIdInput.files[0].name;
+                            fileNameEl.classList.add('show');
+                        } else {
+                            fileNameEl.classList.remove('show');
+                        }
+                    }
+                };
+                lombaIdInput.addEventListener('change', updateLombaId);
+                updateLombaId();
+            }
+
+            // Lomba commitment letter upload
+            const lombaCommitmentInput = document.getElementById('lombaCommitmentLetter');
+            const lombaCommitmentBtn = document.getElementById('chooseLombaCommitmentBtn');
+            if (lombaCommitmentInput && lombaCommitmentBtn) {
+                const updateLombaCommitment = () => {
+                    const hasFile = lombaCommitmentInput.files && lombaCommitmentInput.files.length > 0;
+                    lombaCommitmentBtn.classList.toggle('idle', !hasFile);
+                    // Update filename display
+                    const fileNameEl = document.getElementById('lombaCommitmentFileName');
+                    if (fileNameEl) {
+                        if (hasFile) {
+                            fileNameEl.textContent = lombaCommitmentInput.files[0].name;
+                            fileNameEl.classList.add('show');
+                        } else {
+                            fileNameEl.classList.remove('show');
+                        }
+                    }
+                };
+                lombaCommitmentInput.addEventListener('change', updateLombaCommitment);
+                updateLombaCommitment();
+            }
+        })();
+
+
+        // Security Functions
+        function sanitizeInput(input) {
+            if (typeof input !== 'string') return '';
+            return input.trim().replace(/[<>"']/g, '').substring(0, 255);
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return emailRegex.test(email) && email.includes('.') && !email.includes('..');
+        }
+
+        function isValidPhone(phone) {
+            const cleaned = phone.replace(/\s/g, '');
+            return /^(0|62|\+62)[0-9]{9,13}$/.test(cleaned);
+        }
+
+        let lastSubmission = 0;
+        const SUBMISSION_COOLDOWN = 5000;
+
+        function canSubmit() {
+            const now = Date.now();
+            if (now - lastSubmission < SUBMISSION_COOLDOWN) return false;
+            lastSubmission = now;
+            return true;
+        }
+
+        function getRecaptchaToken(action = 'submit') {
+            return new Promise((resolve, reject) => {
+                if (typeof grecaptcha === 'undefined') {
+                    reject(new Error('reCAPTCHA not loaded'));
+                    return;
+                }
+                grecaptcha.ready(() => {
+                    grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: action })
+                        .then(resolve)
+                        .catch(reject);
+                });
+            });
+        }
+
+        function isLocalhost() {
+            return window.location.hostname === 'localhost' || 
+                   window.location.hostname === '127.0.0.1';
+        }
+
+        // Registration Form Handler (robust init)
+        let registrationForm = null;
+        let institutionTypeEl = null;
+        let facultyEl = null;
+        let studyProgramEl = null;
+
+        function initRegistrationPage() {
+            registrationForm = document.getElementById('registrationForm');
+            institutionTypeEl = document.getElementById('institutionType');
+            facultyEl = document.getElementById('faculty');
+            studyProgramEl = document.getElementById('studyProgram');
+
+            // Clear validation on input
+            document.querySelectorAll('.form-control, .form-select').forEach(el => {
+                el.addEventListener('input', function() {
+                    this.classList.remove('is-invalid', 'is-valid');
+                });
+            });
+
+            if (registrationForm) {
+                registrationForm.addEventListener('submit', handleFormSubmit);
+            }
+
+            if (institutionTypeEl) {
+                institutionTypeEl.addEventListener('change', updateInstitutionFields);
+                institutionTypeEl.addEventListener('input', updateInstitutionFields);
+            }
+            if (facultyEl) {
+                facultyEl.addEventListener('change', updateNimVisibility);
+            }
+            if (studyProgramEl) {
+                studyProgramEl.addEventListener('input', updateNimVisibility);
+            }
+
+            const uploadForm = document.getElementById('uploadForm');
+            if (uploadForm) {
+                uploadForm.addEventListener('submit', handleUploadSubmit);
+            }
+
+            // Free upload form handler
+            const freeUploadForm = document.getElementById('freeUploadForm');
+            if (freeUploadForm) {
+                freeUploadForm.addEventListener('submit', handleFreeUploadSubmit);
+            }
+
+            // Initialize visibility
+            updateInstitutionFields();
+            updateNimVisibility();
+        }
+
+        if (document.readyState === 'loading') {
+            window.addEventListener('DOMContentLoaded', initRegistrationPage);
+        } else {
+            initRegistrationPage();
+        }
+
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) return;
+            
+            try {
+                showAlert('formAlert', 'info', 'Memproses data...');
+                
+                let recaptchaToken = 'development-token';
+                
+                if (!isLocalhost()) {
+                    try {
+                        recaptchaToken = await getRecaptchaToken('registration');
+                    } catch (error) {
+                        showAlert('formAlert', 'warning', 'Verifikasi keamanan gagal. Refresh halaman dan coba lagi.');
+                        return;
+                    }
+                }
+                
+                let registrationNumber = 1;
+                
+                try {
+                    const countResponse = await fetch(APPS_SCRIPT_URL + '?action=getCount');
+                    if (countResponse.ok) {
+                        const countData = await countResponse.json();
+                        registrationNumber = (countData.count || 0) + 1;
+                    }
+                } catch (error) {
+                    console.warn('Using default registration number: 1');
+                }
+                
+                const formData = new FormData(registrationForm);
+                registrationData = {};
+                
+                for (const [key, value] of formData.entries()) {
+                    if (typeof value === 'string') {
+                        registrationData[key] = sanitizeInput(value);
+                    } else {
+                        registrationData[key] = value;
+                    }
+                }
+                
+                registrationData.registrationNumber = registrationNumber;
+                registrationData.recaptchaToken = recaptchaToken;
+                
+                const ticketType = registrationData.ticketType;
+                const basePrice = ticketPrices[ticketType];
+                uniqueCode = registrationNumber;
+                const finalPrice = basePrice + uniqueCode;
+                
+                registrationData.finalPrice = finalPrice;
+                registrationData.uniqueCode = uniqueCode;
+                
+                showPaymentPage(finalPrice);
+            } catch (error) {
+                showAlert('formAlert', 'danger', 'Gagal memproses. Error: ' + error.message);
+            }
+        }
+
+        function validateLombaForm() {
+            let isValid = true;
+            
+            // Validasi Nama Tim
+            const teamName = document.getElementById('lombaTeamName');
+            if (teamName) {
+                const teamNameValue = sanitizeInput(teamName.value);
+                if (!teamNameValue || teamNameValue.length < 2) {
+                    teamName.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    teamName.classList.add('is-valid');
+                }
+            }
+            
+            // Validasi Nama Ketua Tim
+            const leaderName = document.getElementById('lombaLeaderName');
+            if (leaderName) {
+                const leaderNameValue = sanitizeInput(leaderName.value);
+                if (!leaderNameValue || leaderNameValue.length < 2) {
+                    leaderName.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    leaderName.classList.add('is-valid');
+                }
+            }
+            
+            // Validasi Nomor Telepon Ketua Tim
+            const leaderPhone = document.getElementById('lombaLeaderPhone');
+            if (leaderPhone) {
+                if (!isValidPhone(leaderPhone.value)) {
+                    leaderPhone.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    leaderPhone.classList.add('is-valid');
+                }
+            }
+            
+            // Validasi Email Ketua Tim
+            const leaderEmail = document.getElementById('lombaLeaderEmail');
+            if (leaderEmail) {
+                if (!isValidEmail(leaderEmail.value)) {
+                    leaderEmail.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    leaderEmail.classList.add('is-valid');
+                }
+            }
+            
+            // Validasi Nama Anggota 1
+            const member1Name = document.getElementById('lombaMember1Name');
+            if (member1Name) {
+                const member1NameValue = sanitizeInput(member1Name.value);
+                if (!member1NameValue || member1NameValue.length < 2) {
+                    member1Name.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    member1Name.classList.add('is-valid');
+                }
+            }
+            
+            // Validasi Nomor Telepon Anggota 1
+            const member1Phone = document.getElementById('lombaMember1Phone');
+            if (member1Phone) {
+                if (!isValidPhone(member1Phone.value)) {
+                    member1Phone.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    member1Phone.classList.add('is-valid');
+                }
+            }
+            
+            // Validasi Asal Institusi
+            const institutionType = document.getElementById('lombaInstitutionType');
+            if (institutionType) {
+                if (!institutionType.value) {
+                    institutionType.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    institutionType.classList.add('is-valid');
+                    
+                    // Validasi field conditional berdasarkan jenis institusi
+                    if (institutionType.value === 'Universitas') {
+                        const universityName = document.getElementById('lombaUniversityName');
+                        
+                        if (universityName && !universityName.value.trim()) {
+                            universityName.classList.add('is-invalid');
+                            isValid = false;
+                        } else if (universityName) {
+                            universityName.classList.add('is-valid');
+                        }
+                        
+                    } else if (institutionType.value === 'SMA') {
+                        const smaName = document.getElementById('lombaSmaName');
+                        if (smaName) {
+                            if (!smaName.value.trim()) {
+                                smaName.classList.add('is-invalid');
+                                isValid = false;
+                            } else {
+                                smaName.classList.add('is-valid');
+                            }
+                        }
+                    } else if (institutionType.value === 'SMK') {
+                        const smkName = document.getElementById('lombaSmkName');
+                        if (smkName) {
+                            if (!smkName.value.trim()) {
+                                smkName.classList.add('is-invalid');
+                                isValid = false;
+                            } else {
+                                smkName.classList.add('is-valid');
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Validasi Upload Kartu Identitas
+            const idCards = document.getElementById('lombaIdCards');
+            if (idCards) {
+                const idCardsBox = idCards.closest('.tryout-upload-box');
+                if (!idCards.files.length) {
+                    idCardsBox.classList.add('is-invalid');
+                    showAlert('lombaFormAlert', 'warning', 'Mohon upload Kartu Identitas.');
+                    isValid = false;
+                } else {
+                    const maxSize = 5 * 1024 * 1024; // 5MB
+                    const file = idCards.files[0];
+                    if (file.size > maxSize) {
+                        idCardsBox.classList.add('is-invalid');
+                        showAlert('lombaFormAlert', 'warning', 'File Kartu Identitas terlalu besar. Maksimal 5MB.');
+                        isValid = false;
+                    } else {
+                        idCardsBox.classList.remove('is-invalid');
+                    }
+                }
+            }
+            
+            // Validasi Upload Surat Komitmen
+            const commitmentLetter = document.getElementById('lombaCommitmentLetter');
+            if (commitmentLetter) {
+                const commitmentBox = commitmentLetter.closest('.tryout-upload-box');
+                if (!commitmentLetter.files.length) {
+                    commitmentBox.classList.add('is-invalid');
+                    showAlert('lombaFormAlert', 'warning', 'Mohon upload Surat Komitmen.');
+                    isValid = false;
+                } else {
+                    const maxSize = 5 * 1024 * 1024; // 5MB
+                    const file = commitmentLetter.files[0];
+                    if (file.size > maxSize) {
+                        commitmentBox.classList.add('is-invalid');
+                        showAlert('lombaFormAlert', 'warning', 'File Surat Komitmen terlalu besar. Maksimal 5MB.');
+                        isValid = false;
+                    } else {
+                        commitmentBox.classList.remove('is-invalid');
+                    }
+                }
+            }
+            
+            if (!isValid) {
+                showAlert('lombaFormAlert', 'warning', 'Mohon periksa dan lengkapi form dengan benar.');
+            }
+            
+            return isValid;
+        }
+
+        function validateTryoutForm() {
+            let isValid = true;
+            
+            const fullName = document.getElementById('tryoutFullName');
+            const nameValue = sanitizeInput(fullName.value);
+            if (!nameValue || nameValue.length < 2) {
+                fullName.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                fullName.classList.add('is-valid');
+            }
+            
+            const phone = document.getElementById('tryoutPhone');
+            if (!isValidPhone(phone.value)) {
+                phone.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                phone.classList.add('is-valid');
+            }
+            
+            const email = document.getElementById('tryoutEmail');
+            if (!isValidEmail(email.value)) {
+                email.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                email.classList.add('is-valid');
+            }
+            
+            const requiredFields = ['tryoutSchoolType'];
+            
+            for (const fieldId of requiredFields) {
+                const el = document.getElementById(fieldId);
+                const value = sanitizeInput(el.value);
+                
+                if (!value) {
+                    el.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    el.classList.add('is-valid');
+                }
+            }
+            
+            const schoolType = document.getElementById('tryoutSchoolType').value;
+            
+            if (schoolType === 'SMA') {
+                const smaName = document.getElementById('tryoutSmaName');
+                if (!smaName.value.trim()) {
+                    smaName.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    smaName.classList.add('is-valid');
+                }
+            } else if (schoolType === 'SMK') {
+                const smkName = document.getElementById('tryoutSmkName');
+                if (!smkName.value.trim()) {
+                    smkName.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    smkName.classList.add('is-valid');
+                }
+            }
+            
+            const photo = document.getElementById('tryoutPhoto');
+            const uploadBox = photo.closest('.tryout-upload-box');
+            if (!photo.files.length) {
+                uploadBox.classList.add('is-invalid');
+                showAlert('tryoutFormAlert', 'warning', 'Mohon upload foto bukti follow Instagram.');
+                isValid = false;
+            } else {
+                const maxSize = 5 * 1024 * 1024; // 5MB
+                const file = photo.files[0];
+                if (file.size > maxSize) {
+                    uploadBox.classList.add('is-invalid');
+                    showAlert('tryoutFormAlert', 'warning', 'File foto terlalu besar. Maksimal 5MB.');
+                    isValid = false;
+                } else {
+                    uploadBox.classList.remove('is-invalid');
+                }
+            }
+            
+            if (!isValid) {
+                showAlert('tryoutFormAlert', 'warning', 'Mohon periksa dan lengkapi form dengan benar.');
+            }
+            
+            return isValid;
+        }
+
+        function validateForm() {
+            if (!canSubmit()) {
+                showAlert('formAlert', 'warning', 'Tunggu 5 detik sebelum submit lagi.');
+                return false;
+            }
+            
+            let isValid = true;
+            
+            const fullName = document.getElementById('fullName');
+            const nameValue = sanitizeInput(fullName.value);
+            if (!nameValue || nameValue.length < 2) {
+                fullName.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                fullName.classList.add('is-valid');
+            }
+            
+            const phone = document.getElementById('phone');
+            if (!isValidPhone(phone.value)) {
+                phone.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                phone.classList.add('is-valid');
+            }
+            
+            const email = document.getElementById('email');
+            if (!isValidEmail(email.value)) {
+                email.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                email.classList.add('is-valid');
+            }
+            
+            const requiredFields = ['institutionType', 'reason', 'referral', 'awareness', 'ticketType'];
+            
+            for (const fieldId of requiredFields) {
+                const el = document.getElementById(fieldId);
+                const value = sanitizeInput(el.value);
+                
+                if (!value) {
+                    el.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    el.classList.add('is-valid');
+                }
+            }
+            
+            const institutionType = document.getElementById('institutionType').value;
+            
+            if (institutionType === 'UNS') {
+                const faculty = document.getElementById('faculty');
+                const studyProgram = document.getElementById('studyProgram');
+                
+                if (!faculty.value) {
+                    faculty.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    faculty.classList.add('is-valid');
+                }
+                
+                if (!studyProgram.value.trim()) {
+                    studyProgram.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    studyProgram.classList.add('is-valid');
+                }
+                
+                const isTeknik = faculty.value.toLowerCase().includes('teknik');
+                const isElektro = studyProgram.value.toLowerCase().includes('elektro');
+                if (isTeknik && isElektro) {
+                    const nim = document.getElementById('nim');
+                    if (!nim.value.trim()) {
+                        nim.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        nim.classList.add('is-valid');
+                    }
+                }
+            } else if (institutionType === 'SMA') {
+                const smaName = document.getElementById('smaName');
+                if (!smaName.value.trim()) {
+                    smaName.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    smaName.classList.add('is-valid');
+                }
+            } else if (institutionType === 'SMK') {
+                const smkName = document.getElementById('smkName');
+                if (!smkName.value.trim()) {
+                    smkName.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    smkName.classList.add('is-valid');
+                }
+            }
+            
+            if (!isValid) {
+                showAlert('formAlert', 'warning', 'Mohon periksa dan lengkapi form dengan benar.');
+            }
+            
+            return isValid;
+        }
+
+        function showPaymentPage(finalPrice) {
+            document.getElementById('pagesWrapper').classList.add('show-payment');
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step1').classList.add('completed');
+            document.getElementById('connector').classList.add('completed');
+            document.getElementById('step2').classList.add('active');
+            
+            // Update payer summary with previously entered data
+            try {
+                let name, email, phone, ticket, eventDate, eventDay, eventLocation;
+                
+                if (selectedTicketType === 'elsemar') {
+                    name = registrationData.fullName || '-';
+                    email = registrationData.email || '-';
+                    phone = registrationData.phone || '-';
+                    ticket = 'EL SEMAR #13';
+                    eventDate = '3 Des 2025';
+                    eventDay = 'Rabu';
+                    eventLocation = 'REKTORAT UNS';
+                } else if (selectedTicketType === 'tryout') {
+                    name = registrationData.tryoutFullName || '-';
+                    email = registrationData.tryoutEmail || '-';
+                    phone = registrationData.tryoutPhone || '-';
+                    ticket = 'TRYOUT';
+                    eventDate = '8 Nov 2025';
+                    eventDay = 'Sabtu';
+                    eventLocation = 'FT UNS';
+                } else if (selectedTicketType === 'lomba') {
+                    name = registrationData.lombaTeamName || '-';
+                    email = registrationData.lombaLeaderEmail || '-';
+                    phone = registrationData.lombaLeaderPhone || '-';
+                    ticket = 'LOMBA';
+                    eventDate = '3 Des 2025';
+                    eventDay = 'Rabu';
+                    eventLocation = 'REKTORAT UNS';
+                }
+                
+                const summaryNameEl = document.getElementById('summaryName');
+                const summaryPhoneEl = document.getElementById('summaryPhone');
+                const summaryEmailEl = document.getElementById('summaryEmail');
+                const summaryNameLabelEl = document.getElementById('summaryNameLabel');
+                const summaryPhoneLabelEl = document.getElementById('summaryPhoneLabel');
+                const summaryEmailLabelEl = document.getElementById('summaryEmailLabel');
+                const tTicket = document.getElementById('tTicket');
+                const ticketDateEl = document.getElementById('ticketDate');
+                const eventLocationEl = document.getElementById('eventLocation');
+                const ticketPriceEl = document.getElementById('ticketPrice');
+                const ticketPriceOriginalEl = document.getElementById('ticketPriceOriginal');
+                
+                // Update labels based on ticket type
+                if (selectedTicketType === 'lomba') {
+                    if (summaryNameLabelEl) summaryNameLabelEl.textContent = 'Nama Tim';
+                    if (summaryPhoneLabelEl) summaryPhoneLabelEl.textContent = 'No. Telepon Ketua Tim';
+                    if (summaryEmailLabelEl) summaryEmailLabelEl.textContent = 'Email Ketua Tim';
+                } else {
+                    if (summaryNameLabelEl) summaryNameLabelEl.textContent = 'Nama Lengkap';
+                    if (summaryPhoneLabelEl) summaryPhoneLabelEl.textContent = 'No. Telepon';
+                    if (summaryEmailLabelEl) summaryEmailLabelEl.textContent = 'Email';
+                }
+                
+                if (summaryNameEl) summaryNameEl.textContent = name;
+                if (summaryPhoneEl) summaryPhoneEl.textContent = phone;
+                if (summaryEmailEl) summaryEmailEl.textContent = email;
+                if (tTicket) tTicket.textContent = ticket;
+                if (ticketDateEl) ticketDateEl.textContent = `${eventDay}, ${eventDate}`;
+                if (eventLocationEl) eventLocationEl.textContent = eventLocation;
+                if (ticketPriceEl) {
+                    ticketPriceEl.textContent = formatRupiah(finalPrice);
+                    ticketPriceEl.classList.remove('free');
+                }
+                if (ticketPriceOriginalEl) {
+                    ticketPriceOriginalEl.style.display = 'none';
+                }
+                
+                // Update paid option price
+                const paidPriceEl = document.getElementById('paidPrice');
+                if (paidPriceEl) {
+                    paidPriceEl.textContent = formatRupiah(finalPrice);
+                }
+            } catch (_) {}
+            
+            // Show payment method selection for EL SEMAR only (seminar)
+            if (selectedTicketType === 'elsemar') {
+                document.querySelector('.payment-method-selection').style.display = 'block';
+                document.getElementById('paidPaymentSection').style.display = 'none';
+                document.getElementById('freePaymentSection').style.display = 'none';
+                document.getElementById('paidUploadSection').style.display = 'none';
+                document.getElementById('freeUploadSection').style.display = 'none';
+            } else {
+                // For tryout and lomba, show direct payment (no free option)
+                document.querySelector('.payment-method-selection').style.display = 'none';
+                document.getElementById('paidPaymentSection').style.display = 'block';
+                document.getElementById('freePaymentSection').style.display = 'none';
+                document.getElementById('paidUploadSection').style.display = 'block';
+                document.getElementById('freeUploadSection').style.display = 'none';
+                document.getElementById('displayPrice').textContent = formatRupiah(finalPrice);
+                generateDynamicQRIS(finalPrice);
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+        // Payment method selection function
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            
+            // Remove selected class from all options
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            document.getElementById(method + 'Option').classList.add('selected');
+            
+            if (method === 'paid') {
+                document.getElementById('paidPaymentSection').style.display = 'block';
+                document.getElementById('freePaymentSection').style.display = 'none';
+                document.getElementById('paidUploadSection').style.display = 'block';
+                document.getElementById('freeUploadSection').style.display = 'none';
+                
+                let basePrice;
+                if (selectedTicketType === 'elsemar') {
+                    // For seminar, use ticketType from form
+                    basePrice = ticketPrices[registrationData.ticketType] || ticketPrices['Seminar'];
+                } else {
+                    // For tryout and lomba, use selectedTicketType
+                    basePrice = ticketPrices[selectedTicketType];
+                }
+                
+                // Add unique code to base price
+                const finalPrice = basePrice + (registrationData.uniqueCode || 0);
+                document.getElementById('displayPrice').textContent = formatRupiah(finalPrice);
+                generateDynamicQRIS(finalPrice);
+                
+                // Update ticket price display
+                const ticketPriceEl = document.getElementById('ticketPrice');
+                const ticketPriceOriginalEl = document.getElementById('ticketPriceOriginal');
+                if (ticketPriceEl) {
+                    ticketPriceEl.textContent = formatRupiah(finalPrice);
+                    ticketPriceEl.classList.remove('free');
+                }
+                if (ticketPriceOriginalEl) {
+                    ticketPriceOriginalEl.style.display = 'none';
+                }
+            } else if (method === 'free') {
+                document.getElementById('paidPaymentSection').style.display = 'none';
+                document.getElementById('freePaymentSection').style.display = 'block';
+                document.getElementById('paidUploadSection').style.display = 'none';
+                document.getElementById('freeUploadSection').style.display = 'block';
+                
+                // Update ticket price display for free option
+                const ticketPriceEl = document.getElementById('ticketPrice');
+                const ticketPriceOriginalEl = document.getElementById('ticketPriceOriginal');
+                if (ticketPriceEl && ticketPriceOriginalEl) {
+                    // Calculate original price
+                    let basePrice;
+                    if (selectedTicketType === 'elsemar') {
+                        basePrice = ticketPrices[registrationData.ticketType] || ticketPrices['Seminar'];
+                    } else {
+                        basePrice = ticketPrices[selectedTicketType];
+                    }
+                    const originalPrice = basePrice + (registrationData.uniqueCode || 0);
+                    
+                    // Show Rp 0 with original price strikethrough
+                    ticketPriceEl.textContent = 'Rp 0';
+                    ticketPriceEl.classList.add('free');
+                    ticketPriceOriginalEl.textContent = formatRupiah(originalPrice);
+                    ticketPriceOriginalEl.style.display = 'block';
+                }
+                
+                // Conditional upload based on ticket type
+                const ticketType = registrationData.ticketType;
+                const followUpload = document.getElementById('followProofUpload');
+                const repostUpload = document.getElementById('repostProofUpload');
+                const followInput = document.getElementById('followProof');
+                const repostInput = document.getElementById('repostProof');
+                const repostStep = document.getElementById('freeRepostStep');
+                const uploadStepNum = document.getElementById('freeUploadStepNum');
+                const uploadStepDesc = document.getElementById('freeUploadStepDesc');
+                const freeUploadTitle = document.getElementById('freeUploadTitle');
+                const freeUploadInstruction = document.getElementById('freeUploadInstruction');
+                
+                // Semua ticket gratis butuh follow
+                followUpload.style.display = 'block';
+                followInput.required = true;
+                
+                // Hanya Day 1+2 (Pameran) yang butuh repost
+                if (ticketType === 'Day 1+2') {
+                    repostUpload.style.display = 'block';
+                    repostInput.required = true;
+                    repostStep.style.display = 'flex';
+                    uploadStepNum.textContent = '3';
+                    uploadStepDesc.textContent = 'Upload screenshot bukti follow dan repost di bawah ini';
+                    freeUploadTitle.textContent = '📱 Upload Bukti Follow & Repost';
+                    freeUploadInstruction.textContent = 'Upload screenshot bukti follow Instagram @el_semar dan repost postingan EL SEMAR #13';
+                } else {
+                    repostUpload.style.display = 'none';
+                    repostInput.required = false;
+                    repostInput.value = ''; // Clear file jika ada
+                    repostStep.style.display = 'none';
+                    uploadStepNum.textContent = '2';
+                    uploadStepDesc.textContent = 'Upload screenshot bukti follow di bawah ini';
+                    freeUploadTitle.textContent = '📱 Upload Bukti Follow Instagram';
+                    freeUploadInstruction.textContent = 'Upload screenshot bukti follow Instagram @el_semar';
+                }
+            }
+        }
+
+        function goBackToForm() {
+            document.getElementById('pagesWrapper').classList.remove('show-payment');
+            document.getElementById('step1').classList.add('active');
+            document.getElementById('step1').classList.remove('completed');
+            document.getElementById('connector').classList.remove('completed');
+            document.getElementById('step2').classList.remove('active');
+            
+            // Keep form-active class (hero section stays hidden on mobile)
+            // No need to remove form-active here since we're still in the form
+            
+            window.scrollTo(0, 0);
+        }
+
+        // QRIS Generation
+        function generateDynamicQRIS(nominal) {
+            const dynamicQRIS = convertToDynamicQRIS(QRIS_STATIC, nominal.toString());
+            displayQRCode(dynamicQRIS);
+        }
+
+        function convertToDynamicQRIS(qris, nominal) {
+            qris = qris.slice(0, -4).replace("010211", "010212");
+            const [prefix, suffix] = qris.split("5802ID");
+            const nominalData = "54" + String(nominal.length).padStart(2, '0') + nominal;
+            const resultQRIS = `${prefix}${nominalData}5802ID${suffix}${convertCRC16(prefix + nominalData + "5802ID" + suffix)}`;
+            return resultQRIS;
+        }
+
+        function convertCRC16(str) {
+            let crc = 0xFFFF;
+            for (let c = 0; c < str.length; c++) {
+                crc ^= str.charCodeAt(c) << 8;
+                for (let i = 0; i < 8; i++) {
+                    crc = (crc & 0x8000) ? (crc << 1) ^ 0x1021 : crc << 1;
+                }
+            }
+            return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+        }
+
+        function displayQRCode(qrisCode) {
+            const qrcodeEl = document.getElementById('qrcode');
+            qrcodeEl.innerHTML = '';
+            new QRCode(qrcodeEl, {
+                text: qrisCode,
+                width: 300,
+                height: 300,
+                correctLevel: QRCode.CorrectLevel.M
+            });
+        }
+
+        // Upload Form Handler
+        async function handleUploadSubmit(e) {
+            e.preventDefault();
+            
+            const fileInput = document.getElementById('paymentProof');
+            if (!fileInput.files.length) {
+                showAlert('uploadAlert', 'warning', 'Mohon upload bukti pembayaran.');
+                return;
+            }
+            
+            let recaptchaToken = 'development-token';
+            
+            if (!isLocalhost()) {
+                try {
+                    recaptchaToken = await getRecaptchaToken('upload');
+                } catch (error) {
+                    showAlert('uploadAlert', 'warning', 'Verifikasi keamanan gagal. Refresh halaman dan coba lagi.');
+                    return;
+                }
+            }
+            
+            const file = fileInput.files[0];
+            const maxSize = 5 * 1024 * 1024;
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'application/pdf'];
+            const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.pdf'];
+            
+            if (file.size > maxSize) {
+                showAlert('uploadAlert', 'warning', 'Ukuran file terlalu besar. Maksimal 5MB.');
+                return;
+            }
+            
+            if (!allowedTypes.includes(file.type)) {
+                showAlert('uploadAlert', 'warning', 'Format file tidak didukung.');
+                return;
+            }
+            
+            const fileName = file.name.toLowerCase();
+            const hasValidExtension = allowedExtensions.some(ext => fileName.endsWith(ext));
+            if (!hasValidExtension) {
+                showAlert('uploadAlert', 'warning', 'Ekstensi file tidak diperbolehkan.');
+                return;
+            }
+            
+            if (fileName.includes('..') || fileName.includes('/') || fileName.includes('\\')) {
+                showAlert('uploadAlert', 'warning', 'Nama file tidak valid.');
+                return;
+            }
+            
+            try {
+                showLoading('Mengunggah bukti pembayaran');
+                setUploading(true);
+                const reader = new FileReader();
+                
+                reader.onloadend = async () => {
+                    const base64 = reader.result.split(',')[1];
+                    
+                    const formData = new FormData();
+                    Object.keys(registrationData).forEach(key => {
+                        formData.append(key, registrationData[key]);
+                    });
+                    formData.append('paymentProofBase64', base64);
+                    formData.append('paymentProofName', file.name);
+                    formData.append('timestamp', Date.now());
+                    formData.append('userAgent', navigator.userAgent.substring(0, 100));
+                    formData.append('recaptchaToken', recaptchaToken);
+                        
+                    try {
+                        const response = await fetch(APPS_SCRIPT_URL, {
+                            method: 'POST',
+                            body: formData
+                        });
+                        
+                        if (!response.ok) {
+                            throw new Error(`Server error: ${response.status}`);
+                        }
+                        
+                        // Parse JSON response
+                        const result = await response.json();
+                        
+                        hideLoading();
+                        
+                        // Check if submission was successful
+                        if (result.success === false || result.error) {
+                            // Server returned an error
+                            showAlert('uploadAlert', 'danger', result.error || 'Gagal mengirim data. Silakan coba lagi.');
+                            setUploading(false);
+                            return;
+                        }
+
+                        // Show success overlay with invoice
+                        showSuccessOverlay({
+                            name: registrationData.fullName || registrationData.tryoutFullName || registrationData.lombaTeamName,
+                            email: registrationData.email || registrationData.tryoutEmail || registrationData.lombaLeaderEmail,
+                            phone: registrationData.phone || registrationData.tryoutPhone || registrationData.lombaLeaderPhone,
+                            ticketType: registrationData.ticketType || selectedTicketType,
+                            finalPrice: registrationData.finalPrice,
+                            registrationNumber: registrationData.registrationNumber,
+                            paymentMethod: 'paid'
+                        });
+
+                        uploadForm.reset();
+                    } catch (error) {
+                        console.error('Upload error:', error);
+                        showAlert('uploadAlert', 'danger', 'Gagal mengirim data. Silakan coba lagi atau hubungi admin.');
+                    } finally {
+                        setUploading(false);
+                    }
+                    hideLoading();
+                };
+                
+                reader.readAsDataURL(file);
+            } catch (error) {
+                showAlert('uploadAlert', 'danger', 'Gagal memproses file.');
+                console.error(error);
+                hideLoading();
+                setUploading(false);
+            }
+        }
+
+        function setUploading(isUploading) {
+            const btn = document.getElementById('submitBtn');
+            const spinner = document.getElementById('uploadSpinner');
+            btn.disabled = isUploading;
+            spinner.classList.toggle('d-none', !isUploading);
+        }
+
+        function setFreeUploading(isUploading) {
+            const btn = document.getElementById('freeSubmitBtn');
+            const spinner = document.getElementById('freeUploadSpinner');
+            btn.disabled = isUploading;
+            spinner.classList.toggle('d-none', !isUploading);
+        }
+
+        // Handle Free Upload Submit (Follow + Repost proof)
+        async function handleFreeUploadSubmit(e) {
+            e.preventDefault();
+            
+            const followInput = document.getElementById('followProof');
+            const repostInput = document.getElementById('repostProof');
+            const ticketType = registrationData.ticketType;
+            
+            // Validate follow (required for all)
+            if (!followInput.files.length) {
+                showAlert('freeUploadAlert', 'warning', 'Mohon upload bukti follow Instagram.');
+                return;
+            }
+            
+            // Validate repost (only required for Pameran/Day 1+2)
+            if (ticketType === 'Day 1+2' && !repostInput.files.length) {
+                showAlert('freeUploadAlert', 'warning', 'Mohon upload bukti repost untuk tiket Day 1+2.');
+                return;
+            }
+            
+            let recaptchaToken = 'development-token';
+            
+            if (!isLocalhost()) {
+                try {
+                    recaptchaToken = await getRecaptchaToken('free_upload');
+                } catch (error) {
+                    showAlert('freeUploadAlert', 'warning', 'Verifikasi keamanan gagal. Refresh halaman dan coba lagi.');
+                    return;
+                }
+            }
+            
+            const followFile = followInput.files[0];
+            const repostFile = repostInput.files.length > 0 ? repostInput.files[0] : null;
+            const maxSize = 5 * 1024 * 1024;
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+            const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
+            
+            // Validate follow file
+            if (followFile.size > maxSize) {
+                showAlert('freeUploadAlert', 'warning', 'Ukuran file follow terlalu besar. Maksimal 5MB.');
+                return;
+            }
+            
+            if (!allowedTypes.includes(followFile.type)) {
+                showAlert('freeUploadAlert', 'warning', 'Format file follow tidak didukung. Gunakan JPG, PNG, atau GIF.');
+                return;
+            }
+            
+            // Validate repost file (only if provided)
+            if (repostFile) {
+                if (repostFile.size > maxSize) {
+                    showAlert('freeUploadAlert', 'warning', 'Ukuran file repost terlalu besar. Maksimal 5MB.');
+                    return;
+                }
+                
+                if (!repostFile.type || !allowedTypes.includes(repostFile.type)) {
+                    showAlert('freeUploadAlert', 'warning', 'Format file repost tidak didukung. Gunakan JPG, PNG, atau GIF.');
+                    return;
+                }
+            }
+            
+            try {
+                setFreeUploading(true);
+                showAlert('freeUploadAlert', 'info', 'Mengunggah bukti...');
+                
+                // Convert follow file to base64
+                const followBase64 = await fileToBase64(followFile);
+                
+                const formData = new FormData();
+                
+                // Add registration data
+                Object.keys(registrationData).forEach(key => {
+                    formData.append(key, registrationData[key]);
+                });
+                
+                // Add free payment indicator
+                formData.append('paymentMethod', 'free');
+                formData.append('followProofBase64', followBase64);
+                formData.append('followProofName', followFile.name);
+                
+                // Add repost file only if provided
+                if (repostFile) {
+                    const repostBase64 = await fileToBase64(repostFile);
+                    formData.append('repostProofBase64', repostBase64);
+                    formData.append('repostProofName', repostFile.name);
+                }
+                
+                formData.append('timestamp', Date.now());
+                formData.append('userAgent', navigator.userAgent.substring(0, 100));
+                formData.append('recaptchaToken', recaptchaToken);
+                
+                try {
+                    const response = await fetch(APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Server error: ${response.status}`);
+                    }
+                    
+                    // Parse JSON response
+                    const result = await response.json();
+                    
+                    hideLoading();
+                    
+                    // Check if submission was successful
+                    if (result.success === false || result.error) {
+                        // Server returned an error
+                        showAlert('freeUploadAlert', 'danger', result.error || 'Gagal mengirim data. Silakan coba lagi.');
+                        setFreeUploading(false);
+                        return;
+                    }
+
+                    // Show success overlay with invoice
+                    showSuccessOverlay({
+                        name: registrationData.fullName,
+                        email: registrationData.email,
+                        phone: registrationData.phone,
+                        ticketType: registrationData.ticketType,
+                        finalPrice: 0,
+                        registrationNumber: registrationData.registrationNumber,
+                        paymentMethod: 'free'
+                    });
+
+                    document.getElementById('freeUploadForm').reset();
+                } catch (error) {
+                    console.error('Upload error:', error);
+                    showAlert('freeUploadAlert', 'danger', 'Gagal mengirim data. Silakan coba lagi atau hubungi admin.');
+                } finally {
+                    setFreeUploading(false);
+                }
+                
+            } catch (error) {
+                showAlert('freeUploadAlert', 'danger', 'Gagal memproses file: ' + error.message);
+                console.error(error);
+                setFreeUploading(false);
+            }
+        }
+
+        // Helper function to convert file to base64
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const base64 = reader.result.split(',')[1];
+                    resolve(base64);
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Toggle upload button color on file select and show filename
+        const paymentProofInput = document.getElementById('paymentProof');
+        const chooseFileBtn = document.getElementById('chooseFileBtn');
+
+
+
+        function showAlert(elementId, type, message) {
+            const alertEl = document.getElementById(elementId);
+            alertEl.className = `alert alert-${type}`;
+            alertEl.textContent = message;
+            alertEl.classList.remove('d-none');
+        }
+
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(number);
+        }
+
+        // Conditional fields logic
+        function updateInstitutionFields() {
+            if (!institutionTypeEl) return;
+            const type = institutionTypeEl.value;
+            const unsFields = document.getElementById('unsFields');
+            const smaFields = document.getElementById('smaFields');
+            const smkFields = document.getElementById('smkFields');
+            
+            // Remove animation class first to allow re-animation
+            if (unsFields) {
+                unsFields.classList.remove('conditional-field');
+                void unsFields.offsetWidth; // Trigger reflow
+            }
+            if (smaFields) {
+                smaFields.classList.remove('conditional-field');
+                void smaFields.offsetWidth;
+            }
+            if (smkFields) {
+                smkFields.classList.remove('conditional-field');
+                void smkFields.offsetWidth;
+            }
+            
+            // Toggle visibility and add animation
+            if (unsFields) {
+                const shouldShow = type === 'UNS';
+                unsFields.classList.toggle('d-none', !shouldShow);
+                if (shouldShow) unsFields.classList.add('conditional-field');
+            }
+            if (smaFields) {
+                const shouldShow = type === 'SMA';
+                smaFields.classList.toggle('d-none', !shouldShow);
+                if (shouldShow) smaFields.classList.add('conditional-field');
+            }
+            if (smkFields) {
+                const shouldShow = type === 'SMK';
+                smkFields.classList.toggle('d-none', !shouldShow);
+                if (shouldShow) smkFields.classList.add('conditional-field');
+            }
+            
+            const facultyField = document.getElementById('faculty');
+            const studyProgramField = document.getElementById('studyProgram');
+            const smaNameField = document.getElementById('smaName');
+            const smkNameField = document.getElementById('smkName');
+            if (facultyField) facultyField.required = (type === 'UNS');
+            if (studyProgramField) studyProgramField.required = (type === 'UNS');
+            if (smaNameField) smaNameField.required = (type === 'SMA');
+            if (smkNameField) smkNameField.required = (type === 'SMK');
+        }
+
+        function updateNimVisibility() {
+            const nimGroup = document.getElementById('nimGroup');
+            if (!facultyEl || !studyProgramEl || !nimGroup) return;
+            const isTeknik = (facultyEl.value || '').toLowerCase().includes('teknik');
+            const isElektro = (studyProgramEl.value || '').toLowerCase().includes('elektro');
+            const shouldShow = isTeknik && isElektro;
+            
+            // Remove animation class first to allow re-animation
+            nimGroup.classList.remove('conditional-field');
+            void nimGroup.offsetWidth; // Trigger reflow
+            
+            nimGroup.classList.toggle('d-none', !shouldShow);
+            if (shouldShow) nimGroup.classList.add('conditional-field');
+            
+            const nimInput = document.getElementById('nim');
+            if (nimInput) nimInput.required = shouldShow;
+        }
+
+        window.addEventListener('error', function(e) {
+            console.error('Error caught:', e.message);
+            e.preventDefault();
+            return true;
+        });
+
+        window.addEventListener('unhandledrejection', function(e) {
+            console.error('Promise rejection:', e.reason);
+            e.preventDefault();
+        });
+
+                // Loading overlay functions
+        function showLoading(message = 'Memproses pesanan') {
+            const overlay = document.getElementById('loadingOverlay');
+            const loadingText = overlay.querySelector('.loading-text');
+            loadingText.innerHTML = message + '<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>';
+            overlay.classList.add('active');
+        }
+
+        function hideLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            overlay.classList.remove('active');
+        }
+
+        // Success overlay functions
+        function showSuccessOverlay(data) {
+            const overlay = document.getElementById('successOverlay');
+            
+            // Get current timestamp
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('id-ID', { 
+                day: '2-digit', 
+                month: 'long', 
+                year: 'numeric' 
+            });
+            const timeStr = now.toLocaleTimeString('id-ID', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            
+            // Update invoice data
+            let ticketTypeDisplay = '';
+            let invoicePrefix = '';
+            let nameLabel = 'Nama';
+            let emailLabel = 'Email';
+            let phoneLabel = 'No. Telepon';
+            
+            if (selectedTicketType === 'elsemar') {
+                ticketTypeDisplay = `EL SEMAR #13 - ${data.ticketType || 'Day 1'}`;
+                invoicePrefix = 'ELSEMAR';
+            } else if (selectedTicketType === 'tryout') {
+                ticketTypeDisplay = 'TRYOUT TEST';
+                invoicePrefix = 'TRYOUT';
+            } else if (selectedTicketType === 'lomba') {
+                ticketTypeDisplay = 'LOMBA';
+                invoicePrefix = 'LOMBA';
+                nameLabel = 'Nama Tim';
+                emailLabel = 'Email Ketua Tim';
+                phoneLabel = 'No. Telepon Ketua Tim';
+            }
+            
+            const invoiceNumber = `INV-${invoicePrefix}-${String(data.registrationNumber || 1).padStart(5, '0')}`;
+            
+            document.getElementById('invoiceTitle').textContent = 'INVOICE PEMBAYARAN';
+            document.getElementById('invoiceNumber').textContent = invoiceNumber;
+            document.getElementById('invoiceNameLabel').textContent = nameLabel;
+            document.getElementById('invoiceEmailLabel').textContent = emailLabel;
+            document.getElementById('invoicePhoneLabel').textContent = phoneLabel;
+            document.getElementById('invoiceName').textContent = data.name || '-';
+            document.getElementById('invoiceEmail').textContent = data.email || '-';
+            document.getElementById('invoicePhone').textContent = data.phone || '-';
+            document.getElementById('invoiceTicketType').textContent = ticketTypeDisplay;
+            
+            // Update price
+            const totalPrice = data.paymentMethod === 'free' ? 0 : (data.finalPrice || 0);
+            const priceElement = document.getElementById('invoiceTotal');
+            priceElement.textContent = formatRupiah(totalPrice);
+            
+            if (data.paymentMethod === 'free') {
+                priceElement.style.color = '#28a745';
+                priceElement.textContent = 'GRATIS';
+            } else {
+                priceElement.style.color = '#28a745';
+            }
+            
+            // Update timestamp
+            document.getElementById('invoiceDate').textContent = dateStr;
+            document.getElementById('invoiceTime').textContent = timeStr;
+            document.getElementById('invoiceRegNumber').textContent = `REG-${String(data.registrationNumber || 1).padStart(5, '0')}`;
+            
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSuccessOverlay() {
+            const overlay = document.getElementById('successOverlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Reload page after closing
+            setTimeout(() => {
+                location.reload();
+            }, 300);
+        }
+    </script>
+</body>
