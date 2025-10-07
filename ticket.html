@@ -570,37 +570,80 @@
             cursor: not-allowed;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #ff9a56, #ff6b35);
+        /* Payment Button - Custom Style from Uiverse.io */
+        .btn-payment {
+            font-family: inherit;
+            font-size: 20px;
+            background: #212121;
             color: white;
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+            fill: rgb(155, 153, 153);
+            padding: 0.7em 1em;
+            padding-left: 0.9em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            border-radius: 15px;
+            font-weight: 1000;
             width: 100%;
+            transition: all 0.3s ease;
         }
 
-        .btn-primary:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+        .btn-payment span {
+            display: block;
+            margin-left: 0.3em;
+            transition: all 0.3s ease-in-out;
         }
 
-        .btn-secondary {
-            background: #6c757d;
-            color: white;
+        .btn-payment svg {
+            display: block;
+            transform-origin: center center;
+            transition: transform 0.3s ease-in-out;
         }
 
-        .btn-secondary:hover {
-            background: #5a6268;
-            transform: translateY(-2px);
+        .btn-payment:hover {
+            background: #000;
         }
 
-        .btn-success {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        .btn-payment:hover .svg-wrapper {
+            transform: scale(1.25);
+            transition: 0.5s linear;
         }
 
-        .btn-success:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        .btn-payment:hover svg {
+            transform: translateX(1.2em) scale(1.1);
+            fill: #fff;
+        }
+
+        .btn-payment:hover span {
+            opacity: 0;
+            transition: 0.5s linear;
+        }
+
+        .btn-payment:active {
+            transform: scale(0.95);
+        }
+
+        .btn-payment:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-payment .svg-wrapper-1 {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-payment .svg-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-payment .icon {
+            width: 30px;
+            height: 30px;
         }
 
         /* Payment Section */
@@ -818,7 +861,7 @@
 
         
 
-        /* Fancy Upload Button (migrated from style.css) */
+        /* Fancy Upload Button (migrated from style.css) with Uiverse.io animation */
         .upload-button {
             position: relative;
             display: inline-flex;
@@ -833,8 +876,9 @@
             box-shadow: 0 10px 24px rgba(255, 94, 58, 0.35);
             border: none;
             cursor: pointer;
-            transition: transform .15s ease, box-shadow .15s ease;
+            transition: all 250ms ease;
             overflow: hidden;
+            z-index: 1;
         }
 
         .upload-button:before {
@@ -844,14 +888,84 @@
             background: radial-gradient(120px 60px at -10% 50%, rgba(255,255,255,.35), transparent 60%),
                         radial-gradient(120px 60px at 110% 50%, rgba(255,255,255,.35), transparent 60%);
             pointer-events: none;
+            z-index: 2;
         }
 
-        .upload-button:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(255, 94, 58, 0.45); }
-        .upload-button:active { transform: translateY(0); box-shadow: 0 8px 18px rgba(255, 94, 58, 0.35); }
+        /* Slide animation effect */
+        .upload-button::after {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 0;
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff9554 0%, #ff6b35 100%);
+            z-index: -1;
+            transition: all 350ms ease;
+        }
 
-        .upload-button .icon { width: 22px; height: 22px; display: inline-block; }
-        .upload-button .label { font-weight: 600; letter-spacing: .3px; }
-        .upload-button.success { background: linear-gradient(135deg, #2ecc71 0%, #1ea75a 100%); box-shadow: 0 10px 24px rgba(46, 204, 113, 0.35); }
+        .upload-button:hover::after {
+            width: 100%;
+        }
+
+        .upload-button:hover { 
+            transform: translateY(-1px); 
+            box-shadow: 0 12px 28px rgba(255, 94, 58, 0.45); 
+        }
+        
+        .upload-button:active { 
+            transform: translateY(0); 
+            box-shadow: 0 8px 18px rgba(255, 94, 58, 0.35); 
+        }
+
+        .upload-button .icon { 
+            width: 22px; 
+            height: 22px; 
+            display: inline-block; 
+            position: relative;
+            z-index: 3;
+        }
+        
+        .upload-button .label { 
+            font-weight: 600; 
+            letter-spacing: .3px; 
+            position: relative;
+            z-index: 3;
+        }
+
+        .upload-button .desc {
+            position: relative;
+            z-index: 3;
+        }
+        
+        /* Success state */
+        .upload-button.success { 
+            background: linear-gradient(135deg, #2ecc71 0%, #1ea75a 100%); 
+            box-shadow: 0 10px 24px rgba(46, 204, 113, 0.35); 
+        }
+
+        .upload-button.success::after {
+            background: linear-gradient(135deg, #3ee07d 0%, #27c46d 100%);
+        }
+
+        .upload-button.success:hover {
+            box-shadow: 0 12px 28px rgba(46, 204, 113, 0.45);
+        }
+
+        /* Grey state before file selected */
+        .upload-button.idle {
+            background: linear-gradient(135deg, #c8c8c8 0%, #a9a9a9 100%);
+            box-shadow: 0 10px 24px rgba(90, 90, 90, 0.2);
+        }
+
+        .upload-button.idle::after {
+            background: linear-gradient(135deg, #d4d4d4 0%, #bebebe 100%);
+        }
+
+        .upload-button.idle:hover {
+            box-shadow: 0 12px 28px rgba(90, 90, 90, 0.3);
+        }
 
         /* Hide native file input, click via label. Move far offscreen to avoid page jumping on focus */
         .upload-input { position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; padding: 0; margin: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
@@ -865,16 +979,9 @@
         .upload-actions { display: flex; justify-content: center; }
         #selectedFileName { text-align: center; }
 
-        /* Grey state before file selected */
-        .upload-button.idle {
-            background: linear-gradient(135deg, #c8c8c8 0%, #a9a9a9 100%);
-            box-shadow: 0 10px 24px rgba(90, 90, 90, 0.2);
-        }
-
         @media (max-width: 768px) {
             .upload-actions { flex-direction: column; align-items: center; gap: 12px; }
-            .upload-actions .upload-button,
-            .upload-actions .btn.btn-secondary { width: 100%; max-width: 360px; }
+            .upload-actions .upload-button { width: 100%; max-width: 360px; }
             .upload-picker { justify-content: center; }
         }
 
@@ -1953,7 +2060,7 @@
                 </div>
                 <h1 class="hero-title">PENDAFTARAN<br>EL-SEMAR</h1>
                 <p class="hero-subtitle">Satu langkah pasti untuk menjadi bagian dari kami</p>
-               <a href="index.html" class="hero-tagline"><button class="tagline-button">HOME</button></a>
+               <a href="" class="hero-tagline"><button class="tagline-button">HOME</button></a>
             </div>
         </div>
 
@@ -2218,7 +2325,16 @@
                         </div>
 
                         <div class="mt-4">
-                            <button type="submit" class="btn btn-primary">Lanjut ke Pembayaran</button>
+                            <button type="submit" class="btn-payment">
+                                <div class="svg-wrapper-1">
+                                    <div class="svg-wrapper">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" class="icon">
+                                            <path d="M22,15.04C22,17.23 20.24,19 18.07,19H5.93C3.76,19 2,17.23 2,15.04C2,13.07 3.43,11.44 5.31,11.14C5.28,11 5.27,10.86 5.27,10.71C5.27,9.33 6.38,8.2 7.76,8.2C8.37,8.2 8.94,8.43 9.37,8.8C10.14,7.05 11.13,5.44 13.91,5.44C17.28,5.44 18.87,8.06 18.87,10.83C18.87,10.94 18.87,11.06 18.86,11.17C20.65,11.54 22,13.13 22,15.04Z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span>Next</span>
+                            </button>
                         </div>
                         <div id="formAlert" class="alert d-none" role="alert"></div>
                     </form>
@@ -2301,7 +2417,16 @@
                         </div>
 
                         <div class="mt-4">
-                            <button type="submit" class="btn btn-primary">Lanjut ke Pembayaran</button>
+                            <button type="submit" class="btn-payment">
+                                <div class="svg-wrapper-1">
+                                    <div class="svg-wrapper">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" class="icon">
+                                            <path d="M22,15.04C22,17.23 20.24,19 18.07,19H5.93C3.76,19 2,17.23 2,15.04C2,13.07 3.43,11.44 5.31,11.14C5.28,11 5.27,10.86 5.27,10.71C5.27,9.33 6.38,8.2 7.76,8.2C8.37,8.2 8.94,8.43 9.37,8.8C10.14,7.05 11.13,5.44 13.91,5.44C17.28,5.44 18.87,8.06 18.87,10.83C18.87,10.94 18.87,11.06 18.86,11.17C20.65,11.54 22,13.13 22,15.04Z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span>Next</span>
+                            </button>
                         </div>
                         <div id="tryoutFormAlert" class="alert d-none" role="alert"></div>
                     </form>
@@ -2454,7 +2579,16 @@
                         </div>
 
                         <div class="mt-4">
-                            <button type="submit" class="btn btn-primary">Lanjut ke Pembayaran</button>
+                            <button type="submit" class="btn-payment">
+                                <div class="svg-wrapper-1">
+                                    <div class="svg-wrapper">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" class="icon">
+                                            <path d="M22,15.04C22,17.23 20.24,19 18.07,19H5.93C3.76,19 2,17.23 2,15.04C2,13.07 3.43,11.44 5.31,11.14C5.28,11 5.27,10.86 5.27,10.71C5.27,9.33 6.38,8.2 7.76,8.2C8.37,8.2 8.94,8.43 9.37,8.8C10.14,7.05 11.13,5.44 13.91,5.44C17.28,5.44 18.87,8.06 18.87,10.83C18.87,10.94 18.87,11.06 18.86,11.17C20.65,11.54 22,13.13 22,15.04Z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span>Next</span>
+                            </button>
                         </div>
                         <div id="lombaFormAlert" class="alert d-none" role="alert"></div>
                     </form>
