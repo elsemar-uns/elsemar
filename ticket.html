@@ -859,6 +859,54 @@
             }
         }
 
+        /* Radio Input Style from Uiverse.io */
+        .radio-input input {
+            display: none;
+        }
+
+        .radio-input {
+            display: flex;
+            flex-direction: column;
+            padding: 12px;
+            background: #fff;
+            color: #000;
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        .radio-input.is-invalid {
+            border: 2px solid #dc3545;
+        }
+
+        .radio-input.is-valid {
+            border: 2px solid #28a745;
+        }
+
+        .radio-input label {
+            display: flex;
+            background-color: #fff;
+            padding: 14px;
+            margin: 8px 0 0 0;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 1px solid rgba(187, 187, 187, 0.164);
+            color: #000;
+            transition: .3s ease;
+        }
+
+        .radio-input label:hover {
+            background-color: rgba(24, 24, 24, 0.13);
+            border: 1px solid #bbb;
+        }
+
+        .radio-input input:checked + label {
+            border-color: #ff6b35;
+            color: #ff6b35;
+            background-color: rgba(255, 107, 53, 0.05);
+        }
+
         
 
         /* Fancy Upload Button (migrated from style.css) with Uiverse.io animation */
@@ -2206,14 +2254,17 @@
                                 <div class="invalid-feedback">Nama harus diisi minimal 2 karakter</div>
                             </div>
                             <div class="col-6">
-                                <label for="institutionType" class="form-label">Asal institusi<span class="text-danger">*</span></label>
-                                <select id="institutionType" name="institutionType" class="form-select" required>
-                                    <option value="" selected>Pilih</option>
-                                    <option value="UNS">UNS</option>
-                                    <option value="SMA">SMA</option>
-                                    <option value="SMK">SMK</option>
-                                    <option value="Umum">Umum</option>
-                                </select>
+                                <label class="form-label">Asal institusi<span class="text-danger">*</span></label>
+                                <div class="radio-input" id="institutionType-wrapper">
+                                    <input type="radio" id="institutionType-UNS" name="institutionType" value="UNS" required>
+                                    <label for="institutionType-UNS">UNS</label>
+                                    <input type="radio" id="institutionType-SMA" name="institutionType" value="SMA" required>
+                                    <label for="institutionType-SMA">SMA</label>
+                                    <input type="radio" id="institutionType-SMK" name="institutionType" value="SMK" required>
+                                    <label for="institutionType-SMK">SMK</label>
+                                    <input type="radio" id="institutionType-Umum" name="institutionType" value="Umum" required>
+                                    <label for="institutionType-Umum">Umum</label>
+                                </div>
                                 <div class="invalid-feedback">Pilih asal institusi</div>
                             </div>
                             <div class="col-6">
@@ -2227,13 +2278,15 @@
                                 <div class="invalid-feedback">Email tidak valid (contoh: nama@domain.com)</div>
                             </div>
                             <div class="col-6">
-                                <label for="reason" class="form-label">Apa yang membuat kamu tertarik dengan EL Semar?<span class="text-danger">*</span></label>
-                                <select id="reason" name="reason" class="form-select" required>
-                                    <option value="" selected>Pilih salah satu</option>
-                                    <option value="Seminar">Seminar</option>
-                                    <option value="Lomba">Lomba</option>
-                                    <option value="Pameran">Pameran</option>
-                                </select>
+                                <label class="form-label">Apa yang membuat kamu tertarik dengan EL Semar?<span class="text-danger">*</span></label>
+                                <div class="radio-input" id="reason-wrapper">
+                                    <input type="radio" id="reason-Seminar" name="reason" value="Seminar" required>
+                                    <label for="reason-Seminar">Seminar</label>
+                                    <input type="radio" id="reason-Lomba" name="reason" value="Lomba" required>
+                                    <label for="reason-Lomba">Lomba</label>
+                                    <input type="radio" id="reason-Pameran" name="reason" value="Pameran" required>
+                                    <label for="reason-Pameran">Pameran</label>
+                                </div>
                                 <div class="invalid-feedback">Pilih salah satu</div>
                             </div>
                             <div class="col-6">
@@ -2242,25 +2295,31 @@
                                 <div class="invalid-feedback">Field ini wajib diisi</div>
                             </div>
                             <div class="col-6">
-                                <label for="awareness" class="form-label">Seberapa tau kamu tentang EL SEMAR?<span class="text-danger">*</span></label>
-                                <select id="awareness" name="awareness" class="form-select" required>
-                                    <option value="" selected>Pilih</option>
-                                    <option value="Tidak tahu">Tidak tahu</option>
-                                    <option value="Sedikit tahu">Sedikit tahu</option>
-                                    <option value="Cukup tahu">Cukup tahu</option>
-                                    <option value="Sangat tahu">Sangat tahu</option>
-                                    <option value="Paham banget">Paham banget</option>
-                                </select>
+                                <label class="form-label">Seberapa tau kamu tentang EL SEMAR?<span class="text-danger">*</span></label>
+                                <div class="radio-input" id="awareness-wrapper">
+                                    <input type="radio" id="awareness-1" name="awareness" value="Tidak tahu" required>
+                                    <label for="awareness-1">Tidak tahu</label>
+                                    <input type="radio" id="awareness-2" name="awareness" value="Sedikit tahu" required>
+                                    <label for="awareness-2">Sedikit tahu</label>
+                                    <input type="radio" id="awareness-3" name="awareness" value="Cukup tahu" required>
+                                    <label for="awareness-3">Cukup tahu</label>
+                                    <input type="radio" id="awareness-4" name="awareness" value="Sangat tahu" required>
+                                    <label for="awareness-4">Sangat tahu</label>
+                                    <input type="radio" id="awareness-5" name="awareness" value="Paham banget" required>
+                                    <label for="awareness-5">Paham banget</label>
+                                </div>
                                 <div class="invalid-feedback">Pilih salah satu</div>
                             </div>
                             <div class="col-6">
-                                <label for="ticketType" class="form-label">Jenis tiket yang dibeli<span class="text-danger">*</span></label>
-                                <select id="ticketType" name="ticketType" class="form-select" required>
-                                    <option value="" selected>Pilih salah satu</option>
-                                    <option value="Day 1">Day 1 - Rp 15.000</option>
-                                    <option value="Day 2">Day 2 - Rp 15.000</option>
-                                    <option value="Day 1+2">Day 1+2 - Rp 25.000</option>
-                                </select>
+                                <label class="form-label">Jenis tiket yang dibeli<span class="text-danger">*</span></label>
+                                <div class="radio-input" id="ticketType-wrapper">
+                                    <input type="radio" id="ticketType-Day1" name="ticketType" value="Day 1" required>
+                                    <label for="ticketType-Day1">Day 1 - Rp 15.000</label>
+                                    <input type="radio" id="ticketType-Day2" name="ticketType" value="Day 2" required>
+                                    <label for="ticketType-Day2">Day 2 - Rp 15.000</label>
+                                    <input type="radio" id="ticketType-Day12" name="ticketType" value="Day 1+2" required>
+                                    <label for="ticketType-Day12">Day 1+2 - Rp 25.000</label>
+                                </div>
                                 <div class="invalid-feedback">Pilih jenis tiket</div>
                             </div>
                         </div>
@@ -2268,23 +2327,34 @@
                         <!-- Conditional Fields: UNS -->
                         <div id="unsFields" class="d-none">
                             <div class="row">
-                                <div class="col-6">
-                                    <label for="faculty" class="form-label">Fakultas<span class="text-danger">*</span></label>
-                                    <select id="faculty" name="faculty" class="form-select">
-                                        <option value="" selected>Pilih Fakultas</option>
-                                        <option>Fakultas Matematika dan Ipa</option>
-                                        <option>Fakultas Ilmu Budaya</option>
-                                        <option>Fakultas Keolahragaan</option>
-                                        <option>Fakultas Teknik</option>
-                                        <option>Fakultas Hukum</option>
-                                        <option>Fakultas Pertanian</option>
-                                        <option>Fakultas Keguruan dan Ilmu Pendidikan</option>
-                                        <option>Sekolah Vokasi</option>
-                                        <option>Fakultas Seni Rupa dan Desain</option>
-                                        <option>Fakultas Ekonomi dan Bisnis</option>
-                                        <option>Fakultas Sosial dan Politik</option>
-                                        <option>Fakultas Kedokteran</option>
-                                    </select>
+                                <div class="col-12">
+                                    <label class="form-label">Fakultas<span class="text-danger">*</span></label>
+                                    <div class="radio-input" id="faculty-wrapper">
+                                        <input type="radio" id="faculty-1" name="faculty" value="Fakultas Matematika dan Ipa">
+                                        <label for="faculty-1">Fakultas Matematika dan Ipa</label>
+                                        <input type="radio" id="faculty-2" name="faculty" value="Fakultas Ilmu Budaya">
+                                        <label for="faculty-2">Fakultas Ilmu Budaya</label>
+                                        <input type="radio" id="faculty-3" name="faculty" value="Fakultas Keolahragaan">
+                                        <label for="faculty-3">Fakultas Keolahragaan</label>
+                                        <input type="radio" id="faculty-4" name="faculty" value="Fakultas Teknik">
+                                        <label for="faculty-4">Fakultas Teknik</label>
+                                        <input type="radio" id="faculty-5" name="faculty" value="Fakultas Hukum">
+                                        <label for="faculty-5">Fakultas Hukum</label>
+                                        <input type="radio" id="faculty-6" name="faculty" value="Fakultas Pertanian">
+                                        <label for="faculty-6">Fakultas Pertanian</label>
+                                        <input type="radio" id="faculty-7" name="faculty" value="Fakultas Keguruan dan Ilmu Pendidikan">
+                                        <label for="faculty-7">Fakultas Keguruan dan Ilmu Pendidikan</label>
+                                        <input type="radio" id="faculty-8" name="faculty" value="Sekolah Vokasi">
+                                        <label for="faculty-8">Sekolah Vokasi</label>
+                                        <input type="radio" id="faculty-9" name="faculty" value="Fakultas Seni Rupa dan Desain">
+                                        <label for="faculty-9">Fakultas Seni Rupa dan Desain</label>
+                                        <input type="radio" id="faculty-10" name="faculty" value="Fakultas Ekonomi dan Bisnis">
+                                        <label for="faculty-10">Fakultas Ekonomi dan Bisnis</label>
+                                        <input type="radio" id="faculty-11" name="faculty" value="Fakultas Sosial dan Politik">
+                                        <label for="faculty-11">Fakultas Sosial dan Politik</label>
+                                        <input type="radio" id="faculty-12" name="faculty" value="Fakultas Kedokteran">
+                                        <label for="faculty-12">Fakultas Kedokteran</label>
+                                    </div>
                                     <div class="invalid-feedback">Pilih fakultas</div>
                                 </div>
                                 <div class="col-6">
@@ -2348,13 +2418,15 @@
                                 <div class="invalid-feedback">Nama harus diisi minimal 2 karakter</div>
                             </div>
                             <div class="col-6">
-                                <label for="tryoutSchoolType" class="form-label">Asal Sekolah<span class="text-danger">*</span></label>
-                                <select id="tryoutSchoolType" name="tryoutSchoolType" class="form-select" required>
-                                    <option value="" selected>Pilih Jenis Sekolah</option>
-                                    <option value="SMA">SMA</option>
-                                    <option value="SMK">SMK</option>
-                                    <option value="Lainnya">Lainnya</option>
-                                </select>
+                                <label class="form-label">Asal Sekolah<span class="text-danger">*</span></label>
+                                <div class="radio-input" id="tryoutSchoolType-wrapper">
+                                    <input type="radio" id="tryoutSchoolType-SMA" name="tryoutSchoolType" value="SMA" required>
+                                    <label for="tryoutSchoolType-SMA">SMA</label>
+                                    <input type="radio" id="tryoutSchoolType-SMK" name="tryoutSchoolType" value="SMK" required>
+                                    <label for="tryoutSchoolType-SMK">SMK</label>
+                                    <input type="radio" id="tryoutSchoolType-Lainnya" name="tryoutSchoolType" value="Lainnya" required>
+                                    <label for="tryoutSchoolType-Lainnya">Lainnya</label>
+                                </div>
                                 <div class="invalid-feedback">Pilih jenis sekolah</div>
                             </div>
                         </div>
@@ -2487,14 +2559,17 @@
 
                         <div class="row">
                             <div class="col-6">
-                                <label for="lombaInstitutionType" class="form-label">Asal Institusi<span class="text-danger">*</span></label>
-                                <select id="lombaInstitutionType" name="lombaInstitutionType" class="form-select" required>
-                                    <option value="" selected>Pilih</option>
-                                    <option value="Universitas">Universitas</option>
-                                    <option value="SMA">SMA</option>
-                                    <option value="SMK">SMK</option>
-                                    <option value="Umum">Umum</option>
-                                </select>
+                                <label class="form-label">Asal Institusi<span class="text-danger">*</span></label>
+                                <div class="radio-input" id="lombaInstitutionType-wrapper">
+                                    <input type="radio" id="lombaInstitutionType-Universitas" name="lombaInstitutionType" value="Universitas" required>
+                                    <label for="lombaInstitutionType-Universitas">Universitas</label>
+                                    <input type="radio" id="lombaInstitutionType-SMA" name="lombaInstitutionType" value="SMA" required>
+                                    <label for="lombaInstitutionType-SMA">SMA</label>
+                                    <input type="radio" id="lombaInstitutionType-SMK" name="lombaInstitutionType" value="SMK" required>
+                                    <label for="lombaInstitutionType-SMK">SMK</label>
+                                    <input type="radio" id="lombaInstitutionType-Umum" name="lombaInstitutionType" value="Umum" required>
+                                    <label for="lombaInstitutionType-Umum">Umum</label>
+                                </div>
                                 <div class="invalid-feedback">Pilih asal institusi</div>
                             </div>
                         </div>
@@ -3464,14 +3539,26 @@
 
         function initRegistrationPage() {
             registrationForm = document.getElementById('registrationForm');
-            institutionTypeEl = document.getElementById('institutionType');
-            facultyEl = document.getElementById('faculty');
+            
+            // Get radio button groups (now returns NodeList of radio buttons)
+            const institutionTypeRadios = document.querySelectorAll('input[name="institutionType"]');
+            const facultyRadios = document.querySelectorAll('input[name="faculty"]');
             studyProgramEl = document.getElementById('studyProgram');
 
-            // Clear validation on input
-            document.querySelectorAll('.form-control, .form-select').forEach(el => {
+            // Clear validation on input for text inputs
+            document.querySelectorAll('.form-control').forEach(el => {
                 el.addEventListener('input', function() {
                     this.classList.remove('is-invalid', 'is-valid');
+                });
+            });
+
+            // Clear validation on radio input change
+            document.querySelectorAll('.radio-input input[type="radio"]').forEach(el => {
+                el.addEventListener('change', function() {
+                    const wrapper = this.closest('.radio-input');
+                    if (wrapper) {
+                        wrapper.classList.remove('is-invalid', 'is-valid');
+                    }
                 });
             });
 
@@ -3479,13 +3566,16 @@
                 registrationForm.addEventListener('submit', handleFormSubmit);
             }
 
-            if (institutionTypeEl) {
-                institutionTypeEl.addEventListener('change', updateInstitutionFields);
-                institutionTypeEl.addEventListener('input', updateInstitutionFields);
-            }
-            if (facultyEl) {
-                facultyEl.addEventListener('change', updateNimVisibility);
-            }
+            // Add event listeners to institutionType radio buttons
+            institutionTypeRadios.forEach(radio => {
+                radio.addEventListener('change', updateInstitutionFields);
+            });
+
+            // Add event listeners to faculty radio buttons
+            facultyRadios.forEach(radio => {
+                radio.addEventListener('change', updateNimVisibility);
+            });
+
             if (studyProgramEl) {
                 studyProgramEl.addEventListener('input', updateNimVisibility);
             }
@@ -4492,8 +4582,11 @@
 
         // Conditional fields logic
         function updateInstitutionFields() {
-            if (!institutionTypeEl) return;
-            const type = institutionTypeEl.value;
+            // Get checked radio button value
+            const checkedRadio = document.querySelector('input[name="institutionType"]:checked');
+            if (!checkedRadio) return;
+            const type = checkedRadio.value;
+            
             const unsFields = document.getElementById('unsFields');
             const smaFields = document.getElementById('smaFields');
             const smkFields = document.getElementById('smkFields');
@@ -4529,11 +4622,13 @@
                 if (shouldShow) smkFields.classList.add('conditional-field');
             }
             
-            const facultyField = document.getElementById('faculty');
+            // Update required fields based on institution type
+            const facultyRadios = document.querySelectorAll('input[name="faculty"]');
             const studyProgramField = document.getElementById('studyProgram');
             const smaNameField = document.getElementById('smaName');
             const smkNameField = document.getElementById('smkName');
-            if (facultyField) facultyField.required = (type === 'UNS');
+            
+            facultyRadios.forEach(radio => radio.required = (type === 'UNS'));
             if (studyProgramField) studyProgramField.required = (type === 'UNS');
             if (smaNameField) smaNameField.required = (type === 'SMA');
             if (smkNameField) smkNameField.required = (type === 'SMK');
@@ -4541,8 +4636,13 @@
 
         function updateNimVisibility() {
             const nimGroup = document.getElementById('nimGroup');
-            if (!facultyEl || !studyProgramEl || !nimGroup) return;
-            const isTeknik = (facultyEl.value || '').toLowerCase().includes('teknik');
+            if (!studyProgramEl || !nimGroup) return;
+            
+            // Get checked faculty radio button
+            const checkedFaculty = document.querySelector('input[name="faculty"]:checked');
+            if (!checkedFaculty) return;
+            
+            const isTeknik = (checkedFaculty.value || '').toLowerCase().includes('teknik');
             const isElektro = (studyProgramEl.value || '').toLowerCase().includes('elektro');
             const shouldShow = isTeknik && isElektro;
             
