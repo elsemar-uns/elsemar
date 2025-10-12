@@ -5,106 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>El Semar Connect 13</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="navFooter.css">
+    <link href="colourFont.css" rel="stylesheet">
+    <style>
+      body{
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3e%3cpath d='M14 0 L0 14 L14 28 L28 14 Z' fill='none' stroke='%231a1a1a' stroke-width='1'/%3e%3c/svg%3e");
+      }
+      /* Hero */
+      #Hero {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+      }
+      #Hero .background-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.5) ;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+      }
+      .banner-container {
+        position: relative;
+        z-index: 10;
+        top: 30%;
+        text-align: center;
+        /* color: white; */
+      }
+      /* Lines */
+      .line-h1{
+        border-top: 6px solid;
+        /* width: 40%; */
+        margin: auto;
+      }
+    </style>
   </head>
-  <body>
-    <!-- <div style="height:2000px"></div> -->
+  <body class="bg-background">
     <!-- Navbar -->
-    <!-- <nav class="navbar navbar-expand-lg fixed-top navbar-top">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-glass">
       <div class="container-fluid">
-        <div class="navbar-left">
-          <a class="navbar-brand" href="index.html">
-            <img src="img/logo_navBar.png" alt="Logo" height="50" class="logoNavBar logo-hidden">
-            <img src="img/logo_navBar_inverse.png" alt="Logo" height="50" class="logoNavBarInv">
-          </a>
+        <!-- Brand -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          <img src="img/logo_navBar_inverse.png" alt="Logo" height="50" class="logoNavBar logo-hidden">
+        </a>
+
+        <!-- Toggle button (visible only on mobile) -->
+
+
+        <!-- Regular navbar links (visible on desktop) -->
+        <div class="collapse navbar-collapse d-none d-lg-flex justify-content-end">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="seminar.html">Seminar Nasional</a></li>
+            <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="comingSoon.html">Pameran Kreatif Elektro</a></li>
+            <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="kompetisi.html">El-Semar Arena</a></li>
+          </ul>
         </div>
-        <div class="navbar-right">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
-            <ul class="navbar-nav">
-              <li class="nav-item"><a class="nav-link arimo-500" href="#Hero">Home</a></li>
-              <li class="nav-item"><a class="nav-link arimo-500" href="#About">About</a></li>
-              <li class="nav-item"><a class="nav-link arimo-500" href="#Theme">Theme</a></li>
-              <li class="nav-item"><a class="nav-link arimo-500" href="#Event">Event</a></li>
-              <li class="nav-item"><a class="nav-link arimo-500" href="#Sponsor">Sponsor</a></li>
-              <li class="nav-item"><a class="nav-link arimo-500" href="#Contact">Contact</a></li>
+      </div>
+    </nav>
+
+       <!-- Offcanvas menu (visible on mobile) -->
+        <div class="offcanvas offcanvas-start d-lg-none navbar-glass" tabindex="-1" id="offcanvasNavbar">
+          <div class="offcanvas-header">
+            <a href="index.html">
+              <img src="img/logo_navBar_inverse.png" alt="Logo" height="50" class="logoNavBar logo-hidden">
+            </a>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav text-start flex-grow-1">
+              <li class="nav-item"><a class="nav-link active poppins-400 text-white fs-1 my-3"href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="seminar.html">Seminar Nasional </a></li>
+              <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="comingSoon.html">Pameran Kreatif Elektro</a></li>
+              <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="kompetisi.html">El-Semar Arena</a></li>
             </ul>
           </div>
         </div>
-      </div>
-    </nav> -->
-    <div class="navbar navbar-expand-lg navbar-light fixed-top navbar-top" >
-        <div class="container-fluid ">
-            <!--Navbar brand-->
-            <a class="navbar-brand" href="index.html">
-                <img src="img/logo_navBar.png" alt="EL SEMAR CONNECT 13" height="50" class="logoNavBar logo-hidden"> 
-                <img src="img/logo_navBar_inverse.png" alt="EL SEMAR CONNECT 13" height="50" class="logoNavBarInv">
-            </a>
-            <!-- Toggler -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <!--Navbar Menu-->
-            <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
-                 <ul class="navbar-nav">
-                   <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle arimo-500" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Home
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#About">About</a></li>
-                            <li><a class="dropdown-item" href="#Theme">Theme</a></li>
-                            <li><a class="dropdown-item" href="#Event">Event</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link arimo-500" href="">Sponsor</a>
-                    </li>
-                     <li class="nav-item">
-                        <a class="nav-link arimo-500" href="#theme">Media Partner</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link arimo-500" href="#">Contact</a>
-                    </li>
-                 </ul>
-            </div>
-        </div>
-    </div>
 
     <!-- Hero -->
     <section id="Hero">
       <img src="img/Rektorat_bg.png" alt="" class="background-image">
       <div class="banner-container">
-        <h3 class="arimo-500 banner-date">Date, Surakarta, Jawa Tengah</h3>
-        <h1 class="oswald-700 banner-title">EL-SEMAR</h1>
-        <h2 class="arimo-400 banner-subtitle">Connect 2025</h2>
-         <a href="ticket.html"><button class="btn-hero open-sans-400" id="btn-registration">Registration</button></a>
-        <a href="#About"><button class="btn-hero open-sans-400" id="btn-readMore">Read More</button></a>
+        <!-- <h3 class="arimo-500 banner-date">Date, Surakarta, Jawa Tengah</h3> -->
+        <h1 class="poppins-800 text-white display-1  mx-auto my-auto">EL-SEMAR</h1>
+        <h2 class="poppins-400 text-white display-6">Connect 2025</h2>
+         <a href="ticket.html"><button class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-gradient-90 text-white hover:bg-bg-accent hover-lift rounded-pill" id="btn-registration">Registration</button></a>
+         <a href="#About"><button class="poppins-400 m-3 py-2 px-4 fs-5 border-primary bg-primary-10 border-3 text-white hover:bg-primary-20 hover:border-primary hover-lift rounded-pill" id="btn-registration">Read More</button></a>
       </div>
     </section>
+
+<!-- <div class="sale-banner" id="saleBanner">
+  <div class="sale-content">
+    <div class="text">
+      <h2>Massive Sale</h2>
+      <p>Up to 75% off</p>
+    </div>
+    <div class="countdown" id="countdown">
+      <div class="time-box"><span id="days">00</span><div class="label">Days</div></div>
+      <div class="time-box"><span id="hours">00</span><div class="label">Hrs</div></div>
+      <div class="time-box"><span id="minutes">00</span><div class="label">Min</div></div>
+      <div class="time-box"><span id="seconds">00</span><div class="label">Sec</div></div>
+    </div>
+  </div>
+  <button class="btn">LEARN MORE</button>
+  <button class="close-btn" onclick="document.getElementById('saleBanner').remove()">×</button>
+</div> -->
+
 
 
     <!-- Events -->
     <section id="Upcoming">
       
-      <h3 class="oswald-700 event-title text-center">UPCOMING EVENT</h3>
-      <div class="line-h1 text-center"></div>
+      <!-- <h3 class="oswald-700 event-title text-center">UPCOMING EVENT</h3> -->
+      <!-- <div class="line-h1 text-center"></div> -->
       <div class="upcoming-content">
-        <button class="container countdown-container btn btn-secondary" id="elsemar-countdown" type="button" data-bs-toggle="collapse" data-bs-target="#elsemar-collapse" aria-expanded="false" aria-controls="elsemar-collapse">
-          <div class="row">
-            <div class="col-lg-6 col-md-12">
-              <h2 class="oswald-550 countdown-title">GREEN SMART ENERGY</h2>
-              <h3 class="open-sans-400 countdown-info">El-Semar Connect #13</h3>
-              <h4 class="open-sans-400 countdown-location">2025</h4>
+        <div class="container-fluid bg-gradient-135 rounded-bottom-5">
+          <div class="row pt-3">
+            <div class="col-lg-3 col-md-12">
+              <h2 class="oswald-550 text-white text-center">El-Semar <br> Connect 2025</h2>
+              <!-- <h3 class="open-sans-400 countdown-info">Connect 2025</h3> -->
+              <!-- <h4 class="open-sans-400 countdown-location"></h4> -->
                   <!-- <h4 class="open-sans-400 countdown-location">
                     Kentingan Jl. Ir. Sutami No.36, Jebres, Kota Surakarta, Jawa Tengah
                   </h4> -->
             </div>
-            <div class="col-lg-6 col-md-12 text-center timer-col">
-              <div class="container timer-container">
+            <div class="col-lg-9 col-md-12 text-center timer-col">
+              <div class="container timer-container text-white">
                 <div class="row timer-row">
                   <div class="col timer-wrapper">
                     <h2 class="number oswald-550" id="day1">10</h2>
@@ -127,63 +160,12 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <span class="open-sans-400 collapse-readMore">------Read More------</span>
-          </div>
-          <div class="row collapse" id="elsemar-collapse">
-            <div class="card card-body collapseCard">
-              Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-            </div>
-          </div>  
-        </button>
-        <button class="container countdown-container btn btn-secondary" id="competition-countdown" type="button" data-bs-toggle="collapse" data-bs-target="#competition-collapse" aria-expanded="false" aria-controls="competition-collapse">
-          <div class="row">
-            <div class="col-lg-6 col-md-12">
-              <h2 class="oswald-550 countdown-title">LINE <br>FOLLOWER</h2>
-              <h3 class="open-sans-400 countdown-info">El Semar Arena #01</h3>
-              <h4 class="open-sans-400 countdown-location">2025</h4>
-            </div>
-            <div class="col-lg-6 col-md-12 text-center timer-col">
-              <div class="container timer-container">
-                <div class="row timer-row">
-                  <div class="col timer-wrapper">
-                    <h2 class="number oswald-550" id="day2">10</h2>
-                    <h5 class="subnumber text-center">days</h5>
-                  </div>
-                  <div class="col timer-wrapper">
-                    <h2 class="number oswald-550" id="hour2">22</h2>
-                    <h5 class="subnumber arimo-500 text-center">hours</h5>
-                  </div>
-                  <div class="col timer-wrapper">
-                    <h2 class="number oswald-550" id="minute2">10</h2>
-                    <h5 class="subnumber arimo-500 text-center">minutes</h5>
-                  </div>
-                  <div class="col timer-wrapper">
-                    <h2 class="number oswald-550" id="second2">20</h2>
-                    <h5 class="subnumber arimo-500 text-center">seconds</h5>
-                  </div>
-                  <p id="status2" class="timer-status arimo-500"></p>
-                </div>           
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <span class="open-sans-400 collapse-readMore">------Read More------</span>
-          </div>
-          <div class="row collapse" id="competition-collapse">
-            <div class="card card-body collapseCard">
-              Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-            </div>
-          </div>  
-        </button>
-        <button class="container countdown-container btn btn-secondary" id="tryout-countdown" type="button" data-bs-toggle="collapse" data-bs-target="#tryout-collapse" aria-expanded="false" aria-controls="tryout-collapse">
+        </div>
+        <!-- <button class="container-fluid countdown-container btn btn-secondary" id="tryout-countdown" type="button" data-bs-toggle="collapse" data-bs-target="#tryout-collapse" aria-expanded="false" aria-controls="tryout-collapse">
           <div class="row">
             <div class="col-lg-6 col-md-12">
               <h2 class="oswald-550 countdown-title">TRY-OUT <br> UTBK</h2>
               <h3 class="open-sans-400 countdown-info">Ganesha Operation</h3>
-              <!-- <h4 class="open-sans-400 countdown-location">
-                Kentingan Jl. Ir. Sutami No.36, Jebres, Kota Surakarta, Jawa Tengah
-              </h4> -->
             </div>
             <div class="col-lg-6 col-md-12 text-center timer-col">
               <div class="container timer-container">
@@ -217,7 +199,7 @@
               Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
             </div>
           </div>  
-        </button>
+        </button> -->
       </div>
         <div class="row">
           <a href=""></a>
@@ -225,14 +207,16 @@
       </div>
     </section>
 
+  <div class="line-h1 w-75 border-base my-5"></div>
+
     <!-- About -->
-    <section id="About">
-      <div class="container">
-        <h2 class="oswald-550 about-header">About</h2>
-        <div class="line-h1"></div>
+    <section id="About" class="mb-5 py-5">
+      <div class="container bg-gradient-135 pt-1 pb-4 px-5 rounded-5">
+        <h2 class="montserrat-600 text-white text-start pt-4 mt-3 mb-3 display-3">About</h2>
+        <!-- <hr class="border border-primary border-3 opacity-75 w-50 mx-auto mt-2"> -->
         <div class="row align-items-center">
-          <div class="col-md-6 text-center">
-            <img src="img/Azfar.jpg" alt="About Image" class="img-fluid about-img">
+          <div class="col-md-12 col-lg-6 text-center">
+            <img src="img/Azfar.jpg" alt="About Image" class="img-fluid border border-base border-1 rounded-3 mb-4 mt-3 w-75 hover-lift">
             <!-- <div id="carouselExample" class="carousel slide">
               <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -255,57 +239,68 @@
               </button>
             </div> -->
           </div>
-          <div class="col-md-6">
+          <div class="col-md-12 col-lg-6">
             <div class="about-card">
               <!-- <div class="circle-h1"></div> -->
-              <p class="open-sans-400 text-justify lh-base">
+              <p class="open-sans-400 text-start text-white lh-lg ls-wider fs-5 border border-0 rounded-5 px-4 py-3 hover-lift" >
                 El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang diselenggarakan oleh Program Studi Teknik Elektro, Universitas Sebelas Maret. El Semar Connect menjadi wadah untuk menampilkan inovasi, mengembangkan kompetisi, serta mempertemukan berbagai pihak melalui empat rangkaian utama, yaitu: Tryout UTBK nasional, perlombaan, seminar nasional, dan PKE (Pameran Proyek Kreatif Teknik Elektro).
               </p>
-              <p class="open-sans-400 text-justify lh-base">
-                Setiap tahunnya, El Semar Connect mengusung tema yang selaras dengan tren dan isu terkini dalam bidang keteknikan elektro. Pada tahun ini, tema yang diangkat adalah:
-              </p>
-              <p class="open-sans-400 text-center">
-                “Smart Green Energy: Strategies for Efficiency, Innovation, and Sustainability.”
-              </p>
+              <!-- <p class="open-sans-400 text-justify lh-base">
+                Setiap tahunnya, El Semar Connect mengusung tema yang selaras dengan tren dan isu terkini dalam bidang keteknikan elektro.
+              </p> -->
             </div>
           </div>
         </div>
       </div>
     </section>
 
+  <div class="line-h1 w-75 border-base"></div>
+
 
     <!-- Event -->
-    <section id="Event">
-      <h2 class="oswald-550 event-header">Smart Green Energy</h2>
-      <div class="line-h1"></div>
-        <div class="container theme-container text-center">
-          <p class="open-sans-400 theme-text text-white">
-            Tema tersebut lahir dari kesadaran bahwa isu energi terbarukan, efisiensi penggunaan energi, serta inovasi dalam bidang ketenagalistrikan merupakan tantangan sekaligus peluang besar bagi dunia akademik maupun industri.
-          </p>
+    <section id="Event" class="py-4">
+      <div class="container">
+        <div class="row">
+          <h2 class="montserrat-600 text-primary text-start display-3 mx-1 mt-5 mb-2 pb-0">Smart Green Energy:</h2>
+          <h3 class="montserrat-400 text-center text-primary mb-1 fs-2">Strategies for Efficiency, Innovation, and Sustainability.</h3>
         </div>
+        <div class="row">
+            <div class="container text-center bg-gradient-90 mt-3 mb-4 rounded-5 hover-lift">
+              <p class="poppins-400 text-white py-3 fs-5">
+                Tema tersebut lahir dari kesadaran bahwa isu energi terbarukan, efisiensi penggunaan energi, serta inovasi dalam bidang ketenagalistrikan merupakan tantangan sekaligus peluang besar bagi dunia akademik maupun industri.
+              </p>
+            </div>
+        </div>
+      </div>
 
       <div class="container event-container">
             <!-- <h2 class="oswald-550 section-header"></h2> -->
             <div class="row g-4">
               <div class="col-lg-4">
-                <div class="event-card">
-                  <h3 class="oswald-550">Seminar</h3>
-                  <p class="open-sans-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                  <a href="comingSoon.html"><button class="btn-card arimo-400">Read More</button></a>
+                <div class="event-card bg-secondary-20 border border-2 rounded-5 border-base bg-background hover-lift py-4 hover:border-primary">
+                  <h3 class="montserrat-400 text-center text-white">Seminar Nasional</h3>
+                  <p class="open-sans-400 text-center text-white mx-3">Seminar dengan pembiacara sekelas nasional</p>
+                  <div class="d-flex justify-content-center">
+                    <a href="seminar.html" class="text-decoration-none"><button class="montserrat-400 text-white d-flex justify-content-center align-items-center bg-gradient-90 border border-0 rounded-3 py-2 px-4 hover-lift hover:bg-accent">Read More</button></a>
+                  </div>
                 </div>
               </div>
               <div class="col-lg-4">
-                <div class="event-card">
-                  <h3 class="oswald-550">Exhibition</h3>
-                  <p class="open-sans-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                  <a href="comingSoon.html"><button class="btn-card arimo-400">Read More</button></a>
+                <div class="event-card bg-secondary-20 border border-2 rounded-5 border-base bg-background hover-lift py-4 hover:border-primary">
+                  <h3 class="montserrat-400 text-center text-white">Pameran Kreatif Elektro</h3>
+                  <p class="open-sans-400 text-center text-white mx-3">Pameran hasil karya Mahasiswa Teknik Elektro Universitas Sebelas Maret</p>
+                  <div class="d-flex justify-content-center">
+                    <a href="exhibition.html" class="text-decoration-none"><button class="montserrat-400 text-white d-flex justify-content-center align-items-center bg-gradient-90 border border-0 rounded-3 py-2 px-4 hover-lift hover:bg-accent">Read More</button></a>
+                  </div>
                 </div>
               </div>
               <div class="col-lg-4">
-                <div class="event-card">
-                  <h3 class="oswald-550">Competition</h3>
-                  <p class="open-sans-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                  <a href="comingSoon.html"><button class="btn-card arimo-400">Read More</button></a>
+                <div class="event-card bg-secondary-20 border border-2 rounded-5 border-base bg-background hover-lift py-4 hover:border-primary">
+                  <h3 class="montserrat-400 text-center text-white">El-Semar arena</h3>
+                  <p class="open-sans-400 text-center text-white">Perlombaan Line Follower dengan total hadiah sebesar 3,5 Jt Rp</p>
+                  <div class="d-flex justify-content-center">
+                    <a href="kompetisi.html" class="text-decoration-none"><button class="montserrat-400 text-white d-flex justify-content-center align-items-center bg-gradient-90 border border-0 rounded-3 py-2 px-4 hover-lift hover:bg-accent">Read More</button></a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -313,56 +308,133 @@
     </section>
 
     <!-- Footer -->
-    <footer id="Contact">
-      <div class="container text-center text-white">
-        <img src="img/logo_navBar_inverse.png" alt="Logo" class="footer-logo mb-3">
-        <p>© 2025 El Semar Connect 13 - All Rights Reserved</p>
-        <div class="footer-social">
-          <a href="#">Instagram</a> | 
-          <a href="#">LinkedIn</a> | 
-          <a href="#">Email</a>
+<footer class="footer bg-dark text-white pt-5 pb-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+              <h1 class="poppins-800 text-white display-1  mx-auto my-auto">EL-SEMAR</h1>
+        <h2 class="poppins-400 text-white display-6">Connect 2025</h2>
+      </div>
+      <div class="col-md-4 text-end my-3">
+        <p class="poppins-600 display-6">
+          2–3 Desember
+        </p>
+        <p class="poppins-600 display-2">
+          2025
+        </p>
+      </div>
+    </div>
+
+      <div class="line-h1 w-75 border-base mb-4"></div>
+
+    <div class="row text-center text-md-start align-items-center gy-4">
+
+      <!-- ====== LOGO SECTION ====== -->
+      <div class="col-md-4">  
+        <div class="d-flex justify-content-center justify-content-md-start align-items-center gap-3 mb-3">
+          <img src="img/logoUNS.png" alt="Logo UNS" class="footer-logo" height="100" title="Universitas Sebelas Maret">
+          <img src="img/logoHMTE.png" alt="Logo HMTE" class="footer-logo" height="100" title="Himpunan Teknik Elektro">
+          <img src="img/logoElsemar.png" alt="Logo El-Semar" class="footer-logo" height="100" title="El-Semar Connect 2025">
         </div>
       </div>
-    </footer>
+
+      <!-- ====== MAP SECTION ====== -->
+      <div class="col-md-4">
+        <h5 class="text-uppercase mb-3 fw-bold">Lokasi</h5>
+        <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3089.9509554218394!2d110.85661340000001!3d-7.5600136000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a170214d5335d%3A0x80923f047f287377!2sAuditorium%20G.P.H.%20Haryo%20Mataram!5e1!3m2!1sen!2sid!4v1760289205178!5m2!1sen!2sid"
+            width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- ====== INFO SECTION ====== -->
+      <div class="col-md-3">
+        <!-- <h5 class="text-uppercase mb-3 fw-bold">Informasi</h5> -->
+        <p class="mb-1">
+          📞 <strong>Contact Person:</strong><br>
+          <a href="https://wa.me/6281542093100" target="_blank" class="text-white text-decoration-none">
+            +62 815 4209 3100 (Humas)
+          </a>
+        </p>
+        <p class="mb-2">
+          📧 <strong>Email:</strong><br>
+          <a href="mailto:elsemarconnect@gmail.com" class="text-white text-decoration-none">
+            elsemarconnect@gmail.com
+          </a>
+        </p>
+
+        <!-- ====== SOCIAL MEDIA ====== -->
+<div class="social-links mx-5">
+  <a href="https://www.instagram.com/elsemar/" target="_blank" aria-label="Instagram" class="social-link mx-2">
+    <!-- Instagram -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8" />
+      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+    </svg>
+  </a>
+
+  <a href="https://www.tiktok.com/@elsemarconnect" target="_blank" aria-label="TikTok" class="social-link mx-2">
+    <!-- TikTok -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 8v8a3 3 0 1 0 3-3h1.5A5.5 5.5 0 0 0 19 7.5V5a4 4 0 0 1-4-4H13v8a3 3 0 1 1-3-3z"/>
+    </svg>
+  </a>
+
+  <a href="https://www.linkedin.com/company/elsemarconnect" target="_blank" aria-label="LinkedIn" class="social-link mx-2">
+    <!-- LinkedIn -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-4 0v6h-4v-12h4v2" />
+      <rect x="2" y="9" width="4" height="12" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  </a>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+    <div class="line-h1 w-75 border-base mt-3"></div>
+          <p class="small text-muted mt-3 mb-0 text-center">Copyright © 2025 DTIK UNS. All rights reserved.</p>
+</footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script>
       // -----Navbar-----
-        const navEl = document.querySelector('.navbar');
-        const logoEl = document.querySelector('.logoNavBar');
-        const logoInvEl = document.querySelector('.logoNavBarInv');
-// const navbar = document.querySelector('.navbar');
+//         const navEl = document.querySelector('.navbar');
+//         const logoEl = document.querySelector('.logoNavBar');
+//         const logoInvEl = document.querySelector('.logoNavBarInv');
+// if (navEl.classList.contains('.navbar-scrolled')) {
+//   alert("work?");
+// }
+        // window.addEventListener('scroll', () => {
+        //     if(window.scrollY >= 86) {
+        //         navEl.classList.add('navbar-scrolled');
+        //         navEl.classList.remove('navbar-top');
+        //     }else if(window.scrollY <= 86) {
+        //         navEl.classList.remove('navbar-scrolled');
+        //         navEl.classList.add('navbar-top');
+        //     }
+        //   })
 
-if (navEl.classList.contains('.navbar-scrolled')) {
-  alert("work?");
-}
+        // window.addEventListener('scroll', () => {
+        //     if(window.scrollY >= 86) {
+        //         logoEl.classList.remove('logo-hidden');
+        //     }else if(window.scrollY <= 86) {
+        //         logoEl.classList.add('logo-hidden');
+        //     }
+        //   })
 
-// alert("work")
-        window.addEventListener('scroll', () => {
-            if(window.scrollY >= 86) {
-                navEl.classList.add('navbar-scrolled');
-                navEl.classList.remove('navbar-top');
-            }else if(window.scrollY <= 86) {
-                navEl.classList.remove('navbar-scrolled');
-                navEl.classList.add('navbar-top');
-            }
-          })
-
-        window.addEventListener('scroll', () => {
-            if(window.scrollY >= 86) {
-                logoEl.classList.remove('logo-hidden');
-            }else if(window.scrollY <= 86) {
-                logoEl.classList.add('logo-hidden');
-            }
-          })
-
-        window.addEventListener('scroll', () => {
-            if(window.scrollY >= 86) {
-                logoInvEl.classList.add('logo-hidden');
-            }else if(window.scrollY <= 86) {
-                logoInvEl.classList.remove('logo-hidden');
-            }
-          })
+        // window.addEventListener('scroll', () => {
+        //     if(window.scrollY >= 86) {
+        //         logoInvEl.classList.add('logo-hidden');
+        //     }else if(window.scrollY <= 86) {
+        //         logoInvEl.classList.remove('logo-hidden');
+        //     }
+        //   })
 
       // -----Countdown-----
       function pad(num) {
@@ -372,7 +444,7 @@ if (navEl.classList.contains('.navbar-scrolled')) {
       // Konfigurasi untuk banyak countdown
       const countdowns = [
         {
-          target: new Date(2025, 9, 1, 18, 0, 0), // 1 Okt 2025
+          target: new Date(2025, 11, 2, 7, 0, 0), // 1 Okt 2025
           elements: {
             day: document.getElementById("day1"),
             hour: document.getElementById("hour1"),
@@ -430,7 +502,7 @@ if (navEl.classList.contains('.navbar-scrolled')) {
           el.hour.textContent = pad(hours);
           el.minute.textContent = pad(minutes);
           el.second.textContent = pad(seconds);
-          el.status.textContent = `${c.target.toLocaleString()}`;
+          // el.status.textContent = `${c.target.toLocaleString()}`;
         });
       }
 
@@ -441,32 +513,32 @@ if (navEl.classList.contains('.navbar-scrolled')) {
         setInterval(updateAllCountdowns, 1000);
       }, 1000 - (Date.now() % 1000));
       
-      // --------Read More hidden------
-document.addEventListener("DOMContentLoaded", () => {
-  // Select all collapse elements inside your countdown containers
-  const collapses = document.querySelectorAll(".countdown-container .collapse");
+//       // --------Read More hidden------
+// document.addEventListener("DOMContentLoaded", () => {
+//   // Select all collapse elements inside your countdown containers
+//   const collapses = document.querySelectorAll(".countdown-container .collapse");
 
-  collapses.forEach(collapseEl => {
-    // Find the nearest countdown container (the <button>)
-    const parentContainer = collapseEl.closest(".countdown-container");
+//   collapses.forEach(collapseEl => {
+//     // Find the nearest countdown container (the <button>)
+//     const parentContainer = collapseEl.closest(".countdown-container");
 
-    // Find the "Read More" span inside that container
-    const readMoreEl = parentContainer.querySelector(".collapse-readMore");
+//     // Find the "Read More" span inside that container
+//     const readMoreEl = parentContainer.querySelector(".collapse-readMore");
 
-    if (!readMoreEl) return;
+//     if (!readMoreEl) return;
 
-    // Listen to Bootstrap collapse events
-    collapseEl.addEventListener("show.bs.collapse", () => {
-      readMoreEl.style.opacity = "0";
-      readMoreEl.style.pointerEvents = "none";
-    });
+//     // Listen to Bootstrap collapse events
+//     collapseEl.addEventListener("show.bs.collapse", () => {
+//       readMoreEl.style.opacity = "0";
+//       readMoreEl.style.pointerEvents = "none";
+//     });
 
-    collapseEl.addEventListener("hidden.bs.collapse", () => {
-      readMoreEl.style.opacity = "1";
-      readMoreEl.style.pointerEvents = "auto";
-    });
-  });
-});
+//     collapseEl.addEventListener("hidden.bs.collapse", () => {
+//       readMoreEl.style.opacity = "1";
+//       readMoreEl.style.pointerEvents = "auto";
+//     });
+//   });
+// });
 
 
 
