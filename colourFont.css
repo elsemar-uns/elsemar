@@ -1,0 +1,310 @@
+/* Colour */
+:root {
+  --background: 220 15% 8%;
+  --foreground: 0 0% 100%;
+
+  --card: 195 60% 50%;
+  --card-foreground: 0 0% 100%;
+
+  --popover: 220 15% 8%;
+  --popover-foreground: 0 0% 100%;
+
+  --primary: 160, 84%, 39%;
+  --primary-foreground: 220 20% 10%;
+
+  --secondary: 195 60% 50%;
+  --secondary-foreground: 0 0% 100%;
+
+  --muted: 220 15% 15%;
+  --muted-foreground: 220 10% 60%;
+
+  --accent: 143 40% 60%;
+  --accent-foreground: 220 20% 10%;
+
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 220 15% 20%;
+  --input: 220 15% 20%;
+  --ring: 143 40% 60%;
+
+  --radius: 1.5rem;
+
+  --gradient-from: 143 40% 60%;
+  --gradient-to: 195 60% 50%;
+  --highlight: 85 80% 65%;
+}
+
+/* ------------------------------
+   Backgrounds
+--------------------------------*/
+.bg-background { background-color: hsl(var(--background)) !important; }
+.bg-background-10 { background-color: hsl(var(--background)/0.1) !important; }
+.bg-background-50 { background-color: hsl(var(--background)/0.5) !important; }
+.bg-card { background-color: hsl(var(--card)) !important; }
+.bg-popover { background-color: hsl(var(--popover)) !important; }
+.bg-primary { background-color: hsl(var(--primary)) !important; }
+.bg-secondary { background-color: hsl(var(--secondary)) !important; }
+.bg-muted { background-color: hsl(var(--muted)) !important; }
+.bg-accent { background-color: hsl(var(--accent)) !important; }
+.bg-destructive { background-color: hsl(var(--destructive)) !important; }
+.bg-primary-20{background-color: hsl(var(--primary)/0.2);}
+.bg-primary-10{background-color: hsl(var(--primary)/0.1);}
+.bg-primary-50{background-color: hsl(var(--primary)/0.5);}
+.bg-secondary-20{background-color: hsl(var(--secondary)/0.2);}
+.bg-secondary-10{background-color: hsl(var(--secondary)/0.1);}
+.bg-secondary-50{background-color: hsl(var(--secondary)/0.5);}
+
+/* ------------------------------
+   Text Colors
+--------------------------------*/
+.text-foreground { color: hsl(var(--foreground)) !important; }
+.text-card { color: hsl(var(--card-foreground)) !important; }
+.text-popover { color: hsl(var(--popover-foreground)) !important; }
+.text-primary { color: hsl(var(--primary)) !important; }
+.text-secondary { color: hsl(var(--secondary-foreground)) !important; }
+.text-muted { color: hsl(var(--muted-foreground)) !important; }
+.text-accent { color: hsl(var(--accent-foreground)) !important; }
+.text-destructive { color: hsl(var(--destructive-foreground)) !important; }
+.text-gradient {
+  color: linear-gradient(0deg, hsl(var(--gradient-from)), hsl(var(--gradient-to))) !important;
+}
+.text-gradient-90 {
+  color: linear-gradient(90deg, hsl(var(--gradient-from)), hsl(var(--gradient-to))) !important;
+}
+
+/* ------------------------------
+   Borders
+--------------------------------*/
+.border-base { border-color: hsl(var(--border)) !important; }
+.border-primary { border-color: hsl(var(--primary)) !important; }
+.border-primary-10 { border-color: hsl(var(--primary)/0.1) !important; }
+.border-primary-50 { border-color: hsl(var(--primary)/0.5) !important; }
+.border-secondary { border-color: hsl(var(--secondary)) !important; }
+.border-secondary-20 { border-color: hsl(var(--secondary)/0.5) !important; }
+
+/* ------------------------------
+   Gradient Background
+--------------------------------*/
+.bg-gradient {
+  background: linear-gradient(0deg, hsl(var(--gradient-from)), hsl(var(--gradient-to))) !important;
+}
+.bg-gradient-90 {
+  background: linear-gradient(90deg, hsl(var(--gradient-from)), hsl(var(--gradient-to))) !important;
+}
+.bg-gradient-135 {
+  background: linear-gradient(135deg, hsl(var(--gradient-from)), hsl(var(--gradient-to))) !important;
+}
+
+
+/* ------------------------------
+   Hover Variants
+--------------------------------*/
+.hover\:bg-primary:hover { background-color: hsl(var(--primary)) !important; }
+.hover\:bg-primary-20:hover { background-color: hsl(var(--primary)/0.2) !important; }
+.hover\:bg-secondary:hover { background-color: hsl(var(--secondary)) !important; }
+.hover\:bg-accent:hover { background-color: hsl(var(--accent)) !important; }
+.hover\:bg-destructive:hover { background-color: hsl(var(--destructive)) !important; }
+
+.hover\:border-primary:hover { border-color: hsl(var(--primary)) !important; }
+.hover\:border-secondary:hover { border-color: hsl(var(--secondary)) !important; }
+.hover\:border-accent:hover { border-color: hsl(var(--accent)) !important; }
+
+.hover\:text-primary:hover { color: hsl(var(--primary)) !important; }
+.hover\:text-accent:hover { color: hsl(var(--accent)) !important; }
+.hover\:text-destructive:hover { color: hsl(var(--destructive)) !important; }
+
+
+/* ------------------------------
+   Active Variants
+--------------------------------*/
+.active\:bg-primary:active { background-color: hsl(var(--primary)) !important; }
+.active\:bg-accent:active { background-color: hsl(var(--accent)) !important; }
+.active\:bg-destructive:active { background-color: hsl(var(--destructive)) !important; }
+
+/* ------------------------------
+   Glass Effect / Cards
+--------------------------------*/
+.glass {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: var(--radius) !important;
+}
+
+/* ------------------------------
+   Buttons
+--------------------------------*/
+.btn-custom {
+  border-radius: var(--radius) !important;
+  border: none !important;
+  color: hsl(var(--primary-foreground)) !important;
+  background-color: hsl(var(--primary)) !important;
+  transition: all 0.2s ease !important;
+}
+.btn-custom:hover {
+  background-color: hsl(var(--accent)) !important;
+  color: hsl(var(--accent-foreground)) !important;
+}
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 2px 15px rgba(255, 255, 255, 0.1);
+}
+
+
+
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/akzidenzgrotesk');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+.poppins-200 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+.poppins-400 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.poppins-500 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.poppins-600 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.poppins-800 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.open-sans-400 {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /*Use a value from 300 to 800*/
+  font-style: normal; 
+  font-variation-settings:
+    "wdth" 100;
+}
+.open-sans-600 {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600; /*Use a value from 300 to 800*/
+  font-style: normal; 
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.oswald-700 {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700; /*Use a value from 200 to 700*/
+  font-style: normal;
+}
+.oswald-550 {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 550; /*Use a value from 200 to 700*/
+  font-style: normal;
+}
+.oswald-300 {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300; /*Use a value from 200 to 700*/
+  font-style: normal;
+}
+
+.arimo-500 {
+  font-family: "Arimo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500; /*Use a value from 400 to 700*/
+  font-style: normal;
+}
+.arimo-400 {
+  font-family: "Arimo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /*Use a value from 400 to 700*/
+  font-style: normal;
+}
+
+.akidenz-grotesk-400 {
+  font-family: "AkzidenzGrotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /*Use value from 200 to 700*/
+  font-style: normal;
+}
+.akidenz-grotesk-550 {
+  font-family: "AkzidenzGrotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 550; /*Use value from 200 to 700*/
+  font-style: normal;
+}
+.akidenz-grotesk-700 {
+  font-family: "AkzidenzGrotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700; /*Use value from 200 to 700*/
+  font-style: normal;
+}
+.montserrat-400 {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /*Use a value from 100 to 900*/
+  font-style: normal;
+}
+.montserrat-600 {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600; /*Use a value from 100 to 900*/
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap');
+
+.hanken-grotesk-200 {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200; /*Use a value from 100 to 900*/
+  font-style: normal;
+}
+.hanken-grotesk-700 {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700; /*Use a value from 100 to 900*/
+  font-style: normal;
+}
+.hanken-grotesk-750 {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 750; /*Use a value from 100 to 900*/
+  font-style: normal;
+}
+
+.hanken-grotesk-900 {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900; /*Use a value from 100 to 900*/
+  font-style: normal;
+}
+
+.hanken-grotesk-500 {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500; /*Use a value from 100 to 900*/
+  font-style: normal;
+}
+
+.text-justify {
+    text-align: justify;
+}
