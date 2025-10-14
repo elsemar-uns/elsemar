@@ -3243,29 +3243,76 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwD06GW__3kPcoP
 const RECAPTCHA_SITE_KEY = '6LdoftsrAAAAABOhrPKzneF-HXGYUQQ5WLRYEbyM';
 const QRIS_STATIC = '00020101021126610014COM.GO-JEK.WWW01189360091436642109790210G6642109790303UMI51440014ID.CO.QRIS.WWW0215ID10254198343830303UMI5204581253033605802ID5920El Semar #13, JEBRES6004SOLO61055712562070703A01630478F3';
 
-/**
- * DOKUMENTASI STRUKTUR DATA LOMBA UNTUK GOOGLE APPS SCRIPT
- * =========================================================
- * Field lombaSupervisor (Nama Pembimbing) harus ditempatkan di KOLOM L pada spreadsheet
- * 
- * Urutan kolom yang disarankan untuk form Lomba:
- * A: Timestamp
- * B: Registration Number
- * C: Team Name (lombaTeamName)
- * D: Leader Name (lombaLeaderName)
- * E: Leader Phone (lombaLeaderPhone)
- * F: Leader Email (lombaLeaderEmail)
- * G: Member 1 Name (lombaMember1Name)
- * H: Member 1 Phone (lombaMember1Phone)
- * I: Member 2 Name (lombaMember2Name) [Optional]
- * J: Member 2 Phone (lombaMember2Phone) [Optional]
- * K: Institution Type (lombaInstitutionType)
- * L: Supervisor Name (lombaSupervisor) [Optional] <- FIELD BARU
- * M: Institution Name (lombaUniversityName/lombaSmaName/lombaSmkName)
- * ... dst untuk file uploads dan payment info
- */
+// ===== Draft Save/Restore Utilities =====
+const DRAFT_KEY = 'elsemarRegistrationDraft';
+const DRAFT_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
-// Global variables
+function saveRegistrationDraft() {
+	try {
+		const payload = {
+			registrationData,
+			selectedTicketType,
+			timestamp: Date.now()
+		};
+		localStorage.setItem(DRAFT_KEY, JSON.stringify(payload));
+	} catch (_) {}
+}
+
+function loadRegistrationDraft() {
+	try {
+		const raw = localStorage.getItem(DRAFT_KEY);
+		if (!raw) return null;
+		const data = JSON.parse(raw);
+		if (!data || !data.timestamp) return null;
+		if (Date.now() - data.timestamp > DRAFT_TTL_MS) {
+			localStorage.removeItem(DRAFT_KEY);
+			return null;
+		}
+		return data;
+	} catch (_) { return null; }
+}
+
+function clearRegistrationDraft() {
+	try { localStorage.removeItem(DRAFT_KEY); } catch (_) {}
+}
+
+function tryRestoreDraftOnLoad() {
+	const draft = loadRegistrationDraft();
+	if (!draft) return;
+	// If already have a registration in progress, skip auto-restore
+	if (registrationData && Object.keys(registrationData).length > 0) return;
+	const proceed = confirm('Lanjutkan pendaftaran terakhir yang belum terkirim?');
+	if (!proceed) return;
+	try {
+		registrationData = draft.registrationData || {};
+		selectedTicketType = draft.selectedTicketType || registrationData.ticketType || null;
+		if (registrationData && typeof registrationData.finalPrice === 'number') {
+			showPaymentPage(registrationData.finalPrice);
+		}
+	} catch (_) {}
+}
+
+// Call once on script load
+try { window.addEventListener('DOMContentLoaded', tryRestoreDraftOnLoad); } catch (_) {}
+
+// ===== Resilient Fetch with Retry =====
+async function fetchWithRetry(url, options, retries = 3, backoffMs = 800) {
+	let lastError = null;
+	for (let attempt = 0; attempt <= retries; attempt++) {
+		try {
+			const response = await fetch(url, options);
+			if (!response.ok) throw new Error('HTTP ' + response.status);
+			return response;
+		} catch (err) {
+			lastError = err;
+			if (attempt === retries) break;
+			await new Promise(r => setTimeout(r, backoffMs * Math.pow(2, attempt)));
+		}
+	}
+	throw lastError || new Error('Network error');
+}
+
+
 let selectedTicketType = null;
 let selectedPaymentMethod = null;
 let registrationData = {};
@@ -3535,6 +3582,7 @@ async function handleLombaSubmit(e) {
                 registrationData.finalPrice = finalPrice;
                 registrationData.uniqueCode = uniqueCode;
                 
+				saveRegistrationDraft();
                 showPaymentPage(finalPrice);
             }
         }
@@ -3568,7 +3616,7 @@ async function handleLombaSubmit(e) {
         }
         
         if (totalFiles === 0) {
-            checkAllFilesProcessed();
+			checkAllFilesProcessed();
         }
         
     } catch (error) {
@@ -3644,6 +3692,7 @@ async function handleTryoutSubmit(e) {
                 registrationData.finalPrice = finalPrice;
                 registrationData.uniqueCode = uniqueCode;
                 
+				saveRegistrationDraft();
                 showPaymentPage(finalPrice);
             };
             
@@ -3656,6 +3705,7 @@ async function handleTryoutSubmit(e) {
             registrationData.finalPrice = finalPrice;
             registrationData.uniqueCode = uniqueCode;
             
+			saveRegistrationDraft();
             showPaymentPage(finalPrice);
         }
         
@@ -3815,6 +3865,7 @@ async function handleFormSubmit(e) {
         registrationData.finalPrice = finalPrice;
         registrationData.uniqueCode = uniqueCode;
         
+		saveRegistrationDraft();
         showPaymentPage(finalPrice);
     } catch (error) {
         showAlert('formAlert', 'danger', 'Failed to process. Error: ' + error.message);
@@ -4537,11 +4588,11 @@ async function handleUploadSubmit(e) {
             formData.append('userAgent', navigator.userAgent.substring(0, 100));
             formData.append('recaptchaToken', recaptchaToken);
                 
-            try {
-                const response = await fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    body: formData
-                });
+			try {
+				const response = await fetchWithRetry(APPS_SCRIPT_URL, {
+					method: 'POST',
+					body: formData
+				}, 3, 800);
                 
                 if (!response.ok) {
                     throw new Error(`Server error: ${response.status}`);
@@ -4557,7 +4608,8 @@ async function handleUploadSubmit(e) {
                     return;
                 }
 
-                showSuccessOverlay({
+				clearRegistrationDraft();
+				showSuccessOverlay({
                     name: registrationData.fullName || registrationData.tryoutFullName || registrationData.lombaTeamName,
                     email: registrationData.email || registrationData.tryoutEmail || registrationData.lombaLeaderEmail,
                     phone: registrationData.phone || registrationData.tryoutPhone || registrationData.lombaLeaderPhone,
@@ -4568,9 +4620,9 @@ async function handleUploadSubmit(e) {
                 });
 
                 document.getElementById('uploadForm').reset();
-            } catch (error) {
+			} catch (error) {
                 console.error('Upload error:', error);
-                showAlert('uploadAlert', 'danger', 'Failed to send data. Please try again or contact admin.');
+				showAlert('uploadAlert', 'danger', 'Gagal mengirim data. Periksa koneksi Anda lalu klik Submit lagi.');
             } finally {
                 setUploading(false);
             }
@@ -4682,11 +4734,11 @@ async function handleFreeUploadSubmit(e) {
         formData.append('userAgent', navigator.userAgent.substring(0, 100));
         formData.append('recaptchaToken', recaptchaToken);
         
-        try {
-            const response = await fetch(APPS_SCRIPT_URL, {
-                method: 'POST',
-                body: formData
-            });
+			try {
+				const response = await fetchWithRetry(APPS_SCRIPT_URL, {
+					method: 'POST',
+					body: formData
+				}, 3, 800);
             
             if (!response.ok) {
                 throw new Error(`Server error: ${response.status}`);
@@ -4702,7 +4754,8 @@ async function handleFreeUploadSubmit(e) {
                 return;
             }
 
-            showSuccessOverlay({
+				clearRegistrationDraft();
+				showSuccessOverlay({
                 name: registrationData.fullName,
                 email: registrationData.email,
                 phone: registrationData.phone,
@@ -4713,9 +4766,9 @@ async function handleFreeUploadSubmit(e) {
             });
 
             document.getElementById('freeUploadForm').reset();
-        } catch (error) {
+			} catch (error) {
             console.error('Upload error:', error);
-            showAlert('freeUploadAlert', 'danger', 'Failed to send data. Please try again or contact admin.');
+				showAlert('freeUploadAlert', 'danger', 'Gagal mengirim data. Periksa koneksi Anda lalu klik Submit lagi.');
         } finally {
             setFreeUploading(false);
         }
