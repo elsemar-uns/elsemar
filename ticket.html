@@ -3247,11 +3247,6 @@ const QRIS_STATIC = '00020101021126610014COM.GO-JEK.WWW0118936009143664210979021
 const DRAFT_KEY = 'elsemarRegistrationDraft';
 const DRAFT_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
-function generateIdempotencyKey() {
-	const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-	return `${Date.now()}-${s4()}${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
-}
-
 function saveRegistrationDraft() {
 	try {
 		const payload = {
@@ -3544,9 +3539,22 @@ async function handleLombaSubmit(e) {
             }
         }
         
+        let registrationNumber = 1;
+        
+        try {
+            const countResponse = await fetch(APPS_SCRIPT_URL + '?action=getCount&type=lomba');
+            if (countResponse.ok) {
+                const countData = await countResponse.json();
+                registrationNumber = (countData.count || 0) + 1;
+            }
+        } catch (error) {
+            console.warn('Using default registration number: 1');
+        }
+        
         const formData = new FormData(e.target);
         registrationData = {
             ticketType: 'lomba',
+            registrationNumber: registrationNumber,
             recaptchaToken: recaptchaToken
         };
         
@@ -3564,35 +3572,18 @@ async function handleLombaSubmit(e) {
         let filesProcessed = 0;
         const totalFiles = (lombaIdCardsInput.files.length > 0 ? 1 : 0) + (lombaCommitmentInput.files.length > 0 ? 1 : 0);
         
-        async function checkAllFilesProcessed() {
+        function checkAllFilesProcessed() {
             filesProcessed++;
             if (filesProcessed >= totalFiles || totalFiles === 0) {
-                try {
-                    if (!registrationData.idempotencyKey) {
-                        registrationData.idempotencyKey = generateIdempotencyKey();
-                    }
-                    const preregData = new FormData();
-                    Object.keys(registrationData).forEach(key => {
-                        if (typeof registrationData[key] === 'string' || typeof registrationData[key] === 'number') {
-                            preregData.append(key, registrationData[key]);
-                        }
-                    });
-                    const resp = await fetch(APPS_SCRIPT_URL, { method: 'POST', body: preregData });
-                    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-                    const data = await resp.json();
-                    if (!data || data.success === false || data.error) throw new Error(data && (data.error || data.message) || 'Prereg failed');
-                    registrationData.qrCode = data.qrCode;
-                    registrationData.registrationNumber = data.registrationNumber;
-                    const basePrice = ticketPrices['lomba'];
-                    uniqueCode = data.registrationNumber;
-                    const finalPrice = basePrice + uniqueCode;
-                    registrationData.finalPrice = finalPrice;
-                    registrationData.uniqueCode = uniqueCode;
-                    saveRegistrationDraft();
-                    showPaymentPage(finalPrice);
-                } catch (err) {
-                    showAlert('lombaFormAlert', 'danger', 'Gagal membuat reservasi. ' + err.message);
-                }
+                const basePrice = ticketPrices['lomba'];
+                uniqueCode = registrationNumber;
+                const finalPrice = basePrice + uniqueCode;
+                
+                registrationData.finalPrice = finalPrice;
+                registrationData.uniqueCode = uniqueCode;
+                
+				saveRegistrationDraft();
+                showPaymentPage(finalPrice);
             }
         }
         
@@ -3840,6 +3831,18 @@ async function handleFormSubmit(e) {
             }
         }
         
+        let registrationNumber = 1;
+        
+        try {
+            const countResponse = await fetch(APPS_SCRIPT_URL + '?action=getCount');
+            if (countResponse.ok) {
+                const countData = await countResponse.json();
+                registrationNumber = (countData.count || 0) + 1;
+            }
+        } catch (error) {
+            console.warn('Using default registration number: 1');
+        }
+        
         const formData = new FormData(registrationForm);
         registrationData = {};
         
@@ -3851,37 +3854,19 @@ async function handleFormSubmit(e) {
             }
         }
         
+        registrationData.registrationNumber = registrationNumber;
         registrationData.recaptchaToken = recaptchaToken;
         
-        // Preregister to server to get server-assigned registrationNumber and qrCode
-        try {
-            if (!registrationData.idempotencyKey) {
-                registrationData.idempotencyKey = generateIdempotencyKey();
-            }
-            const preregData = new FormData();
-            Object.keys(registrationData).forEach(key => {
-                if (typeof registrationData[key] === 'string' || typeof registrationData[key] === 'number') {
-                    preregData.append(key, registrationData[key]);
-                }
-            });
-            const resp = await fetch(APPS_SCRIPT_URL, { method: 'POST', body: preregData });
-            if (!resp.ok) throw new Error('HTTP ' + resp.status);
-            const data = await resp.json();
-            if (!data || data.success === false || data.error) throw new Error(data && (data.error || data.message) || 'Prereg failed');
-            registrationData.qrCode = data.qrCode;
-            registrationData.registrationNumber = data.registrationNumber;
-            const ticketType = registrationData.ticketType;
-            const basePrice = ticketPrices[ticketType];
-            uniqueCode = data.registrationNumber;
-            const finalPrice = basePrice + uniqueCode;
-            registrationData.finalPrice = finalPrice;
-            registrationData.uniqueCode = uniqueCode;
-            saveRegistrationDraft();
-            showPaymentPage(finalPrice);
-        } catch (err) {
-            showAlert('formAlert', 'danger', 'Gagal membuat reservasi. ' + err.message);
-            return;
-        }
+        const ticketType = registrationData.ticketType;
+        const basePrice = ticketPrices[ticketType];
+        uniqueCode = registrationNumber;
+        const finalPrice = basePrice + uniqueCode;
+        
+        registrationData.finalPrice = finalPrice;
+        registrationData.uniqueCode = uniqueCode;
+        
+		saveRegistrationDraft();
+        showPaymentPage(finalPrice);
     } catch (error) {
         showAlert('formAlert', 'danger', 'Failed to process. Error: ' + error.message);
     }
@@ -4602,8 +4587,6 @@ async function handleUploadSubmit(e) {
             formData.append('timestamp', Date.now());
             formData.append('userAgent', navigator.userAgent.substring(0, 100));
             formData.append('recaptchaToken', recaptchaToken);
-            if (registrationData.qrCode) formData.append('qrCode', registrationData.qrCode);
-            if (registrationData.idempotencyKey) formData.append('idempotencyKey', registrationData.idempotencyKey);
                 
 			try {
 				const response = await fetchWithRetry(APPS_SCRIPT_URL, {
@@ -4750,8 +4733,6 @@ async function handleFreeUploadSubmit(e) {
         formData.append('timestamp', Date.now());
         formData.append('userAgent', navigator.userAgent.substring(0, 100));
         formData.append('recaptchaToken', recaptchaToken);
-        if (registrationData.qrCode) formData.append('qrCode', registrationData.qrCode);
-        if (registrationData.idempotencyKey) formData.append('idempotencyKey', registrationData.idempotencyKey);
         
 			try {
 				const response = await fetchWithRetry(APPS_SCRIPT_URL, {
