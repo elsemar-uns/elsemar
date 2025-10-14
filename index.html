@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>El Semar Connect 13</title>
+    <title>El-Semar Connect 2025</title>
+    <link rel="shortcut icon" href="img/logoElsemar.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="navFooter.css">
@@ -43,6 +44,7 @@
       }
 .responsive-text {
   font-size: clamp(0.9rem, 1.5vw, 1.25rem);
+  /* font-size: calc(0.9em + 1vw); */
   line-height: 1.75;
 }
 .navbar-toggler {
@@ -113,7 +115,9 @@
   border-right: 3px solid white;
   white-space: nowrap;
   color: white;
-  font-size: clamp(2.5rem, 8vw, 6rem);
+  /* font-size: 10vw; */
+  /* font-size: clamp(2.5rem, 8vw, 6rem); */
+  font-size: calc(2.5em + 3.5vw);
   font-weight: 800;
   animation: typewriter 2s steps(12, end) 1 forwards, blink 0.7s step-end infinite;
 }
@@ -148,9 +152,38 @@
     transform: translateY(0);
   }
 }
+.btn-hover:hover {
+  background-color: rgba(16, 183, 127, 0.15) !important;
+  transition: all 0.2s ease;
+}
 
 
     </style>
+
+
+    <!-- Meta -->
+    <meta name="description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
+    <meta name="author" content="EL-SEMAR CONNECT 2025" />
+    <meta name="copyright" content="EL-SEMAR CONNECT 2025" />
+    <meta name="application-name" content="EL-SEMAR CONNECT 2025" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="EL-SEMAR CONNECT 2025 | Competitions Innovations & Exhibition" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="img/logoElsemar.png" />
+    <meta property="og:image:alt" content="EL-SEMAR CONNECT 2025 | Competitions Innovations & Exhibition" />
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="500" />
+    <meta property="og:url" content="https://elsemar.ft.uns.ac.id/id/" />
+    <meta property="og:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="EL-SEMAR CONNECT 2025 | Competitions Innovations & Exhibition" />
+    <meta name="twitter:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
+    <meta name="twitter:image" content="img/logoElsemar.png" />
+
+
   </head>
   <body class="bg-background">
     <!-- Navbar -->
@@ -230,7 +263,7 @@
           </button>
         </a>
         <a href="#About">
-          <button class="poppins-400 m-3 py-2 px-4 fs-5 border-primary bg-primary-10 border-3 text-white hover:bg-primary-20 hover:border-primary hover-lift rounded-pill">
+          <button class="poppins-400 m-3 py-2 px-4 fs-5 border-primary bg-primary-10 border-3 text-white btn-hover hover:border-primary hover-lift rounded-pill">
             Read More
           </button>
         </a>
@@ -376,8 +409,11 @@
           <div class="col-md-12 col-lg-6">
             <div class="about-card">
               <!-- <div class="circle-h1"></div> -->
+              <p class="open-sans-400 text-justify text-white responsive-text px-3 px-md-4 py-3 py-md-4 hover-lift rounded-5" style="max-width: 800px; margin-inline: auto;">
+                El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang diselenggarakan oleh Program Studi Teknik Elektro, Universitas Sebelas Maret.
+              </p>
               <p class="open-sans-400 text-start text-white responsive-text px-3 px-md-4 py-3 py-md-4 hover-lift rounded-5" style="max-width: 800px; margin-inline: auto;">
-                El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang diselenggarakan oleh Program Studi Teknik Elektro, Universitas Sebelas Maret. El Semar Connect menjadi wadah untuk menampilkan inovasi, mengembangkan kompetisi, serta mempertemukan berbagai pihak melalui empat rangkaian utama, yaitu: Tryout UTBK nasional, perlombaan, seminar nasional, dan PKE (Pameran Proyek Kreatif Teknik Elektro).
+                El Semar Connect menjadi wadah untuk menampilkan inovasi, mengembangkan kompetisi, serta mempertemukan berbagai pihak melalui empat rangkaian utama, yaitu: Tryout UTBK nasional, perlombaan, seminar nasional, dan PKE (Pameran Proyek Kreatif Teknik Elektro).
               </p>
               <!-- <p class="open-sans-400 text-justify lh-base">
                 Setiap tahunnya, El Semar Connect mengusung tema yang selaras dengan tren dan isu terkini dalam bidang keteknikan elektro.
@@ -400,7 +436,7 @@
         </div>
         <div class="row">
             <div class="container text-center bg-gradient-90 mt-3 mb-4 rounded-5 hover-lift">
-              <p class="poppins-400 text-white py-3 fs-5">
+              <p class="poppins-400 text-white py-3 px-3 mb-0 fs-5">
                 Tema tersebut lahir dari kesadaran bahwa isu energi terbarukan, efisiensi penggunaan energi, serta inovasi dalam bidang ketenagalistrikan merupakan tantangan sekaligus peluang besar bagi dunia akademik maupun industri.
               </p>
             </div>
@@ -514,8 +550,8 @@
     <div class="row text-center text-md-start align-items-center gy-4">
 
       <!-- ====== LOGO SECTION ====== -->
-      <div class="col-md-4">  
-        <div class="d-flex justify-content-center justify-content-md-start align-items-center gap-3 mb-3">
+      <div class="col-md-12 col-lg-4">  
+        <div class="d-flex justify-content-center justify-content-lg-start align-items-center gap-3 mb-3">
           <img src="img/logoUNS.png" alt="Logo UNS" class="footer-logo" height="100" title="Universitas Sebelas Maret">
           <img src="img/logoHMTE.png" alt="Logo HMTE" class="footer-logo" height="100" title="Himpunan Teknik Elektro">
           <img src="img/logoElsemar.png" alt="Logo El-Semar" class="footer-logo" height="100" title="El-Semar Connect 2025">
@@ -523,8 +559,8 @@
       </div>
 
       <!-- ====== MAP SECTION ====== -->
-      <div class="col-md-4">
-        <h5 class="text-uppercase mb-3 fw-bold">Lokasi</h5>
+      <div class="col-md-12 col-lg-4">
+        <h5 class="text-uppercase mb-3 fw-bold text-md-center">Lokasi</h5>
         <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3089.9509554218394!2d110.85661340000001!3d-7.5600136000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a170214d5335d%3A0x80923f047f287377!2sAuditorium%20G.P.H.%20Haryo%20Mataram!5e1!3m2!1sen!2sid!4v1760289205178!5m2!1sen!2sid"
@@ -534,7 +570,7 @@
       </div>
 
       <!-- ====== INFO SECTION ====== -->
-      <div class="col-md-3">
+      <div class="col-md-12 col-lg-4 text-md-center text-lg-start">
         <!-- <h5 class="text-uppercase mb-3 fw-bold">Informasi</h5> -->
         <p class="mb-1">
           📞 <strong>Contact Person:</strong><br>
@@ -549,33 +585,33 @@
           </a>
         </p>
 
-        <!-- ====== SOCIAL MEDIA ====== -->
-<div class="social-links mx-5">
-  <a href="https://www.instagram.com/elsemar/" target="_blank" aria-label="Instagram" class="social-link mx-2">
-    <!-- Instagram -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8" />
-      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
-    </svg>
-  </a>
+                <!-- ====== SOCIAL MEDIA ====== -->
+        <div class="social-links mx-5 d-flex justify-content-lg-start just">
+          <a href="https://www.instagram.com/el_semar/" target="_blank" aria-label="Instagram" class="social-link mx-2">
+            <!-- Instagram -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8" />
+              <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+            </svg>
+          </a>
 
-  <a href="https://www.tiktok.com/@el_semar?_t=ZS-90VZUTXawid&_r=1" target="_blank" aria-label="TikTok" class="social-link mx-2">
-    <!-- TikTok -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M9 8v8a3 3 0 1 0 3-3h1.5A5.5 5.5 0 0 0 19 7.5V5a4 4 0 0 1-4-4H13v8a3 3 0 1 1-3-3z"/>
-    </svg>
-  </a>
+          <a href="https://www.tiktok.com/@el_semar?_t=ZS-90VZUTXawid&_r=1" target="_blank" aria-label="TikTok" class="social-link mx-2">
+            <!-- TikTok -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 8v8a3 3 0 1 0 3-3h1.5A5.5 5.5 0 0 0 19 7.5V5a4 4 0 0 1-4-4H13v8a3 3 0 1 1-3-3z"/>
+            </svg>
+          </a>
 
-  <!-- <a href="https://www.linkedin.com/company/elsemarconnect" target="_blank" aria-label="LinkedIn" class="social-link mx-2">
-    LinkedIn
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-4 0v6h-4v-12h4v2" />
-      <rect x="2" y="9" width="4" height="12" />
-      <circle cx="4" cy="4" r="2" />
-    </svg>
-  </a> -->
-</div>
+          <!-- <a href="https://www.linkedin.com/company/elsemarconnect" target="_blank" aria-label="LinkedIn" class="social-link mx-2">
+            LinkedIn
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-4 0v6h-4v-12h4v2" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          </a> -->
+        </div>
 
       </div>
 
