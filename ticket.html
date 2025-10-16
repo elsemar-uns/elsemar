@@ -534,6 +534,177 @@ body {
     }
 }
 
+/* Form Animation Classes */
+.form-container {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    animation: formContainerFadeIn 0.6s ease forwards;
+}
+
+.form-subtitle {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: formSubtitleFadeIn 0.5s ease 0.2s forwards;
+}
+
+.form-row {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: formRowFadeIn 0.5s ease forwards;
+}
+
+.form-row:nth-child(1) { animation-delay: 0.3s; }
+.form-row:nth-child(2) { animation-delay: 0.4s; }
+.form-row:nth-child(3) { animation-delay: 0.5s; }
+.form-row:nth-child(4) { animation-delay: 0.6s; }
+.form-row:nth-child(5) { animation-delay: 0.7s; }
+.form-row:nth-child(6) { animation-delay: 0.8s; }
+.form-row:nth-child(7) { animation-delay: 0.9s; }
+.form-row:nth-child(8) { animation-delay: 1.0s; }
+
+.form-control, .form-select {
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.btn-submit {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    animation: submitButtonFadeIn 0.6s ease 1.1s forwards;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+}
+
+.btn-submit:active {
+    transform: translateY(0) scale(1.02);
+}
+
+/* Payment Page Animations */
+.payment-container {
+    opacity: 0;
+    transform: translateX(50px) scale(0.95);
+    animation: paymentContainerFadeIn 0.7s ease forwards;
+}
+
+.payment-info-card {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: paymentCardFadeIn 0.6s ease forwards;
+}
+
+.payment-info-card:nth-child(1) { animation-delay: 0.2s; }
+.payment-info-card:nth-child(2) { animation-delay: 0.4s; }
+.payment-info-card:nth-child(3) { animation-delay: 0.6s; }
+
+.qr-section {
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+    animation: qrSectionFadeIn 0.8s ease 0.8s forwards;
+}
+
+.payment-buttons {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: paymentButtonsFadeIn 0.6s ease 1.0s forwards;
+}
+
+/* Keyframe Animations for Forms */
+@keyframes formContainerFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes formSubtitleFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes formRowFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes submitButtonFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes paymentContainerFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(50px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes paymentCardFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes qrSectionFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) rotate(-5deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes paymentButtonsFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .modern-ticket-selection .ticket-header {
     display: flex;
     justify-content: space-between;
@@ -2833,7 +3004,7 @@ h3, h2 {
                         </div>
                     </div>
 
-                    <div id="formContainer" style="display: none;">
+                    <div id="formContainer" class="form-container" style="display: none;">
                         <div class="form-top-section">
 
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 20px;">
@@ -2853,10 +3024,10 @@ h3, h2 {
                             </div>
                         </div>
 
-                        <h3 class="form-subtitle" style="text-align: left; margin-bottom: 10px; color: #10b981; font-size: 1.5rem;">Let us know more about you</h3>
+                        <h3 class="form-subtitle animated-subtitle" style="text-align: left; margin-bottom: 10px; color: #10b981; font-size: 1.5rem;">Let us know more about you</h3>
 
                     <form id="registrationForm" novalidate>
-                        <div class="row">
+                        <div class="row form-row">
                             <div class="col-6">
                                 <label for="fullName" class="form-label">Full Name<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Full name" required>
@@ -2978,7 +3149,7 @@ h3, h2 {
                         </div>
 
                         <div class="mt-4">
-                            <button type="submit" class="btn-payment">
+                            <button type="submit" class="btn-payment btn-submit">
                                 <div class="svg-wrapper-1">
                                     <div class="svg-wrapper">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" class="icon">
@@ -3068,7 +3239,7 @@ h3, h2 {
                         </div>
 
                         <div class="mt-4">
-                            <button type="submit" class="btn-payment">
+                            <button type="submit" class="btn-payment btn-submit">
                                 <div class="svg-wrapper-1">
                                     <div class="svg-wrapper">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" class="icon">
@@ -3231,7 +3402,7 @@ h3, h2 {
                         </div>
 
                         <div class="mt-4">
-                            <button type="submit" class="btn-payment">
+                            <button type="submit" class="btn-payment btn-submit">
                                 <div class="svg-wrapper-1">
                                     <div class="svg-wrapper">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" class="icon">
@@ -3247,7 +3418,7 @@ h3, h2 {
                     </div>
                 </div>
 
-                <div class="page-slide">
+                <div class="page-slide payment-container">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 20px;">
                         <button type="button" class="btn-back" onclick="goBackToForm()">
                             ← Back
@@ -3263,9 +3434,9 @@ h3, h2 {
                         <div class="step active" id="stepPaymentSubmitPayment">3</div>
                     </div>
 
-                    <h3 class="form-subtitle" style="text-align: left; margin-bottom: 10px; color: #10b981; font-size: 1.5rem;">Payment</h3>
+                    <h3 class="form-subtitle animated-subtitle" style="text-align: left; margin-bottom: 10px; color: #10b981; font-size: 1.5rem;">Payment</h3>
 
-                    <div class="digital-ticket" id="payerSummary">
+                    <div class="digital-ticket payment-info-card" id="payerSummary">
                         <div class="ticket-header-section">
                             <div class="ticket-header-left">
                                 <div class="ticket-number">TICKET</div>
@@ -3303,7 +3474,7 @@ h3, h2 {
                         </div>
                     </div>
 
-                    <div class="payment-method-selection">
+                    <div class="payment-method-selection qr-section">
                         <span class="form-subtitle" style="display: block; margin-bottom: 20px;">Payment Method<span class="text-danger"></span></span>
                         <div class="payment-options">
                             <div class="payment-option" id="paidOption" onclick="selectPaymentMethod('paid')">
@@ -3384,7 +3555,7 @@ h3, h2 {
                                 
                             </div>
                             <div id="paymentFileName" class="file-name"></div>
-                            <div class="upload-actions align-items-center gap-3">
+                            <div class="upload-actions payment-buttons align-items-center gap-3">
                                 <button type="submit" id="submitBtn" class="upload-button success">
                                     <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M12 16V8M12 8l-3 3M12 8l3 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -3448,7 +3619,7 @@ h3, h2 {
                                 </div>
                             </div>
                             
-                            <div class="upload-actions align-items-center gap-3">
+                            <div class="upload-actions payment-buttons align-items-center gap-3">
                                 
                                 <button type="submit" id="freeSubmitBtn" class="upload-button success">
                                     <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
