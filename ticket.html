@@ -3750,10 +3750,84 @@ function selectTicket(ticketType) {
         document.getElementById('tryoutForm').style.display = 'block';
         document.getElementById('lombaForm').style.display = 'none';
     } else if (ticketType === 'lomba') {
-        document.getElementById('registrationForm').style.display = 'none';
-        document.getElementById('lombaForm').style.display = 'block';
-        document.getElementById('tryoutForm').style.display = 'none';
+        // Check lomba registration limit before showing form
+        checkLombaAvailability();
     }
+}
+
+// Update lomba quota display
+async function updateLombaQuotaDisplay() {
+    try {
+        const countResponse = await fetch(APPS_SCRIPT_URL + '?action=getCount&type=lomba');
+        if (countResponse.ok) {
+            const countData = await countResponse.json();
+            const currentCount = countData.count || 0;
+            const remainingSlots = Math.max(0, 16 - currentCount);
+            
+            // Update quota display in ticket card
+            const lombaCard = document.querySelector('[data-ticket="lomba"]');
+            if (lombaCard) {
+                let quotaDisplay = lombaCard.querySelector('.quota-display');
+                if (!quotaDisplay) {
+                    quotaDisplay = document.createElement('div');
+                    quotaDisplay.className = 'quota-display';
+                    quotaDisplay.style.cssText = `
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        background: ${remainingSlots > 0 ? 'rgba(16, 185, 129, 0.9)' : 'rgba(239, 68, 68, 0.9)'};
+                        color: white;
+                        padding: 4px 8px;
+                        border-radius: 12px;
+                        font-size: 10px;
+                        font-weight: 600;
+                        z-index: 10;
+                    `;
+                    lombaCard.style.position = 'relative';
+                    lombaCard.appendChild(quotaDisplay);
+                }
+                
+                if (remainingSlots > 0) {
+                    quotaDisplay.textContent = `${remainingSlots} slot tersisa`;
+                    quotaDisplay.style.background = 'rgba(16, 185, 129, 0.9)';
+                } else {
+                    quotaDisplay.textContent = 'KUOTA PENUH';
+                    quotaDisplay.style.background = 'rgba(239, 68, 68, 0.9)';
+                }
+            }
+        }
+    } catch (error) {
+        console.warn('Could not update lomba quota display');
+    }
+}
+
+// Check lomba availability
+async function checkLombaAvailability() {
+    try {
+        const countResponse = await fetch(APPS_SCRIPT_URL + '?action=getCount&type=lomba');
+        if (countResponse.ok) {
+            const countData = await countResponse.json();
+            const currentCount = countData.count || 0;
+            
+            // Check if lomba registration limit is reached (16 teams)
+            if (currentCount >= 16) {
+                alert('Maaf, pendaftaran lomba EL-SEMAR ARENA sudah penuh!\n\nKuota 16 tim telah terpenuhi.\nSilakan pilih jenis tiket lainnya (EL-SEMAR #13 atau TRYOUT).');
+                
+                // Remove selected state and go back to ticket selection
+                document.querySelectorAll('#ticketSelection .ticket-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
+                return;
+            }
+        }
+    } catch (error) {
+        console.warn('Could not check lomba availability, proceeding with registration');
+    }
+    
+    // If available, proceed with normal flow
+    document.getElementById('registrationForm').style.display = 'none';
+    document.getElementById('lombaForm').style.display = 'block';
+    document.getElementById('tryoutForm').style.display = 'none';
 }
 
 // Back to ticket selection
@@ -3798,6 +3872,8 @@ function backToTicketSelection() {
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', function() {
+    // Update lomba quota display on page load
+    updateLombaQuotaDisplay();
     // Tryout school type change handler
     document.getElementById('tryoutSchoolType').addEventListener('change', function() {
         const schoolType = this.value;
@@ -3894,7 +3970,15 @@ async function handleLombaSubmit(e) {
             const countResponse = await fetch(APPS_SCRIPT_URL + '?action=getCount&type=lomba');
             if (countResponse.ok) {
                 const countData = await countResponse.json();
-                registrationNumber = (countData.count || 0) + 1;
+                const currentCount = countData.count || 0;
+                
+                // Check if lomba registration limit is reached (16 teams)
+                if (currentCount >= 16) {
+                    showAlert('lombaFormAlert', 'danger', 'Maaf, pendaftaran lomba EL-SEMAR ARENA sudah penuh! Kuota 16 tim telah terpenuhi. Silakan pilih jenis tiket lainnya.');
+                    return;
+                }
+                
+                registrationNumber = currentCount + 1;
             }
         } catch (error) {
             console.warn('Using default registration number: 1');
