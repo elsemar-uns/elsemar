@@ -3763,6 +3763,9 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwD06GW__3kPcoP
 const RECAPTCHA_SITE_KEY = '6LdoftsrAAAAABOhrPKzneF-HXGYUQQ5WLRYEbyM';
 const QRIS_STATIC = '00020101021126610014COM.GO-JEK.WWW01189360091436642109790210G6642109790303UMI51440014ID.CO.QRIS.WWW0215ID10254198343830303UMI5204581253033605802ID5920El Semar #13, JEBRES6004SOLO61055712562070703A01630478F3';
 
+// ===== Loading Animation Functions =====
+// Using existing earth loader functions
+
 // ===== Draft Save/Restore Utilities =====
 const DRAFT_KEY = 'elsemarRegistrationDraft';
 const DRAFT_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
@@ -3853,7 +3856,7 @@ const ticketPrices = {
 };
 
 // Ticket selection function with double tap for mobile
-function selectTicket(ticketType) {
+async function selectTicket(ticketType) {
     const isMobile = window.innerWidth <= 768;
     
     if (isMobile) {
@@ -3903,27 +3906,39 @@ function selectTicket(ticketType) {
 
     selectedTicketType = ticketType;
 
-    // Direct transition without loading animation
-    document.getElementById('ticketSelection').style.display = 'none';
-    document.getElementById('formContainer').style.display = 'block';
-    document.querySelector('.main-wrapper').classList.add('form-active');
+    // Show loading animation with earth loader
+    showLoading('Loading form...');
 
-    // Title tetap "Registrasi Tiket" untuk semua jenis
-    // const formTitle = document.getElementById('formTitle');
-    // formTitle.textContent = 'Registrasi Tiket';
-    
-    if (ticketType === 'elsemar') {
-        document.getElementById('registrationForm').style.display = 'block';
-        document.getElementById('tryoutForm').style.display = 'none';
-        document.getElementById('lombaForm').style.display = 'none';
-    } else if (ticketType === 'tryout') {
-        document.getElementById('registrationForm').style.display = 'none';
-        document.getElementById('tryoutForm').style.display = 'block';
-        document.getElementById('lombaForm').style.display = 'none';
-    } else if (ticketType === 'lomba') {
-        // Check lomba registration limit before showing form
-        checkLombaAvailability();
-    }
+    // Add a small delay for better UX, then show form
+    setTimeout(async () => {
+        document.getElementById('ticketSelection').style.display = 'none';
+        document.getElementById('formContainer').style.display = 'block';
+        document.querySelector('.main-wrapper').classList.add('form-active');
+
+        // Title tetap "Registrasi Tiket" untuk semua jenis
+        // const formTitle = document.getElementById('formTitle');
+        // formTitle.textContent = 'Registrasi Tiket';
+        
+        if (ticketType === 'elsemar') {
+            document.getElementById('registrationForm').style.display = 'block';
+            document.getElementById('tryoutForm').style.display = 'none';
+            document.getElementById('lombaForm').style.display = 'none';
+            hideLoading();
+        } else if (ticketType === 'tryout') {
+            document.getElementById('registrationForm').style.display = 'none';
+            document.getElementById('tryoutForm').style.display = 'block';
+            document.getElementById('lombaForm').style.display = 'none';
+            hideLoading();
+        } else if (ticketType === 'lomba') {
+            // Check lomba registration limit before showing form
+            const isAvailable = await checkLombaAvailability();
+            if (!isAvailable) {
+                hideLoading();
+                return; // Stop execution if not available
+            }
+            hideLoading();
+        }
+    }, 800); // 800ms loading animation
 }
 
 // Update lomba quota display
@@ -3988,7 +4003,10 @@ async function checkLombaAvailability() {
                 document.querySelectorAll('#ticketSelection .ticket-card').forEach(card => {
                     card.classList.remove('selected');
                 });
-                return;
+                document.getElementById('ticketSelection').style.display = 'block';
+                document.getElementById('formContainer').style.display = 'none';
+                document.querySelector('.main-wrapper').classList.remove('form-active');
+                return false;
             }
         }
     } catch (error) {
@@ -3999,6 +4017,7 @@ async function checkLombaAvailability() {
     document.getElementById('registrationForm').style.display = 'none';
     document.getElementById('lombaForm').style.display = 'block';
     document.getElementById('tryoutForm').style.display = 'none';
+    return true;
 }
 
 // Back to ticket selection
