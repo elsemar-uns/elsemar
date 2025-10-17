@@ -499,7 +499,7 @@ body {
 }
 
 
-/* Text Animation Classes */
+
 .animated-title {
     opacity: 0;
     transform: translateY(-30px) scale(0.9);
@@ -534,7 +534,7 @@ body {
     }
 }
 
-/* Form Animation Classes */
+
 .form-container {
     opacity: 0;
     transform: translateY(30px) scale(0.95);
@@ -587,7 +587,7 @@ body {
     transform: translateY(0) scale(1.02);
 }
 
-/* Payment Page Animations */
+
 .payment-container {
     opacity: 0;
     transform: translateX(50px) scale(0.95);
@@ -616,7 +616,7 @@ body {
     animation: paymentButtonsFadeIn 0.6s ease 1.0s forwards;
 }
 
-/* Keyframe Animations for Forms */
+
 @keyframes formContainerFadeIn {
     0% {
         opacity: 0;
@@ -3759,17 +3759,14 @@ h3, h2 {
     </div>
 
     <script>
-        // Constants
+
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwD06GW__3kPcoPz9M8-98lgGqnV-SOt5d3GImNGPb3JMItX-WdAgvwRsATCtuLyK1T/exec';
 const RECAPTCHA_SITE_KEY = '6LdoftsrAAAAABOhrPKzneF-HXGYUQQ5WLRYEbyM';
 const QRIS_STATIC = '00020101021126610014COM.GO-JEK.WWW01189360091436642109790210G6642109790303UMI51440014ID.CO.QRIS.WWW0215ID10254198343830303UMI5204581253033605802ID5920El Semar #13, JEBRES6004SOLO61055712562070703A01630478F3';
 
-// ===== Loading Animation Functions =====
-// Using existing earth loader functions
 
-// ===== Draft Save/Restore Utilities =====
 const DRAFT_KEY = 'elsemarRegistrationDraft';
-const DRAFT_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+const DRAFT_TTL_MS = 24 * 60 * 60 * 1000; 
 
 function saveRegistrationDraft() {
 	try {
@@ -3803,7 +3800,7 @@ function clearRegistrationDraft() {
 function tryRestoreDraftOnLoad() {
 	const draft = loadRegistrationDraft();
 	if (!draft) return;
-	// If already have a registration in progress, skip auto-restore
+
 	if (registrationData && Object.keys(registrationData).length > 0) return;
 	const proceed = confirm('Lanjutkan pendaftaran terakhir yang belum terkirim?');
 	if (!proceed) return;
@@ -3816,10 +3813,10 @@ function tryRestoreDraftOnLoad() {
 	} catch (_) {}
 }
 
-// Call once on script load
+
 try { window.addEventListener('DOMContentLoaded', tryRestoreDraftOnLoad); } catch (_) {}
 
-// ===== Resilient Fetch with Retry =====
+
 async function fetchWithRetry(url, options, retries = 3, backoffMs = 800) {
 	let lastError = null;
 	for (let attempt = 0; attempt <= retries; attempt++) {
@@ -3842,7 +3839,7 @@ let selectedPaymentMethod = null;
 let registrationData = {};
 let uniqueCode = 0;
 let lastSubmitTime = 0;
-let currentQRISCode = null; // Store current QRIS code for download
+let currentQRISCode = null; 
 let lastTapTimeTicket = 0;
 let selectedTicketTemp = null;
 
@@ -3864,9 +3861,8 @@ async function selectTicket(ticketType) {
         const currentTime = new Date().getTime();
         const tapGap = currentTime - lastTapTimeTicket;
         
-        // First tap or different ticket selected
+
         if (tapGap > 2000 || selectedTicketTemp !== ticketType) {
-            // Remove all selected states
             document.querySelectorAll('#ticketSelection .ticket-card').forEach(card => {
                 card.classList.remove('selected');
             });
@@ -3876,7 +3872,7 @@ async function selectTicket(ticketType) {
             selectedTicketTemp = ticketType;
             lastTapTimeTicket = currentTime;
             
-            // Auto reset after 3 seconds
+
             setTimeout(() => {
                 const card = document.querySelector(`#ticketSelection [data-ticket="${ticketType}"]`);
                 if (card) {
@@ -3890,7 +3886,7 @@ async function selectTicket(ticketType) {
             return;
         }
         
-        // Second tap within 2000ms - proceed with selection
+
         selectedTicketTemp = null;
         lastTapTimeTicket = 0;
     }
@@ -3907,18 +3903,16 @@ async function selectTicket(ticketType) {
 
     selectedTicketType = ticketType;
 
-    // Show loading animation with earth loader
+
     showLoading('Loading form...');
 
-    // Add a small delay for better UX, then show form
+
     setTimeout(async () => {
         document.getElementById('ticketSelection').style.display = 'none';
         document.getElementById('formContainer').style.display = 'block';
         document.querySelector('.main-wrapper').classList.add('form-active');
 
-        // Title tetap "Registrasi Tiket" untuk semua jenis
-        // const formTitle = document.getElementById('formTitle');
-        // formTitle.textContent = 'Registrasi Tiket';
+
         
         if (ticketType === 'elsemar') {
             document.getElementById('registrationForm').style.display = 'block';
@@ -3931,18 +3925,18 @@ async function selectTicket(ticketType) {
             document.getElementById('lombaForm').style.display = 'none';
             hideLoading();
         } else if (ticketType === 'lomba') {
-            // Check lomba registration limit before showing form
+
             const isAvailable = await checkLombaAvailability();
             if (!isAvailable) {
                 hideLoading();
-                return; // Stop execution if not available
+                return; 
             }
             hideLoading();
         }
-    }, 800); // 800ms loading animation
+    }, 800); 
 }
 
-// Update lomba quota display
+
 async function updateLombaQuotaDisplay() {
     try {
         const countResponse = await fetch(APPS_SCRIPT_URL + '?action=getCount&type=lomba');
@@ -3951,7 +3945,7 @@ async function updateLombaQuotaDisplay() {
             const currentCount = countData.count || 0;
             const remainingSlots = Math.max(0, 16 - currentCount);
             
-            // Update quota display in ticket card
+
             const lombaCard = document.querySelector('[data-ticket="lomba"]');
             if (lombaCard) {
                 let quotaDisplay = lombaCard.querySelector('.quota-display');
@@ -3988,7 +3982,6 @@ async function updateLombaQuotaDisplay() {
     }
 }
 
-// Check lomba availability
 async function checkLombaAvailability() {
     try {
         const countResponse = await fetch(APPS_SCRIPT_URL + '?action=getCount&type=lomba');
@@ -3996,11 +3989,11 @@ async function checkLombaAvailability() {
             const countData = await countResponse.json();
             const currentCount = countData.count || 0;
             
-            // Check if lomba registration limit is reached (16 teams)
+
             if (currentCount >= 16) {
                 alert('Maaf, pendaftaran lomba EL-SEMAR ARENA sudah penuh!\n\nKuota 16 tim telah terpenuhi.\nSilakan pilih jenis tiket lainnya (EL-SEMAR #13 atau TRYOUT).');
                 
-                // Remove selected state and go back to ticket selection
+
                 document.querySelectorAll('#ticketSelection .ticket-card').forEach(card => {
                     card.classList.remove('selected');
                 });
@@ -4014,14 +4007,14 @@ async function checkLombaAvailability() {
         console.warn('Could not check lomba availability, proceeding with registration');
     }
     
-    // If available, proceed with normal flow
+
     document.getElementById('registrationForm').style.display = 'none';
     document.getElementById('lombaForm').style.display = 'block';
     document.getElementById('tryoutForm').style.display = 'none';
     return true;
 }
 
-// Back to ticket selection
+
 function isWindowsPlatform() {
     if (typeof navigator === 'undefined') return false;
     const ua = navigator.userAgent || '';
@@ -4039,7 +4032,7 @@ function hardReload() {
 }
 
 function backToTicketSelection() {
-    // Show confirmation alert for both mobile and desktop
+
     const confirmBack = confirm('Kembali ke pilihan tiket?\n\nData yang sudah diisi akan hilang.');
     
     if (!confirmBack) {
@@ -4050,7 +4043,7 @@ function backToTicketSelection() {
     const isWindows = isWindowsPlatform();
     
     if (isMobile || isWindows) {
-        // Mobile and Windows desktop - refresh page to ensure clean state
+
         hardReload();
     } else {
         // Desktop - just go back without refresh
@@ -4061,11 +4054,11 @@ function backToTicketSelection() {
     }
 }
 
-// Initialize page
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Update lomba quota display on page load
+
     updateLombaQuotaDisplay();
-    // Tryout school type change handler
+
     document.getElementById('tryoutSchoolType').addEventListener('change', function() {
         const schoolType = this.value;
         const smaFields = document.getElementById('tryoutSmaFields');
@@ -4089,7 +4082,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Lomba institution type change handler
+
     document.getElementById('lombaInstitutionType').addEventListener('change', function() {
         const institutionType = this.value;
         const universitasFields = document.getElementById('lombaUniversitasFields');
@@ -4129,8 +4122,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('lombaForm').addEventListener('submit', handleLombaSubmit);
 });
 
-// Handle lomba form submission
-// Field lombaSupervisor (Nama Pembimbing) [Optional] harus ditempatkan di kolom L pada spreadsheet
+
 async function handleLombaSubmit(e) {
     e.preventDefault();
     
@@ -4163,7 +4155,7 @@ async function handleLombaSubmit(e) {
                 const countData = await countResponse.json();
                 const currentCount = countData.count || 0;
                 
-                // Check if lomba registration limit is reached (16 teams)
+
                 if (currentCount >= 16) {
                     showAlert('lombaFormAlert', 'danger', 'Maaf, pendaftaran lomba EL-SEMAR ARENA sudah penuh! Kuota 16 tim telah terpenuhi. Silakan pilih jenis tiket lainnya.');
                     return;
@@ -4248,7 +4240,7 @@ async function handleLombaSubmit(e) {
     }
 }
 
-// Handle tryout form submission
+
 async function handleTryoutSubmit(e) {
     e.preventDefault();
     
@@ -4338,7 +4330,6 @@ async function handleTryoutSubmit(e) {
     }
 }
 
-// Security Functions
 function sanitizeInput(input) {
     if (typeof input !== 'string') return '';
     return input.trim().replace(/[<>"']/g, '').substring(0, 255);
@@ -4383,7 +4374,7 @@ function isLocalhost() {
            window.location.hostname === '127.0.0.1';
 }
 
-// Registration Form Handler
+
 let registrationForm = null;
 let institutionTypeEl = null;
 let facultyEl = null;
@@ -4561,8 +4552,7 @@ function validateLombaForm() {
             member1Phone.classList.add('is-valid');
         }
     }
-    
-    // Supervisor is optional, no validation needed
+
     const supervisor = document.getElementById('lombaSupervisor');
     if (supervisor && supervisor.value.trim()) {
         const supervisorValue = sanitizeInput(supervisor.value);
@@ -4846,8 +4836,7 @@ function validateForm() {
 
 function showPaymentPage(finalPrice) {
     document.getElementById('pagesWrapper').classList.add('show-payment');
-    
-    // Update step indicators
+
     const stepFormFill = document.getElementById('stepFormFillActive');
     const connectorFormToPayment = document.getElementById('connectorFormToPaymentActive');
     const stepPayment = document.getElementById('stepPaymentSubmitForm');
@@ -5061,11 +5050,10 @@ function selectPaymentMethod(method) {
 }
 
 function goBackToForm() {
-    // Always go back to form without reload
+
     
     document.getElementById('pagesWrapper').classList.remove('show-payment');
-    
-    // Guarded updates in case elements are not present
+
     const step1 = document.getElementById('step1');
     const connector = document.getElementById('connector');
     const step2 = document.getElementById('step2');
@@ -5079,10 +5067,10 @@ function goBackToForm() {
     window.scrollTo(0, 0);
 }
 
-// QRIS Generation
+
 function generateDynamicQRIS(nominal) {
     const dynamicQRIS = convertToDynamicQRIS(QRIS_STATIC, nominal.toString());
-    currentQRISCode = dynamicQRIS; // Save QRIS code globally for download
+    currentQRISCode = dynamicQRIS;
     displayQRCode(dynamicQRIS);
 }
 
@@ -5108,12 +5096,12 @@ function convertCRC16(str) {
 function displayQRCode(qrisCode) {
     const qrcodeEl = document.getElementById('qrcode');
     
-    // Clear all existing QR codes completely
+
     while (qrcodeEl.firstChild) {
         qrcodeEl.removeChild(qrcodeEl.firstChild);
     }
     
-    // Generate new QR code with optimal settings for QRIS
+
     try {
         new QRCode(qrcodeEl, {
             text: qrisCode,
@@ -5121,13 +5109,13 @@ function displayQRCode(qrisCode) {
             height: 300,
             colorDark: '#000000',
             colorLight: '#ffffff',
-            correctLevel: QRCode.CorrectLevel.M  // Medium - optimal for long QRIS strings
+            correctLevel: QRCode.CorrectLevel.M  
         });
         console.log('QR Code generated successfully, data length:', qrisCode.length);
     } catch (error) {
         console.error('QR Code generation error:', error);
         console.error('QRIS data length:', qrisCode ? qrisCode.length : 'undefined');
-        // Try with lower error correction if failed
+
         try {
             qrcodeEl.innerHTML = '';
             new QRCode(qrcodeEl, {
@@ -5136,7 +5124,7 @@ function displayQRCode(qrisCode) {
                 height: 300,
                 colorDark: '#000000',
                 colorLight: '#ffffff',
-                correctLevel: QRCode.CorrectLevel.L  // Low - for very long strings
+                correctLevel: QRCode.CorrectLevel.L  
             });
             console.log('QR Code generated with lower error correction');
         } catch (retryError) {
@@ -5146,7 +5134,7 @@ function displayQRCode(qrisCode) {
     }
 }
 
-// Upload Form Handler
+
 async function handleUploadSubmit(e) {
     e.preventDefault();
     
@@ -5276,7 +5264,7 @@ function setFreeUploading(isUploading) {
     spinner.classList.toggle('d-none', !isUploading);
 }
 
-// Handle Free Upload Submit
+
 async function handleFreeUploadSubmit(e) {
     e.preventDefault();
     
@@ -5416,7 +5404,7 @@ function fileToBase64(file) {
     });
 }
 
-// Setup upload button state
+
 (function setupUploadButtonState() {
     const paymentInput = document.getElementById('paymentProof');
     const paymentBtn = document.getElementById('chooseFileBtn');
@@ -5554,7 +5542,7 @@ function formatRupiah(number) {
     }).format(number);
 }
 
-// Conditional fields logic
+
 function updateInstitutionFields() {
     if (!institutionTypeEl) return;
     const type = institutionTypeEl.value;
@@ -5614,9 +5602,9 @@ function updateNimVisibility() {
                       studyProgramValue.includes('listrik');
     const shouldShow = isTeknik && isElektro;
     
-    // Remove animation class first to allow re-animation
+
     nimGroup.classList.remove('conditional-field');
-    void nimGroup.offsetWidth; // Trigger reflow
+    void nimGroup.offsetWidth; 
     
     nimGroup.classList.toggle('d-none', !shouldShow);
     if (shouldShow) nimGroup.classList.add('conditional-field');
@@ -5636,7 +5624,6 @@ window.addEventListener('unhandledrejection', function(e) {
     e.preventDefault();
 });
 
-        // Loading overlay functions
 function showLoading(message = 'Processing order') {
     const overlay = document.getElementById('loadingOverlay');
     const loadingText = overlay.querySelector('.loading-text');
@@ -5649,11 +5636,11 @@ function hideLoading() {
     overlay.classList.remove('active');
 }
 
-// Success overlay functions
+
 function showSuccessOverlay(data) {
     const overlay = document.getElementById('successOverlay');
     
-    // Get current timestamp
+
     const now = new Date();
     const dateStr = now.toLocaleDateString('id-ID', { 
         day: '2-digit', 
@@ -5666,7 +5653,7 @@ function showSuccessOverlay(data) {
         second: '2-digit'
     });
     
-    // Update invoice data
+
     let ticketTypeDisplay = '';
     let invoicePrefix = '';
     let nameLabel = 'Name';
@@ -5699,7 +5686,7 @@ function showSuccessOverlay(data) {
     document.getElementById('invoicePhone').textContent = data.phone || '-';
     document.getElementById('invoiceTicketType').textContent = ticketTypeDisplay;
     
-    // Update price
+
     const totalPrice = data.paymentMethod === 'free' ? 0 : (data.finalPrice || 0);
     const priceElement = document.getElementById('invoiceTotal');
     priceElement.textContent = formatRupiah(totalPrice);
@@ -5711,7 +5698,7 @@ function showSuccessOverlay(data) {
         priceElement.style.color = '#28a745';
     }
     
-    // Update timestamp
+
     document.getElementById('invoiceDate').textContent = dateStr;
     document.getElementById('invoiceTime').textContent = timeStr;
     document.getElementById('invoiceRegNumber').textContent = `REG-${String(data.registrationNumber || 1).padStart(5, '0')}`;
@@ -5725,7 +5712,6 @@ function closeSuccessOverlay() {
     overlay.classList.remove('active');
     document.body.style.overflow = '';
     
-    // Reload page after closing
     setTimeout(() => {
         location.reload();
     }, 300);
