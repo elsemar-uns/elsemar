@@ -3760,7 +3760,7 @@ h3, h2 {
 
     <script>
 
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwf7y279H3t_ppBPGv6mDpScllqNlEKxQf-hM9_TKqOoJYoFV3isIVFMxRPpCa6b-xx/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzPWuBmNmqM58dFz7THDh6yZrUfOH-WsJcEwnVM1Tb7X4C16ruCGfdvakz1pIH87qlX/exec';
 const RECAPTCHA_SITE_KEY = '6LdoftsrAAAAABOhrPKzneF-HXGYUQQ5WLRYEbyM';
 const QRIS_STATIC = '00020101021126610014COM.GO-JEK.WWW01189360091436642109790210G6642109790303UMI51440014ID.CO.QRIS.WWW0215ID10254198343830303UMI5204581253033605802ID5920El Semar #13, JEBRES6004SOLO61055712562070703A01630478F3';
 
@@ -4435,15 +4435,12 @@ async function handleFormSubmit(e) {
     try {
         showAlert('formAlert', 'info', 'Processing data...');
         
-        let recaptchaToken = 'development-token';
-        
-        if (!isLocalhost()) {
-            try {
-                recaptchaToken = await getRecaptchaToken('registration');
-            } catch (error) {
-                showAlert('formAlert', 'warning', 'Security verification failed. Please refresh the page and try again.');
-                return;
-            }
+        let recaptchaToken = '';
+        try {
+            recaptchaToken = await getRecaptchaToken('registration');
+        } catch (error) {
+            showAlert('formAlert', 'warning', 'Security verification failed. Please refresh the page and try again.');
+            return;
         }
         
         let registrationNumber = 1;
@@ -5111,10 +5108,9 @@ function displayQRCode(qrisCode) {
             colorLight: '#ffffff',
             correctLevel: QRCode.CorrectLevel.M  
         });
-        console.log('QR Code generated successfully, data length:', qrisCode.length);
+        
     } catch (error) {
-        console.error('QR Code generation error:', error);
-        console.error('QRIS data length:', qrisCode ? qrisCode.length : 'undefined');
+        
 
         try {
             qrcodeEl.innerHTML = '';
@@ -5126,7 +5122,7 @@ function displayQRCode(qrisCode) {
                 colorLight: '#ffffff',
                 correctLevel: QRCode.CorrectLevel.L  
             });
-            console.log('QR Code generated with lower error correction');
+            
         } catch (retryError) {
             console.error('QR Code retry error:', retryError);
             showAlert('uploadAlert', 'danger', 'Failed to generate QR Code. Data too long.');
@@ -5144,15 +5140,12 @@ async function handleUploadSubmit(e) {
         return;
     }
     
-    let recaptchaToken = 'development-token';
-    
-    if (!isLocalhost()) {
-        try {
-            recaptchaToken = await getRecaptchaToken('upload');
-        } catch (error) {
-            showAlert('uploadAlert', 'warning', 'Security verification failed. Please refresh the page and try again.');
-            return;
-        }
+    let recaptchaToken = '';
+    try {
+        recaptchaToken = await getRecaptchaToken('upload');
+    } catch (error) {
+        showAlert('uploadAlert', 'warning', 'Security verification failed. Please refresh the page and try again.');
+        return;
     }
     
     const file = fileInput.files[0];
@@ -5282,15 +5275,12 @@ async function handleFreeUploadSubmit(e) {
         return;
     }
     
-    let recaptchaToken = 'development-token';
-    
-    if (!isLocalhost()) {
-        try {
-            recaptchaToken = await getRecaptchaToken('free_upload');
-        } catch (error) {
-            showAlert('freeUploadAlert', 'warning', 'Security verification failed. Please refresh the page and try again.');
-            return;
-        }
+    let recaptchaToken = '';
+    try {
+        recaptchaToken = await getRecaptchaToken('free_upload');
+    } catch (error) {
+        showAlert('freeUploadAlert', 'warning', 'Security verification failed. Please refresh the page and try again.');
+        return;
     }
     
     const followFile = followInput.files[0];
@@ -5613,16 +5603,7 @@ function updateNimVisibility() {
     if (nimInput) nimInput.required = shouldShow;
 }
 
-window.addEventListener('error', function(e) {
-    console.error('Error caught:', e.message);
-    e.preventDefault();
-    return true;
-});
-
-window.addEventListener('unhandledrejection', function(e) {
-    console.error('Promise rejection:', e.reason);
-    e.preventDefault();
-});
+// Removed global error suppression to surface real issues in production
 
 function showLoading(message = 'Processing order') {
     const overlay = document.getElementById('loadingOverlay');
