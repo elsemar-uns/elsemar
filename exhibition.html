@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>El-Semar Connect #13</title>
@@ -9,29 +9,33 @@
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="navFooter.css">
     <link href="colourFont.css" rel="stylesheet">
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
+
       body{
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3e%3cpath d='M14 0 L0 14 L14 28 L28 14 Z' fill='none' stroke='%231a1a1a' stroke-width='1'/%3e%3c/svg%3e");
         font-family: 'Poppins', sans-serif;
       }
-      /* Lines */
       .line-h1{
         border-top: 6px solid;
         /* width: 40%; */
         margin: auto;
       }
-    .gradient-card {
-        background: linear-gradient(120deg, #43cea2, #185a9d);
-        padding: 2rem;
-        border-radius: 20px;
-        height: 100%;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .card-img-top {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      
+      /* background-color: #fff; */
     }
-    .gradient-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+/* 
+    .card {
+      transition: transform 0.2s ease;
     }
+
+    .card:hover {
+      transform: translateY(-5px);
+    } */
 .navbar-toggler {
   background: none !important;
   padding: 0.5rem;
@@ -80,16 +84,122 @@
   transform: rotate(90deg);
   opacity: 0.8;
 }
+.flip-card {
+  background-color: rgba(0, 0, 0, 0);
+  perspective: 1000px;
+  cursor: pointer;
+  height: 350px;
+}
+
+.flip-card .card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+}
+
+.flip-card.is-flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card .card-front,
+.flip-card .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.flip-card .card-back {
+  transform: rotateY(180deg);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.flip-card .card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.flip-card .card-body {
+  padding: 10px;
+  text-align: center;
+}
 .btn-back:hover {
   background-color: rgba(16, 183, 127, 0.15) !important;
   transition: all 0.2s ease;
 }
+/* From Uiverse.io by cosnametv */ 
+.loader {
+  --color: #a5a5b0;
+  --size: 70px;
+  width: var(--size);
+  height: var(--size);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.loader span {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color);
+  animation: keyframes-blink 0.6s alternate infinite linear;
+}
+
+.loader span:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.loader span:nth-child(2) {
+  animation-delay: 200ms;
+}
+
+.loader span:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+.loader span:nth-child(4) {
+  animation-delay: 400ms;
+}
+
+.loader span:nth-child(5) {
+  animation-delay: 500ms;
+}
+
+.loader span:nth-child(6) {
+  animation-delay: 600ms;
+}
+
+@keyframes keyframes-blink {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.5) rotate(5deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.accordion-item {
+  border: none; /* removes the white border lines */
+  background: transparent; /* removes any white background */
+}
+.accordion-button {
+  border: none;
+}
 
 
-
-    </style>
-
-    <!-- Meta -->
+  </style>
+      <!-- Meta -->
     <meta name="description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
     <meta name="author" content="EL-SEMAR CONNECT #13" />
     <meta name="copyright" content="EL-SEMAR CONNECT #13" />
@@ -110,11 +220,11 @@
     <meta name="twitter:title" content="EL-SEMAR CONNECT #13 | Competitions Innovations & Exhibition" />
     <meta name="twitter:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
     <meta name="twitter:image" content="img/logoElsemar.png" />
-    
-  </head>
-  <body class="bg-background">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top navbar-glass">
+</head>
+
+<body class="bg-background">
+<!-- Navbar -->
+     <nav class="navbar navbar-expand-lg fixed-top navbar-glass">
       <div class="container-fluid">
         <!-- Brand -->
         <button class="navbar-toggler border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -171,7 +281,6 @@
           </div>
         </div>
         
-        
 <div class="div my-5">.</div>
 
 <section id="Back">
@@ -189,7 +298,7 @@
     <section id="About">
         <div class="container bg-gradient-90 rounded-5 pb-5 px-5 pt-3 my-5">
           <div class="row">
-    <h1 class="poppins-800 display-1 text-start text-white bg-gradient-135 rounded-pill my-4 py-3">Seminar Nasional</h1>
+    <h1 class="poppins-800 display-1 text-start text-white bg-gradient-135 rounded-pill my-4 py-3">Pameran Kreatif Elektro</h1>
 
             <!-- <h2 class="poppins-600 text-white display-3 pt-5">About</h2> -->
           </div>
@@ -199,10 +308,10 @@
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-7 order-lg-1">
                     <p class="open-sans-400 text-start text-white lh-lg ls-wider fs-5 border border-0 rounded-5 px-4 pb-3 mt-5 hover-lift">
-                    Seminar El Semar Connect hadir sebagai wadah kolaborasi antara mahasiswa, akademisi, praktisi, dan stakeholder industri. Kegiatan ini diharapkan menjadi ruang interaktif dan inspiratif dalam mendukung transisi energi hijau di Indonesia.                    
+                      Pameran Proyek Kreatif Elektro (PKE) sebagai wadah untuk memamerkan alat hasil riset dan inovasi dari Mahasiswa Teknik Elektro dengan tujuan mendorong tingkat inovasi agar dapat bersaing di era industri.                  
                     </p>
-                    <a href="ticket.html"><button class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-primary border-3 text-white hover:border-primary hover-lift rounded-pill">Registrasi ↗</button></a>
-                    <a href="#"><button class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-primary border-3 text-white  hover:border-primary hover-lift rounded-pill">Guidebook ↗</button></a>
+                    <!-- <a href="ticket.html"><button class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-primary border-3 text-white hover:border-primary hover-lift rounded-pill">Registrasi ↗</button></a>
+                    <a href="#"><button class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-primary border-3 text-white  hover:border-primary hover-lift rounded-pill">Guidebook ↗</button></a> -->
                 </div>
             </div>
         </div>
@@ -210,53 +319,24 @@
 
       <div class="line-h1 w-75 border-base mb-4"></div>
 
-    <section id="Countdown" class="py-5">
-        <div class="container text-center">
-             <h2 class="mb-4 poppins-800 text-primary display-3 text-start">Countdown</h2>
-             <div class="row mt-4">
-                 <div class="col-lg-3 col-md-6 mb-4">
-                     <div class="gradient-card text-white poppins-600">
-                         <h3 class="display-4" id="day1">0</h3>
-                         <h5>days</h5>
-                     </div>
-                 </div>
-                 <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="gradient-card text-white poppins-600">
-                        <h3 class="display-4" id="hour1">0</h3>
-                        <h5>hours</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="gradient-card text-white poppins-600">
-                        <h3 class="display-4" id="minute1">0</h3>
-                        <h5>minutes</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="gradient-card text-white poppins-600">
-                        <h3 class="display-4" id="second1">0</h3>
-                        <h5>seconds</h5>
-                    </div>
-                </div>
-             </div>
+
+    <section id="Pameran">
+      <div class="container text-center">
+        <h2 class="mb-4 poppins-800 text-primary display-3 text-start">Pameran</h2>
+        <div id="pack-container" class="d-flex justify-content-center bg-background">
+          <!-- From Uiverse.io by cosnametv --> 
+          <div class="loader">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
+      </div>
     </section>
 
-      <div class="line-h1 w-75 border-base mb-4"></div>
-
-
-    <section id="Speaker">
-        <div class="container">
-            <div class="row">
-                <h2 class="poppins-600 text-primary display-2 my-3">Speaker</h2>
-            </div>
-            <div class="row">
-                <span class="poppins-400 text-white text-center display-5 my-5">Coming Soon</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
 <footer class="footer bg-dark text-white pt-5 pb-3 mt-5">
   <div class="container">
     <div class="row">
@@ -348,58 +428,124 @@
           <p class="small text-muted mt-3 mb-0 text-center">Copyright © 2025 DTIK UNS. All rights reserved.</p>
 </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script>
-        // --- Set the date we're counting down to ---
-        // IMPORTANT: Change this to your event's date and time
-        const countDownDate = new Date("Dec 3, 2025 07:00:00").getTime();
+    <!-- <div class="container">
+      <div class="row row-cols-1 row-cols-md-3 row-cols-lg-6 g-4"> 
+        <div class="col">
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front">
+                <img src="img/Azfar.jpg" class="card-img" alt="foto_proyek">
+                <div class="card-body">
+                  <h5 class="card-title">nama_proyek</h5>
+                </div>
+              </div>
+              <div class="card-back">
+                <div class="card-body">
+                  <p class="card-text">deskripsi_atau_penjelasan_proyek</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
 
-        // Update the count down every 1 second
-        const x = setInterval(function() {
 
-            // Get today's date and time
-            const now = new Date().getTime();
-                
-            // Find the distance between now and the count down date
-            const distance = countDownDate - now;
-                
-            // Time calculations for days, hours, minutes and seconds
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                
-            // Display the result in the elements with the corresponding IDs
-            document.getElementById("day1").innerHTML = days;
-            document.getElementById("hour1").innerHTML = hours;
-            document.getElementById("minute1").innerHTML = minutes;
-            document.getElementById("second1").innerHTML = seconds;
-                
-            // If the count down is over, write some text 
-            if (distance < 0) {
-                clearInterval(x);
-                // You can change what happens when the timer ends here
-                document.getElementById("Countdown").innerHTML = "<div class='container text-center'><h2>Acara sudah dimulai!</h2></div>";
-            }
-        }, 1000);
-    </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-  const toggler = document.querySelector('.navbar-toggler');
-  const menuIcon = document.getElementById('icon-menu');
-  const closeIcon = document.getElementById('icon-close');
-  const offcanvas = document.getElementById('offcanvasNavbar');
+const apiUrl = 'https://script.google.com/macros/s/AKfycbwFzAC-bmDK9-xPYJEI3ItAbZcX9E9ykH44HOREPFb9mQOjvjiBiScWeruWWO4_vRTBXQ/exec';
 
-  // When offcanvas opens
-  offcanvas.addEventListener('show.bs.offcanvas', () => {
-    menuIcon.style.display = 'none';
-    closeIcon.style.display = 'block';
-  });
+function fixImageLink(url) {
+  if (!url) return '';
+  const match = url.match(/[-\w]{25,}/);
+  return match ? `https://drive.google.com/thumbnail?id=${match[0]}&sz=w1000` : url;
+}
 
-  // When offcanvas closes
-  offcanvas.addEventListener('hidden.bs.offcanvas', () => {
-    menuIcon.style.display = 'block';
-    closeIcon.style.display = 'none';
-  });
+async function load() {
+  try {
+    const res = await fetch(apiUrl);
+    if (!res.ok) throw new Error(res.statusText);
+    const packs = await res.json();
+    console.log(packs);
+
+    const grouped = { 22: [], 23: [], 24: [] };
+
+    packs.forEach(pack => {
+      const angkatan = pack.angkatan;
+      const kelompok = pack.kelompok;
+      // Only push if not already existing
+      if (angkatan && grouped[angkatan] && !grouped[angkatan].some(p => p.kelompok === kelompok)) {
+        grouped[angkatan].push(pack);
+      }
+    });
+
+    const container = document.getElementById('pack-container');
+container.innerHTML = `
+<div class="container d-flex justify-content-center ">
+  <div class="accordion w-100" id="angkatanAccordion">
+     ${[22, 23, 24].map(a => `
+      <div class="accordion-item ${a === 22 ? 'mt-0 mb-5' : 'my-5'} border rounded-5 border-0">
+        <h2 class="accordion-header bg-background">
+        <button class="accordion-button bg-gradient-135 border rounded-5 text-white fs-3 poppins-600 hover-lift" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${a}" aria-expanded="true" aria-controls="collapse${a}">
+          Angkatan ${a}
+        </button>
+        </h2>
+        <div id="collapse${a}" class="accordion-collapse collapse bg-background ${a === 22 ? 'show' : ''}">
+          <div class="accordion-body bg-background border border-0">
+            ${
+              grouped[a].length
+                ? `
+                <div class="container bg-background">
+                  <div class="row row-cols-1 row-cols-md-3 row-cols-lg-6 g-4 justify-content-center bg-background border border-0"> 
+                        ${grouped[a].map(pack => `
+                          <div class="col">
+                            <div class="card flip-card hover-lift">
+                              <div class="card-inner">
+                                <div class="card-front bg-gradient-135">
+                                  <img src="${fixImageLink(pack["gambar_proyek_(bisa_rancangan/prototipe/hasil_jadi/gambar_dari_google)"])}" class="card-img-top pt-4 px-3" alt="${pack.nama_proyek}">
+                                  <div class="card-body d-flex align-items-center justify-content-center">
+                                    <h5 class="card-title  text-white">${pack.nama_proyek}</h5>
+                                  </div>
+                                </div>
+                                <div class="card-back bg-primary">
+                                  <div class="card-body text-center d-flex flex-column">
+                                    <p class="card-text text-white small flex-grow-1 d-flex align-items-center justify-content-center">${pack.deskripsi_atau_penjelasan_proyek}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    `).join('')}
+                  </div>
+                </div>`
+              : `<p class="text-center text-muted mb-0">Coming soon</p>`
+            }
+          </div>
+        </div>
+      </div>
+    `).join('')}
+  </div>
+</div>
+  `;
+
+
+
+  } catch(err) {
+    console.error(err);
+    document.getElementById('pack-container').innerText = 'Failed to load.';
+  }
+}
+
+load();
 </script>
-  </body>
+<script>
+document.addEventListener('click', e => {
+  const card = e.target.closest('.flip-card');
+  if (card) card.classList.toggle('is-flipped');
+});
+</script>
+
+
+</body>
 </html>
