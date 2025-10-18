@@ -1,199 +1,98 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>El-Semar Connect #13</title>
-    <link rel="shortcut icon" href="img/logoElsemar.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="stylesheet" href="navFooter.css">
-    <link href="colourFont.css" rel="stylesheet">
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>El-Semar Connect #13</title>
 
-      body{
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3e%3cpath d='M14 0 L0 14 L14 28 L28 14 Z' fill='none' stroke='%231a1a1a' stroke-width='1'/%3e%3c/svg%3e");
-        font-family: 'Poppins', sans-serif;
-      }
-      /* Hero */
-      #Hero {
-        width: 100vw;
-        height: 100vh;
-        position: relative;
-      }
-      #Hero .background-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: brightness(0.5) ;
-        position: absolute;
-        top: 0;
-        left: 0;
+  <!-- ✅ Favicon -->
+  <link rel="icon" href="img/logoElsemar.png">
 
-      }
-      .banner-container {
-        position: relative;
-        z-index: 10;
-        top: 30%;
-        text-align: center;
-        /* color: white; */
-      }
-      /* Lines */
-      .line-h1{
-        border-top: 6px solid;
-        /* width: 40%; */
-        margin: auto;
-      }
-.responsive-text {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  /* font-size: calc(0.9em + 1vw); */
-  line-height: 1.75;
-}
-.navbar-toggler {
-  background: none !important;
-  padding: 0.5rem;
-  border: none !important;
-  box-shadow: none !important;
-}
+  <!-- ✅ Preconnect & Preload Fonts (replaces @import) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
 
-.navbar-toggler:focus,
-.navbar-toggler:active {
-  outline: none !important;
-  box-shadow: none !important;
-}
-/* Remove Bootstrap's default close image */
-.btn-close-custom {
-  background: none !important;
-  border: none;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  z-index: 1056;
-  cursor: pointer;
-}
+  <!-- ✅ Critical inline CSS (above-the-fold only) -->
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0d0d0d;
+      margin: 0;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3e%3cpath d='M14 0 L0 14 L14 28 L28 14 Z' fill='none' stroke='%231a1a1a' stroke-width='1'/%3e%3c/svg%3e");
+    }
+    #Hero {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+      
+    }
+    .hero-title h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      border-right: 3px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typewriter 2s steps(12, end) forwards, blink 0.7s step-end infinite;
+    }
+    @keyframes typewriter { 0% { width: 0; } 100% { width: 9ch; } }
+    @keyframes blink { 0%, 100% { border-color: transparent; } 50% { border-color: white; } }
+    .subheading {
+      font-size: clamp(1rem, 3vw, 2rem);
+      opacity: 0;
+      animation: fadeUp 1.2s ease-out 2s forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .btn-hover:hover {
+      background-color: rgba(16, 183, 127, 0.15) !important;
+      transition: all 0.2s ease;
+    }
+    /* a, button, [role="button"] {
+  outline: 2px solid red !important;
+  outline-offset: 2px;
+} */
 
-/* Hide Bootstrap’s default X if applied */
-.btn-close-custom::after,
-.btn-close-custom::before {
-  background-image: none !important;
-}
+  </style>
 
-/* Add your custom white X icon */
-.btn-close-custom::before {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 100%;
-  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>') no-repeat center;
-  -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>') no-repeat center;
-  background-color: white;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
+  <!-- ✅ Load Bootstrap non-blocking -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"></noscript>
 
-.btn-close-custom:hover::before {
-  transform: rotate(90deg);
-  opacity: 0.8;
-}
-.loader-heading {
-  display: inline-block;
-  overflow: hidden;
-}
-.hero-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* centers horizontally */
-  justify-content: center;
-  text-align: center;
-  overflow: visible; /* prevents clipping */
-}
+  <!-- ✅ Preload custom CSS -->
+  <link rel="preload" href="navFooter.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="navFooter.css"></noscript>
+  <link rel="preload" href="colourFont.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="colourFont.css"></noscript>
 
-/* === TYPEWRITER EFFECT === */
-.loader-heading {
-  display: inline-block;
-  overflow: hidden;
-  border-right: 3px solid white;
-  white-space: nowrap;
-  color: white;
-  /* font-size: 10vw; */
-  /* font-size: clamp(2.5rem, 8vw, 6rem); */
-  font-size: calc(2.5em + 3.5vw);
-  font-weight: 800;
-  animation: typewriter 2s steps(12, end) 1 forwards, blink 0.7s step-end infinite;
-}
+  <!-- ✅ Meta & OG tags -->
+  <meta name="description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan Teknik Elektro UNS.">
+  <meta name="author" content="EL-SEMAR CONNECT #13">
+  <meta property="og:title" content="EL-SEMAR CONNECT #13 | Competitions, Innovations & Exhibition">
+  <meta property="og:image" content="https://elsemar.vercel.app/img/logoElsemar.png">
+  <meta property="og:url" content="https://elsemar.vercel.app/">
+  <meta property="og:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan Teknik Elektro UNS.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="EL-SEMAR CONNECT #13 | Competitions, Innovations & Exhibition">
+  <meta name="twitter:description" content="Acara tahunan Teknik Elektro UNS: kompetisi, inovasi, dan pameran.">
+  <meta name="twitter:image" content="https://elsemar.vercel.app/img/logoElsemar.png">
+</head>
 
-@keyframes typewriter {
-  0% { width: 0; }
-  100% { width: 9ch; } /* makes sure the last letter isn't cut */
-}
-
-@keyframes blink {
-  0%, 100% { border-color: transparent; }
-  50% { border-color: white; }
-}
-
-/* === FADE IN FROM BOTTOM === */
-.subheading {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 1.2s ease-out 1s forwards; /* starts after typing ends */
-  color: white;
-  font-size: clamp(1rem, 3vw, 2rem);
-  margin-top: 0.5rem;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.btn-hover:hover {
-  background-color: rgba(16, 183, 127, 0.15) !important;
-  transition: all 0.2s ease;
-}
-
-
-    </style>
-
-
-    <!-- Meta -->
-    <meta name="description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
-    <meta name="author" content="EL-SEMAR CONNECT #13" />
-    <meta name="copyright" content="EL-SEMAR CONNECT #13" />
-    <meta name="application-name" content="EL-SEMAR CONNECT #13" />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="EL-SEMAR CONNECT #13 | Competitions Innovations & Exhibition" />
-    <meta property="og:type" content="article" />
-    <meta property="og:image" content="https://elsemar.vercel.app/index.html/img/logoElsemar.png" />
-    <meta property="og:image:alt" content="EL-SEMAR CONNECT #13 | Competitions Innovations & Exhibition" />
-    <meta property="og:image:width" content="500" />
-    <meta property="og:image:height" content="500" />
-    <meta property="og:url" content="https://elsemar.vercel.app/index.html" />
-    <meta property="og:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="EL-SEMAR CONNECT #13 | Competitions Innovations & Exhibition" />
-    <meta name="twitter:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
-    <meta name="twitter:image" content="img/logoElsemar.png" />
-
-
-  </head>
   <body class="bg-background">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-glass">
       <div class="container-fluid">
         <!-- Brand -->
-        <button class="navbar-toggler border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <button class="navbar-toggler border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Open Menu">
         <!-- Custom hamburger & close icons -->
         <span class="navbar-toggler-icon d-flex align-items-center justify-content-center">
             <!-- Hamburger -->
@@ -233,7 +132,7 @@
             <a href="index.html">
               <img src="img/logo_navBar_inverse.png" alt="Logo" height="50" class="logoNavBar logo-hidden">
             </a>
-<button type="button" class="btn-close-custom" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close-custom" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 
 
           </div>
@@ -249,31 +148,29 @@
 
 
     <!-- Hero -->
-<section id="Hero">
-  <img src="img/Rektorat_bg.png" alt="" class="background-image">
+<section id="Hero" style="background:url('img/Rektorat_bg.webp') center/cover no-repeat; ">
+  <div class="hero-title">
+    <h1>EL-SEMAR</h1>
+    <h2 class="subheading">Connect #13</h2>
+  </div>
+  <div class="mt-4">
+<a href="ticket.html"
+   class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-gradient-90 text-white hover:bg-bg-accent hover-lift rounded-pill d-inline-block text-decoration-none text-center"
+   title="Registration"
+   aria-label="Go to Registration page">
+  Registration
+</a>
 
-  <div class="container banner-container text-center">
-<div class="row hero-title text-center justify-content-center">
-  <h1 class="poppins-800 loader-heading">EL-SEMAR</h1>
-  <h2 class="poppins-400 subheading">Connect #13</h2>
-</div>
+<a href="#About"
+   class="poppins-400 m-3 py-2 px-4 fs-5 border border-primary bg-primary-10 border-3 text-white btn-hover hover:border-primary hover-lift rounded-pill d-inline-block text-decoration-none text-center"
+   title="Read More"
+   aria-label="Read more about El-Semar Connect">
+  Read More
+</a>
 
-    <div class="row justify-content-center align-items-center">
-      <div class="col-auto text-center">
-        <a href="ticket.html">
-          <button class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-gradient-90 text-white hover:bg-bg-accent hover-lift rounded-pill">
-            Registration
-          </button>
-        </a>
-        <a href="#About">
-          <button class="poppins-400 m-3 py-2 px-4 fs-5 border-primary bg-primary-10 border-3 text-white btn-hover hover:border-primary hover-lift rounded-pill">
-            Read More
-          </button>
-        </a>
-      </div>
-    </div>
   </div>
 </section>
+
 
 
 <!-- <div class="sale-banner" id="saleBanner">
@@ -310,20 +207,20 @@
               <div class="container timer-container text-white">
                 <div class="row timer-row">
                   <div class="col timer-wrapper hover-lift">
-                    <h2 class="number oswald-550" id="day1">10</h2>
-                    <h5 class="subnumber text-center">days</h5>
+                    <p class="number oswald-550 fs-2 mb-0" id="day1">10</p>
+                    <p class="subnumber text-center fs-5">days</p>
                   </div>
                   <div class="col timer-wrapper hover-lift">
-                    <h2 class="number oswald-550" id="hour1">22</h2>
-                    <h5 class="subnumber arimo-500 text-center">hours</h5>
+                    <p class="number oswald-550 fs-2 mb-0" id="hour1">22</p>
+                    <p class="subnumber arimo-500 text-center fs-5">hours</p>
                   </div>
                   <div class="col timer-wrapper hover-lift">
-                    <h2 class="number oswald-550" id="minute1">10</h2>
-                    <h5 class="subnumber arimo-500 text-center">minutes</h5>
+                    <p class="number oswald-550 fs-2 mb-0" id="minute1">10</p>
+                    <p class="subnumber arimo-500 text-center fs-5">minutes</p>
                   </div>
                   <div class="col timer-wrapper hover-lift">
-                    <h2 class="number oswald-550" id="second1">20</h2>
-                    <h5 class="subnumber arimo-500 text-center">seconds</h5>
+                    <p class="number oswald-550 fs-2 mb-0" id="second1">20</p>
+                    <p class="subnumber arimo-500 text-center fs-5">seconds</p>
                   </div>
                     <p id="status1" class="timer-status arimo-500"></p>
                 </div>           
@@ -386,7 +283,7 @@
         <!-- <hr class="border border-primary border-3 opacity-75 w-50 mx-auto mt-2"> -->
         <div class="row align-items-center">
           <div class="col-md-12 col-lg-6 text-center">
-            <img src="img/Azfar.jpg" alt="About Image" class="img-fluid border border-base border-1 rounded-3 mb-4 mt-3 w-75 hover-lift">
+            <img src="img/Azfar.webp" alt="About Image" class="img-fluid rounded-3 mb-4 mt-3 w-75" loading="lazy" width="600" height="400">
             <!-- <div id="carouselExample" class="carousel slide">
               <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -503,41 +400,36 @@
           <div class="col-12 col-xl-6 text-start">
             <p class="poppins-600 text-white py-2 fs-3 px-2 text-center hover-lift rounded-5">Lokasi</p>
             <div class="text-start hover-lift">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193.12111298139337!2d110.85376582225926!3d-7.561850300889111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a16fdf072a90f%3A0xea50b255b0e6ce3e!2sFakultas%20Teknik%20UNS!5e1!3m2!1sen!2sid!4v1760724968667!5m2!1sen!2sid"
-                width="100%"
-                height="250"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                class="rounded-4 shadow-sm">
-              </iframe>
+              <div id="map-placeholder-tryout" class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm border border-base hover:border-primary" onclick="loadMap('tryout')" title="Tryout Location">
+                <img src="img/map-preview-tryout.webp" alt="Click to load Tryout location"
+                    width="100%" height="250" loading="lazy" style="cursor:pointer;" class="d-flex justify-content-center align-items-center text-white poppins-600 fs-3 text-center">
+                              <!-- <p class="text-center text-white mt-2 ">Click to load map</p> -->
+              </div>
             </div>
           </div>
 
           <!-- Right column: Countdown boxes -->
           <div class="col-12 col-xl-6">
-            <p class="poppins-600 text-white py-2 fs-3 px-2 text-center hover-lift rounded-5">Registration Closes In</p>
-            <div class="d-flex justify-content-center flex-wrap gap-4 text-center">
+            <h3 class="poppins-600 text-white py-2 fs-3 px-2 text-center rounded-5">Registration Closes In</3>
+            <div class="d-flex justify-content-center flex-wrap gap-4 text-center mt-4">
               <div class="border text-white poppins-600 p-3 rounded-5 bg-background border-base hover:border-primary hover-lift" style="width:220px;">
-                <h3 class="display-4 mb-0" id="day2">0</h3>
-                <h5>days</h5>
+                <p class="display-4 mb-0" id="day2">0</p>
+                <p>days</p>
               </div>
 
               <div class="border text-white poppins-600 p-3 rounded-5 bg-background border-base hover:border-primary hover-lift" style="width:220px;">
-                <h3 class="display-4 mb-0" id="hour2">0</h3>
-                <h5>hours</h5>
+                <p class="display-4 mb-0" id="hour2">0</p>
+                <p>hours</p>
               </div>
 
               <div class="border text-white poppins-600 p-3 rounded-5 bg-background border-base hover:border-primary hover-lift" style="width:220px;">
-                <h3 class="display-4 mb-0" id="minute2">0</h3>
-                <h5>minutes</h5>
+                <p class="display-4 mb-0" id="minute2">0</p>
+                <p>minutes</p>
               </div>
 
               <div class="border text-white poppins-600 p-3 rounded-5 bg-background border-base hover:border-primary hover-lift" style="width:220px;">
-                <h3 class="display-4 mb-0" id="second2">0</h3>
-                <h5>seconds</h5>
+                <p class="display-4 mb-0" id="second2">0</p>
+                <p>seconds</p>
               </div>
             </div>
           </div>
@@ -546,11 +438,12 @@
 
         <div class="row justify-content-center mt-4">
           <div class="col-auto">
-            <a href="ticket.html">
-              <button class="poppins-400 py-3 px-5 fs-4 border-0 bg-gradient-90 text-white hover:bg-bg-accent hover-lift rounded-pill">
-                Registration
-              </button>
-            </a>
+<a href="ticket.html"
+   class="poppins-400 m-3 py-3 px-4 fs-2 border-0 bg-gradient-90 text-white hover:bg-bg-accent hover-lift rounded-pill d-inline-block text-decoration-none text-center"
+   title="Registration"
+   aria-label="Go to Registration page">
+  Registration
+</a>
           </div>
         </div>
       </div>
@@ -591,10 +484,10 @@
       <div class="col-md-12 col-lg-4">
         <h5 class="text-uppercase mb-3 fw-bold text-md-center">Lokasi</h5>
         <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3089.9509554218394!2d110.85661340000001!3d-7.5600136000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a170214d5335d%3A0x80923f047f287377!2sAuditorium%20G.P.H.%20Haryo%20Mataram!5e1!3m2!1sen!2sid!4v1760289205178!5m2!1sen!2sid"
-            width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy">
-          </iframe>
+          <div id="map-placeholder-footer" class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm" onclick="loadMap('footer')" title="Event Location">
+            <img src="img/map-preview-footer.webp" alt="Click to load El-Semar Connect #13 location"
+                width="100%" height="200" loading="lazy" style="cursor:pointer;" class="d-flex justify-content-center align-items-center text-white poppins-600 fs-5 text-center" >
+          </div>
         </div>
       </div>
 
@@ -616,14 +509,14 @@
 
                 <!-- ====== SOCIAL MEDIA ====== -->
         <div class="social-links mx-5 d-flex justify-content-lg-start just">
-          <a href="https://www.instagram.com/el_semar/" target="_blank" aria-label="Instagram" class="social-link mx-2">
+          <a href="https://www.instagram.com/el_semar/" target="_blank" aria-label="Instagram" class="social-link mx-2" title="Instagram">
             <!-- Instagram -->
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
               <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
             </svg>
           </a>
 
-          <a href="https://www.tiktok.com/@el_semar?_t=ZS-90VZUTXawid&_r=1" target="_blank" aria-label="TikTok" class="social-link mx-2">
+          <a href="https://www.tiktok.com/@el_semar?_t=ZS-90VZUTXawid&_r=1" target="_blank" aria-label="TikTok" class="social-link mx-2" title="Tiktok">
             <!-- TikTok -->
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tiktok" viewBox="0 0 16 16">
               <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"/>
@@ -648,149 +541,80 @@
           <p class="small text-muted mt-3 mb-0 text-center">Copyright © 2025 DTIK UNS. All rights reserved.</p>
 </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script>
-      // -----Navbar-----
-//         const navEl = document.querySelector('.navbar');
-//         const logoEl = document.querySelector('.logoNavBar');
-//         const logoInvEl = document.querySelector('.logoNavBarInv');
-// if (navEl.classList.contains('.navbar-scrolled')) {
-//   alert("work?");
-// }
-        // window.addEventListener('scroll', () => {
-        //     if(window.scrollY >= 86) {
-        //         navEl.classList.add('navbar-scrolled');
-        //         navEl.classList.remove('navbar-top');
-        //     }else if(window.scrollY <= 86) {
-        //         navEl.classList.remove('navbar-scrolled');
-        //         navEl.classList.add('navbar-top');
-        //     }
-        //   })
+<!-- ✅ Load Bootstrap JS asynchronously -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"
+        defer></script>
 
-        // window.addEventListener('scroll', () => {
-        //     if(window.scrollY >= 86) {
-        //         logoEl.classList.remove('logo-hidden');
-        //     }else if(window.scrollY <= 86) {
-        //         logoEl.classList.add('logo-hidden');
-        //     }
-        //   })
+<!-- ✅ Main Script -->
+<script defer>
+document.addEventListener("DOMContentLoaded", () => {
 
-        // window.addEventListener('scroll', () => {
-        //     if(window.scrollY >= 86) {
-        //         logoInvEl.classList.add('logo-hidden');
-        //     }else if(window.scrollY <= 86) {
-        //         logoInvEl.classList.remove('logo-hidden');
-        //     }
-        //   })
+  /* ---------- Navbar Toggle (Mobile) ---------- */
+  const menuIcon = document.getElementById('icon-menu');
+  const closeIcon = document.getElementById('icon-close');
+  const offcanvas = document.getElementById('offcanvasNavbar');
 
-      // -----Countdown-----
-      function pad(num) {
-        return String(num).padStart(2, "0");
+  if (offcanvas) {
+    offcanvas.addEventListener('show.bs.offcanvas', () => {
+      menuIcon.style.display = 'none';
+      closeIcon.style.display = 'block';
+    });
+    offcanvas.addEventListener('hidden.bs.offcanvas', () => {
+      menuIcon.style.display = 'block';
+      closeIcon.style.display = 'none';
+    });
+  }
+
+  /* ---------- Countdown Timers ---------- */
+  const countdowns = [
+    {
+      target: new Date(2025, 11, 2, 7, 0, 0), // Dec 2, 2025
+      ids: ["day1", "hour1", "minute1", "second1"]
+    },
+    {
+      target: new Date(2025, 10, 9, 7, 0, 0), // Nov 9, 2025
+      ids: ["day2", "hour2", "minute2", "second2"]
+    },
+    {
+      target: new Date(2026, 0, 10, 12, 0, 0), // Jan 10, 2026
+      ids: ["day3", "hour3", "minute3", "second3"]
+    }
+  ];
+
+  const pad = num => String(num).padStart(2, "0");
+
+  function updateCountdowns() {
+    const now = new Date();
+    countdowns.forEach(({ target, ids }) => {
+      const [d, h, m, s] = ids.map(id => document.getElementById(id));
+      if (!d) return;
+
+      let ms = target - now;
+      if (ms <= 0) {
+        [d, h, m, s].forEach(el => el && (el.textContent = "00"));
+        return;
       }
+      const sec = Math.floor(ms / 1000);
+      const days = Math.floor(sec / 86400);
+      const hours = Math.floor((sec % 86400) / 3600);
+      const minutes = Math.floor((sec % 3600) / 60);
+      const seconds = sec % 60;
 
-      // Konfigurasi untuk banyak countdown
-      const countdowns = [
-        {
-          target: new Date(2025, 11, 2, 7, 0, 0), // 1 Okt #13
-          elements: {
-            day: document.getElementById("day1"),
-            hour: document.getElementById("hour1"),
-            minute: document.getElementById("minute1"),
-            second: document.getElementById("second1"),
-            status: document.getElementById("status1"),
-          }
-        },
-        {
-          target: new Date(2025, 10, 9, 7, 0, 0), // 15 Nov #13
-          elements: {
-            day: document.getElementById("day2"),
-            hour: document.getElementById("hour2"),
-            minute: document.getElementById("minute2"),
-            second: document.getElementById("second2"),
-            status: document.getElementById("status2"),
-          }
-        },
-        {
-          target: new Date(2026, 0, 10, 12, 0, 0), // 10 Jan 2026
-          elements: {
-            day: document.getElementById("day3"),
-            hour: document.getElementById("hour3"),
-            minute: document.getElementById("minute3"),
-            second: document.getElementById("second3"),
-            status: document.getElementById("status3"),
-          }
-        }
-      ];
+      if (d) d.textContent = pad(days);
+      if (h) h.textContent = pad(hours);
+      if (m) m.textContent = pad(minutes);
+      if (s) s.textContent = pad(seconds);
+    });
+  }
 
+  updateCountdowns();
+  setInterval(updateCountdowns, 1000);
 
-      function updateAllCountdowns() {
-        const now = new Date();
+});
+</script>
 
-        countdowns.forEach(c => {
-          let ms = c.target - now;
-          const el = c.elements;
-
-          if (ms <= 0) {
-            el.day.textContent = "00";
-            el.hour.textContent = "00";
-            el.minute.textContent = "00";
-            el.second.textContent = "00";
-            el.status.textContent = "Acara sudah dimulai";
-            return;
-          }
-
-          const secTotal = Math.floor(ms / 1000);
-          const days = Math.floor(secTotal / 86400);
-          const hours = Math.floor((secTotal % 86400) / 3600);
-          const minutes = Math.floor((secTotal % 3600) / 60);
-          const seconds = secTotal % 60;
-
-          el.day.textContent = pad(days);
-          el.hour.textContent = pad(hours);
-          el.minute.textContent = pad(minutes);
-          el.second.textContent = pad(seconds);
-          // el.status.textContent = `${c.target.toLocaleString()}`;
-        });
-      }
-
-      // Sinkronisasi detik
-      updateAllCountdowns();
-      setTimeout(() => {
-        updateAllCountdowns();
-        setInterval(updateAllCountdowns, 1000);
-      }, 1000 - (Date.now() % 1000));
-      
-//       // --------Read More hidden------
-// document.addEventListener("DOMContentLoaded", () => {
-//   // Select all collapse elements inside your countdown containers
-//   const collapses = document.querySelectorAll(".countdown-container .collapse");
-
-//   collapses.forEach(collapseEl => {
-//     // Find the nearest countdown container (the <button>)
-//     const parentContainer = collapseEl.closest(".countdown-container");
-
-//     // Find the "Read More" span inside that container
-//     const readMoreEl = parentContainer.querySelector(".collapse-readMore");
-
-//     if (!readMoreEl) return;
-
-//     // Listen to Bootstrap collapse events
-//     collapseEl.addEventListener("show.bs.collapse", () => {
-//       readMoreEl.style.opacity = "0";
-//       readMoreEl.style.pointerEvents = "none";
-//     });
-
-//     collapseEl.addEventListener("hidden.bs.collapse", () => {
-//       readMoreEl.style.opacity = "1";
-//       readMoreEl.style.pointerEvents = "auto";
-//     });
-//   });
-// });
-
-
-
-
-    </script>
 <script>
   const toggler = document.querySelector('.navbar-toggler');
   const menuIcon = document.getElementById('icon-menu');
@@ -809,6 +633,23 @@
     closeIcon.style.display = 'none';
   });
 </script>
+
+<script defer>
+function loadMap(target) {
+  const maps = {
+    tryout: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193.12111298139337!2d110.85376582225926!3d-7.561850300889111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a16fdf072a90f%3A0xea50b255b0e6ce3e!2sFakultas%20Teknik%20UNS!5e1!3m2!1sen!2sid!4v1760724968667!5m2!1sen!2sid`,
+    footer: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3089.9509554218394!2d110.85661340000001!3d-7.5600136000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a170214d5335d%3A0x80923f047f287377!2sAuditorium%20G.P.H.%20Haryo%20Mataram!5e1!3m2!1sen!2sid!4v1760289205178!5m2!1sen!2sid`
+  };
+
+  const placeholder = document.getElementById(`map-placeholder-${target}`);
+  if (!placeholder) return;
+
+  placeholder.innerHTML = `
+    <iframe src="${maps[target]}" width="100%" height="${target === 'tryout' ? 250 : 200}" 
+      style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+}
+</script>
+ 
   <!-- <script>
     console.log("✅ JS loaded");
 
