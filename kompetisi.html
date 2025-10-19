@@ -538,6 +538,20 @@
     closeIcon.style.display = 'none';
   });
 </script>
+<script defer>
+function loadMap(target) {
+  const maps = {
+    footer: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3089.9509554218394!2d110.85661340000001!3d-7.5600136000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a170214d5335d%3A0x80923f047f287377!2sAuditorium%20G.P.H.%20Haryo%20Mataram!5e1!3m2!1sen!2sid!4v1760289205178!5m2!1sen!2sid`
+  };
+
+  const placeholder = document.getElementById(`map-placeholder-${target}`);
+  if (!placeholder) return;
+
+  placeholder.innerHTML = `
+    <iframe src="${maps[target]}" width="100%" height="${target === 'tryout' ? 250 : 200}" 
+      style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+}
+</script>
 
 </body>
 </html>
