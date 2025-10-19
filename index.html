@@ -91,7 +91,54 @@
   outline: 2px solid red !important;
   outline-offset: 2px;
 } */
+.navbar-toggler {
+  background: none !important;
+  padding: 0.5rem;
+  border: none !important;
+  box-shadow: none !important;
+}
 
+.navbar-toggler:focus,
+.navbar-toggler:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* Remove Bootstrap's default close image */
+.btn-close-custom {
+  background: none !important;
+  border: none;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  z-index: 1056;
+  cursor: pointer;
+}
+
+/* Hide Bootstrap’s default X if applied */
+.btn-close-custom::after,
+.btn-close-custom::before {
+  background-image: none !important;
+}
+
+/* Add your custom white X icon */
+.btn-close-custom::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>') no-repeat center;
+  -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>') no-repeat center;
+  background-color: white;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-close-custom:hover::before {
+  transform: rotate(90deg);
+  opacity: 0.8;
+}
   </style>
 
   <!-- ✅ Load Bootstrap non-blocking -->
