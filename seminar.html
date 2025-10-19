@@ -4,13 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>El-Semar Connect #13</title>
-    <link rel="shortcut icon" href="img/logoElsemar.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="stylesheet" href="navFooter.css">
-    <link href="colourFont.css" rel="stylesheet">
+    <!-- ✅ Favicon -->
+    <link rel="icon" href="img/logoElsemar.webp">
+
+    <!-- ✅ Preconnect & Preload Fonts (replaces @import) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Non-blocking Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap"
+          rel="stylesheet"
+          media="print"
+          onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    </noscript>
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
       body{
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3e%3cpath d='M14 0 L0 14 L14 28 L28 14 Z' fill='none' stroke='%231a1a1a' stroke-width='1'/%3e%3c/svg%3e");
         font-family: 'Poppins', sans-serif;
@@ -89,27 +97,27 @@
 
     </style>
 
-    <!-- Meta -->
-    <meta name="description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
-    <meta name="author" content="EL-SEMAR CONNECT #13" />
-    <meta name="copyright" content="EL-SEMAR CONNECT #13" />
-    <meta name="application-name" content="EL-SEMAR CONNECT #13" />
+  <!-- ✅ Load Bootstrap non-blocking -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"></noscript>
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="EL-SEMAR CONNECT #13 | Competitions Innovations & Exhibition" />
-    <meta property="og:type" content="article" />
-    <meta property="og:image" content="img/logoElsemar.png" />
-    <meta property="og:image:alt" content="EL-SEMAR CONNECT #13 | Competitions Innovations & Exhibition" />
-    <meta property="og:image:width" content="500" />
-    <meta property="og:image:height" content="500" />
-    <meta property="og:url" content="https://elsemar.ft.uns.ac.id/id/" />
-    <meta property="og:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
+  <!-- ✅ Preload custom CSS -->
+  <link rel="preload" href="navFooter.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="navFooter.css"></noscript>
+  <link rel="preload" href="colourFont.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="colourFont.css"></noscript>
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="EL-SEMAR CONNECT #13 | Competitions Innovations & Exhibition" />
-    <meta name="twitter:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
-    <meta name="twitter:image" content="img/logoElsemar.png" />
+  <!-- ✅ Meta & OG tags -->
+  <meta name="description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan Teknik Elektro UNS.">
+  <meta name="author" content="EL-SEMAR CONNECT #13">
+  <meta property="og:title" content="EL-SEMAR CONNECT #13 | Competitions, Innovations & Exhibition">
+  <meta property="og:image" content="https://elsemar.vercel.app/img/logoElsemar.webp">
+  <meta property="og:url" content="https://elsemar.vercel.app/">
+  <meta property="og:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan Teknik Elektro UNS.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="EL-SEMAR CONNECT #13 | Competitions, Innovations & Exhibition">
+  <meta name="twitter:description" content="Acara tahunan Teknik Elektro UNS: kompetisi, inovasi, dan pameran.">
+  <meta name="twitter:image" content="https://elsemar.vercel.app/img/logoElsemar.webp">
     
   </head>
   <body class="bg-background">
@@ -133,7 +141,7 @@
         </span>
         </button>
         <a class="navbar-brand" href="index.html">
-          <img src="img/logo_navBar_inverse.png" alt="Logo" height="50" class="logoNavBar logo-hidden">
+          <img src="img/logo_navBar_inverse.webp" alt="Logo" height="50" class="logoNavBar logo-hidden">
         </a>
 
         <!-- Toggle button (visible only on mobile) -->
@@ -155,7 +163,7 @@
         <div class="offcanvas offcanvas-start d-lg-none navbar-glass" tabindex="-1" id="offcanvasNavbar">
           <div class="offcanvas-header">
             <a href="index.html">
-              <img src="img/logo_navBar_inverse.png" alt="Logo" height="50" class="logoNavBar logo-hidden">
+              <img src="img/logo_navBar_inverse.webp" alt="Logo" height="50" class="logoNavBar logo-hidden">
             </a>
 <button type="button" class="btn-close-custom" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 
@@ -195,14 +203,14 @@
           </div>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-5 order-lg-2 text-center">
-                  <img src="img/Azfar.jpg" alt="About Image" class="img-fluid border border-base border-1 rounded-3 mb-4 mt-3 w-75 hover-lift">
+                  <img src="img/Azfar.webp" alt="About Image" class="img-fluid border border-base border-1 rounded-3 mb-4 mt-3 w-75 hover-lift" width="500" height="500"> 
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-7 order-lg-1">
                     <p class="open-sans-400 text-start text-white lh-lg ls-wider fs-5 border border-0 rounded-5 px-4 pb-3 mt-5 hover-lift">
                     Seminar El Semar Connect hadir sebagai wadah kolaborasi antara mahasiswa, akademisi, praktisi, dan stakeholder industri. Kegiatan ini diharapkan menjadi ruang interaktif dan inspiratif dalam mendukung transisi energi hijau di Indonesia.                    
                     </p>
-                    <a href="ticket.html"><button class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-primary border-3 text-white hover:border-primary hover-lift rounded-pill">Registrasi ↗</button></a>
-                    <a href="#"><button class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-primary border-3 text-white  hover:border-primary hover-lift rounded-pill">Guidebook ↗</button></a>
+                    <!-- <a href="ticket.html"><button class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-primary border-3 text-white hover:border-primary hover-lift rounded-pill">Registrasi ↗</button></a>
+                    <a href="#"><button class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-primary border-3 text-white  hover:border-primary hover-lift rounded-pill">Guidebook ↗</button></a> -->
                 </div>
             </div>
         </div>
@@ -216,26 +224,26 @@
              <div class="row mt-4">
                  <div class="col-lg-3 col-md-6 mb-4">
                      <div class="gradient-card text-white poppins-600">
-                         <h3 class="display-4" id="day1">0</h3>
-                         <h5>days</h5>
+                         <p class="number oswald-550 display-4 mb-0" id="day1">0</p>
+                         <p class="poppins-400 fs-1">days</p>
                      </div>
                  </div>
                  <div class="col-lg-3 col-md-6 mb-4">
                     <div class="gradient-card text-white poppins-600">
-                        <h3 class="display-4" id="hour1">0</h3>
-                        <h5>hours</h5>
+                        <p class="number oswald-550 display-4 mb-0" id="hour1">0</p>
+                        <p class="poppins-400 fs-1">hours</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="gradient-card text-white poppins-600">
-                        <h3 class="display-4" id="minute1">0</h3>
-                        <h5>minutes</h5>
+                        <p class="number oswald-550 display-4 mb-0" id="minute1">0</p>
+                        <p class="poppins-400 fs-1">minutes</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="gradient-card text-white poppins-600">
-                        <h3 class="display-4" id="second1">0</h3>
-                        <h5>seconds</h5>
+                        <p class="number oswald-550 display-4 mb-0" id="second1">0</p>
+                        <p class="poppins-400 fs-1">seconds</p>
                     </div>
                 </div>
              </div>
@@ -269,7 +277,7 @@
           2–3 Desember
         </p>
         <p class="poppins-600 display-2">
-          #13
+          2025
         </p>
       </div>
     </div>
@@ -281,9 +289,9 @@
       <!-- ====== LOGO SECTION ====== -->
       <div class="col-md-12 col-lg-4">  
         <div class="d-flex justify-content-center justify-content-lg-start align-items-center gap-3 mb-3">
-          <img src="img/logoUNS.png" alt="Logo UNS" class="footer-logo" height="100" title="Universitas Sebelas Maret">
-          <img src="img/logoHMTE.png" alt="Logo HMTE" class="footer-logo" height="100" title="Himpunan Teknik Elektro">
-          <img src="img/logoElsemar.png" alt="Logo El-Semar" class="footer-logo" height="100" title="El-Semar Connect #13">
+          <img src="img/logoUNS.webp" alt="Logo UNS" class="footer-logo" width="100" height="100" title="Universitas Sebelas Maret" loading="lazy">
+          <img src="img/logoHMTE.webp" alt="Logo HMTE" class="footer-logo" width="100" height="100" title="Himpunan Teknik Elektro" loading="lazy">
+          <img src="img/logoElsemar.webp" alt="Logo El-Semar" class="footer-logo" width="100" height="100" title="El-Semar Connect #13" loading="lazy">
         </div>
       </div>
 
@@ -291,10 +299,10 @@
       <div class="col-md-12 col-lg-4">
         <h5 class="text-uppercase mb-3 fw-bold text-md-center">Lokasi</h5>
         <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3089.9509554218394!2d110.85661340000001!3d-7.5600136000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a170214d5335d%3A0x80923f047f287377!2sAuditorium%20G.P.H.%20Haryo%20Mataram!5e1!3m2!1sen!2sid!4v1760289205178!5m2!1sen!2sid"
-            width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy">
-          </iframe>
+          <div id="map-placeholder-footer" class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm" onclick="loadMap('footer')" title="Event Location">
+            <img src="img/map-preview-footer.webp" alt="Click to load El-Semar Connect #13 location"
+                width="100%" height="200" loading="lazy" style="cursor:pointer;" class="d-flex justify-content-center align-items-center text-white poppins-600 fs-5 text-center" >
+          </div>
         </div>
       </div>
 
@@ -316,14 +324,14 @@
 
                 <!-- ====== SOCIAL MEDIA ====== -->
         <div class="social-links mx-5 d-flex justify-content-lg-start just">
-          <a href="https://www.instagram.com/el_semar/" target="_blank" aria-label="Instagram" class="social-link mx-2">
+          <a href="https://www.instagram.com/el_semar/" target="_blank" aria-label="Instagram" class="social-link mx-2" title="Instagram">
             <!-- Instagram -->
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
               <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
             </svg>
           </a>
 
-          <a href="https://www.tiktok.com/@el_semar?_t=ZS-90VZUTXawid&_r=1" target="_blank" aria-label="TikTok" class="social-link mx-2">
+          <a href="https://www.tiktok.com/@el_semar?_t=ZS-90VZUTXawid&_r=1" target="_blank" aria-label="TikTok" class="social-link mx-2" title="Tiktok">
             <!-- TikTok -->
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tiktok" viewBox="0 0 16 16">
               <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"/>
