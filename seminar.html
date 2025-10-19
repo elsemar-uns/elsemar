@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>El-Semar Connect #13</title>
@@ -18,28 +18,25 @@
     <noscript>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     </noscript>
-    <style>
-      body{
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="navFooter.css">
+    <link href="colourFont.css" rel="stylesheet">
+
+   <style>
+
+    body {
+        background-color: #121212;
+       
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3e%3cpath d='M14 0 L0 14 L14 28 L28 14 Z' fill='none' stroke='%231a1a1a' stroke-width='1'/%3e%3c/svg%3e");
         font-family: 'Poppins', sans-serif;
-      }
-      /* Lines */
+        color: white;
+    }
       .line-h1{
         border-top: 6px solid;
         /* width: 40%; */
         margin: auto;
       }
-    .gradient-card {
-        background: linear-gradient(120deg, #43cea2, #185a9d);
-        padding: 2rem;
-        border-radius: 20px;
-        height: 100%;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .gradient-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
 .navbar-toggler {
   background: none !important;
   padding: 0.5rem;
@@ -88,39 +85,153 @@
   transform: rotate(90deg);
   opacity: 0.8;
 }
+
+
+    #Hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    .hero-card {
+        background: linear-gradient(120deg, #43cea2, #185a9d);
+        border-radius: 30px;
+        padding: 4rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        color: white;
+    }
+
+    .hero-card h1 {
+        font-size: 4.5rem;
+        font-weight: 800;
+        margin: 0;
+        line-height: 1.1;
+    }
+
+    .hero-card h2 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: #c9ffbf; 
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-card p {
+        font-size: 1.1rem;
+        max-width: 500px;
+        margin-bottom: 2rem;
+    }
+
+    .hero-image {
+        width: 100%;
+        border-radius: 20px;
+        object-fit: cover;
+    }
+    
+   
+    .section-title {
+        font-weight: 800; 
+        font-size: 3rem;
+    }
+
+   
+    .btn-custom {
+        padding: 12px 28px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-register {
+        background: linear-gradient(120deg, #43cea2, #185a9d);
+        color: white;
+        border: none;
+    }
+    .btn-register:hover {
+        color: white;
+        transform: translateY(-2px);
+        filter: brightness(1.1);
+    }
+
+    .btn-guidebook {
+        background-color: transparent;
+        color: white;
+        border: 2px solid white;
+    }
+    .btn-guidebook:hover {
+        background-color: white;
+        color: #121212;
+    }
+
+    
+    .gradient-card {
+        background: linear-gradient(120deg, #43cea2, #185a9d);
+        padding: 2rem;
+        border-radius: 20px;
+        height: 100%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gradient-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    
+    @media (max-width: 992px) {
+        .hero-card {
+            padding: 2.5rem;
+            text-align: center;
+        }
+        .hero-card .text-content {
+            margin-bottom: 2rem;
+        }
+        .hero-card p {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .hero-card h1, .section-title {
+            font-size: 3rem;
+        }
+        .hero-card h2 {
+            font-size: 2.5rem;
+        }
+    }
 .btn-back:hover {
   background-color: rgba(16, 183, 127, 0.15) !important;
   transition: all 0.2s ease;
 }
+</style>
+       
+    <!-- Meta -->
+    <meta name="description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
+    <meta name="author" content="EL-SEMAR CONNECT #13" />
+    <meta name="copyright" content="EL-SEMAR CONNECT #13" />
+    <meta name="application-name" content="EL-SEMAR CONNECT #13" />
 
+    <!-- Open Graph -->
+    <meta property="og:title" content="EL-SEMAR CONNECT #13 | Competitions Innovations & Exhibition" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="img/logoElsemar.webp" />
+    <meta property="og:image:alt" content="EL-SEMAR CONNECT #13 | Competitions Innovations & Exhibition" />
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="500" />
+    <meta property="og:url" content="https://elsemar.ft.uns.ac.id/id/" />
+    <meta property="og:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
 
-
-    </style>
-
-  <!-- ✅ Load Bootstrap non-blocking -->
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" as="style" onload="this.rel='stylesheet'">
-  <noscript><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"></noscript>
-
-  <!-- ✅ Preload custom CSS -->
-  <link rel="preload" href="navFooter.css" as="style" onload="this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="navFooter.css"></noscript>
-  <link rel="preload" href="colourFont.css" as="style" onload="this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="colourFont.css"></noscript>
-
-  <!-- ✅ Meta & OG tags -->
-  <meta name="description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan Teknik Elektro UNS.">
-  <meta name="author" content="EL-SEMAR CONNECT #13">
-  <meta property="og:title" content="EL-SEMAR CONNECT #13 | Competitions, Innovations & Exhibition">
-  <meta property="og:image" content="https://elsemar.vercel.app/img/logoElsemar.webp">
-  <meta property="og:url" content="https://elsemar.vercel.app/">
-  <meta property="og:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan Teknik Elektro UNS.">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="EL-SEMAR CONNECT #13 | Competitions, Innovations & Exhibition">
-  <meta name="twitter:description" content="Acara tahunan Teknik Elektro UNS: kompetisi, inovasi, dan pameran.">
-  <meta name="twitter:image" content="https://elsemar.vercel.app/img/logoElsemar.webp">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="EL-SEMAR CONNECT #13 | Competitions Innovations & Exhibition" />
+    <meta name="twitter:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
+    <meta name="twitter:image" content="img/logoElsemar.webp" />
     
-  </head>
-  <body class="bg-background">
+</head>
+<body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-glass">
       <div class="container-fluid">
@@ -179,7 +290,6 @@
           </div>
         </div>
         
-        
 <div class="div my-5">.</div>
 
 <section id="Back">
@@ -207,7 +317,7 @@
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-7 order-lg-1">
                     <p class="open-sans-400 text-start text-white lh-lg ls-wider fs-5 border border-0 rounded-5 px-4 pb-3 mt-5 hover-lift">
-                    Seminar El Semar Connect hadir sebagai wadah kolaborasi antara mahasiswa, akademisi, praktisi, dan stakeholder industri. Kegiatan ini diharapkan menjadi ruang interaktif dan inspiratif dalam mendukung transisi energi hijau di Indonesia.                    
+                      Seminar El Semar Connect hadir sebagai wadah kolaborasi antara mahasiswa, akademisi, praktisi, dan stakeholder industri. Kegiatan ini diharapkan menjadi ruang interaktif dan inspiratif dalam mendukung transisi energi hijau di Indonesia.                   
                     </p>
                     <!-- <a href="ticket.html"><button class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-primary border-3 text-white hover:border-primary hover-lift rounded-pill">Registrasi ↗</button></a>
                     <a href="#"><button class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-primary border-3 text-white  hover:border-primary hover-lift rounded-pill">Guidebook ↗</button></a> -->
@@ -216,11 +326,12 @@
         </div>
     </section>
 
-      <div class="line-h1 w-75 border-base mb-4"></div>
+      <div class="line-h1 w-75 border-base my-4"></div>
+
 
     <section id="Countdown" class="py-5">
         <div class="container text-center">
-             <h2 class="mb-4 poppins-800 text-primary display-3 text-start">Countdown</h2>
+             <h2 class="mb-4 poppins-800 text-primary display-3 text-start">Registration Closes In:</h2>
              <div class="row mt-4">
                  <div class="col-lg-3 col-md-6 mb-4">
                      <div class="gradient-card text-white poppins-600">
@@ -264,7 +375,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
 <footer class="footer bg-dark text-white pt-5 pb-3 mt-5">
   <div class="container">
     <div class="row">
@@ -356,11 +466,12 @@
           <p class="small text-muted mt-3 mb-0 text-center">Copyright © 2025 DTIK UNS. All rights reserved.</p>
 </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
         // --- Set the date we're counting down to ---
         // IMPORTANT: Change this to your event's date and time
-        const countDownDate = new Date("Dec 3, 2025 07:00:00").getTime();
+        const countDownDate = new Date("Nov 2, 2025 23:59:00").getTime();
 
         // Update the count down every 1 second
         const x = setInterval(function() {
@@ -409,5 +520,6 @@
     closeIcon.style.display = 'none';
   });
 </script>
-  </body>
+
+</body>
 </html>
