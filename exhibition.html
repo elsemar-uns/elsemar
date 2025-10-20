@@ -509,7 +509,7 @@ container.innerHTML = `
               grouped[a].length
                 ? `
                 <div class="container bg-background">
-                  <div class="row row-cols-1 row-cols-md-3 row-cols-lg-6 g-4 justify-content-center bg-background border border-0"> 
+                  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center bg-background border border-0"> 
                         ${grouped[a].map(pack => `
                           <div class="col">
                             <div class="card flip-card hover-lift">
@@ -517,12 +517,12 @@ container.innerHTML = `
                                 <div class="card-front bg-gradient-135">
                                   <img src="${fixImageLink(pack["gambar_proyek_(bisa_rancangan/prototipe/hasil_jadi/gambar_dari_google)"])}" class="card-img-top pt-4 px-3" alt="${pack.nama_proyek}">
                                   <div class="card-body d-flex align-items-center justify-content-center">
-                                    <h5 class="card-title  text-white">${pack.nama_proyek}</h5>
+                                    <h5 class="card-title  text-white text-break">${pack.nama_proyek}</h5>
                                   </div>
                                 </div>
                                 <div class="card-back bg-primary">
                                   <div class="card-body text-center d-flex flex-column">
-                                    <p class="card-text text-white small flex-grow-1 d-flex align-items-center justify-content-center">${pack.deskripsi_atau_penjelasan_proyek}</p>
+                                    <p class="card-text text-white small flex-grow-1 d-flex align-items-center justify-content-center px-1">${pack.deskripsi_atau_penjelasan_proyek}</p>
                                   </div>
                                 </div>
                               </div>
