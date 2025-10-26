@@ -24,10 +24,7 @@
 
   <!-- ✅ Critical inline CSS (above-the-fold only) -->
   <style>
-    img {
-      width: 100%; /* or max-width: 100%; */
-      height: auto;
-    }
+
     body {
       font-family: "Poppins", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background-color: #0d0d0d;
@@ -461,8 +458,8 @@
     <section id="TryOut" class="py-4">
       <div class="container">
         <div class="row">
-          <h2 class="montserrat-600 text-primary text-start display-3 mx-1 mt-5 px-3 pt-2 pb-0 hover-lift rounded-5">Try-Out UTBK</h2>
-          <h3 class="montserrat-400 text-start offset-1 w-50 text-primary mb-1 fs-1 hover-lift rounded-5 pb-3">x RuangGuru</h3>
+          <h2 class="montserrat-600 text-primary text-start display-3 mx-1 mt-5 px-3 pt-2 pb-0 hover-lift rounded-5">TRYOUT NASIONAL RUANG GURU</h2>
+          <h3 class="montserrat-400 text-start offset-1 w-50 text-primary mb-1 fs-1 hover-lift rounded-5 pb-3">X EL-SEMAR#13</h3>
         </div>
         <div class="row">
             <div class="col text-center bg-gradient-90 mt-3 mb-4 rounded-5 hover-lift">
@@ -475,7 +472,7 @@
         <div class="row text-center gx-4 gy-4 mb-5 justify-content-center align-items-center ">
           <!-- Left column: Map section -->
           <div class="col-12 col-xl-6 text-start">
-            <p class="poppins-600 text-white py-2 fs-3 px-2 text-center hover-lift rounded-5">Lokasi</p>
+            <h3 class="poppins-600 text-white py-2 fs-3 px-2 text-center rounded-5 hover-lift">Lokasi</h3>
             <div class="text-start hover-lift">
               <div id="map-placeholder-tryout" class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm border border-base hover:border-primary" onclick="loadMap('tryout')" title="Tryout Location">
                 <img src="img/map-preview-tryout.webp" alt="Click to load Tryout location"
@@ -487,7 +484,7 @@
 
           <!-- Right column: Countdown boxes -->
           <div class="col-12 col-xl-6">
-            <h3 class="poppins-600 text-white py-2 fs-3 px-2 text-center rounded-5">Registration Closes In</3>
+            <h3 class="poppins-600 text-white py-2 fs-3 px-2 text-center rounded-5 hover-lift">Registration Closes In</h3>
             <div class="d-flex justify-content-center flex-wrap gap-4 text-center mt-4">
               <div class="border text-white poppins-600 p-3 rounded-5 bg-background border-base hover:border-primary hover-lift" style="width:220px;">
                 <p class="display-4 mb-0" id="day2">0</p>
@@ -511,7 +508,7 @@
             </div>
           </div>
         </div>
-
+                   <p id="status2" class="poppins-600 text-white"></p>
 
         <div class="row justify-content-center mt-4">
           <div class="col-auto">
@@ -648,15 +645,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const countdowns = [
     {
       target: new Date(2025, 11, 2, 7, 0, 0), // Dec 2, 2025
-      ids: ["day1", "hour1", "minute1", "second1"]
+      ids: ["day1", "hour1", "minute1", "second1", "status1"]
     },
     {
-      target: new Date(2025, 10, 9, 7, 0, 0), // Nov 9, 2025
-      ids: ["day2", "hour2", "minute2", "second2"]
+      target: new Date(2025, 10, 15, 7, 0, 0), // Nov 15, 2025
+      ids: ["day2", "hour2", "minute2", "second2", "status2"]
     },
     {
       target: new Date(2026, 0, 10, 12, 0, 0), // Jan 10, 2026
-      ids: ["day3", "hour3", "minute3", "second3"]
+      ids: ["day3", "hour3", "minute3", "second3", "status3"]
     }
   ];
 
@@ -665,12 +662,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateCountdowns() {
     const now = new Date();
     countdowns.forEach(({ target, ids }) => {
-      const [d, h, m, s] = ids.map(id => document.getElementById(id));
+      const [d, h, m, s, st] = ids.map(id => document.getElementById(id));
       if (!d) return;
 
       let ms = target - now;
       if (ms <= 0) {
         [d, h, m, s].forEach(el => el && (el.textContent = "00"));
+        st.innerHTML = "<div class='container text-center fs-3'><p>Acara sudah dimulai!</p></div>";
         return;
       }
       const sec = Math.floor(ms / 1000);
@@ -714,6 +712,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script defer>
 function loadMap(target) {
   const maps = {
+    tryout: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d364.564363172599!2d110.85383123331881!3d-7.561580924668542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a16fe0a9afda9%3A0xca97b4a1d31f31eb!2sCivil%20Engineering%20Sebelas%20Maret%20University!5e1!3m2!1sen!2sid!4v1761492210206!5m2!1sen!2sid`,
     footer: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3089.9509554218394!2d110.85661340000001!3d-7.5600136000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a170214d5335d%3A0x80923f047f287377!2sAuditorium%20G.P.H.%20Haryo%20Mataram!5e1!3m2!1sen!2sid!4v1760289205178!5m2!1sen!2sid`
   };
 
