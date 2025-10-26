@@ -2941,8 +2941,8 @@ h3, h2 {
                                         <span class="detail-value">2-3 Des 2025</span>
                                     </div>
                                     <div class="ticket-detail-item">
-                                        <span class="detail-label">Time</span>
-                                        <span class="detail-value">08:00</span>
+                                        <span class="detail-label">Open Gate</span>
+                                        <span class="detail-value">07:00 - 07.30</span>
                                     </div>
                                     <div class="ticket-detail-item">
                                         <span class="detail-label">Location</span>
@@ -2951,7 +2951,7 @@ h3, h2 {
                                 </div>
                                 <div class="ticket-footer">
                                     <p class="ticket-description">Main Event of EL-SEMAR #13</p>
-                                    <p class="ticket-price">Rp 15.000 - 25.000</p>
+                                    <p class="ticket-price">Rp 0 - 25.000</p>
                                 </div>
                             </div>
                             <div class="ticket-card" data-ticket="tryout" onclick="selectTicket('tryout')">
@@ -2962,19 +2962,19 @@ h3, h2 {
                                 <div class="ticket-details">
                                     <div class="ticket-detail-item">
                                         <span class="detail-label">Date</span>
-                                        <span class="detail-value">9 Nov 2025</span>
+                                        <span class="detail-value">15 Nov 2025</span>
                                     </div>
                                     <div class="ticket-detail-item">
-                                        <span class="detail-label">Time</span>
-                                        <span class="detail-value">09:00</span>
+                                        <span class="detail-label">Open Gate</span>
+                                        <span class="detail-value">07:00 - 07.30</span>
                                     </div>
                                     <div class="ticket-detail-item">
                                         <span class="detail-label">Location</span>
-                                        <span class="detail-value">FT UNS</span>
+                                        <span class="detail-value">Faculty of Engineering UNS</span>
                                     </div>
                                 </div>
                                 <div class="ticket-footer">
-                                    <p class="ticket-description">Tryout
+                                    <p class="ticket-description">TRYOUT EL-SEMAR#13 X RUANG GURU
                                     <p class="ticket-price">Rp 25.000</p>
                                 </div>
                             </div>
@@ -2985,12 +2985,12 @@ h3, h2 {
                                 </div>
                                 <div class="ticket-details">
                                     <div class="ticket-detail-item">
-                                        <span class="detail-label">Date</span>
+                                        <span class="detail-label">Open Gate</span>
                                         <span class="detail-value">3 Des 2025</span>
                                     </div>
                                     <div class="ticket-detail-item">
                                         <span class="detail-label">Time</span>
-                                        <span class="detail-value">10:00</span>
+                                        <span class="detail-value">07:00 - 07.30</span>
                                     </div>
                                     <div class="ticket-detail-item">
                                         <span class="detail-label">Location</span>
@@ -3381,7 +3381,7 @@ h3, h2 {
 
                         <div class="row">
                             <div class="col-12">
-                                <span class="form-label">Upload Commitment Letter<span class="text-danger">*</span></span>
+                                <span class="form-label">Upload <a href="https://drive.google.com/drive/folders/1-8pFG0jGsNQouFFv5lkfgMX7l-yNk6te?usp=sharing" target="_blank" style="color: inherit; text-decoration: underline;">Commitment Letter</a><span class="text-danger">*</span></span>
                                 <div class="tryout-upload-box">
                                     <div class="tryout-upload-header">
                                         
@@ -3750,7 +3750,8 @@ h3, h2 {
                 <div class="invoice-footer">
                     <p class="invoice-note">
                         We will verify your payment within 24 hours.<br>
-                        Further information will be sent via email.
+                        Further information will be sent via email.<br>
+                        <strong>Please check your spam/junk folder if you don't receive our email.</strong>
                     </p>
                     <button class="btn-close-invoice" onclick="closeSuccessOverlay()">Done</button>
                 </div>
@@ -4876,9 +4877,9 @@ function showPaymentPage(finalPrice) {
             email = registrationData.tryoutEmail || '-';
             phone = registrationData.tryoutPhone || '-';
             ticket = 'TRYOUT';
-            eventDate = '9 Nov 2025';
+            eventDate = '15 Nov 2025';
             eventDay = 'Saturday';
-            eventLocation = 'FT UNS';
+            eventLocation = 'Faculty of Engineering UNS';
         } else if (selectedTicketType === 'lomba') {
             name = registrationData.lombaTeamName || '-';
             email = registrationData.lombaLeaderEmail || '-';
