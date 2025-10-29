@@ -5109,6 +5109,11 @@ function displayQRCode(qrisCode) {
             colorLight: '#ffffff',
             correctLevel: QRCode.CorrectLevel.M  
         });
+        qrcodeEl.removeAttribute('title');
+        const qrMedia1 = qrcodeEl.querySelector('img, canvas');
+        if (qrMedia1) {
+            qrMedia1.removeAttribute('title');
+        }
         
     } catch (error) {
         
@@ -5123,6 +5128,11 @@ function displayQRCode(qrisCode) {
                 colorLight: '#ffffff',
                 correctLevel: QRCode.CorrectLevel.L  
             });
+            qrcodeEl.removeAttribute('title');
+            const qrMedia2 = qrcodeEl.querySelector('img, canvas');
+            if (qrMedia2) {
+                qrMedia2.removeAttribute('title');
+            }
             
         } catch (retryError) {
             console.error('QR Code retry error:', retryError);
