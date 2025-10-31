@@ -3844,6 +3844,77 @@ let currentQRISCode = null;
 let lastTapTimeTicket = 0;
 let selectedTicketTemp = null;
 
+// ===== DEADLINES =====
+function createLocalDeadline(year, month, day) {
+    // month is 1-based; end of day local time
+    return new Date(year, month - 1, day, 23, 59, 59, 999);
+}
+
+const DEADLINES = {
+    tryout: createLocalDeadline(2025, 11, 14),
+    lomba: createLocalDeadline(2025, 11, 27),
+    elsemar: createLocalDeadline(2025, 12, 1) // seminar ticket in UI is 'elsemar'
+};
+
+function isAfterDeadline(ticketType) {
+    const key = (ticketType === 'elsemar' ? 'elsemar' : ticketType);
+    const dl = DEADLINES[key];
+    if (!dl) return false;
+    return new Date().getTime() > dl.getTime();
+}
+
+function getDeadlineText(ticketType) {
+    const key = (ticketType === 'elsemar' ? 'elsemar' : ticketType);
+    const dl = DEADLINES[key];
+    if (!dl) return '-';
+    return dl.toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' });
+}
+
+function areAllDeadlinesPassed() {
+    return ['tryout', 'lomba', 'elsemar'].every(type => isAfterDeadline(type));
+}
+
+function showComingSoon() {
+    try {
+        const formSection = document.querySelector('.form-section');
+        if (!formSection) return;
+        formSection.innerHTML = `
+            <div style="min-height: 70vh; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 60px 20px; background: white;">
+                <div class="digital-ticket" style="max-width: 720px; width: 100%; text-align: center;">
+                    <div class="ticket-header-section">
+                        <div class="ticket-header-left">
+                            <div class="ticket-number">INFORMASI</div>
+                            <h3 class="ticket-name">Coming Soon: EL SEMAR #14</h3>
+                        </div>
+                        <div class="ticket-date-box">
+                            <div class="ticket-date-label">Tahun</div>
+                            <div class="ticket-date-value">2026</div>
+                        </div>
+                    </div>
+                    <div class="ticket-price-section">
+                        <div class="price-label">Pendaftaran</div>
+                        <div class="price-value free">Akan Dibuka Kembali</div>
+                    </div>
+                    <div class="ticket-info-section">
+                        <div class="ticket-info-row">
+                            <div class="ticket-info-label">Keterangan</div>
+                            <div class="ticket-info-value">Terima kasih atas antusiasnya! Pantau terus info resmi EL SEMAR untuk update jadwal pendaftaran EL SEMAR #14.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+    } catch (_) {}
+}
+
+// Auto-show Coming Soon if all categories are closed
+try {
+    window.addEventListener('DOMContentLoaded', function() {
+        if (areAllDeadlinesPassed()) {
+            showComingSoon();
+        }
+    });
+} catch (_) {}
+
 // Ticket prices
 const ticketPrices = {
     'Day 1': 15000,
@@ -3856,6 +3927,16 @@ const ticketPrices = {
 
 // Ticket selection function with double tap for mobile
 async function selectTicket(ticketType) {
+    // Deadline enforcement before any UI transition
+    if (areAllDeadlinesPassed()) {
+        showComingSoon();
+        return;
+    }
+    if (isAfterDeadline(ticketType)) {
+        const deadlineText = getDeadlineText(ticketType);
+        alert('Maaf, pendaftaran untuk kategori ini sudah ditutup.\n\nBatas akhir: ' + deadlineText + '.');
+        return;
+    }
     const isMobile = window.innerWidth <= 768;
     
     if (isMobile) {
@@ -4126,6 +4207,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function handleLombaSubmit(e) {
     e.preventDefault();
+    // Deadline guard
+    if (isAfterDeadline('lomba')) {
+        showAlert('lombaFormAlert', 'danger', 'Pendaftaran Lomba telah ditutup (batas akhir: ' + getDeadlineText('lomba') + ').');
+        return;
+    }
     
     if (!canSubmit()) {
         showAlert('lombaFormAlert', 'warning', 'Please wait 5 seconds before submitting again.');
@@ -4244,6 +4330,11 @@ async function handleLombaSubmit(e) {
 
 async function handleTryoutSubmit(e) {
     e.preventDefault();
+    // Deadline guard
+    if (isAfterDeadline('tryout')) {
+        showAlert('tryoutFormAlert', 'danger', 'Pendaftaran Tryout telah ditutup (batas akhir: ' + getDeadlineText('tryout') + ').');
+        return;
+    }
     
     if (!canSubmit()) {
         showAlert('tryoutFormAlert', 'warning', 'Please wait 5 seconds before submitting again.');
@@ -4430,6 +4521,11 @@ if (document.readyState === 'loading') {
 
 async function handleFormSubmit(e) {
     e.preventDefault();
+    // Deadline guard for Seminar (ticket key: elsemar)
+    if (isAfterDeadline('elsemar')) {
+        showAlert('formAlert', 'danger', 'Pendaftaran Seminar telah ditutup (batas akhir: ' + getDeadlineText('elsemar') + ').');
+        return;
+    }
     
     if (!validateForm()) return;
     
