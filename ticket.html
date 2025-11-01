@@ -6,7 +6,7 @@
     <title>Registrasi EL SEMAR #13</title>
     <link rel="stylesheet" href="ticket_styles_css.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LdoftsrAAAAABOhrPKzneF-HXGYUQQ5WLRYEbyM"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
@@ -2269,6 +2269,30 @@ h3, h2 {
     color: #0c5460;
 }
 
+.coupon-alert.alert-success {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    color: #155724;
+    border-left-color: #28a745 !important;
+}
+
+.coupon-alert.alert-danger {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    color: #721c24;
+    border-left-color: #dc3545 !important;
+}
+
+.coupon-alert.alert-warning {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    color: #856404;
+    border-left-color: #ffc107 !important;
+}
+
+.coupon-alert.alert-info {
+    background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+    color: #0c5460;
+    border-left-color: #17a2b8 !important;
+}
+
 .d-none { 
     display: none !important; 
 }
@@ -3239,6 +3263,30 @@ h3, h2 {
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="form-label">Please upload proof that you have reposted our Instagram post (<a href="https://www.instagram.com/el_semar/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: none; font-weight: 500;">@el_semar</a>)<span class="text-danger">*</span></span>
+                                <div class="tryout-upload-box">
+                                    <div class="tryout-upload-header">
+                                        
+                                    </div>
+                                    <div class="upload-picker">
+                                        <input type="file" class="upload-input" id="tryoutRepostProof" name="tryoutRepostProof" accept="image/jpeg,image/jpg,image/png,image/gif" required>
+                                        <label for="tryoutRepostProof" class="upload-button idle" id="chooseTryoutRepostBtn">
+                                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.5 7.5h-.75A2.25 2.25 0 0 0 4.5 9.75v7.5a2.25 2.25 0 0 0 2.25 2.25h7.5a2.25 2.25 0 0 0 2.25-2.25v-7.5a2.25 2.25 0 0 0-2.25-2.25h-.75m0-3-3-3m0 0-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 0 1 2.25 2.25v7.5a2.25 2.25 0 0 1-2.25 2.25h-7.5a2.25 2.25 0 0 1-2.25-2.25v-.75"/>
+                                            </svg>
+                                            <div class="desc">Upload</div>
+                                        </label>
+                                    </div>
+                                    <div id="tryoutRepostFileName" class="file-name"></div>
+                                    
+                                </div>
+                                
+                                <div class="invalid-feedback">Upload foto repost Instagram</div>
+                            </div>
+                        </div>
+
                         <div class="mt-4">
                             <button type="submit" class="btn-payment btn-submit">
                                 <div class="svg-wrapper-1">
@@ -3475,7 +3523,46 @@ h3, h2 {
                         </div>
                     </div>
 
-                    <div class="payment-method-selection qr-section">
+                    <div class="payment-method-selection qr-section voucher-section" id="voucherSection" style="margin-bottom: 30px; display: none;">
+                        <h3 style="text-align: center; margin-bottom: 10px; font-weight: 700; color: #000000; font-size: 1.8rem;">Voucher (optional)</h3>
+                        <p style="text-align: center; color: #666; margin-bottom: 20px; font-size: 14px;">Enter your voucher code to get special discounts on your registration.</p>
+                        <div class="coupon-container" style="background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border: 2px solid #e5e7eb; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: all 0.3s ease;">
+                            <div class="row" style="display: flex; align-items: center; gap: 12px; margin-bottom: 0;">
+                                <div style="flex: 1; min-width: 0;">
+                                    <input type="text" class="form-control coupon-input" id="couponCode" name="couponCode" placeholder="Enter Voucher Code" style="width: 100%; margin-bottom: 0; border-radius: 12px; padding: 14px 16px; font-size: 15px; border: 2px solid #6c757d; background-color: #6c757d; color: white; transition: all 0.3s ease;">
+                                    <style>
+                                        .coupon-input::placeholder {
+                                            color: rgba(255, 255, 255, 0.7);
+                                        }
+                                        .coupon-input:focus {
+                                            background-color: #5a6268;
+                                            border-color: #5a6268;
+                                            outline: none;
+                                        }
+                                    </style>
+                                </div>
+                                <div style="flex-shrink: 0;">
+                                    <button type="button" class="btn-coupon-verify" id="verifyCouponBtn" onclick="verifyCoupon()" style="padding: 14px 24px; font-size: 14px; font-weight: 600; border-radius: 12px; border: none; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3); white-space: nowrap;">
+                                        Verify
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="couponAlert" class="coupon-alert d-none mt-3" role="alert" style="margin-top: 16px !important; padding: 12px 16px; border-radius: 10px; font-size: 14px; font-weight: 500; border-left: 3px solid;"></div>
+                        </div>
+                    </div>
+
+                    <div class="payment-method-selection qr-section" id="recaptchaSection" style="margin-bottom: 30px; display: none;">
+                        <h3 style="text-align: center; margin-bottom: 10px; font-weight: 700; color: #000000; font-size: 1.8rem;">Security Verification</h3>
+                        <p style="text-align: center; color: #666; margin-bottom: 20px; font-size: 14px;">Please complete the security verification below.</p>
+                        <div class="coupon-container" style="background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border: 2px solid #e5e7eb; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: all 0.3s ease;">
+                            <div id="recaptcha-container" style="display: flex; justify-content: center; align-items: center; min-height: 78px;"></div>
+                            <div id="recaptcha-error" style="margin-top: 10px; padding: 8px 12px; background: #fef3c7; border-left: 3px solid #f59e0b; border-radius: 6px; font-size: 12px; color: #92400e; display: none; text-align: center;">
+                                <strong>Note:</strong> Error "Invalid domain" is normal when testing locally (file://). In production, make sure the domain is registered in Google reCAPTCHA Console.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-method-selection qr-section" id="paymentMethodSelection" style="display: none;">
                         <span class="form-subtitle" style="display: block; margin-bottom: 20px;">Payment Method<span class="text-danger"></span></span>
                         <div class="payment-options">
                             <div class="payment-option" id="paidOption" onclick="selectPaymentMethod('paid')">
@@ -3761,9 +3848,19 @@ h3, h2 {
 
     <script>
 
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzPWuBmNmqM58dFz7THDh6yZrUfOH-WsJcEwnVM1Tb7X4C16ruCGfdvakz1pIH87qlX/exec';
-const RECAPTCHA_SITE_KEY = '6LdoftsrAAAAABOhrPKzneF-HXGYUQQ5WLRYEbyM';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxy9NWFbD2nLOKq1HmFljHaR4srplfEC19iBG-1v8LVe8blsnB92FHT7zZs-JpCgS5z/exec';
+const RECAPTCHA_SITE_KEY = '6LcQkf4rAAAAAKd6FyDQmckgACoN0HQCmU3ZU2PE';
 const QRIS_STATIC = '00020101021126690021ID.CO.BANKMANDIRI.WWW01189360000801936632980211719366329860303UMI51440014ID.CO.QRIS.WWW0215ID10254476691320303UMI5204546253033605802ID5923El Semar Food and Drink6015Surakarta (Kota61055712662070703A0163047426';
+
+// Voucher variables
+let couponCode = null;
+let couponDiscount = 0;
+let originalPrice = 0;
+
+// reCAPTCHA variables
+let recaptchaWidgetId = null;
+let recaptchaResolve = null;
+let recaptchaReject = null;
 
 
 const DRAFT_KEY = 'elsemarRegistrationDraft';
@@ -3823,10 +3920,26 @@ async function fetchWithRetry(url, options, retries = 3, backoffMs = 800) {
 	for (let attempt = 0; attempt <= retries; attempt++) {
 		try {
 			const response = await fetch(url, options);
-			if (!response.ok) throw new Error('HTTP ' + response.status);
+			if (!response.ok) {
+				// Handle specific HTTP errors
+				if (response.status === 404) {
+					throw new Error('404: Apps Script URL tidak ditemukan. Pastikan URL benar dan Apps Script sudah di-deploy.');
+				}
+				throw new Error('HTTP ' + response.status);
+			}
 			return response;
 		} catch (err) {
 			lastError = err;
+			
+			// Check for CORS error
+			if (err.message && (err.message.includes('CORS') || err.message.includes('Failed to fetch'))) {
+				const corsError = new Error('CORS: Pastikan Apps Script sudah di-deploy dan domain sudah terdaftar. Untuk testing localhost, gunakan mode "Allow CORS" atau deploy ke hosting yang sudah terdaftar.');
+				if (attempt === retries) {
+					throw corsError;
+				}
+				lastError = corsError;
+			}
+			
 			if (attempt === retries) break;
 			await new Promise(r => setTimeout(r, backoffMs * Math.pow(2, attempt)));
 		}
@@ -4224,15 +4337,7 @@ async function handleLombaSubmit(e) {
         lastSubmitTime = Date.now();
         showAlert('lombaFormAlert', 'info', 'Processing data...');
         
-        let recaptchaToken = '';
-        if (typeof grecaptcha !== 'undefined') {
-            try {
-                recaptchaToken = await getRecaptchaToken('lomba');
-            } catch (error) {
-                showAlert('lombaFormAlert', 'warning', 'Security verification failed. Please refresh the page and try again.');
-                return;
-            }
-        }
+        let recaptchaToken = 'development-token';
         
         let registrationNumber = 1;
         
@@ -4347,15 +4452,7 @@ async function handleTryoutSubmit(e) {
         lastSubmitTime = Date.now();
         showAlert('tryoutFormAlert', 'info', 'Processing data...');
         
-        let recaptchaToken = '';
-        if (typeof grecaptcha !== 'undefined') {
-            try {
-                recaptchaToken = await getRecaptchaToken('tryout');
-            } catch (error) {
-                showAlert('tryoutFormAlert', 'warning', 'Security verification failed. Please refresh the page and try again.');
-                return;
-            }
-        }
+        let recaptchaToken = 'development-token';
         
         let registrationNumber = 1;
         
@@ -4384,6 +4481,8 @@ async function handleTryoutSubmit(e) {
         registrationData.recaptchaToken = recaptchaToken;
         
         const tryoutPhotoInput = document.getElementById('tryoutPhoto');
+        const tryoutRepostInput = document.getElementById('tryoutRepostProof');
+        
         if (tryoutPhotoInput.files.length > 0) {
             const file = tryoutPhotoInput.files[0];
             const reader = new FileReader();
@@ -4393,6 +4492,64 @@ async function handleTryoutSubmit(e) {
                 registrationData.tryoutPhotoBase64 = base64;
                 registrationData.tryoutPhotoName = file.name;
                 
+                if (tryoutRepostInput && tryoutRepostInput.files.length > 0) {
+                    const repostFile = tryoutRepostInput.files[0];
+                    const repostReader = new FileReader();
+                    
+                    repostReader.onloadend = () => {
+                        const repostBase64 = repostReader.result.split(',')[1];
+                        registrationData.tryoutRepostProofBase64 = repostBase64;
+                        registrationData.tryoutRepostProofName = repostFile.name;
+                        
+                        const basePrice = ticketPrices['tryout'];
+                        uniqueCode = registrationNumber;
+                        const finalPrice = basePrice + uniqueCode;
+                        
+                        registrationData.finalPrice = finalPrice;
+                        registrationData.uniqueCode = uniqueCode;
+                        
+                        saveRegistrationDraft();
+                        showPaymentPage(finalPrice);
+                    };
+                    
+                    repostReader.readAsDataURL(repostFile);
+                } else {
+                    const basePrice = ticketPrices['tryout'];
+                    uniqueCode = registrationNumber;
+                    const finalPrice = basePrice + uniqueCode;
+                    
+                    registrationData.finalPrice = finalPrice;
+                    registrationData.uniqueCode = uniqueCode;
+                    
+                    saveRegistrationDraft();
+                    showPaymentPage(finalPrice);
+                }
+            };
+            
+            reader.readAsDataURL(file);
+        } else {
+            if (tryoutRepostInput && tryoutRepostInput.files.length > 0) {
+                const repostFile = tryoutRepostInput.files[0];
+                const repostReader = new FileReader();
+                
+                repostReader.onloadend = () => {
+                    const repostBase64 = repostReader.result.split(',')[1];
+                    registrationData.tryoutRepostProofBase64 = repostBase64;
+                    registrationData.tryoutRepostProofName = repostFile.name;
+                    
+                    const basePrice = ticketPrices['tryout'];
+                    uniqueCode = registrationNumber;
+                    const finalPrice = basePrice + uniqueCode;
+                    
+                    registrationData.finalPrice = finalPrice;
+                    registrationData.uniqueCode = uniqueCode;
+                    
+                    saveRegistrationDraft();
+                    showPaymentPage(finalPrice);
+                };
+                
+                repostReader.readAsDataURL(repostFile);
+            } else {
                 const basePrice = ticketPrices['tryout'];
                 uniqueCode = registrationNumber;
                 const finalPrice = basePrice + uniqueCode;
@@ -4400,21 +4557,9 @@ async function handleTryoutSubmit(e) {
                 registrationData.finalPrice = finalPrice;
                 registrationData.uniqueCode = uniqueCode;
                 
-				saveRegistrationDraft();
+                saveRegistrationDraft();
                 showPaymentPage(finalPrice);
-            };
-            
-            reader.readAsDataURL(file);
-        } else {
-            const basePrice = ticketPrices['tryout'];
-            uniqueCode = registrationNumber;
-            const finalPrice = basePrice + uniqueCode;
-            
-            registrationData.finalPrice = finalPrice;
-            registrationData.uniqueCode = uniqueCode;
-            
-			saveRegistrationDraft();
-            showPaymentPage(finalPrice);
+            }
         }
         
     } catch (error) {
@@ -4447,18 +4592,252 @@ function canSubmit() {
     return true;
 }
 
-function getRecaptchaToken(action = 'submit') {
+function renderRecaptcha() {
+    const container = document.getElementById('recaptcha-container');
+    const errorDiv = document.getElementById('recaptcha-error');
+    
+    if (!container || recaptchaWidgetId !== null) return;
+    
+    if (typeof grecaptcha !== 'undefined') {
+        try {
+            recaptchaWidgetId = grecaptcha.render(container, {
+                'sitekey': RECAPTCHA_SITE_KEY,
+                'theme': 'dark',
+                'error-callback': function() {
+                    if (errorDiv && window.location.protocol === 'file:') {
+                        errorDiv.style.display = 'block';
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('reCAPTCHA render error:', error);
+            if (errorDiv && window.location.protocol === 'file:') {
+                errorDiv.style.display = 'block';
+            }
+        }
+    } else {
+        if (errorDiv && window.location.protocol === 'file:') {
+            errorDiv.style.display = 'block';
+        }
+    }
+}
+
+function getRecaptchaToken() {
     return new Promise((resolve, reject) => {
         if (typeof grecaptcha === 'undefined') {
-            reject(new Error('reCAPTCHA not loaded'));
+            reject(new Error('reCAPTCHA not loaded. Please refresh the page.'));
             return;
         }
-        grecaptcha.ready(() => {
-            grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: action })
-                .then(resolve)
-                .catch(reject);
-        });
+        
+        if (recaptchaWidgetId === null) {
+            const container = document.getElementById('recaptcha-container');
+            if (!container) {
+                reject(new Error('reCAPTCHA container not found. Please go to payment page first.'));
+                return;
+            }
+            
+            try {
+                recaptchaResolve = resolve;
+                recaptchaReject = reject;
+                
+                recaptchaWidgetId = grecaptcha.render(container, {
+                    'sitekey': RECAPTCHA_SITE_KEY,
+                    'theme': 'dark',
+                    'callback': function(token) {
+                        if (recaptchaResolve) {
+                            recaptchaResolve(token);
+                            recaptchaResolve = null;
+                            recaptchaReject = null;
+                        }
+                    },
+                    'expired-callback': function() {
+                        grecaptcha.reset(recaptchaWidgetId);
+                        if (recaptchaReject) {
+                            recaptchaReject(new Error('reCAPTCHA expired. Please complete again.'));
+                            recaptchaResolve = null;
+                            recaptchaReject = null;
+                        }
+                    },
+                    'error-callback': function() {
+                        if (recaptchaReject) {
+                            recaptchaReject(new Error('reCAPTCHA error. Please try again.'));
+                            recaptchaResolve = null;
+                            recaptchaReject = null;
+                        }
+                    }
+                });
+                
+                setTimeout(() => {
+                    const token = grecaptcha.getResponse(recaptchaWidgetId);
+                    if (token && recaptchaResolve) {
+                        recaptchaResolve(token);
+                        recaptchaResolve = null;
+                        recaptchaReject = null;
+                    }
+                }, 500);
+            } catch (error) {
+                reject(new Error('Failed to render reCAPTCHA: ' + error.message));
+            }
+        } else {
+            const token = grecaptcha.getResponse(recaptchaWidgetId);
+            if (token) {
+                resolve(token);
+            } else {
+                reject(new Error('Please complete reCAPTCHA checkbox before submitting.'));
+            }
+        }
     });
+}
+
+async function verifyCoupon() {
+    const couponInput = document.getElementById('couponCode');
+    const couponValue = couponInput.value.trim().toUpperCase();
+    const alertEl = document.getElementById('couponAlert');
+    const verifyBtn = document.getElementById('verifyCouponBtn');
+    
+    if (!couponValue) {
+        showCouponAlert('warning', 'Masukkan kode kupon terlebih dahulu');
+        return;
+    }
+    
+    verifyBtn.disabled = true;
+    verifyBtn.textContent = 'Memverifikasi...';
+    
+    try {
+        const params = new URLSearchParams({
+            action: 'verifyCoupon',
+            code: couponValue
+        });
+        const url = APPS_SCRIPT_URL + '?' + params.toString();
+        
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error('Network error: ' + response.status);
+        }
+        
+        const responseText = await response.text();
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (parseError) {
+            if (responseText.trim() === 'OK' || responseText.trim() === '0') {
+                throw new Error('Server returned invalid response. Please check Apps Script URL and deployment.');
+            }
+            throw new Error('Server response format error. Received: ' + responseText.substring(0, 50));
+        }
+        
+        if (!result || typeof result !== 'object') {
+            throw new Error('Invalid server response format. Please try again.');
+        }
+        
+        if (result.success && result.valid) {
+            if (result.minPurchase > 0 && originalPrice < result.minPurchase) {
+                showCouponAlert('warning', `Kupon valid, tetapi minimum pembelian adalah ${formatRupiah(result.minPurchase)}. Harga saat ini: ${formatRupiah(originalPrice)}`);
+                couponCode = null;
+                couponDiscount = 0;
+                updatePriceWithCoupon();
+                return;
+            }
+            
+            couponCode = couponValue;
+            couponDiscount = result.discount || 0;
+            
+            showCouponAlert('success', `Kupon valid! Diskon: ${formatRupiah(couponDiscount)}`);
+            updatePriceWithCoupon();
+        } else {
+            couponCode = null;
+            couponDiscount = 0;
+            showCouponAlert('danger', result.message || 'Kode kupon tidak valid atau sudah digunakan');
+            updatePriceWithCoupon();
+        }
+    } catch (error) {
+        let errorMessage = 'Gagal memverifikasi kupon. Coba lagi nanti.';
+        if (error.message) {
+            if (error.message.includes('Server response format')) {
+                errorMessage = 'Format response server tidak valid. Silakan coba lagi.';
+            } else if (error.message.includes('Network error')) {
+                errorMessage = 'Gagal terhubung ke server. Periksa koneksi internet Anda.';
+            } else {
+                errorMessage = error.message;
+            }
+        }
+        showCouponAlert('danger', errorMessage);
+        console.error('Coupon verification error:', error);
+    } finally {
+        verifyBtn.disabled = false;
+        verifyBtn.textContent = 'Verify';
+    }
+}
+
+function showCouponAlert(type, message) {
+    const alertEl = document.getElementById('couponAlert');
+    if (!alertEl) return;
+    
+    alertEl.className = `alert alert-${type} mt-3`;
+    alertEl.textContent = message;
+    alertEl.classList.remove('d-none');
+    
+    // Auto hide setelah 5 detik untuk success/warning
+    if (type === 'success' || type === 'warning') {
+        setTimeout(() => {
+            alertEl.classList.add('d-none');
+        }, 5000);
+    }
+}
+
+function updatePriceWithCoupon() {
+    if (originalPrice === 0) {
+        originalPrice = registrationData.finalPrice || 0;
+    }
+    
+    let totalDiscount = couponDiscount;
+    
+    if (totalDiscount > originalPrice) {
+        totalDiscount = originalPrice;
+    }
+    
+    let newPrice = originalPrice - totalDiscount;
+    if (newPrice < 0) newPrice = 0;
+    
+    registrationData.finalPrice = newPrice;
+    registrationData.couponCode = couponCode;
+    registrationData.couponDiscount = couponDiscount;
+    registrationData.totalDiscount = totalDiscount;
+    
+    const ticketPriceEl = document.getElementById('ticketPrice');
+    const displayPriceEl = document.getElementById('displayPrice');
+    const paidPriceEl = document.getElementById('paidPrice');
+    
+    if (ticketPriceEl) {
+        ticketPriceEl.textContent = formatRupiah(newPrice);
+        if (totalDiscount > 0) {
+            ticketPriceEl.style.color = '#28a745';
+        } else {
+            ticketPriceEl.style.color = '';
+        }
+    }
+    
+    if (displayPriceEl) {
+        displayPriceEl.textContent = formatRupiah(newPrice);
+        if (totalDiscount > 0) {
+            displayPriceEl.style.color = '#28a745';
+        }
+    }
+    
+    if (paidPriceEl) {
+        paidPriceEl.textContent = formatRupiah(newPrice);
+    }
+    
+    const paidSection = document.getElementById('paidPaymentSection');
+    if (paidSection && paidSection.style.display !== 'none') {
+        generateDynamicQRIS(newPrice);
+    }
 }
 
 function isLocalhost() {
@@ -4532,13 +4911,7 @@ async function handleFormSubmit(e) {
     try {
         showAlert('formAlert', 'info', 'Processing data...');
         
-        let recaptchaToken = '';
-        try {
-            recaptchaToken = await getRecaptchaToken('registration');
-        } catch (error) {
-            showAlert('formAlert', 'warning', 'Security verification failed. Please refresh the page and try again.');
-            return;
-        }
+        let recaptchaToken = 'development-token';
         
         let registrationNumber = 1;
         
@@ -4816,6 +5189,26 @@ function validateTryoutForm() {
         }
     }
     
+    const repostPhoto = document.getElementById('tryoutRepostProof');
+    if (repostPhoto) {
+        const repostUploadBox = repostPhoto.closest('.tryout-upload-box');
+        if (!repostPhoto.files.length) {
+            repostUploadBox.classList.add('is-invalid');
+            showAlert('tryoutFormAlert', 'warning', 'Please upload Instagram Repost Proof.');
+            isValid = false;
+        } else {
+            const maxSize = 5 * 1024 * 1024;
+            const file = repostPhoto.files[0];
+            if (file.size > maxSize) {
+                repostUploadBox.classList.add('is-invalid');
+                showAlert('tryoutFormAlert', 'warning', 'Instagram Repost Proof file is too large. Maximum 5MB.');
+                isValid = false;
+            } else {
+                repostUploadBox.classList.remove('is-invalid');
+            }
+        }
+    }
+    
     if (!isValid) {
         showAlert('tryoutFormAlert', 'warning', 'Please check and fill the form correctly.');
     }
@@ -4946,6 +5339,40 @@ function showPaymentPage(finalPrice) {
         stepPayment.classList.add('active');
     }
     
+    // Reset voucher
+    couponCode = null;
+    couponDiscount = 0;
+    originalPrice = finalPrice;
+    const couponCodeInput = document.getElementById('couponCode');
+    const couponAlertEl = document.getElementById('couponAlert');
+    if (couponCodeInput) couponCodeInput.value = '';
+    if (couponAlertEl) couponAlertEl.classList.add('d-none');
+    
+    // Show/hide voucher section based on ticket type (UNTUK TRYOUT DAN LOMBA SAJA)
+    const voucherSection = document.getElementById('voucherSection');
+    if (voucherSection) {
+        if (selectedTicketType === 'tryout' || selectedTicketType === 'lomba') {
+            voucherSection.style.display = 'block';
+            console.log('✅ Voucher section shown for ' + selectedTicketType.toUpperCase());
+        } else {
+            voucherSection.style.display = 'none';
+            console.log('✅ Voucher section hidden for ' + selectedTicketType.toUpperCase());
+        }
+    } else {
+        console.warn('⚠️ Voucher section element not found!');
+    }
+    
+    // Show reCAPTCHA section (always shown on payment page)
+    const recaptchaSection = document.getElementById('recaptchaSection');
+    if (recaptchaSection) {
+        recaptchaSection.style.display = 'block';
+    }
+    
+    // Render reCAPTCHA
+    setTimeout(() => {
+        renderRecaptcha();
+    }, 500);
+    
     try {
         let name, email, phone, ticket, eventDate, eventDay, eventLocation;
         
@@ -5030,20 +5457,44 @@ function showPaymentPage(finalPrice) {
         }
     } catch (_) {}
     
+    // Payment method selection HANYA untuk SEMINAR (elsemar)
+    // Untuk tryout dan lomba langsung show paid payment (NO selection)
+    const paymentMethodSelectionEl = document.getElementById('paymentMethodSelection');
     if (selectedTicketType === 'elsemar') {
-        document.querySelector('.payment-method-selection').style.display = 'block';
-        document.getElementById('paidPaymentSection').style.display = 'none';
-        document.getElementById('freePaymentSection').style.display = 'none';
-        document.getElementById('paidUploadSection').style.display = 'none';
-        document.getElementById('freeUploadSection').style.display = 'none';
+        // Seminar: show payment method selection (paid or free)
+        if (paymentMethodSelectionEl) {
+            paymentMethodSelectionEl.style.display = 'block';
+            console.log('✅ Payment method selection shown for SEMINAR');
+        }
+        const paidPaymentSection = document.getElementById('paidPaymentSection');
+        const freePaymentSection = document.getElementById('freePaymentSection');
+        const paidUploadSection = document.getElementById('paidUploadSection');
+        const freeUploadSection = document.getElementById('freeUploadSection');
+        if (paidPaymentSection) paidPaymentSection.style.display = 'none';
+        if (freePaymentSection) freePaymentSection.style.display = 'none';
+        if (paidUploadSection) paidUploadSection.style.display = 'none';
+        if (freeUploadSection) freeUploadSection.style.display = 'none';
     } else {
-        document.querySelector('.payment-method-selection').style.display = 'none';
-        document.getElementById('paidPaymentSection').style.display = 'block';
-        document.getElementById('freePaymentSection').style.display = 'none';
-        document.getElementById('paidUploadSection').style.display = 'block';
-        document.getElementById('freeUploadSection').style.display = 'none';
-        document.getElementById('displayPrice').textContent = formatRupiah(finalPrice);
-        generateDynamicQRIS(finalPrice);
+        // Tryout dan Lomba: HIDE payment method selection, langsung show paid payment
+        if (paymentMethodSelectionEl) {
+            paymentMethodSelectionEl.style.display = 'none';
+            console.log('✅ Payment method selection HIDDEN for ' + selectedTicketType.toUpperCase());
+        }
+        const paidPaymentSection = document.getElementById('paidPaymentSection');
+        const freePaymentSection = document.getElementById('freePaymentSection');
+        const paidUploadSection = document.getElementById('paidUploadSection');
+        const freeUploadSection = document.getElementById('freeUploadSection');
+        const displayPriceEl = document.getElementById('displayPrice');
+        
+        if (paidPaymentSection) paidPaymentSection.style.display = 'block';
+        if (freePaymentSection) freePaymentSection.style.display = 'none';
+        if (paidUploadSection) paidUploadSection.style.display = 'block';
+        if (freeUploadSection) freeUploadSection.style.display = 'none';
+        if (displayPriceEl) {
+            displayPriceEl.textContent = formatRupiah(finalPrice);
+            generateDynamicQRIS(finalPrice);
+        }
+        selectedPaymentMethod = 'paid'; // Set default untuk tryout/lomba
     }
     
     window.scrollTo(0, 0);
@@ -5249,9 +5700,12 @@ async function handleUploadSubmit(e) {
     
     let recaptchaToken = '';
     try {
-        recaptchaToken = await getRecaptchaToken('upload');
+        recaptchaToken = await getRecaptchaToken();
     } catch (error) {
-        showAlert('uploadAlert', 'warning', 'Security verification failed. Please refresh the page and try again.');
+        const errorMsg = error.message.includes('complete reCAPTCHA') 
+            ? 'Please complete reCAPTCHA checkbox before submitting.' 
+            : 'Security verification failed. Please complete reCAPTCHA and try again.';
+        showAlert('uploadAlert', 'warning', errorMsg);
         return;
     }
     
@@ -5291,9 +5745,45 @@ async function handleUploadSubmit(e) {
             const base64 = reader.result.split(',')[1];
             
             const formData = new FormData();
+            
+            // Tambahkan semua data registration terlebih dahulu
             Object.keys(registrationData).forEach(key => {
-                formData.append(key, registrationData[key]);
+                // Skip null, undefined, atau empty string
+                if (registrationData[key] !== null && registrationData[key] !== undefined && registrationData[key] !== '') {
+                    formData.append(key, registrationData[key]);
+                }
             });
+            
+            // Explicit append untuk tryout repost proof (PASTIKAN TERKIRIM)
+            if (selectedTicketType === 'tryout') {
+                console.log('🔍 Tryout Payment Submit - Checking Registration Data:');
+                console.log('- registrationData.tryoutPhotoBase64 exists:', !!registrationData.tryoutPhotoBase64);
+                console.log('- registrationData.tryoutRepostProofBase64 exists:', !!registrationData.tryoutRepostProofBase64);
+                console.log('- registrationData.tryoutRepostProofName:', registrationData.tryoutRepostProofName || 'NOT SET');
+                
+                // Explicit append untuk tryout files (pastikan terkirim)
+                if (registrationData.tryoutPhotoBase64) {
+                    formData.append('tryoutPhotoBase64', registrationData.tryoutPhotoBase64);
+                    formData.append('tryoutPhotoName', registrationData.tryoutPhotoName || '');
+                    console.log('✅ tryoutPhotoBase64 added to FormData');
+                } else {
+                    console.warn('⚠️ tryoutPhotoBase64 NOT FOUND in registrationData');
+                }
+                
+                if (registrationData.tryoutRepostProofBase64) {
+                    formData.append('tryoutRepostProofBase64', registrationData.tryoutRepostProofBase64);
+                    formData.append('tryoutRepostProofName', registrationData.tryoutRepostProofName || '');
+                    console.log('✅ tryoutRepostProofBase64 EXPLICITLY added to FormData');
+                    console.log('   Repost proof name:', registrationData.tryoutRepostProofName);
+                    console.log('   Repost proof size:', registrationData.tryoutRepostProofBase64.length, 'bytes');
+                } else {
+                    console.error('❌ ERROR: tryoutRepostProofBase64 TIDAK ADA di registrationData!');
+                    console.log('Available keys in registrationData:', Object.keys(registrationData));
+                    console.log('Full registrationData:', registrationData);
+                }
+            }
+            
+            // Tambahkan payment proof dan metadata
             formData.append('paymentProofBase64', base64);
             formData.append('paymentProofName', file.name);
             formData.append('timestamp', Date.now());
@@ -5334,11 +5824,22 @@ async function handleUploadSubmit(e) {
                 document.getElementById('uploadForm').reset();
 			} catch (error) {
                 console.error('Upload error:', error);
-				showAlert('uploadAlert', 'danger', 'Gagal mengirim data. Periksa koneksi Anda lalu klik Submit lagi.');
+                let errorMessage = 'Gagal mengirim data. Periksa koneksi Anda lalu klik Submit lagi.';
+                
+                // Better error messages
+                if (error.message && error.message.includes('CORS')) {
+                    errorMessage = 'Error CORS: Pastikan Apps Script sudah di-deploy dan domain sudah terdaftar. Untuk testing localhost, gunakan mode "Allow CORS" atau deploy ke hosting yang sudah terdaftar.';
+                } else if (error.message && error.message.includes('404')) {
+                    errorMessage = 'Error 404: Apps Script URL tidak ditemukan. Pastikan URL benar dan Apps Script sudah di-deploy.';
+                } else if (error.message && error.message.includes('Network')) {
+                    errorMessage = 'Error koneksi: Pastikan koneksi internet Anda stabil dan coba lagi.';
+                }
+                
+				showAlert('uploadAlert', 'danger', errorMessage);
             } finally {
                 setUploading(false);
+                hideLoading();
             }
-            hideLoading();
         };
         
         reader.readAsDataURL(file);
@@ -5384,9 +5885,12 @@ async function handleFreeUploadSubmit(e) {
     
     let recaptchaToken = '';
     try {
-        recaptchaToken = await getRecaptchaToken('free_upload');
+        recaptchaToken = await getRecaptchaToken();
     } catch (error) {
-        showAlert('freeUploadAlert', 'warning', 'Security verification failed. Please refresh the page and try again.');
+        const errorMsg = error.message.includes('complete reCAPTCHA') 
+            ? 'Please complete reCAPTCHA checkbox before submitting.' 
+            : 'Security verification failed. Please complete reCAPTCHA and try again.';
+        showAlert('freeUploadAlert', 'warning', errorMsg);
         return;
     }
     
@@ -5477,7 +5981,18 @@ async function handleFreeUploadSubmit(e) {
             document.getElementById('freeUploadForm').reset();
 			} catch (error) {
             console.error('Upload error:', error);
-				showAlert('freeUploadAlert', 'danger', 'Gagal mengirim data. Periksa koneksi Anda lalu klik Submit lagi.');
+            let errorMessage = 'Gagal mengirim data. Periksa koneksi Anda lalu klik Submit lagi.';
+            
+            // Better error messages
+            if (error.message && error.message.includes('CORS')) {
+                errorMessage = 'Error CORS: Pastikan Apps Script sudah di-deploy dan domain sudah terdaftar. Untuk testing localhost, gunakan mode "Allow CORS" atau deploy ke hosting yang sudah terdaftar.';
+            } else if (error.message && error.message.includes('404')) {
+                errorMessage = 'Error 404: Apps Script URL tidak ditemukan. Pastikan URL benar dan Apps Script sudah di-deploy.';
+            } else if (error.message && error.message.includes('Network')) {
+                errorMessage = 'Error koneksi: Pastikan koneksi internet Anda stabil dan coba lagi.';
+            }
+            
+			showAlert('freeUploadAlert', 'danger', errorMessage);
         } finally {
             setFreeUploading(false);
         }
@@ -5561,6 +6076,26 @@ function fileToBase64(file) {
         };
         repostInput.addEventListener('change', updateRepost);
         updateRepost();
+    }
+
+    const tryoutRepostInput = document.getElementById('tryoutRepostProof');
+    const tryoutRepostBtn = document.getElementById('chooseTryoutRepostBtn');
+    if (tryoutRepostInput && tryoutRepostBtn) {
+        const updateTryoutRepost = () => {
+            const hasFile = tryoutRepostInput.files && tryoutRepostInput.files.length > 0;
+            tryoutRepostBtn.classList.toggle('idle', !hasFile);
+            const fileNameEl = document.getElementById('tryoutRepostFileName');
+            if (fileNameEl) {
+                if (hasFile) {
+                    fileNameEl.textContent = tryoutRepostInput.files[0].name;
+                    fileNameEl.classList.add('show');
+                } else {
+                    fileNameEl.classList.remove('show');
+                }
+            }
+        };
+        tryoutRepostInput.addEventListener('change', updateTryoutRepost);
+        updateTryoutRepost();
     }
 
     const tryoutInput = document.getElementById('tryoutPhoto');
