@@ -138,6 +138,14 @@
   background-color: rgba(16, 183, 127, 0.15) !important;
   transition: all 0.2s ease;
 }
+@media (max-width: 576px) {
+  .toast {
+    bottom: 1rem !important;
+    right: 50% !important;
+    transform: translateX(50%);
+    width: 90%;
+  }
+}
 
 </style>
        
@@ -165,6 +173,7 @@
     
 </head>
 <body>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-glass">
       <div class="container-fluid">
@@ -199,6 +208,7 @@
             <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="exhibition.html">Pameran Kreatif Elektro</a></li>
             <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="kompetisi.html">El-Semar Arena</a></li>
           </ul>
+          
         </div>
       </div>
     </nav>
@@ -215,8 +225,8 @@
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav text-start flex-grow-1">
-              <li class="nav-item"><a class="nav-link active poppins-400 text-white fs-1 my-3"href="index.html">Home</a></li>
-              <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="seminar.html">Seminar Nasional </a></li>
+              <li class="nav-item"><a class="nav-link active poppins-400 text-white fs-1 my-3"href="index.html" title="Homepage">Home</a></li>
+              <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="seminar.html" title="">Seminar Nasional </a></li>
               <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="exhibition.html">Pameran Kreatif Elektro</a></li>
               <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="kompetisi.html">El-Semar Arena</a></li>
             </ul>
@@ -251,6 +261,8 @@
     </div>
   </div>
 </section>
+
+
 
     <!-- Events -->
     <section id="Upcoming">
@@ -291,15 +303,42 @@
       </div>
     </section>
 
+<!-- Popup -->
+<div class="toast-container position-fixed bottom-0 start-0 p-3">
+  <div id="liveToast" class="toast bg-gradient-135 rounded-4 w-50 text-start hover-lift border border-secondary" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="container">
+      <div class="row">
+        <div class="col-8">
+    <span class="mx-auto">...</span>
+
+        </div>
+        <div class="col">
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="toast-header bg-background text-white border border-primary border-bottom-0">
+      <img src="img/Tryout_popup.webp" class="rounded mx-auto" alt="..." height="96" width="96">
+    </div>
+    <div class="toast-body bg-accent border border-primary border-top-0 rounded-bottom-4">
+      <!-- <p class="me-auto poppins-600 fs-6">TRYOUT NASIONAL</p> -->
+      <div class="w-100 my-1 border border-base"></div>
+      <p class="poppins-400 text-center">Ruang Guru x El-Semar Connect #13</p>
+      <a href="#TryOut" class="poppins-400 text-white text-decoration-none d-flex align-items-center justify-content-center bg-background-10 hover-lift rounded-pill">Read More</a>
+    </div>
+  </div>
+</div>
+
       <div class="line-h1 w-75 border-base my-5"></div>
 
     <section id="About" class="mb-5 py-5 ">
       <div class="container bg-gradient-135 pt-1 pb-4 px-5 rounded-5 hover-lift">
-        <h2 class="montserrat-600 text-white text-start pt-4 mt-3 mb-3 display-3 hover-lift">About</h2>
+        <h2 class="montserrat-600 text-white text-start pt-4 mt-3 mb-3 display-3 hover-lift rounded-5">About</h2>
         <!-- <hr class="border border-primary border-3 opacity-75 w-50 mx-auto mt-2"> -->
         <div class="row align-items-center">
           <div class="col-md-12 col-lg-6 text-center">
-            <img src="img/Azfar.webp" alt="About Image" class="img-fluid rounded-3 mb-4 mt-3 w-75" loading="lazy" width="500" height="500" style="aspect-ratio: 2 / 2;">
+            <img src="img/Azfar.webp" alt="About Image" class="img-fluid rounded-3 mb-4 mt-3 w-75 hover-lift" loading="lazy" width="500" height="500" style="aspect-ratio: 2 / 2;">
             <!-- <div id="carouselExample" class="carousel slide">
               <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -450,26 +489,38 @@
         </div>
         <div class="row">
           <div class="col-md-6 col-sm-12 mb-3">
-            <a class="btn btn-primary d-flex align-items-center justify-content-center bg-gradient-135 border border-0 rounded-4 fs-4 hover-lift poppins-600" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Keuntungan Mengikuti event:
-            </a>
-            <div class="collapse multi-collapse show" id="multiCollapseExample1">
-              <div class="card card-body hover-lift border border-base hover:border-primary  bg-background text-white h-100 fs-5 justify-content-center lh-lg poppins-400" style="min-height: 200px;">
-                ✅ Konsumsi. <br>
-                ✅ Free Pass Event EL-SEMAR#13 (2 Hari) <br>
-                ✅ E-sertifikat resmi.
+            <div class="border border-base hover:border-primary rounded-4 hover-lift">
+              <a class="btn btn-primary d-flex align-items-center justify-content-center bg-gradient-135 border border-0 rounded-4 fs-4 poppins-600" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Keuntungan Mengikuti event:
+              </a>
+              <div class="collapse multi-collapse show" id="multiCollapseExample1">
+                <div class="card card-body bg-background text-white h-100 fs-5 justify-content-center lh-lg poppins-400 rounded-bottom-4 rounded-top-0" style="min-height: 200px;">
+                  ✅ Konsumsi. <br>
+                  ✅ Free Pass Event EL-SEMAR#13 (2 Hari) <br>
+                  ✅ E-sertifikat resmi.
+                </div>
               </div>
             </div>
           </div>
           <div class="col-md-6 col-sm-12">
-            <a class="btn btn-primary btn btn-primary d-flex align-items-center justify-content-center bg-gradient-135 hover-lift border border-0 rounded-4 fs-4 poppins-600" data-bs-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">Prizepool kepada 3 Peringkat Terbaik:
-            </a>
-            <div class="collapse multi-collapse show" id="multiCollapseExample2">
-              <div class="card card-body hover-lift border border-base hover:border-primary bg-background text-white h-100 fs-5 justify-content-center lh-base poppins-400" style="min-height: 200px;">
-                ✅ E-sertifikat Eksklusif <br>
-                ✅ Merchandise menarik. <br>
-                ✅ Beasiswa Speaking PRO Kampung Inggris Pare (2 Minggu) <br>
-                ✅ Bonus: sit-in di Teknik Elektro UNS 1 Hari
+            <div class="border border-base hover:border-primary rounded-4 hover-lift">
+              <a class="btn btn-primary d-flex align-items-center justify-content-center bg-gradient-135 border border-0 rounded-4 fs-4 poppins-600" data-bs-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">Prizepool kepada 3 Peringkat Terbaik:
+              </a>
+              <div class="collapse multi-collapse show" id="multiCollapseExample2">
+                <div class="card card-body bg-background text-white h-100 fs-5 justify-content-center lh-lg poppins-400 rounded-bottom-4 rounded-top-0" style="min-height: 200px;">
+                  ✅E-sertifikat Eksklusif <br>
+                  ✅ Merchandise menarik. <br>
+                  ✅ Beasiswa Speaking PRO Kampung Inggris Pare (2 Minggu) <br>
+                  ✅ Bonus: sit-in di Teknik Elektro UNS 1 Hari
+                </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="row my-3 justify-content-center">
+          <div class="col-md-8 text-center border border-0 py-2 rounded-pill">
+            <div class="border border-base hover:border-primary hover-lift rounded-5">
+              <h2 class="fs-1 poppins-600 mb-0 rounded-top-5 bg-gradient-135 w-100 py-2">TOTAL PRIZEPOOL 3 TERBAIK</h2>
+              <p class="display-1 poppins-400 bg-background my-0 py-2 rounded-bottom-5 w-100 border border-base">RP. 5.000.000,00</p>
             </div>
           </div>
         </div>
@@ -500,8 +551,8 @@
     </div>
     <div class="row mt-5 mb-4">
       <div class="col-lg-4 col-12 mb-4 text-center">
-        <div class="card text-center h-100 border border-0 hover:border-primary hover-lift rounded-4">
-          <div class="card-header bg-gradient-135 text-white text-center">
+        <div class="card text-center h-100 border border-0 hover:border-primary bg-0 hover-lift rounded-5">
+          <div class="card-header bg-gradient-135 text-white text-center rounded-top-5">
             <h4 class="fs-2 poppins-600">Main Event</h4>
             <!-- <p>(Seminar Nasional, Pameran Kreatif Elektro)</p> -->
           </div>
@@ -511,15 +562,15 @@
             <a href="https://wa.me/6281542093100" class="btn text-white my-3 border border-base hover:border-primary hover-lift d-flex justify-content-center align-items-center w-75" title="+62 815 4209 3100 (Rafael)">+62 815 4209 3100 (Rafael)</a> <br>
             <!-- <a href="#" class="btn text-white my-3">Go somewhere</a> -->
           </div>
-          <div class="card-footer bg-background border border-base text-white poppins-400">
+          <div class="card-footer bg-background border border-base text-white poppins-400 rounded-bottom-5">
             Seminar Nasional & Pameran Kreatif Elektro
           </div>
         </div>
 
       </div>
       <div class="col-lg-4 col-12 mb-4 text-center">
-        <div class="card text-center h-100 border border-0 hover:border-primary hover-lift rounded-4">
-          <div class="card-header bg-gradient-135 text-white text-center">
+        <div class="card text-center h-100 border border-0 hover:border-primary hover-lift rounded-5 bg-0">
+          <div class="card-header bg-gradient-135 text-white text-center rounded-top-5">
             <h4 class="fs-2 poppins-600">El-Semar Arena</h4>
             <!-- <p>(Seminar Nasional, Pameran Kreatif Elektro)</p> -->
           </div>
@@ -529,16 +580,16 @@
             <a href="https://wa.me/6289525767587" class="btn text-white my-3 border border-base hover:border-primary hover-lift w-75" title="+62 8952 5767 587 (Raffi)">+62 8952 5767 587 (Raffi)</a> <br>
             <a href="https://wa.me/6282112988299" class="btn text-white my-3 border border-base hover:border-primary hover-lift w-75" title="+62 8211 2988 299 (Rasya)">+62 8211 2988 299 (Rasya)</a>
           </div>
-          <div class="card-footer bg-background border border-base text-white poppins-400">
+          <div class="card-footer bg-background border border-base text-white poppins-400 rounded-bottom-5">
             Line Follower
           </div>
         </div>
 
       </div>
       <div class="col-lg-4 col-12 mb-4 text-center">
-        <div class="card text-center h-100 border border-0 hover:border-primary hover-lift rounded-4">
-          <div class="card-header bg-gradient-135 text-white text-center">
-            <h4 class="fs-2 poppins-600">TRYOUT Nasional</h4>
+        <div class="card text-center h-100 border border-0 hover:border-primary hover-lift rounded-5 bg-0">
+          <div class="card-header bg-gradient-135 text-white text-center rounded-top-5">
+            <h4 class="fs-2 py-auto poppins-600">TRYOUT Nasional</h4>
             <!-- <p>(Seminar Nasional, Pameran Kreatif Elektro)</p> -->
           </div>
           <div class="card-body bg-background border border-base">
@@ -547,7 +598,7 @@
             <a href="http://wa.me/6288802784423" class="btn text-white my-3 border border-base hover:border-primary hover-lift w-75" title="+62 8880 2784 423 (Deany)">+62 8880 2784 423 (Deany)</a> <br>
             <a href="http://wa.me/628113338377" class="btn text-white my-3 border border-base hover:border-primary hover-lift w-75" title="+62 8113 3383 77 (Kanya)">+62 8113 3383 77 (Kanya)</a>
           </div>
-          <div class="card-footer bg-background border border-base text-white poppins-400">
+          <div class="card-footer bg-background border border-base text-white poppins-400 rounded-bottom-5">
             Ruang Guru x El-Semar Connect #13
           </div>
         </div>
@@ -608,7 +659,7 @@
       <div class="col-md-12 col-lg-4">
         <h5 class="text-uppercase mb-3 fw-bold text-md-center">Lokasi</h5>
         <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm">
-          <div id="map-placeholder-footer" class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm" onclick="loadMap('footer')" title="Event Location">
+          <div id="map-placeholder-footer" class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm border border-base" onclick="loadMap('footer')" title="Event Location">
             <img src="img/map-preview-footer.webp" alt="Click to load El-Semar Connect #13 location"
                 width="100%" height="200" loading="lazy" style="cursor:pointer;" class="d-flex justify-content-center align-items-center text-white poppins-600 fs-5 text-center" >
           </div>
@@ -749,8 +800,17 @@ function loadMap(target) {
 }
 </script>
 <script>
-  const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-  const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+document.addEventListener('DOMContentLoaded', () => {
+  const toastLiveExample = document.getElementById('liveToast');
+
+  if (toastLiveExample) {
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample, {
+      autohide: false
+    });
+    toastBootstrap.show(); // Show immediately on page load
+  }
+});
 </script>
+
 </body>
 </html>
