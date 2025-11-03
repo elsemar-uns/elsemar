@@ -574,7 +574,7 @@ body {
 .btn-submit {
     opacity: 0;
     transform: translateY(20px) scale(0.95);
-    animation: formContainerFadeIn 0.6s ease forwards;
+    animation: submitButtonFadeIn 0.6s ease 1.1s forwards;
     transition: all 0.3s ease;
 }
 
@@ -607,7 +607,7 @@ body {
 .qr-section {
     opacity: 0;
     transform: scale(0.8) rotate(-5deg);
-    animation: paymentCardFadeIn 0.6s ease forwards;
+    animation: qrSectionFadeIn 0.8s ease 0.8s forwards;
 }
 
 .payment-buttons {
@@ -2980,22 +2980,15 @@ h3, h2 {
                             </div>
                             <div class="ticket-card" data-ticket="tryout" onclick="selectTicket('tryout')">
                                 <div class="ticket-header">
-                                    <h4 class="ticket-name">TRYOUT</h4>
+                                    <h4 class="ticket-name">TRYOUT UTBK</h4>
                                     <div class="radio-indicator"></div>
                                 </div>
                                 <div class="ticket-details">
                                     <div class="ticket-detail-item">
                                         <span class="detail-label">Date</span>
-                                        <span class="detail-value">15 Nov 2025</span>
+                                        <span class="detail-value">15-26 Nov 2025</span>
                                     </div>
-                                    <div class="ticket-detail-item">
-                                        <span class="detail-label">Open Gate</span>
-                                        <span class="detail-value">07:00 - 07.30</span>
-                                    </div>
-                                    <div class="ticket-detail-item">
-                                        <span class="detail-label">Location</span>
-                                        <span class="detail-value">Faculty of Engineering UNS</span>
-                                    </div>
+
                                 </div>
                                 <div class="ticket-footer">
                                     <p class="ticket-description">TRYOUT EL-SEMAR#13 X RUANG GURU
@@ -5400,9 +5393,8 @@ function showPaymentPage(finalPrice) {
             email = registrationData.tryoutEmail || '-';
             phone = registrationData.tryoutPhone || '-';
             ticket = 'TRYOUT';
-            eventDate = '15 Nov 2025';
-            eventDay = 'Saturday';
-            eventLocation = 'Faculty of Engineering UNS';
+            eventDate = '15-26 Nov 2025';
+            eventLocation = '';
         } else if (selectedTicketType === 'lomba') {
             name = registrationData.lombaTeamName || '-';
             email = registrationData.lombaLeaderEmail || '-';
@@ -5442,7 +5434,15 @@ function showPaymentPage(finalPrice) {
         if (ticketDateEl) {
             ticketDateEl.textContent = eventDay ? `${eventDay}, ${eventDate}` : eventDate;
         }
-        if (eventLocationEl) eventLocationEl.textContent = eventLocation;
+        if (eventLocationEl) {
+            const locationRow = eventLocationEl.closest('.ticket-info-row');
+            if (eventLocation && String(eventLocation).trim() !== '') {
+                eventLocationEl.textContent = eventLocation;
+                if (locationRow) locationRow.style.display = '';
+            } else {
+                if (locationRow) locationRow.style.display = 'none';
+            }
+        }
         if (ticketPriceEl) {
             ticketPriceEl.textContent = formatRupiah(finalPrice);
             ticketPriceEl.classList.remove('free');
