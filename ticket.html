@@ -5419,8 +5419,8 @@ function showPaymentPage(finalPrice) {
         
         if (selectedTicketType === 'lomba') {
             if (summaryNameLabelEl) summaryNameLabelEl.textContent = 'Team Name';
-            if (summaryPhoneLabelEl) summaryPhoneLabelEl.textContent = 'Leader Phone Number';
-            if (summaryEmailLabelEl) summaryEmailLabelEl.textContent = 'Leader Email';
+            if (summaryPhoneLabelEl) summaryPhoneLabelEl.textContent = 'Member 1 Phone Number';
+            if (summaryEmailLabelEl) summaryEmailLabelEl.textContent = 'Member 1 Email';
         } else {
             if (summaryNameLabelEl) summaryNameLabelEl.textContent = 'Full Name';
             if (summaryPhoneLabelEl) summaryPhoneLabelEl.textContent = 'Phone Number';
@@ -6293,8 +6293,8 @@ function showSuccessOverlay(data) {
         ticketTypeDisplay = 'LOMBA';
         invoicePrefix = 'LOMBA';
         nameLabel = 'Team Name';
-        emailLabel = 'Leader Email';
-        phoneLabel = 'Leader Phone Number';
+        emailLabel = 'Member 1 Email';
+        phoneLabel = 'Member 1 Phone Number';
     }
     
     const invoiceNumber = `INV-${invoicePrefix}-${String(data.registrationNumber || 1).padStart(5, '0')}`;
