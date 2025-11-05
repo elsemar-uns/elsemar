@@ -3324,14 +3324,14 @@ h3, h2 {
 
                         <div class="row">
                             <div class="col-6">
-                                <label for="lombaMember1Name" class="form-label">Member 1 Name<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="lombaMember1Name" name="lombaMember1Name" placeholder="Member 1 name" required>
-                                <div class="invalid-feedback">Member 1 name is required</div>
+                                <label for="lombaMember1Name" class="form-label">Member 1 Name</label>
+                                <input type="text" class="form-control" id="lombaMember1Name" name="lombaMember1Name" placeholder="Member 1 name (optional)">
+                                <div class="form-text">Optional - can be left blank</div>
                             </div>
                             <div class="col-6">
-                                <label for="lombaMember1Phone" class="form-label">Member 1 Phone Number<span class="text-danger">*</span></label>
-                                <input type="tel" class="form-control" id="lombaMember1Phone" name="lombaMember1Phone" placeholder="08xxxxxxxxxx" required>
-                                <div class="invalid-feedback">Member 1 phone number is required</div>
+                                <label for="lombaMember1Phone" class="form-label">Member 1 Phone Number</label>
+                                <input type="tel" class="form-control" id="lombaMember1Phone" name="lombaMember1Phone" placeholder="08xxxxxxxxxx (optional)">
+                                <div class="form-text">Optional - can be left blank</div>
                             </div>
                         </div>
 
@@ -4995,21 +4995,32 @@ function validateLombaForm() {
     const member1Name = document.getElementById('lombaMember1Name');
     if (member1Name) {
         const member1NameValue = sanitizeInput(member1Name.value);
-        if (!member1NameValue || member1NameValue.length < 2) {
-            member1Name.classList.add('is-invalid');
-            isValid = false;
+        if (member1NameValue) {
+            if (member1NameValue.length < 2) {
+                member1Name.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                member1Name.classList.add('is-valid');
+            }
         } else {
-            member1Name.classList.add('is-valid');
+            // optional: no validation if empty
+            member1Name.classList.remove('is-invalid', 'is-valid');
         }
     }
     
     const member1Phone = document.getElementById('lombaMember1Phone');
     if (member1Phone) {
-        if (!isValidPhone(member1Phone.value)) {
-            member1Phone.classList.add('is-invalid');
-            isValid = false;
+        const phoneVal = (member1Phone.value || '').trim();
+        if (phoneVal) {
+            if (!isValidPhone(phoneVal)) {
+                member1Phone.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                member1Phone.classList.add('is-valid');
+            }
         } else {
-            member1Phone.classList.add('is-valid');
+            // optional: no validation if empty
+            member1Phone.classList.remove('is-invalid', 'is-valid');
         }
     }
 
