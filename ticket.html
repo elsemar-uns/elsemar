@@ -3303,17 +3303,17 @@ h3, h2 {
                                 <div class="invalid-feedback">Team name is required</div>
                             </div>
                             <div class="col-6">
-                                <label for="lombaLeaderName" class="form-label">Leader Name<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="lombaLeaderName" name="lombaLeaderName" placeholder="Leader name" required>
-                                <div class="invalid-feedback">Leader name is required</div>
+                                <label for="lombaLeaderName" class="form-label">Member 1 Name (Leader)<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="lombaLeaderName" name="lombaLeaderName" placeholder="Member 1 name" required>
+                                <div class="invalid-feedback">Member 1 name is required</div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-6">
-                                <label for="lombaLeaderPhone" class="form-label">Leader Phone Number<span class="text-danger">*</span></label>
+                                <label for="lombaLeaderPhone" class="form-label">Member 1 Phone Number<span class="text-danger">*</span></label>
                                 <input type="tel" class="form-control" id="lombaLeaderPhone" name="lombaLeaderPhone" placeholder="08xxxxxxxxxx" required>
-                                <div class="invalid-feedback">Leader phone number is required</div>
+                                <div class="invalid-feedback">Member 1 phone number is required</div>
                             </div>
                             <div class="col-6">
                                 <label for="lombaLeaderEmail" class="form-label">Leader Email<span class="text-danger">*</span></label>
@@ -3324,25 +3324,25 @@ h3, h2 {
 
                         <div class="row">
                             <div class="col-6">
-                                <label for="lombaMember1Name" class="form-label">Member 1 Name</label>
-                                <input type="text" class="form-control" id="lombaMember1Name" name="lombaMember1Name" placeholder="Member 1 name (optional)">
-                                <div class="form-text">Optional - can be left blank</div>
+                                <label for="lombaMember1Name" class="form-label">Member 2 Name<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="lombaMember1Name" name="lombaMember1Name" placeholder="Member 2 name" required>
+                                <div class="invalid-feedback">Member 2 name is required</div>
                             </div>
                             <div class="col-6">
-                                <label for="lombaMember1Phone" class="form-label">Member 1 Phone Number</label>
-                                <input type="tel" class="form-control" id="lombaMember1Phone" name="lombaMember1Phone" placeholder="08xxxxxxxxxx (optional)">
-                                <div class="form-text">Optional - can be left blank</div>
+                                <label for="lombaMember1Phone" class="form-label">Member 2 Phone Number<span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="lombaMember1Phone" name="lombaMember1Phone" placeholder="08xxxxxxxxxx" required>
+                                <div class="invalid-feedback">Member 2 phone number is required</div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-6">
-                                <label for="lombaMember2Name" class="form-label">Member 2 Name</label>
-                                <input type="text" class="form-control" id="lombaMember2Name" name="lombaMember2Name" placeholder="Member 2 name (optional)">
+                                <label for="lombaMember2Name" class="form-label">Member 3 Name</label>
+                                <input type="text" class="form-control" id="lombaMember2Name" name="lombaMember2Name" placeholder="Member 3 name (optional)">
                                 <div class="form-text">Optional - can be left blank</div>
                             </div>
                             <div class="col-6">
-                                <label for="lombaMember2Phone" class="form-label">Member 2 Phone Number</label>
+                                <label for="lombaMember2Phone" class="form-label">Member 3 Phone Number</label>
                                 <input type="tel" class="form-control" id="lombaMember2Phone" name="lombaMember2Phone" placeholder="08xxxxxxxxxx (optional)">
                                 <div class="form-text">Optional - can be left blank</div>
                             </div>
@@ -4995,32 +4995,21 @@ function validateLombaForm() {
     const member1Name = document.getElementById('lombaMember1Name');
     if (member1Name) {
         const member1NameValue = sanitizeInput(member1Name.value);
-        if (member1NameValue) {
-            if (member1NameValue.length < 2) {
-                member1Name.classList.add('is-invalid');
-                isValid = false;
-            } else {
-                member1Name.classList.add('is-valid');
-            }
+        if (!member1NameValue || member1NameValue.length < 2) {
+            member1Name.classList.add('is-invalid');
+            isValid = false;
         } else {
-            // optional: no validation if empty
-            member1Name.classList.remove('is-invalid', 'is-valid');
+            member1Name.classList.add('is-valid');
         }
     }
     
     const member1Phone = document.getElementById('lombaMember1Phone');
     if (member1Phone) {
-        const phoneVal = (member1Phone.value || '').trim();
-        if (phoneVal) {
-            if (!isValidPhone(phoneVal)) {
-                member1Phone.classList.add('is-invalid');
-                isValid = false;
-            } else {
-                member1Phone.classList.add('is-valid');
-            }
+        if (!isValidPhone(member1Phone.value)) {
+            member1Phone.classList.add('is-invalid');
+            isValid = false;
         } else {
-            // optional: no validation if empty
-            member1Phone.classList.remove('is-invalid', 'is-valid');
+            member1Phone.classList.add('is-valid');
         }
     }
 
