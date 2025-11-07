@@ -147,6 +147,78 @@
   }
 }
 
+.popup {
+    /* background-color: #ffffff; */
+    /* width: 420px; */
+    /* padding: 30px 40px; */
+    position: fixed;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    border-radius: 8px;
+    font-family: "Poppins", sans-serif;
+    display: none;
+    text-align: center;
+    z-index: 2000;
+}
+.popup button {
+    display: block;
+    margin: 0 0 20px auto;
+    background-color: transparent;
+    /* font-size: 30px; */
+    /* color: #ffffff; */
+    /* background: #03549a; */
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.popup h2 {
+    margin-top: -20px;
+}
+.popup p {
+    /* font-size: 14px; */
+    text-align: justify;
+    margin: 20px 0;
+    line-height: 25px;
+}
+.popup a {
+    display: block;
+    /* width: 150px; */
+    margin: 10px auto;
+    text-align: center;
+    /* background-color: #0f72e5; */
+    border-radius: 20px;
+    /* color: #ffffff; */
+    text-decoration: none;
+    padding: 8px 0;
+}
+@media (max-width: 768px) {
+  .popup h2 {
+    font-size: 3.5rem !important;
+    word-break: keep-all !important;
+  }
+  .popup h3 {
+    font-size: 1.5rem !important;
+    word-break: keep-all !important;
+  }
+  .popup p {
+    font-size: 1rem !important;
+    word-break: keep-all !important;
+  }
+  .popup strong {
+  font-size: 1rem !important;
+  word-break: keep-all !important;
+  }
+  .popup {
+    width: 80vw !important;
+    word-break: keep-all !important;
+  }
+}
+
+
 </style>
        
     <!-- Meta -->
@@ -207,6 +279,7 @@
             <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="seminar.html">Seminar Nasional</a></li>
             <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="exhibition.html">Pameran Kreatif Elektro</a></li>
             <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="kompetisi.html">El-Semar Arena</a></li>
+            <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="Faq.html">FaQ</a></li>
           </ul>
           
         </div>
@@ -229,6 +302,7 @@
               <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="seminar.html" title="">Seminar Nasional </a></li>
               <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="exhibition.html">Pameran Kreatif Elektro</a></li>
               <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="kompetisi.html">El-Semar Arena</a></li>
+              <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="Faq.html">FaQ</a></li>
             </ul>
           </div>
         </div>
@@ -304,7 +378,7 @@
     </section>
 
 <!-- Popup -->
-<div class="toast-container position-fixed bottom-0 start-0 p-3">
+<!-- <div class="toast-container position-fixed bottom-0 start-0 p-3">
   <div id="liveToast" class="toast bg-gradient-135 rounded-4 w-50 text-start hover-lift border border-secondary" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="container">
       <div class="row">
@@ -322,13 +396,28 @@
       <img src="img/Tryout_popup.webp" class="rounded mx-auto" alt="..." height="96" width="96">
     </div>
     <div class="toast-body bg-accent border border-primary border-top-0 rounded-bottom-4">
-      <!-- <p class="me-auto poppins-600 fs-6">TRYOUT NASIONAL</p> -->
       <div class="w-100 my-1 border border-base"></div>
       <p class="poppins-400 text-center">Ruang Guru x El-Semar Connect #13</p>
       <a href="#TryOut" class="poppins-400 text-white text-decoration-none d-flex align-items-center justify-content-center bg-background-10 hover-lift rounded-pill">Read More</a>
     </div>
   </div>
+</div> -->
+
+<!-- === Popup Start === -->
+<div class="popup bg-background border border-primary border-2 rounded-5 py-0 px-0 pt-1 pe-1 w-50" id="autoPopup">
+    <button type="button" class="btn-close btn-close-white fs-4" aria-label="Close" title="Close" id="closePopup"></button>
+    <div class="px-4 py-2">
+      <h2 class="text-primary display-4">Tryout Nasional</h2>
+      <h3 class="text-white fs-5 pb-0 mx-5">Ruang Guru x El-Semar Connect #13</h3>
+      <strong class="text-white fs-2 mx-5">15 - 26 November</strong>
+      <p class="bg-gradient-135 p-3 rounded-4 mt-2">
+        TRYOUT yang ditujukan untuk menguji kesiapan siswa - siswi menuju UTBK dan meningkatkan Brand Awareness dari El-Semar maupun Teknik Ele...
+      </p>
+      <a href="#TryOut" id="readMore" title="Read More" class="text-white">Read More</a>
+    </div>
 </div>
+<!-- === Popup End === -->
+
 
       <div class="line-h1 w-75 border-base my-5"></div>
 
@@ -436,8 +525,8 @@
     <section id="TryOut" class="py-4">
       <div class="container">
         <div class="row">
-          <h2 class="montserrat-600 text-primary text-start display-3 mx-1 mt-5 px-3 pt-2 pb-0 hover-lift rounded-5">TRYOUT NASIONAL RUANG GURU</h2>
-          <h3 class="montserrat-400 text-start offset-1 w-50 text-primary mb-1 fs-1 hover-lift rounded-5 pb-3">X EL-SEMAR#13</h3>
+          <h2 class="montserrat-600 text-primary text-start display-3 mx-1 mt-5 px-3 pt-2 pb-0 hover-lift rounded-5">TRYOUT NASIONAL ONLINE</h2>
+          <h3 class="montserrat-400 text-start offset-1 w-75 text-primary mb-1 fs-1 hover-lift rounded-5 pb-3">Ruang Guru X EL-SEMAR CONNECT#13</h3>
         </div>
         <div class="row">
             <div class="col text-center bg-gradient-90 mt-3 mb-4 rounded-5 hover-lift">
@@ -446,21 +535,30 @@
               </p>
             </div>
         </div>
-        
-        <div class="row text-center gx-4 gy-4 mb-5 justify-content-center align-items-center ">
-          <!-- Left column: Map section -->
+        <div class="row py-4">
+          <div class="col">
+            <h4 class="poppins-600 text-white text-center display-2 hover-lift rounded-5 py-2">15 - 26 November</h4>
+          </div>
+          <div class="col d-flex justify-content-center align-items-center">
+            <a href="ticket.html"
+              class="poppins-600 m-3 py-3 px-4 fs-2 border-0 bg-gradient-90 text-white hover:bg-bg-accent hover-lift rounded-pill d-inline-block text-decoration-none text-center"
+              title="Registration"
+              aria-label="Go to Registration page">
+              Registration
+            </a>
+          </div>
+        </div>
+        <!-- <div class="row text-center gx-4 gy-4 mb-5 justify-content-center align-items-center ">
           <div class="col-12 col-xl-6 text-start">
             <h3 class="poppins-600 text-white py-2 fs-3 px-2 text-center rounded-5 hover-lift">Lokasi</h3>
             <div class="text-start hover-lift">
               <div id="map-placeholder-tryout" class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm border border-base hover:border-primary" onclick="loadMap('tryout')" title="Tryout Location">
                 <img src="img/map-preview-tryout.webp" alt="Click to load Tryout location"
                     width="100%" width="250" height="250" loading="lazy" style="cursor:pointer;" class="d-flex justify-content-center align-items-center text-white poppins-600 fs-3 text-center">
-                              <!-- <p class="text-center text-white mt-2 ">Click to load map</p> -->
               </div>
             </div>
           </div>
 
-          <!-- Right column: Countdown boxes -->
           <div class="col-12 col-xl-6">
             <h3 class="poppins-600 text-white py-2 fs-3 px-2 text-center rounded-5 hover-lift">Registration Closes In</h3>
             <div class="d-flex justify-content-center flex-wrap gap-4 text-center mt-4">
@@ -486,7 +584,7 @@
             </div>
               <p id="status2" class="poppins-600 text-white"></p>
           </div>
-        </div>
+        </div> -->
         <div class="row">
           <div class="col-md-6 col-sm-12 mb-3">
             <div class="border border-base hover:border-primary rounded-4 hover-lift">
@@ -524,20 +622,6 @@
             </div>
           </div>
         </div>
-        <div class="row mt-5 mb-2">
-          <div class="col text-center">
-            <a href="https://drive.google.com/file/d/10LtHCqbKsn6vY86M7INN-x2v2k0QuzjQ/view"
-              class="poppins-400 m-3 py-2 px-4 fs-5 border border-primary bg-primary-10 border-3 text-white btn-hover hover:border-primary hover-lift rounded-pill d-inline-block text-decoration-none text-center"
-              title="Booklet TRYOUT"
-              aria-label="Read more about El-Semar Connect">
-              More Information
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="7 7 17 7 17 17" />
-              <line x1="7" y1="17" x2="17" y2="7" />
-            </svg>
-            </a>
-          </div>
-        </div>
         </div>
       </div>
     </section>
@@ -547,7 +631,7 @@
 <section id="Contact" class="pt-4">
   <div class="container">
     <div class="row">
-      <h2 class="montserrat-600 text-primary text-start display-3 mx-1 mt-5 px-3 pt-2 pb-0 hover-lift rounded-5">Contact Person</h2>
+      <h2 class="montserrat-600 text-primary text-start display-3 mx-1 mt-5 px-3 pt-2 pb-0 hover-lift rounded-5">Contact Person & FaQ</h2>
     </div>
     <div class="row mt-5 mb-4">
       <div class="col-lg-4 col-12 mb-4 text-center">
@@ -602,6 +686,20 @@
             Ruang Guru x El-Semar Connect #13
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row mt-0 mb-2">
+      <div class="col text-center">
+        <a href="Faq.html"
+          class="poppins-400 m-3 py-2 px-4 fs-5 border border-primary bg-primary-10 border-3 text-white btn-hover hover:border-primary hover-lift rounded-pill d-inline-block text-decoration-none text-center"
+          title="Frequently asked Question"
+          aria-label="Frequently asked Question about El Semar Connect #13">
+          Visit FaQ
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="7 7 17 7 17 17" />
+          <line x1="7" y1="17" x2="17" y2="7" />
+        </svg>
+        </a>
       </div>
     </div>
   </div>
@@ -787,7 +885,6 @@
 <script defer>
 function loadMap(target) {
   const maps = {
-    tryout: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d364.564363172599!2d110.85383123331881!3d-7.561580924668542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a16fe0a9afda9%3A0xca97b4a1d31f31eb!2sCivil%20Engineering%20Sebelas%20Maret%20University!5e1!3m2!1sen!2sid!4v1761492210206!5m2!1sen!2sid`,
     footer: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3089.9509554218394!2d110.85661340000001!3d-7.5600136000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a170214d5335d%3A0x80923f047f287377!2sAuditorium%20G.P.H.%20Haryo%20Mataram!5e1!3m2!1sen!2sid!4v1760289205178!5m2!1sen!2sid`
   };
 
@@ -800,15 +897,18 @@ function loadMap(target) {
 }
 </script>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const toastLiveExample = document.getElementById('liveToast');
+window.addEventListener("load", function() {
+    // Show popup after 2 seconds
+    setTimeout(function() {
+        document.getElementById("autoPopup").style.display = "block";
+    }, 2000);
+});
 
-  if (toastLiveExample) {
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample, {
-      autohide: false
-    });
-    toastBootstrap.show(); // Show immediately on page load
-  }
+document.getElementById("closePopup").addEventListener("click", function() {
+    document.getElementById("autoPopup").style.display = "none";
+});
+document.getElementById("readMore").addEventListener("click", function() {
+    document.getElementById("autoPopup").style.display = "none";
 });
 </script>
 

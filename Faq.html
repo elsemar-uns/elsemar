@@ -6,8 +6,11 @@
     <title>El-Semar Connect #13</title>
     <!-- ✅ Favicon -->
     <link rel="icon" href="img/logoElsemar.webp">
-
-    <!-- ✅ Preconnect & Preload Fonts (replaces @import) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="navFooter.css">
+    <link href="colourFont.css" rel="stylesheet">
+        <!-- ✅ Preconnect & Preload Fonts (replaces @import) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Non-blocking Google Font -->
@@ -18,197 +21,194 @@
     <noscript>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     </noscript>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="stylesheet" href="navFooter.css">
-    <link href="colourFont.css" rel="stylesheet">
-
-   <style>
-
-    body {
-        background-color: #121212;
-       
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3e%3cpath d='M14 0 L0 14 L14 28 L28 14 Z' fill='none' stroke='%231a1a1a' stroke-width='1'/%3e%3c/svg%3e");
-        font-family: 'Poppins', sans-serif;
-        color: white;
-    }
-      .line-h1{
-        border-top: 6px solid;
-        /* width: 40%; */
-        margin: auto;
-      }
-.navbar-toggler {
-  background: none !important;
-  padding: 0.5rem;
-  border: none !important;
-  box-shadow: none !important;
+  <style>
+body{
+  background-color: #121212;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3e%3cpath d='M14 0 L0 14 L14 28 L28 14 Z' fill='none' stroke='%231a1a1a' stroke-width='1'/%3e%3c/svg%3e");
+  font-family: 'Poppins', sans-serif;
 }
-
-.navbar-toggler:focus,
-.navbar-toggler:active {
-  outline: none !important;
-  box-shadow: none !important;
+.line-h1{
+  border-top: 6px solid;
+  /* width: 40%; */
+  margin: auto;
 }
-/* Remove Bootstrap's default close image */
-.btn-close-custom {
-  background: none !important;
-  border: none;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  z-index: 1056;
-  cursor: pointer;
-}
-
-/* Hide Bootstrap’s default X if applied */
-.btn-close-custom::after,
-.btn-close-custom::before {
-  background-image: none !important;
-}
-
-/* Add your custom white X icon */
-.btn-close-custom::before {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 100%;
-  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>') no-repeat center;
-  -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>') no-repeat center;
-  background-color: white;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.btn-close-custom:hover::before {
-  transform: rotate(90deg);
-  opacity: 0.8;
-}
-
-
-    #Hero {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-    }
-
-    .hero-card {
-        background: linear-gradient(120deg, #43cea2, #185a9d);
-        border-radius: 30px;
-        padding: 4rem;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-        color: white;
-    }
-
-    .hero-card h1 {
-        font-size: 4.5rem;
-        font-weight: 800;
-        margin: 0;
-        line-height: 1.1;
-    }
-
-    .hero-card h2 {
-        font-size: 3.5rem;
-        font-weight: 700;
-        color: #c9ffbf; 
-        margin-bottom: 1.5rem;
-    }
-
-    .hero-card p {
-        font-size: 1.1rem;
-        max-width: 500px;
-        margin-bottom: 2rem;
-    }
-
-    .hero-image {
-        width: 100%;
-        border-radius: 20px;
-        object-fit: cover;
-    }
-    
-   
-    .section-title {
-        font-weight: 800; 
-        font-size: 3rem;
-    }
-
-   
-    .btn-custom {
-        padding: 12px 28px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: bold;
-        margin-right: 1rem;
-        transition: all 0.3s ease;
-    }
-
-    .btn-register {
-        background: linear-gradient(120deg, #43cea2, #185a9d);
-        color: white;
-        border: none;
-    }
-    .btn-register:hover {
-        color: white;
-        transform: translateY(-2px);
-        filter: brightness(1.1);
-    }
-
-    .btn-guidebook {
-        background-color: transparent;
-        color: white;
-        border: 2px solid white;
-    }
-    .btn-guidebook:hover {
-        background-color: white;
-        color: #121212;
-    }
-
-    
-    .gradient-card {
-        background: linear-gradient(120deg, #43cea2, #185a9d);
-        padding: 2rem;
-        border-radius: 20px;
-        height: 100%;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .gradient-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    
-    @media (max-width: 992px) {
-        .hero-card {
-            padding: 2.5rem;
-            text-align: center;
-        }
-        .hero-card .text-content {
-            margin-bottom: 2rem;
-        }
-        .hero-card p {
-            margin-left: auto;
-            margin-right: auto;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .hero-card h1, .section-title {
-            font-size: 3rem;
-        }
-        .hero-card h2 {
-            font-size: 2.5rem;
-        }
-    }
 .btn-back:hover {
   background-color: rgba(16, 183, 127, 0.15) !important;
   transition: all 0.2s ease;
 }
-</style>
-       
-    <!-- Meta -->
+#faqSearch {
+  border: 2px solid #43cea2;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+#faqSearch:focus {
+  border-color: #00ffa6;
+  box-shadow: 0 0 6px #00ffa677;
+  background-color: #202020;
+}
+#faqSearch::placeholder {
+  color: #aaaaaa;
+}
+.btn-primary {
+  border-radius: 999px;
+  background: linear-gradient(120deg, #43cea2, #185a9d);
+  border: none;
+}
+.btn-primary:hover { filter: brightness(1.1); }
+
+/* ===== Tab style (garis bawah mirip nav-tabs) ===== */
+#faqTabsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-bottom: 2px solid #2b2b2b;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+#faqTabsWrapper button,
+#faqTabsWrapper .dropdown-toggle {
+  background: none;
+  color: #ccc;
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+}
+
+#faqTabsWrapper button:hover,
+#faqTabsWrapper .dropdown-toggle:hover {
+  color: #43cea2;
+  border-bottom-color: #43cea260;
+}
+
+#faqTabsWrapper .active-tab {
+  color: #43cea2;
+  border-bottom-color: #43cea2;
+}
+
+/* ===== Dropdown style ===== */
+.dropdown-menu-dark {
+  background-color: #1e1e1e;
+  border-radius: 10px;
+}
+.dropdown-menu-dark .dropdown-item {
+  color: white;
+}
+.dropdown-menu-dark .dropdown-item:hover {
+  background-color: #43cea220;
+}
+
+/* ===== Accordion ===== */
+/* === Fix white border/glow on accordion === */
+.accordion-button {
+  background-color: transparent !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.accordion-button:focus {
+  box-shadow: none !important;
+}
+
+.accordion-item {
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Remove inner white line when open */
+.accordion-button:not(.collapsed) {
+  background: linear-gradient(120deg, #43cea2, #185a9d);
+  color: #fff;
+  border: none;
+  box-shadow: none;
+}
+
+
+/* ===== Fade animation for content ===== */
+#faqContent {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+.accordion-item {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.accordion-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+/* From Uiverse.io by cosnametv */ 
+.loader {
+  --color: #a5a5b0;
+  --size: 70px;
+  width: var(--size);
+  height: var(--size);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.loader span {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color);
+  animation: keyframes-blink 0.6s alternate infinite linear;
+}
+
+.loader span:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.loader span:nth-child(2) {
+  animation-delay: 200ms;
+}
+
+.loader span:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+.loader span:nth-child(4) {
+  animation-delay: 400ms;
+}
+
+.loader span:nth-child(5) {
+  animation-delay: 500ms;
+}
+
+.loader span:nth-child(6) {
+  animation-delay: 600ms;
+}
+.gradient-card {
+    background: linear-gradient(120deg, #43cea2, #185a9d);
+    padding: 2rem;
+    border-radius: 20px;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gradient-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+@keyframes keyframes-blink {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.5) rotate(5deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+  </style>
+      <!-- Meta -->
     <meta name="description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
     <meta name="author" content="EL-SEMAR CONNECT #13" />
     <meta name="copyright" content="EL-SEMAR CONNECT #13" />
@@ -229,10 +229,10 @@
     <meta name="twitter:title" content="EL-SEMAR CONNECT #13 | Competitions Innovations & Exhibition" />
     <meta name="twitter:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
     <meta name="twitter:image" content="img/logoElsemar.webp" />
-    
 </head>
-<body>
-    <!-- Navbar -->
+
+<body class="bg-background">
+<!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-glass">
       <div class="container-fluid">
         <!-- Brand -->
@@ -307,167 +307,15 @@
   </div>
 </section>
 
-    <section id="About">
-        <div class="container bg-gradient-90 rounded-5 pb-5 px-5 pt-3 my-5">
-          <div class="row">
-    <h1 class="poppins-800 display-1 text-start text-white bg-gradient-135 rounded-pill my-4 py-3">Seminar Nasional</h1>
-
-            <!-- <h2 class="poppins-600 text-white display-3 pt-5">About</h2> -->
-          </div>
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-5 order-lg-2 text-center">
-                  <img src="img/Azfar.webp" alt="About Image" class="img-fluid border border-base border-1 rounded-3 mb-4 mt-3 w-75 hover-lift" width="500" height="500"> 
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-7 order-lg-1">
-                    <p class="open-sans-400 text-start text-white lh-lg ls-wider fs-5 border border-0 rounded-5 px-4 pb-3 mt-5 hover-lift">
-                      Seminar El Semar Connect hadir sebagai wadah kolaborasi antara mahasiswa, akademisi, praktisi, dan stakeholder industri. Kegiatan ini diharapkan menjadi ruang interaktif dan inspiratif dalam mendukung transisi energi hijau di Indonesia.                   
-                    </p>
-                    <!-- <a href="ticket.html"><button class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-primary border-3 text-white hover:border-primary hover-lift rounded-pill">Registrasi ↗</button></a>
-                    <a href="#"><button class="poppins-400 m-3 py-2 px-4 fs-5 border-0 bg-primary border-3 text-white  hover:border-primary hover-lift rounded-pill">Guidebook ↗</button></a> -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-      <div class="line-h1 w-75 border-base my-4"></div>
-
-
-    <section id="Countdown" class="py-5">
-        <div class="container text-center">
-             <h2 class="mb-4 poppins-800 text-primary display-3 text-start">Event Starts In:</h2>
-             <div class="row mt-4">
-                 <div class="col-lg-3 col-md-6 mb-4">
-                     <div class="gradient-card text-white poppins-600">
-                         <p class="number oswald-550 display-4 mb-0" id="day1">0</p>
-                         <p class="poppins-400 fs-1">days</p>
-                     </div>
-                 </div>
-                 <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="gradient-card text-white poppins-600">
-                        <p class="number oswald-550 display-4 mb-0" id="hour1">0</p>
-                        <p class="poppins-400 fs-1">hours</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="gradient-card text-white poppins-600">
-                        <p class="number oswald-550 display-4 mb-0" id="minute1">0</p>
-                        <p class="poppins-400 fs-1">minutes</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="gradient-card text-white poppins-600">
-                        <p class="number oswald-550 display-4 mb-0" id="second1">0</p>
-                        <p class="poppins-400 fs-1">seconds</p>
-                    </div>
-                </div>
-             </div>
-        </div>
-    </section>
-
-      <div class="line-h1 w-75 border-base mb-4"></div>
-
-
-    <section id="Speaker">
-        <div class="container">
-            <div class="row">
-                <h2 class="poppins-600 text-primary display-2 my-3">Speaker</h2>
-            </div>
-            <div class="row">
-                <span class="poppins-400 text-muted text-center display-5 my-5">Coming Soon</span>
-            </div>
-        </div>
-    </section>
-
-      <div class="line-h1 w-75 border-base mb-4"></div>
-
-<section id="Contact" class="pt-4">
-  <div class="container">
-    <div class="row">
-      <h2 class="montserrat-600 text-primary text-start display-3 mx-1 mt-5 px-3 pt-2 pb-0 rounded-5">Contact Person & FaQ</h2>
-    </div>
-    <div class="row mt-5 mb-4 justify-content-center">
-      <div class="col-lg-4 col-12 mb-4 text-center">
-        <div class="card text-center h-100 border border-0 hover:border-primary bg-0 hover-lift rounded-5">
-          <div class="card-header bg-gradient-135 text-white text-center rounded-top-5">
-            <h4 class="fs-2 poppins-600">Main Event</h4>
-            <!-- <p>(Seminar Nasional, Pameran Kreatif Elektro)</p> -->
-          </div>
-          <div class="card-body bg-background border border-base d-flex align-items-center justify-content-center">
-            <!-- <h5 class="card-title">Special title treatment</h5> -->
-            <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
-            <a href="https://wa.me/6281542093100" class="btn text-white my-3 border border-base hover:border-primary hover-lift d-flex justify-content-center align-items-center w-75" title="+62 815 4209 3100 (Rafael)">+62 815 4209 3100 (Rafael)</a> <br>
-            <!-- <a href="#" class="btn text-white my-3">Go somewhere</a> -->
-          </div>
-          <div class="card-footer bg-background border border-base text-white poppins-400 rounded-bottom-5">
-            Seminar Nasional & Pameran Kreatif Elektro
-          </div>
-        </div>
-
-      </div>
-      <!-- <div class="col-lg-4 col-12 mb-4 text-center">
-        <div class="card text-center h-100 border border-0 hover:border-primary hover-lift rounded-5 bg-0">
-          <div class="card-header bg-gradient-135 text-white text-center rounded-top-5">
-            <h4 class="fs-2 poppins-600">El-Semar Arena</h4>
-          </div>
-          <div class="card-body bg-background border border-base">
-            <a href="https://wa.me/6289525767587" class="btn text-white my-3 border border-base hover:border-primary hover-lift w-75" title="+62 8952 5767 587 (Raffi)">+62 8952 5767 587 (Raffi)</a> <br>
-            <a href="https://wa.me/6282112988299" class="btn text-white my-3 border border-base hover:border-primary hover-lift w-75" title="+62 8211 2988 299 (Rasya)">+62 8211 2988 299 (Rasya)</a>
-          </div>
-          <div class="card-footer bg-background border border-base text-white poppins-400 rounded-bottom-5">
-            Line Follower
-          </div>
-        </div>
-      </div> -->
-
-      <!-- <div class="col-lg-4 col-12 mb-4 text-center">
-        <div class="card text-center h-100 border border-0 hover:border-primary hover-lift rounded-5 bg-0">
-          <div class="card-header bg-gradient-135 text-white text-center rounded-top-5">
-            <h4 class="fs-2 py-auto poppins-600">TRYOUT Nasional</h4>
-          </div>
-          <div class="card-body bg-background border border-base">
-            <a href="http://wa.me/6288802784423" class="btn text-white my-3 border border-base hover:border-primary hover-lift w-75" title="+62 8880 2784 423 (Deany)">+62 8880 2784 423 (Deany)</a> <br>
-            <a href="http://wa.me/628113338377" class="btn text-white my-3 border border-base hover:border-primary hover-lift w-75" title="+62 8113 3383 77 (Kanya)">+62 8113 3383 77 (Kanya)</a>
-          </div>
-          <div class="card-footer bg-background border border-base text-white poppins-400 rounded-bottom-5">
-            Ruang Guru x El-Semar Connect #13
-          </div>
-        </div>
-      </div> -->
-    </div>
-    <div class="row mt-0 mb-2">
-      <div class="col text-center">
-        <a href="Faq.html"
-          class="poppins-400 m-3 py-2 px-4 fs-5 border border-primary bg-primary-10 border-3 text-white btn-back hover:border-primary hover-lift rounded-pill d-inline-block text-decoration-none text-center"
-          title="Frequently asked Question"
-          aria-label="Frequently asked Question about El Semar Connect #13">
-          Visit FaQ
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="7 7 17 7 17 17" />
-          <line x1="7" y1="17" x2="17" y2="7" />
-        </svg>
-        </a>
-      </div>
-    </div>
+<section id="FAQ">
+  <div class="container text-center pb-5 px-5 pt-3 mt-3 mb-5">
+    <h2 class="mb-4 poppins-800 text-primary display-3 text-start">FAQ</h2>
+    <div id="pack-container" class="bg-background"></div>
+    
   </div>
 </section>
 
-      <div class="line-h1 w-75 border-base mb-4"></div>
-
-
-<section id="Registration">
-  <div class="container">
-    <div class="row justify-content-center mt-4">
-      <div class="col-auto">
-        <a href="ticket.html"
-          class="poppins-600 m-3 py-3 px-4 fs-2 border-0 bg-gradient-90 text-white hover:bg-bg-accent hover-lift rounded-pill d-inline-block text-decoration-none text-center"
-          title="Registration"
-          aria-label="Go to Registration page">
-          Registration
-        </a>
-      </div>
-    </div>
-  </div>  
-</section>
+      <!-- <div class="line-h1 w-75 border-base mb-4"></div> -->
 
 <footer class="footer bg-dark text-white pt-5 pb-3 mt-5">
   <div class="container">
@@ -560,8 +408,31 @@
           <p class="small text-muted mt-3 mb-0 text-center">Copyright © 2025 DTIK UNS. All rights reserved.</p>
 </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <!-- <div class="container">
+      <div class="row row-cols-1 row-cols-md-3 row-cols-lg-6 g-4"> 
+        <div class="col">
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front">
+                <img src="img/Azfar.webp" class="card-img" alt="foto_proyek">
+                <div class="card-body">
+                  <h5 class="card-title">nama_proyek</h5>
+                </div>
+              </div>
+              <div class="card-back">
+                <div class="card-body">
+                  <p class="card-text">deskripsi_atau_penjelasan_proyek</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         // --- Set the date we're counting down to ---
         // IMPORTANT: Change this to your event's date and time
@@ -596,23 +467,269 @@
             }
         }, 1000);
     </script>
+
 <script>
-  const toggler = document.querySelector('.navbar-toggler');
-  const menuIcon = document.getElementById('icon-menu');
-  const closeIcon = document.getElementById('icon-close');
-  const offcanvas = document.getElementById('offcanvasNavbar');
+const apiUrl = 'https://script.google.com/macros/s/AKfycbyP05b_Z-HwZZa5pnRVuIstriifo0Ag0RVvEFzqoGJllszLoQtMc4N1BQMvkQOhaH9e/exec';
+// Ganti dengan URL Apps Script kamu
 
-  // When offcanvas opens
-  offcanvas.addEventListener('show.bs.offcanvas', () => {
-    menuIcon.style.display = 'none';
-    closeIcon.style.display = 'block';
+let grouped = {};  
+let filteredGrouped = {};  
+let categories = ["All", "Seminar Nasional", "Pameran Kreatif Elektro", "El Semar Arena", "Tryout Nasional"];
+let currentQuery = "";
+let currentDropdownLabel = "Lainnya";
+
+async function loadFAQ() {
+  const container = document.getElementById('pack-container');
+  container.innerHTML = `
+    <div class="d-flex justify-content-center my-5">
+          <div class="loader">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+    </div>
+  `;
+
+  try {
+    const res = await fetch(apiUrl);
+    if (!res.ok) throw new Error(res.statusText);
+    const data = await res.json();
+
+    // --- Hilangkan duplikat
+    const seen = new Set();
+    const uniqueData = data.filter(faq => {
+      const key = faq.pertanyaan?.trim().toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
+    // --- Kelompokkan
+    grouped = {};
+    categories.forEach(cat => grouped[cat] = []);
+    uniqueData.forEach(faq => {
+      if (grouped[faq.kategori]) grouped[faq.kategori].push(faq);
+      grouped["All"].push(faq);
+    });
+
+    filteredGrouped = structuredClone(grouped);
+    renderFAQ(container);
+
+    window.addEventListener("resize", () => renderFAQ(container));
+  } catch (err) {
+    console.error(err);
+    container.innerHTML = `<p class="text-danger text-center">Gagal memuat data FAQ.</p>`;
+  }
+}
+
+function renderFAQ(container) {
+  const isMobile = window.innerWidth < 768;
+
+  const totalResults = countFilteredResults(filteredGrouped);
+
+  container.innerHTML = `
+    <!-- Search bar -->
+    <div class="d-flex justify-content-center mb-3 flex-wrap pt-3">
+      <input type="text" id="faqSearch" class="form-control w-75 w-md-50 mb-2 mb-md-0 me-0 rounded-end-0"
+        placeholder="Cari pertanyaan..." value="${currentQuery}">
+      <button class="btn btn-primary ms-0 rounded-start-0" type="button" id="searchBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+        </svg>  
+      </button>
+    </div>
+
+    ${currentQuery 
+      ? `<p class="text-center text-info mb-3">
+           Menampilkan <strong>${totalResults}</strong> hasil untuk "<em>${currentQuery}</em>"
+         </p>` 
+      : ""}
+
+    ${isMobile ? renderMobileTabs() : renderDesktopTabs()}
+
+    <!-- Accordion content -->
+    <div id="faqContent">${renderCategoryContent(filteredGrouped, "All")}</div>
+  `;
+
+  // Tombol cari
+  document.getElementById('searchBtn').addEventListener('click', () => {
+    const queryInput = document.getElementById('faqSearch');
+    const query = queryInput.value.trim().toLowerCase();
+    currentQuery = query;
+    performSearch(query);
   });
 
-  // When offcanvas closes
-  offcanvas.addEventListener('hidden.bs.offcanvas', () => {
-    menuIcon.style.display = 'block';
-    closeIcon.style.display = 'none';
+  // Reset otomatis saat input dikosongkan
+  document.getElementById('faqSearch').addEventListener('input', e => {
+    if (!e.target.value.trim()) {
+      currentQuery = "";
+      filteredGrouped = structuredClone(grouped);
+      currentDropdownLabel = "Lainnya";
+      renderFAQ(container);
+    }
   });
+}
+
+function renderDesktopTabs() {
+  return `
+    <div id="faqTabsWrapper">
+      ${categories.map((cat, i) => `
+        <button class="${i === 0 ? 'active-tab' : ''}" 
+                id="tab-${cat.replace(/\s/g, '')}" 
+                onclick="openTab('${cat}')">${cat}</button>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderMobileTabs() {
+  return `
+    <div id="faqTabsWrapper" class="justify-content-center">
+      <button class="active-tab" id="tab-all" onclick="openTab('All')">All</button>
+      <div class="dropdown">
+        <button class="dropdown-toggle" type="button" id="faqDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
+          ${currentDropdownLabel}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark" id="faqDropdownMenu">
+          ${categories.filter(c => c !== "All").map(cat => `
+            <li><a class="dropdown-item" href="#" onclick="selectDropdown('${cat}')">${cat}</a></li>
+          `).join('')}
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderCategoryContent(dataGroup, category) {
+  const faqs = dataGroup[category];
+  if (!faqs || faqs.length === 0) {
+    return `<p class="text-center text-muted my-5">Tidak ada pertanyaan.</p>`;
+  }
+  return renderAccordion(faqs, category);
+}
+
+function renderAccordion(faqs, cat) {
+  const safeCat = cat.replace(/\s/g, '');
+  return `
+    <div class="accordion" id="accordion-${safeCat}">
+      ${faqs.map((faq, j) => `
+        <div class="accordion-item bg-transparent">
+          <h2 class="accordion-header" id="heading-${safeCat}-${j}">
+            <button class="accordion-button collapsed bg-gradient-135 text-white my-1 rounded-2"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse-${safeCat}-${j}"
+                    aria-expanded="false"
+                    aria-controls="collapse-${safeCat}-${j}">
+              ${faq.pertanyaan}
+            </button>
+          </h2>
+          <div id="collapse-${safeCat}-${j}"
+               class="accordion-collapse collapse"
+               aria-labelledby="heading-${safeCat}-${j}">
+            <div class="accordion-body text-white bg-background text-start">
+              ${faq.jawaban || '<em>Tidak ada jawaban.</em>'}
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+
+// --- buka kategori
+function openTab(category) {
+  const isMobile = window.innerWidth < 768;
+  document.querySelectorAll('#faqTabsWrapper button').forEach(btn => btn.classList.remove('active-tab'));
+
+  if (!isMobile) {
+    document.getElementById(`tab-${category.replace(/\s/g, '')}`).classList.add('active-tab');
+  } else if (category === 'All') {
+    document.getElementById('tab-all').classList.add('active-tab');
+    currentDropdownLabel = "Lainnya";
+  } else {
+    currentDropdownLabel = category;
+  }
+
+  const content = document.getElementById('faqContent');
+  fadeContentOutIn(content, () => {
+    content.innerHTML = renderCategoryContent(filteredGrouped, category);
+  });
+
+  const dropdownBtn = document.getElementById('faqDropdownBtn');
+  if (dropdownBtn) dropdownBtn.innerText = currentDropdownLabel;
+}
+
+// --- animasi fade
+function fadeContentOutIn(element, callback) {
+  element.style.opacity = 0;
+  setTimeout(() => {
+    callback();
+    element.style.transition = 'opacity 0.5s ease';
+    element.style.opacity = 1;
+  }, 250);
+}
+
+// --- dropdown pilih kategori
+function selectDropdown(category) {
+  openTab(category);
+  const dropdown = bootstrap.Dropdown.getInstance(document.getElementById('faqDropdownBtn'));
+  dropdown.hide();
+}
+
+// --- fungsi pencarian
+function performSearch(query) {
+  if (!query) {
+    filteredGrouped = structuredClone(grouped);
+    renderFAQ(document.getElementById('pack-container'));
+    return;
+  }
+
+  const filtered = {};
+  categories.forEach(cat => filtered[cat] = []);
+
+  for (const cat of categories) {
+    filtered[cat] = grouped[cat].filter(faq =>
+      faq.pertanyaan?.toLowerCase().includes(query) ||
+      faq.jawaban?.toLowerCase().includes(query)
+    );
+  }
+
+  // Buat kategori All gabungan unik
+  const seen = new Set();
+  filtered["All"] = [];
+  grouped["All"].forEach(faq => {
+    const key = faq.pertanyaan?.toLowerCase();
+    if (!seen.has(key) && (faq.pertanyaan?.toLowerCase().includes(query) || faq.jawaban?.toLowerCase().includes(query))) {
+      seen.add(key);
+      filtered["All"].push(faq);
+    }
+  });
+
+  filteredGrouped = filtered;
+  renderFAQ(document.getElementById('pack-container'));
+  openTab("All");
+}
+
+// Hitung total hasil untuk indikator
+function countFilteredResults(data) {
+  const set = new Set();
+  data["All"].forEach(f => set.add(f.pertanyaan?.toLowerCase()));
+  return set.size;
+}
+
+document.addEventListener('DOMContentLoaded', loadFAQ);
+</script>
+
+<script>
+document.addEventListener('click', e => {
+  const card = e.target.closest('.flip-card');
+  if (card) card.classList.toggle('is-flipped');
+});
 </script>
 <script defer>
 function loadMap(target) {
