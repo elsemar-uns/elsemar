@@ -3833,21 +3833,6 @@ h3, h2 {
                         Further information will be sent via email.<br>
                         <strong>Please check your spam/junk folder if you don't receive our email.</strong>
                     </p>
-                    
-                    <!-- Group Join Section (hanya untuk Seminar) -->
-                    <div id="seminarGroupSection" style="display: none; margin: 20px 0; padding: 16px; background: linear-gradient(135deg, #10b981, #3b82f6); border-radius: 12px; text-align: center;">
-                        <p style="color: white; font-weight: 600; margin: 0 0 12px 0; font-size: 15px;">
-                            Jangan lupa join grup resmi Seminar!
-                        </p>
-                        <p style="color: rgba(255,255,255,0.9); font-size: 13px; margin: 0 0 14px 0;">
-                            Dapatkan info agenda, pengumuman teknis, dan update penting lainnya.
-                        </p>
-                        <a href="https://uns.id/ELSemarConnect13" target="_blank" rel="noopener" 
-                           style="display: inline-block; background: white; color: #059669; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
-                            Join Grup Sekarang
-                        </a>
-                    </div>
-                    
                     <button class="btn-close-invoice" onclick="closeSuccessOverlay()">Done</button>
                 </div>
             </div>
@@ -5474,9 +5459,23 @@ function showPaymentPage(finalPrice) {
     
     // Payment method selection HANYA untuk SEMINAR (elsemar)
     // Untuk tryout dan lomba langsung show paid payment (NO selection)
+    // KHUSUS ELEKTRO: auto FREE dan skip payment selection
     const paymentMethodSelectionEl = document.getElementById('paymentMethodSelection');
+    
+    // Check if user is Elektro (only for SEMINAR)
+    let isElektroUser = false;
     if (selectedTicketType === 'elsemar') {
-        // Seminar: show payment method selection (paid or free)
+        const facultyValue = (registrationData.faculty || '').toLowerCase();
+        const studyProgramValue = (registrationData.studyProgram || '').toLowerCase();
+        const isTeknik = facultyValue.includes('teknik') || facultyValue.includes('engineering');
+        const isElektro = studyProgramValue.includes('elektro') || 
+                          studyProgramValue.includes('electrical') || 
+                          studyProgramValue.includes('listrik');
+        isElektroUser = isTeknik && isElektro;
+    }
+    
+    if (selectedTicketType === 'elsemar' && !isElektroUser) {
+        // Seminar (NON-ELEKTRO): show payment method selection (paid or free)
         if (paymentMethodSelectionEl) {
             paymentMethodSelectionEl.style.display = 'block';
             console.log('✅ Payment method selection shown for SEMINAR');
@@ -5489,6 +5488,63 @@ function showPaymentPage(finalPrice) {
         if (freePaymentSection) freePaymentSection.style.display = 'none';
         if (paidUploadSection) paidUploadSection.style.display = 'none';
         if (freeUploadSection) freeUploadSection.style.display = 'none';
+    } else if (selectedTicketType === 'elsemar' && isElektroUser) {
+        // ELEKTRO: AUTO FREE, skip payment selection, langsung show submit button
+        console.log('⚡ ELEKTRO USER DETECTED - Auto FREE mode activated');
+        if (paymentMethodSelectionEl) {
+            paymentMethodSelectionEl.style.display = 'none';
+        }
+        const paidPaymentSection = document.getElementById('paidPaymentSection');
+        const freePaymentSection = document.getElementById('freePaymentSection');
+        const paidUploadSection = document.getElementById('paidUploadSection');
+        const freeUploadSection = document.getElementById('freeUploadSection');
+        
+        // Show only FREE upload section (dengan submit button langsung)
+        if (paidPaymentSection) paidPaymentSection.style.display = 'none';
+        if (freePaymentSection) freePaymentSection.style.display = 'none';
+        if (paidUploadSection) paidUploadSection.style.display = 'none';
+        if (freeUploadSection) freeUploadSection.style.display = 'block';
+        
+        // Set payment method as free automatically
+        selectedPaymentMethod = 'free';
+        
+        // Update price display to FREE
+        const ticketPriceEl = document.getElementById('ticketPrice');
+        if (ticketPriceEl) {
+            ticketPriceEl.textContent = 'FREE';
+            ticketPriceEl.classList.add('free');
+        }
+        
+        // Customize FREE section for Elektro (hide Instagram requirements)
+        const freeUploadTitle = document.getElementById('freeUploadTitle');
+        const freeUploadInstruction = document.getElementById('freeUploadInstruction');
+        const followProofUpload = document.getElementById('followProofUpload');
+        const repostProofUpload = document.getElementById('repostProofUpload');
+        const freeSubmitBtn = document.getElementById('freeSubmitBtn');
+        const followProofInput = document.getElementById('followProof');
+        const repostProofInput = document.getElementById('repostProof');
+        
+        if (freeUploadTitle) {
+            freeUploadTitle.innerHTML = '⚡ Mahasiswa Elektro - Gratis!';
+        }
+        if (freeUploadInstruction) {
+            freeUploadInstruction.innerHTML = 'Sebagai mahasiswa Elektro UNS, kamu mendapat tiket gratis. Langsung klik Submit di bawah!';
+        }
+        if (followProofUpload) {
+            followProofUpload.style.display = 'none';
+        }
+        if (repostProofUpload) {
+            repostProofUpload.style.display = 'none';
+        }
+        if (freeSubmitBtn) {
+            const btnLabel = freeSubmitBtn.querySelector('.label');
+            if (btnLabel) {
+                btnLabel.textContent = 'Submit Registration';
+            }
+        }
+        // Make uploads optional for Elektro
+        if (followProofInput) followProofInput.required = false;
+        if (repostProofInput) repostProofInput.required = false;
     } else {
         // Tryout dan Lomba: HIDE payment method selection, langsung show paid payment
         if (paymentMethodSelectionEl) {
@@ -5888,14 +5944,26 @@ async function handleFreeUploadSubmit(e) {
     const repostInput = document.getElementById('repostProof');
     const ticketType = registrationData.ticketType;
     
-    if (!followInput.files.length) {
-        showAlert('freeUploadAlert', 'warning', 'Please upload Instagram Follow Proof.');
-        return;
-    }
+    // Check if user is Elektro (skip Instagram proof requirement)
+    const facultyValue = (registrationData.faculty || '').toLowerCase();
+    const studyProgramValue = (registrationData.studyProgram || '').toLowerCase();
+    const isTeknik = facultyValue.includes('teknik') || facultyValue.includes('engineering');
+    const isElektroCheck = studyProgramValue.includes('elektro') || 
+                      studyProgramValue.includes('electrical') || 
+                      studyProgramValue.includes('listrik');
+    const isElektroUser = isTeknik && isElektroCheck;
     
-    if (ticketType === 'Day 1+2' && !repostInput.files.length) {
-        showAlert('freeUploadAlert', 'warning', 'Please upload Repost Proof for Day 1+2 ticket.');
-        return;
+    // Validation: skip Instagram proof for Elektro users
+    if (!isElektroUser) {
+        if (!followInput.files.length) {
+            showAlert('freeUploadAlert', 'warning', 'Please upload Instagram Follow Proof.');
+            return;
+        }
+        
+        if (ticketType === 'Day 1+2' && !repostInput.files.length) {
+            showAlert('freeUploadAlert', 'warning', 'Please upload Repost Proof for Day 1+2 ticket.');
+            return;
+        }
     }
     
     let recaptchaToken = '';
@@ -5909,22 +5977,25 @@ async function handleFreeUploadSubmit(e) {
         return;
     }
     
-    const followFile = followInput.files[0];
+    const followFile = followInput.files.length > 0 ? followInput.files[0] : null;
     const repostFile = repostInput.files.length > 0 ? repostInput.files[0] : null;
     const maxSize = 5 * 1024 * 1024;
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png',];
     
-    if (followFile.size > maxSize) {
-        showAlert('freeUploadAlert', 'warning', 'Follow Proof file is too large. Maximum 5MB.');
-        return;
-    }
-    
-    if (!allowedTypes.includes(followFile.type)) {
-            showAlert('freeUploadAlert', 'warning', 'Format file follow not supported. Use JPG, PNG, or GIF.');
+    // File validation: skip for Elektro users (no files required)
+    if (!isElektroUser && followFile) {
+        if (followFile.size > maxSize) {
+            showAlert('freeUploadAlert', 'warning', 'Follow Proof file is too large. Maximum 5MB.');
             return;
+        }
+        
+        if (!allowedTypes.includes(followFile.type)) {
+                showAlert('freeUploadAlert', 'warning', 'Format file follow not supported. Use JPG, PNG, or GIF.');
+                return;
+        }
     }
     
-    if (repostFile) {
+    if (!isElektroUser && repostFile) {
         if (repostFile.size > maxSize) {
             showAlert('freeUploadAlert', 'warning', 'Repost Proof file is too large. Maximum 5MB.');
             return;
@@ -5938,9 +6009,7 @@ async function handleFreeUploadSubmit(e) {
     
     try {
         setFreeUploading(true);
-        showAlert('freeUploadAlert', 'info', 'Uploading proof...');
-        
-        const followBase64 = await fileToBase64(followFile);
+        showAlert('freeUploadAlert', 'info', isElektroUser ? 'Submitting registration...' : 'Uploading proof...');
         
         const formData = new FormData();
         
@@ -5949,13 +6018,23 @@ async function handleFreeUploadSubmit(e) {
         });
         
         formData.append('paymentMethod', 'free');
-        formData.append('followProofBase64', followBase64);
-        formData.append('followProofName', followFile.name);
         
-        if (repostFile) {
+        // Only upload Instagram proofs for non-Elektro users
+        if (!isElektroUser && followFile) {
+            const followBase64 = await fileToBase64(followFile);
+            formData.append('followProofBase64', followBase64);
+            formData.append('followProofName', followFile.name);
+        }
+        
+        if (!isElektroUser && repostFile) {
             const repostBase64 = await fileToBase64(repostFile);
             formData.append('repostProofBase64', repostBase64);
             formData.append('repostProofName', repostFile.name);
+        }
+        
+        // Add flag for Elektro user
+        if (isElektroUser) {
+            formData.append('isElektroFree', 'true');
         }
         
         formData.append('timestamp', Date.now());
@@ -6340,14 +6419,6 @@ function showSuccessOverlay(data) {
     document.getElementById('invoiceDate').textContent = dateStr;
     document.getElementById('invoiceTime').textContent = timeStr;
     document.getElementById('invoiceRegNumber').textContent = `REG-${String(data.registrationNumber || 1).padStart(5, '0')}`;
-    
-    // Show group join section only for Seminar
-    const groupSection = document.getElementById('seminarGroupSection');
-    if (selectedTicketType === 'elsemar') {
-        groupSection.style.display = 'block';
-    } else {
-        groupSection.style.display = 'none';
-    }
     
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
