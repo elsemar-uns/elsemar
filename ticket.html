@@ -3055,7 +3055,7 @@ h3, h2 {
                                 <label for="institutionType" class="form-label">Institution<span class="text-danger">*</span></label>
                                 <select id="institutionType" name="institutionType" class="form-select" required>
                                     <option value="" selected>Choose</option>
-                                    <option value="UNS">Sebelas Maret University</option>
+                                    <option value="UNS">Universitas Sebelas Maret</option>
                                     <option value="SMA">High School</option>
                                     <option value="Umum">General</option>
                                 </select>
@@ -3371,7 +3371,7 @@ h3, h2 {
                             <div class="row">
                                 <div class="col-12">
                                     <label for="lombaUniversityName" class="form-label">University Name<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="lombaUniversityName" name="lombaUniversityName" placeholder="Example: Sebelas Maret University">
+                                    <input type="text" class="form-control" id="lombaUniversityName" name="lombaUniversityName" placeholder="Example: Universitas Sebelas Maret">
                                     <div class="invalid-feedback">Fill university name</div>
                                 </div>
                             </div>
@@ -3833,6 +3833,21 @@ h3, h2 {
                         Further information will be sent via email.<br>
                         <strong>Please check your spam/junk folder if you don't receive our email.</strong>
                     </p>
+                    
+                    <!-- Group Join Section (hanya untuk Seminar) -->
+                    <div id="seminarGroupSection" style="display: none; margin: 20px 0; padding: 16px; background: linear-gradient(135deg, #10b981, #3b82f6); border-radius: 12px; text-align: center;">
+                        <p style="color: white; font-weight: 600; margin: 0 0 12px 0; font-size: 15px;">
+                            📢 Jangan lupa join grup resmi Seminar!
+                        </p>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 13px; margin: 0 0 14px 0;">
+                            Dapatkan info agenda, pengumuman teknis, dan update penting lainnya.
+                        </p>
+                        <a href="https://uns.id/ELSemarConnect13" target="_blank" rel="noopener" 
+                           style="display: inline-block; background: white; color: #059669; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                            Join Grup Sekarang
+                        </a>
+                    </div>
+                    
                     <button class="btn-close-invoice" onclick="closeSuccessOverlay()">Done</button>
                 </div>
             </div>
@@ -6325,6 +6340,14 @@ function showSuccessOverlay(data) {
     document.getElementById('invoiceDate').textContent = dateStr;
     document.getElementById('invoiceTime').textContent = timeStr;
     document.getElementById('invoiceRegNumber').textContent = `REG-${String(data.registrationNumber || 1).padStart(5, '0')}`;
+    
+    // Show group join section only for Seminar
+    const groupSection = document.getElementById('seminarGroupSection');
+    if (selectedTicketType === 'elsemar') {
+        groupSection.style.display = 'block';
+    } else {
+        groupSection.style.display = 'none';
+    }
     
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
