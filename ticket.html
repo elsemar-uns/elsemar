@@ -3833,6 +3833,21 @@ h3, h2 {
                         Further information will be sent via email.<br>
                         <strong>Please check your spam/junk folder if you don't receive our email.</strong>
                     </p>
+                    
+                    <!-- Group Join Section (only for Seminar) -->
+                    <div id="seminarGroupSection" style="display: none; margin: 20px 0; padding: 16px; background: linear-gradient(135deg, #10b981, #3b82f6); border-radius: 12px; text-align: center;">
+                        <p style="color: white; font-weight: 600; margin: 0 0 12px 0; font-size: 15px;">
+                            📢 Don't forget to join the official Seminar group!
+                        </p>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 13px; margin: 0 0 14px 0;">
+                            Get agenda info, technical announcements, and other important updates.
+                        </p>
+                        <a href="https://uns.id/ELSemarConnect13" target="_blank" rel="noopener" 
+                           style="display: inline-block; background: white; color: #059669; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                            Join Group Now
+                        </a>
+                    </div>
+                    
                     <button class="btn-close-invoice" onclick="closeSuccessOverlay()">Done</button>
                 </div>
             </div>
@@ -6419,6 +6434,16 @@ function showSuccessOverlay(data) {
     document.getElementById('invoiceDate').textContent = dateStr;
     document.getElementById('invoiceTime').textContent = timeStr;
     document.getElementById('invoiceRegNumber').textContent = `REG-${String(data.registrationNumber || 1).padStart(5, '0')}`;
+    
+    // Show group join section only for Seminar (elsemar)
+    const groupSection = document.getElementById('seminarGroupSection');
+    if (groupSection) {
+        if (selectedTicketType === 'elsemar') {
+            groupSection.style.display = 'block';
+        } else {
+            groupSection.style.display = 'none';
+        }
+    }
     
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
