@@ -2975,7 +2975,7 @@ h3, h2 {
                                 </div>
                                 <div class="ticket-footer">
                                     <p class="ticket-description">Main Event of EL-SEMAR #13</p>
-                                    <p class="ticket-price">Rp 0 - 25.000</p>
+                                    <p class="ticket-price"><span style="color: #10b981; font-weight: 900; font-size: 20px;">Rp 0</span></p>
                                 </div>
                             </div>
                             <div class="ticket-card" data-ticket="tryout" onclick="selectTicket('tryout')">
@@ -4140,6 +4140,38 @@ async function selectTicket(ticketType) {
 }
 
 
+function updateElsemarBadge() {
+    try {
+        const elsemarCard = document.querySelector('[data-ticket="elsemar"]');
+        if (elsemarCard) {
+            let badgeDisplay = elsemarCard.querySelector('.elektrobebas-badge');
+            if (!badgeDisplay) {
+                badgeDisplay = document.createElement('div');
+                badgeDisplay.className = 'elektrobebas-badge';
+                badgeDisplay.style.cssText = `
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background: rgba(16, 185, 129, 0.9);
+                    color: white;
+                    padding: 4px 8px;
+                    border-radius: 12px;
+                    font-size: 10px;
+                    font-weight: 600;
+                    z-index: 10;
+                `;
+                elsemarCard.style.position = 'relative';
+                elsemarCard.appendChild(badgeDisplay);
+            }
+            
+            badgeDisplay.textContent = 'Gratis Untuk Semua';
+            badgeDisplay.style.background = 'rgba(16, 185, 129, 0.9)';
+        }
+    } catch (error) {
+        console.warn('Could not update elsemar badge display');
+    }
+}
+
 async function updateLombaQuotaDisplay() {
     try {
         const countResponse = await fetch(APPS_SCRIPT_URL + '?action=getCount&type=lomba');
@@ -4254,12 +4286,16 @@ function backToTicketSelection() {
         document.getElementById('formContainer').style.display = 'none';
         document.querySelector('.main-wrapper').classList.remove('form-active');
         selectedTicketType = null;
+        // Update badges when showing ticket selection again
+        updateElsemarBadge();
+        updateLombaQuotaDisplay();
     }
 }
 
 
 document.addEventListener('DOMContentLoaded', function() {
 
+    updateElsemarBadge();
     updateLombaQuotaDisplay();
 
     document.getElementById('tryoutSchoolType').addEventListener('change', function() {
@@ -4345,6 +4381,26 @@ async function handleLombaSubmit(e) {
         lastSubmitTime = Date.now();
         showAlert('lombaFormAlert', 'info', 'Processing data...');
         
+        const formData = new FormData(e.target);
+        registrationData = {
+            ticketType: 'lomba'
+        };
+        
+        for (const [key, value] of formData.entries()) {
+            if (typeof value === 'string') {
+                registrationData[key] = sanitizeInput(value);
+            } else {
+                registrationData[key] = value;
+            }
+        }
+        
+        // Check for duplicate before proceeding
+        const duplicateError = await checkDuplicateBeforeSubmit(registrationData, 'lomba');
+        if (duplicateError) {
+            showAlert('lombaFormAlert', 'danger', duplicateError);
+            return;
+        }
+        
         let recaptchaToken = 'development-token';
         
         let registrationNumber = 1;
@@ -4367,20 +4423,8 @@ async function handleLombaSubmit(e) {
             console.warn('Using default registration number: 1');
         }
         
-        const formData = new FormData(e.target);
-        registrationData = {
-            ticketType: 'lomba',
-            registrationNumber: registrationNumber,
-            recaptchaToken: recaptchaToken
-        };
-        
-        for (const [key, value] of formData.entries()) {
-            if (typeof value === 'string') {
-                registrationData[key] = sanitizeInput(value);
-            } else {
-                registrationData[key] = value;
-            }
-        }
+        registrationData.registrationNumber = registrationNumber;
+        registrationData.recaptchaToken = recaptchaToken;
         
         const lombaIdCardsInput = document.getElementById('lombaIdCards');
         const lombaCommitmentInput = document.getElementById('lombaCommitmentLetter');
@@ -4460,6 +4504,24 @@ async function handleTryoutSubmit(e) {
         lastSubmitTime = Date.now();
         showAlert('tryoutFormAlert', 'info', 'Processing data...');
         
+        const formData = new FormData(e.target);
+        registrationData = {};
+        
+        for (const [key, value] of formData.entries()) {
+            if (typeof value === 'string') {
+                registrationData[key] = sanitizeInput(value);
+            } else {
+                registrationData[key] = value;
+            }
+        }
+        
+        // Check for duplicate before proceeding
+        const duplicateError = await checkDuplicateBeforeSubmit(registrationData, 'tryout');
+        if (duplicateError) {
+            showAlert('tryoutFormAlert', 'danger', duplicateError);
+            return;
+        }
+        
         let recaptchaToken = 'development-token';
         
         let registrationNumber = 1;
@@ -4472,17 +4534,6 @@ async function handleTryoutSubmit(e) {
             }
         } catch (error) {
             console.warn('Using default registration number: 1');
-        }
-        
-        const formData = new FormData(e.target);
-        registrationData = {};
-        
-        for (const [key, value] of formData.entries()) {
-            if (typeof value === 'string') {
-                registrationData[key] = sanitizeInput(value);
-            } else {
-                registrationData[key] = value;
-            }
         }
         
         registrationData.registrationNumber = registrationNumber;
@@ -4906,6 +4957,34 @@ if (document.readyState === 'loading') {
     initRegistrationPage();
 }
 
+async function checkDuplicateBeforeSubmit(formData, type) {
+    try {
+        const params = new URLSearchParams();
+        params.append('action', 'checkDuplicate');
+        params.append('type', type);
+        
+        if (type === 'lomba') {
+            params.append('teamName', formData.lombaTeamName || '');
+            params.append('leaderEmail', formData.lombaLeaderEmail || '');
+        } else {
+            params.append('email', formData.email || formData.tryoutEmail || '');
+            params.append('phone', formData.phone || formData.tryoutPhone || '');
+            params.append('nim', formData.nim || '');
+        }
+        
+        const response = await fetch(APPS_SCRIPT_URL + '?' + params.toString());
+        if (response.ok) {
+            const result = await response.json();
+            if (result.isDuplicate && result.error) {
+                return result.error;
+            }
+        }
+    } catch (error) {
+        console.warn('Could not check duplicate, proceeding anyway:', error);
+    }
+    return null;
+}
+
 async function handleFormSubmit(e) {
     e.preventDefault();
     // Deadline guard for Seminar (ticket key: elsemar)
@@ -4919,6 +4998,24 @@ async function handleFormSubmit(e) {
     try {
         showAlert('formAlert', 'info', 'Processing data...');
         
+        const formData = new FormData(registrationForm);
+        registrationData = {};
+        
+        for (const [key, value] of formData.entries()) {
+            if (typeof value === 'string') {
+                registrationData[key] = sanitizeInput(value);
+            } else {
+                registrationData[key] = value;
+            }
+        }
+        
+        // Check for duplicate before proceeding
+        const duplicateError = await checkDuplicateBeforeSubmit(registrationData, 'seminar');
+        if (duplicateError) {
+            showAlert('formAlert', 'danger', duplicateError);
+            return;
+        }
+        
         let recaptchaToken = 'development-token';
         
         let registrationNumber = 1;
@@ -4931,17 +5028,6 @@ async function handleFormSubmit(e) {
             }
         } catch (error) {
             console.warn('Using default registration number: 1');
-        }
-        
-        const formData = new FormData(registrationForm);
-        registrationData = {};
-        
-        for (const [key, value] of formData.entries()) {
-            if (typeof value === 'string') {
-                registrationData[key] = sanitizeInput(value);
-            } else {
-                registrationData[key] = value;
-            }
         }
         
         registrationData.registrationNumber = registrationNumber;
