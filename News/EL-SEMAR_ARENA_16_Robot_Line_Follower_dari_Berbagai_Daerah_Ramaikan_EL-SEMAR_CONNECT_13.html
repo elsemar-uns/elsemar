@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>El-Semar Connect #13</title>
+    <!-- ✅ Favicon -->
+    <link rel="icon" href="../img/logoElsemar.webp">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="../navFooter.css">
+    <link href="../colourFont.css" rel="stylesheet">
+        <!-- ✅ Preconnect & Preload Fonts (replaces @import) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Non-blocking Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap"
+          rel="stylesheet"
+          media="print"
+          onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    </noscript>
+  <style>
+body{
+  background-color: #121212;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3e%3cpath d='M14 0 L0 14 L14 28 L28 14 Z' fill='none' stroke='%231a1a1a' stroke-width='1'/%3e%3c/svg%3e");
+  font-family: 'Poppins', sans-serif;
+}
+.line-h1{
+  border-top: 6px solid;
+  /* width: 40%; */
+  margin: auto;
+}
+.btn-back:hover {
+  background-color: rgba(16, 183, 127, 0.15) !important;
+  transition: all 0.2s ease;
+}
+#faqSearch {
+  border: 2px solid #43cea2;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+#faqSearch:focus {
+  border-color: #00ffa6;
+  box-shadow: 0 0 6px #00ffa677;
+  background-color: #202020;
+}
+#faqSearch::placeholder {
+  color: #aaaaaa;
+}
+.btn-primary {
+  border-radius: 999px;
+  background: linear-gradient(120deg, #43cea2, #185a9d);
+  border: none;
+}
+.btn-primary:hover { filter: brightness(1.1); }
+
+/* ===== Tab style (garis bawah mirip nav-tabs) ===== */
+#faqTabsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-bottom: 2px solid #2b2b2b;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+#faqTabsWrapper button,
+#faqTabsWrapper .dropdown-toggle {
+  background: none;
+  color: #ccc;
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+}
+
+#faqTabsWrapper button:hover,
+#faqTabsWrapper .dropdown-toggle:hover {
+  color: #43cea2;
+  border-bottom-color: #43cea260;
+}
+
+#faqTabsWrapper .active-tab {
+  color: #43cea2;
+  border-bottom-color: #43cea2;
+}
+
+/* ===== Dropdown style ===== */
+.dropdown-menu-dark {
+  background-color: #1e1e1e;
+  border-radius: 10px;
+}
+.dropdown-menu-dark .dropdown-item {
+  color: white;
+}
+.dropdown-menu-dark .dropdown-item:hover {
+  background-color: #43cea220;
+}
+
+/* ===== Accordion ===== */
+/* === Fix white border/glow on accordion === */
+.accordion-button {
+  background-color: transparent !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.accordion-button:focus {
+  box-shadow: none !important;
+}
+
+.accordion-item {
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Remove inner white line when open */
+.accordion-button:not(.collapsed) {
+  background: linear-gradient(120deg, #43cea2, #185a9d);
+  color: #fff;
+  border: none;
+  box-shadow: none;
+}
+
+
+/* ===== Fade animation for content ===== */
+#faqContent {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+.accordion-item {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.accordion-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+/* From Uiverse.io by cosnametv */ 
+.loader {
+  --color: #a5a5b0;
+  --size: 70px;
+  width: var(--size);
+  height: var(--size);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.loader span {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color);
+  animation: keyframes-blink 0.6s alternate infinite linear;
+}
+
+.loader span:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.loader span:nth-child(2) {
+  animation-delay: 200ms;
+}
+
+.loader span:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+.loader span:nth-child(4) {
+  animation-delay: 400ms;
+}
+
+.loader span:nth-child(5) {
+  animation-delay: 500ms;
+}
+
+.loader span:nth-child(6) {
+  animation-delay: 600ms;
+}
+.gradient-card {
+    background: linear-gradient(120deg, #43cea2, #185a9d);
+    padding: 2rem;
+    border-radius: 20px;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gradient-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+@keyframes keyframes-blink {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.5) rotate(5deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* Sponsor Section Layout */
+#Sponsor .sponsor-tier {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Card wrapper — penyama tinggi */
+.sponsor-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+
+  width: 220px;         /* sama untuk semua tier */
+  height: 150px;        /* ini yang bikin tinggi rata */
+  
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.sponsor-card:hover {
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Gambar menyesuaikan card */
+.sponsor-card img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: brightness(0.95);
+  transition: filter 0.3s ease;
+}
+
+.sponsor-card:hover img {
+  filter: brightness(1.2);
+}
+
+/* Pyramid size scaling based on tier */
+.sponsor-tier-1 .sponsor-card {
+  width: 300px;  
+  height: 200px;  
+}
+
+.sponsor-tier-2 .sponsor-card {
+  width: 220px;
+  height: 150px;
+}
+
+.sponsor-tier-3 .sponsor-card {
+  width: 180px;
+  height: 130px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .sponsor-tier-1 .sponsor-card { width: 200px; height: 140px; }
+  .sponsor-tier-2 .sponsor-card { width: 170px; height: 120px; }
+  .sponsor-tier-3 .sponsor-card { width: 140px; height: 110px; }
+}
+
+  </style>
+      <!-- Meta -->
+    <meta name="description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
+    <meta name="author" content="EL-SEMAR CONNECT #13" />
+    <meta name="copyright" content="EL-SEMAR CONNECT #13" />
+    <meta name="application-name" content="EL-SEMAR CONNECT #13" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="EL-SEMAR CONNECT #13 | Competitions Innovations & Exhibition" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="../img/logoElsemar.webp" />
+    <meta property="og:image:alt" content="EL-SEMAR CONNECT #13 | Competitions Innovations & Exhibition" />
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="500" />
+    <meta property="og:url" content="https://elsemar.ft.uns.ac.id/id/" />
+    <meta property="og:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="EL-SEMAR CONNECT #13 | Competitions Innovations & Exhibition" />
+    <meta name="twitter:description" content="El Semar Connect (Competitions Innovations dan Exhibitions) merupakan acara tahunan yang menjadi wadah untuk menampilkan inova..." />
+    <meta name="twitter:image" content="../img/logoElsemar.webp" />
+</head>
+
+<body class="bg-background">
+<!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-glass">
+      <div class="container-fluid">
+        <!-- Brand -->
+        <button class="navbar-toggler border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Open Menu" title="Open Menu">
+        <!-- Custom hamburger & close icons -->
+          <span class="navbar-toggler-icon d-flex align-items-center justify-content-center">
+              <!-- Hamburger -->
+              <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="white">
+              <rect x="3" y="5" width="18" height="2" rx="1"></rect>
+              <rect x="3" y="11" width="18" height="2" rx="1"></rect>
+              <rect x="3" y="17" width="18" height="2" rx="1"></rect>
+              </svg>
+              <!-- Close -->
+              <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="white" style="display: none;">
+              <path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7a1 1 0 0 0-1.41 1.41L10.59 12l-4.9 4.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.9a1 1 0 0 0 1.41-1.41L13.41 12l4.9-4.89a1 1 0 0 0 0-1.4z"/>
+              </svg>
+          </span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          <img src="../img/logo_navBar_inverse.webp" alt="Logo" width="154" height="50" class="logoNavBar logo-hidden" loading="lazy">
+        </a>
+
+        <!-- Toggle button (visible only on mobile) -->
+
+
+        <!-- Regular navbar links (visible on desktop) -->
+        <div class="collapse navbar-collapse d-none d-lg-flex justify-content-end">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="../index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="../seminar.html">Seminar Nasional</a></li>
+            <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="../exhibition.html">Pameran Karya Elektro</a></li>
+            <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="../kompetisi.html">El-Semar Arena</a></li>
+            <li class="nav-item"><a class="nav-link active poppins-400 text-white px-4 my-3 mx-3" href="../Faq.html">FaQ</a></li>
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+
+       <!-- Offcanvas menu (visible on mobile) -->
+        <div class="offcanvas offcanvas-start d-lg-none navbar-glass" tabindex="-1" id="offcanvasNavbar">
+          <div class="offcanvas-header">
+            <a href="../index.html">
+              <img src="../img/logo_navBar_inverse.webp" alt="Logo" width="154" height="50" class="logoNavBar logo-hidden" loading="lazy">
+            </a>
+            <button type="button" class="btn-close-custom" data-bs-dismiss="offcanvas" aria-label="Close" title="Close"></button>
+
+
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav text-start flex-grow-1">
+              <li class="nav-item"><a class="nav-link active poppins-400 text-white fs-1 my-3"href="../index.html" title="Homepage">Home</a></li>
+              <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="../seminar.html" title="">Seminar Nasional </a></li>
+              <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="../exhibition.html">Pameran Karya Elektro</a></li>
+              <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="../kompetisi.html">El-Semar Arena</a></li>
+              <li class="nav-item"><a class="nav-link poppins-400 text-white fs-1 my-3" href="../Faq.html">FaQ</a></li>
+            </ul>
+          </div>
+        </div>
+        
+<div class="div my-5">.</div>
+
+<section id="Back">
+  <div class="container-fluid">
+    <div class="row">
+      <a href="../index.html">
+        <button class="bg-background border-primary rounded-pill px-4 py-3 fs-6 text-white btn-back hover-lift">
+          ← Back to Homepage
+        </button>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="Header" class="py-4 mt-3">
+    <div class="container">
+        <div class="row bg-background border border-0">
+            <h1 class="mb-4 poppins-800 text-primary display-5 text-start">EL-SEMAR ARENA: 16 Robot Line Follower dari Berbagai Daerah Ramaikan EL-SEMAR CONNECT #13</h1>
+        </div>
+        <div class="row text-muted">
+            <div class="col text-start">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+                    </svg>
+                    Uncategorized
+                </p>
+            </div>
+            <div class="col text-end">
+            <p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+                </svg>
+                December 28, 2025
+            </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <div class="line-h1 w-75 border-base mb-4"></div>
+
+<section id="Content" class="py-4">
+    <div class="container bg-background border border-0">
+        <div class="row mx-5">
+            <img src="../img/News1/News1_01.webp" alt="About Image" class="img-fluid border border-0 border-1 rounded-3 mb-4 mt-3 hover-lift" width="1280" height="575"> 
+            <p class="text-justify text-white">
+                SURAKARTA – Semangat inovasi teknologi mewarnai hari kedua rangkaian acara EL-SEMAR CONNECT #13 yang diselenggarakan oleh Program Studi Teknik Elektro Fakultas Teknik Universitas Sebelas Maret (UNS). Pada Rabu (03/12/2025), kompetisi robotika bergengsi bertajuk EL-SEMAR ARENA resmi digelar di Auditorium G.P.H. Haryo Mataram UNS, membawa persaingan sengit antar inovator muda dari berbagai daerah.
+            </p>
+            <p class="text-justify text-white">
+                EL-SEMAR ARENA hadir sebagai lanjutan dari seminar nasional bertema “Smart Green Energy: Strategies for Efficiency, Innovation, and Sustainability” yang digelar pada hari pertama. Jika hari pertama menekankan penguatan wawasan dan diskursus seputar energi hijau, maka hari kedua menghadirkan implementasi kecakapan teknis dan kreativitas mahasiswa maupun pelajar melalui ajang kompetisi robot line follower.
+            </p>
+        </div>
+        <div class="row mx-5">
+            <img src="../img/News1/News1_02.webp" alt="About Image" class="img-fluid border border-0 border-1 rounded-3 mb-4 mt-3 hover-lift" width="600" height="337"> 
+            <ul class="text-white ms-3">
+                <li> IFER Elite - SMKN 5 Surakarta</li>
+                <li>SE-Khalifatah - SMA Negeri 1 Purworejo</li>
+                <li>Mendadak Sigma - Universitas Sebelas Maret</li>
+                <li>MRT_LUCKY STRIKE - Universitas Trunojoyo Madura</li>
+                <li>MRT_LOUISE - Universitas Trunojoyo Madura</li>
+                <li>DECIXUMA - Universitas Diponegoro</li>
+                <li>UDIN GALONE - Universitas Diponegoro</li>
+                <li>iDevbot</li>
+                <li>MRT_Anyaa - Universitas Trunojoyo Madura</li>
+                <li>MRT_Nesh - Universitas Trunojoyo Madura</li>
+                <li>MRT_Alicee - Universitas Trunojoyo Madura</li>
+                <li>MRT_KikukKikuk - Universitas Trunojoyo Madura</li>
+                <li>QARITY - Universitas Semarang</li>
+                <li>Pasukan Anti Gedor - SMAS Al-Izzah Batu</li>
+                <li>SEMBADA EDU - BETTER</li>
+                <li>ICHIBOT SUMATRAN</li>
+            </ul> 
+            <p class="text-justify text-white">
+                Kehadiran tim dari berbagai kota dan institusi ini menunjukkan bahwa minat terhadap robotika, khususnya robot line follower, terus berkembang dan menjadi sarana pembelajaran yang menarik bagi pelajar maupun mahasiswa.
+            </p>
+        </div>
+        <div class="row mx-5">
+            <img src="../img/News1/News1_03.webp" alt="About Image" class="img-fluid border border-0 border-1 rounded-3 mb-4 mt-3 hover-lift" width="1488" height="1153"> 
+            <p class="text-justify text-white">
+                Dalam kompetisi ini, para peserta tidak hanya dituntut menghadirkan robot yang cepat, tetapi juga stabil, responsif, dan konsisten dalam membaca garis lintasan. Lintasan yang digunakan telah didesain berlapis dengan berbagai level kesulitan sehingga menguji ketepatan sensor, algoritma kontrol, hingga kualitas perakitan robot.
+            </p>
+            <p class="text-justify text-white">
+                Setiap tim harus menyusun strategi mulai dari pemilihan sensor, tuning parameter kontrol, hingga pengaturan kecepatan agar robot mampu menyelesaikan lintasan seefisien mungkin tanpa keluar jalur. Kesalahan kecil saja, seperti keterlambatan membaca garis atau manuver yang terlalu agresif, dapat berakibat pada melencengnya robot dari lintasan dan hilangnya waktu berharga.
+            </p>
+        </div>
+        <div class="row mx-5">
+            <img src="../img/News1/News1_04.webp" alt="About Image" class="img-fluid border border-0 border-1 rounded-3 mb-4 mt-3 hover-lift" width="1600" height="902"> 
+            <p class="text-justify text-white">
+                EL-SEMAR ARENA tidak hanya menjadi ajang kompetitif, tetapi juga ruang berbagi pengetahuan. Di sela-sela perlombaan, para peserta tampak saling berdiskusi mengenai konfigurasi sensor, pemrograman mikrokontroler, hingga teknik kalibrasi robot. Hal ini sejalan dengan semangat EL-SEMAR CONNECT #13 yang ingin mendorong budaya kolaborasi dan pembelajaran lintas institusi.
+            </p>
+            <p class="text-justify text-white">
+                Untuk semakin memotivasi peserta, panitia EL-SEMAR ARENA menyiapkan total prize pool sebesar Rp3.500.000,00 dengan rincian:
+            </p>
+            <ul class="text-white ms-3">
+                <li>Juara 1: Rp1.500.000,00</li>
+                <li>Juara 2: Rp1.200.000,00</li>
+                <li>Juara 3: Rp800.000,00</li>
+            </ul> 
+        </div>
+        <div class="row mx-5">
+            <img src="../img/News1/News1_05.webp" alt="About Image" class="img-fluid border border-0 border-1 rounded-3 mb-4 mt-3 hover-lift" width="1600" height="1131"> 
+            <p class="text-justify text-white">
+                Setelah melalui turnamen single elimination 16 besar, tiga tim terbaik berhasil keluar sebagai pemenang:
+            </p>
+            <ul class="text-white ms-3">
+                <li>Juara 1: ICHIBOT SUMATRAN</li>
+                <li>Juara 2: MRT_Anyaa – Universitas Trunojoyo Madura</li>
+                <li>Juara 3: QARITY – Universitas Semarang</li>
+            </ul> 
+            <p class="text-justify text-white">
+                Para pemenang membuktikan bahwa mereka unggul dalam hal stabilitas robot, kecepatan tempuh, serta minimnya kesalahan saat melintasi track. Kemenangan ini tidak hanya menjadi prestasi bagi tim, tetapi juga membawa nama baik sekolah dan perguruan tinggi masing-masing. 
+            </p>
+        </div>
+        <div class="row mx-5">
+            <img src="../img/News1/News1_06.webp" alt="About Image" class="img-fluid border border-0 border-1 rounded-3 mb-4 mt-3 hover-lift" width="1918" height="949"> 
+            <p class="text-justify text-white">
+                EL-SEMAR ARENA menjadi bukti bahwa EL-SEMAR CONNECT #13 tidak hanya berhenti pada diskusi konsep energi, teknologi, dan inovasi di ruang seminar, tetapi juga memberikan wadah aktualisasi keterampilan teknis mahasiswa dan pelajar. Melalui lomba robot line follower ini, peserta dilatih untuk mengintegrasikan ilmu pemrograman, elektronika, sistem kontrol, hingga desain mekanik dalam satu karya nyata.
+            </p>
+            <p class="text-justify text-white">
+                Selain itu, kehadiran kompetisi robot dalam rangkaian EL-SEMAR CONNECT #13 selaras dengan pesan yang disampaikan pada seminar hari pertama, bahwa dunia akademik harus menjadi sumber lahirnya ide, inovasi, serta prototipe yang dapat diimplementasikan dan memberikan manfaat bagi masyarakat.
+            </p>
+        </div>
+        <div class="row mx-5">
+            <img src="../img/News1/News1_07.webp" alt="About Image" class="img-fluid border border-0 border-1 rounded-3 mb-4 mt-3 hover-lift" width="600" height="337"> 
+            <p class="text-justify text-white">
+                Dengan terselenggaranya EL-SEMAR ARENA, Program Studi Teknik Elektro FT UNS kembali menegaskan komitmennya dalam mendukung pengembangan talenta muda di bidang teknologi dan robotika, serta memperkuat ekosistem pendidikan yang adaptif terhadap perkembangan industri 4.0 dan era energi hijau yang berkelanjutan.
+            </p>
+        </div>
+    </div>
+
+</section>
+
+      <!-- <div class="line-h1 w-75 border-base mb-4"></div> -->
+    <div class="line-h1 w-75 border-base mb-4"></div>
+
+<section id="Sponsor" class="py-5">
+  <div class="container">
+    <h2 class="montserrat-600 text-primary text-start display-3 mx-1 mt-5 px-3 pt-2 pb-0 hover-lift rounded-5">
+      Sponsors & Media Partners
+    </h2>
+    <h3 class="montserrat-400 text-center text-primary mb-4 fs-2 hover-lift rounded-5">
+      Supported by Our Partners
+    </h3>
+<!-- Tier 1 -->
+<div class="sponsor-tier sponsor-tier-1 my-4">
+  <div class="sponsor-card"><img src="../img/sponsor1_L.webp" alt="sponsor 1"></div>
+  <div class="sponsor-card"><img src="../img/sponsor2_L.webp" alt="sponsor 2"></div>
+  <div class="sponsor-card"><img src="../img/sponsor3_L.webp" alt="sponsor 3"></div>
+
+</div>
+
+<!-- Tier 2 -->
+<div class="sponsor-tier sponsor-tier-2 my-4">
+  <div class="sponsor-card"><img src="../img/sponsor1_M.webp" alt="sponsor 4"></div>
+  <div class="sponsor-card"><img src="../img/sponsor2_M.webp" alt="sponsor 5"></div>
+  <div class="sponsor-card"><img src="../img/sponsor3_M.webp" alt="sponsor 6"></div>
+  <div class="sponsor-card"><img src="../img/sponsor4_M.webp" alt="sponsor 7"></div>
+  <div class="sponsor-card"><img src="../img/sponsor5_M.webp" alt="sponsor 8"></div>
+  <div class="sponsor-card"><img src="../img/sponsor6_M.webp" alt="sponsor 9"></div>
+  <div class="sponsor-card"><img src="../img/sponsor7_M.webp" alt="sponsor 10"></div>
+  <div class="sponsor-card"><img src="../img/sponsor8_M.webp" alt="sponsor 11"></div>
+  <div class="sponsor-card"><img src="../img/sponsor9_M.webp" alt="sponsor 12"></div>
+  <div class="sponsor-card"><img src="../img/sponsor10_M.webp" alt="sponsor 12"></div>
+
+</div>
+
+<!-- Tier 3 -->
+<div class="sponsor-tier sponsor-tier-3 my-4">
+  <div class="sponsor-card"><img src="../img/sponsor1_S.webp" alt="sponsor 13"></div>
+  <div class="sponsor-card"><img src="../img/sponsor2_S.webp" alt="sponsor 14"></div>
+  <div class="sponsor-card"><img src="../img/sponsor3_S.webp" alt="sponsor 15"></div>
+  <div class="sponsor-card"><img src="../img/sponsor4_S.webp" alt="sponsor 16"></div>
+  <div class="sponsor-card"><img src="../img/sponsor5_S.webp" alt="sponsor 17"></div>
+  <div class="sponsor-card"><img src="../img/sponsor6_S.webp" alt="sponsor 18"></div>
+  <div class="sponsor-card"><img src="../img/sponsor7_S.webp" alt="sponsor 19"></div>
+  <div class="sponsor-card"><img src="../img/sponsor8_S.webp" alt="sponsor 20"></div>
+  <div class="sponsor-card"><img src="../img/sponsor9_S.webp" alt="sponsor 21"></div>
+  <div class="sponsor-card"><img src="../img/sponsor10_S.webp" alt="sponsor 22"></div>
+  <div class="sponsor-card"><img src="../img/sponsor11_S.webp" alt="sponsor 23"></div>
+
+</div>
+
+  </div>
+</section>
+
+
+    <div class="line-h1 w-75 border-base mb-4"></div>
+
+<footer class="footer bg-dark text-white pt-5 pb-3 mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+              <h1 class="poppins-800 text-white display-1  mx-auto my-auto">EL-SEMAR</h1>
+        <h2 class="poppins-400 text-white display-6">Connect #13</h2>
+      </div>
+      <div class="col-md-4 text-end my-3">
+        <p class="poppins-600 display-6">
+          2–3 Desember
+        </p>
+        <p class="poppins-600 display-2">
+          2025
+        </p>
+      </div>
+    </div>
+
+      <div class="line-h1 w-75 border-base mb-4"></div>
+
+    <div class="row text-center text-md-start align-items-center gy-4">
+
+      <!-- ====== LOGO SECTION ====== -->
+      <div class="col-md-12 col-lg-4">  
+        <div class="d-flex justify-content-center justify-content-lg-start align-items-center gap-3 mb-3">
+          <img src="../img/logoUNS.webp" alt="Logo UNS" class="footer-logo" width="100" height="100" title="Universitas Sebelas Maret" loading="lazy">
+          <img src="../img/logoHMTE.webp" alt="Logo HMTE" class="footer-logo" width="100" height="100" title="Himpunan Teknik Elektro" loading="lazy">
+          <img src="../img/logoElsemar.webp" alt="Logo El-Semar" class="footer-logo" width="100" height="100" title="El-Semar Connect #13" loading="lazy">
+        </div>
+      </div>
+
+      <!-- ====== MAP SECTION ====== -->
+      <div class="col-md-12 col-lg-4">
+        <h5 class="text-uppercase mb-3 fw-bold text-md-center">Lokasi</h5>
+        <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm">
+          <div id="map-placeholder-footer" class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm border border-base" onclick="loadMap('footer')" title="Event Location">
+            <img src="img/map-preview-footer.webp" alt="Click to load El-Semar Connect #13 location"
+                width="100%" height="200" loading="lazy" style="cursor:pointer;" class="d-flex justify-content-center align-items-center text-white poppins-600 fs-5 text-center" >
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== INFO SECTION ====== -->
+      <div class="col-md-12 col-lg-4 text-md-center text-lg-start">
+        <!-- <h5 class="text-uppercase mb-3 fw-bold">Informasi</h5> -->
+        <p class="mb-1">
+          📞 <strong>Contact Person:</strong><br>
+          <a href="https://wa.me/6281542093100" target="_blank" class="text-white text-decoration-underline">
+            +62 815 4209 3100 (Humas)
+          </a>
+        </p>
+        <p class="mb-2">
+          📧 <strong>Email:</strong><br>
+          <a href="mailto:elsemar@ft.uns.ac.id" class="text-white text-decoration-underline">
+            elsemar@ft.uns.ac.id
+          </a>
+        </p>
+
+                <!-- ====== SOCIAL MEDIA ====== -->
+        <div class="social-links mx-5 d-flex justify-content-lg-start just">
+          <a href="https://www.instagram.com/el_semar/" target="_blank" aria-label="Instagram" class="social-link mx-2" title="Instagram">
+            <!-- Instagram -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+              <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+            </svg>
+          </a>
+
+          <a href="https://www.tiktok.com/@el_semar?_t=ZS-90VZUTXawid&_r=1" target="_blank" aria-label="TikTok" class="social-link mx-2" title="Tiktok">
+            <!-- TikTok -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tiktok" viewBox="0 0 16 16">
+              <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"/>
+            </svg>
+          </a>
+
+          <!-- <a href="https://www.linkedin.com/company/elsemarconnect" target="_blank" aria-label="LinkedIn" class="social-link mx-2">
+            LinkedIn
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-4 0v6h-4v-12h4v2" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          </a> -->
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+    <div class="line-h1 w-75 border-base mt-3"></div>
+          <p class="small text-muted mt-3 mb-0 text-center">Copyright © 2025 DTIK UNS. All rights reserved.</p>
+</footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script defer>
+function loadMap(target) {
+  const maps = {
+    footer: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3089.9509554218394!2d110.85661340000001!3d-7.5600136000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a170214d5335d%3A0x80923f047f287377!2sAuditorium%20G.P.H.%20Haryo%20Mataram!5e1!3m2!1sen!2sid!4v1760289205178!5m2!1sen!2sid`
+  };
+
+  const placeholder = document.getElementById(`map-placeholder-${target}`);
+  if (!placeholder) return;
+
+  placeholder.innerHTML = `
+    <iframe src="${maps[target]}" width="100%" height="${target === 'tryout' ? 250 : 200}" 
+      style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+}
+</script>
+</body>
+</html>
